@@ -1,18 +1,29 @@
-"""FASE 4b — ERGM sulla rete integrale, per scala crescente.
+"""FASE 4b — ERGM sulla rete INTEGRALE.
 
-La Fase 4 stimava sottoreti campionate di 1.500 nodi, e il paper doveva
-dichiarare che le stime valevano solo per quelle. Qui si toglie quel limite:
-si stima la stessa specifica su reti via via piu' grandi, fino all'intera rete
-di collaborazione (circa 59.000 nodi e 524.000 archi).
+La Fase 4 stimava sottoreti campionate di 1.500 nodi, e l'articolo doveva
+dichiarare che le stime valevano solo per quelle. Qui si toglie il limite e si
+stima sulla rete intera: 56.915 nodi, 521.438 archi, 1,62 miliardi di diadi.
 
-Le scale intermedie non sono un ripiego. Sono la prova di rappresentativita':
-se il coefficiente di omofilia femminile resta stabile passando da 1.500 a
-59.000 nodi, allora le stime su sottorete della Fase 4 erano informative; se
-si muove, lo si vede e lo si dichiara. In entrambi i casi e' un risultato, non
-un'approssimazione.
+Due differenze rispetto alla Fase 4, oltre alla dimensione:
 
-Ogni scala scrive i propri risultati appena finisce, quindi un'interruzione al
-livello piu' grande non porta via i precedenti.
+* **Nessuno sfoltimento degli archi.** La Fase 4 teneva solo i legami di peso
+  almeno 1, per rendere la stima praticabile. Qui ci sono tutti, compresi i
+  legami deboli fra crediti "a ombrello". Non e' un dettaglio tecnico: i due
+  oggetti rispondono a domande diverse — chi ha collaborato in modo sostanziale
+  contro chi e' semplicemente comparso sullo stesso disco.
+* **Nessun tempo massimo.** La stima puo' prendersi i giorni che le servono.
+
+Si stima prima la MPLE, che e' sempre calcolabile e arriva in pochi minuti, poi
+la MCMLE. La MPLE non e' un ripiego ma nemmeno un sostituto: e' notoriamente
+distorta quando la dipendenza fra archi e' forte, ed e' proprio il caso qui
+(il coefficiente gwesp vale oltre 3,7). Serve come riferimento e come garanzia
+di avere comunque un risultato; la stima da riportare e' la MCMLE.
+
+Non ci sono scale intermedie. Erano previste, ma misurandole si e' visto che
+nessun campionamento conserva cio' che conta: la palla di neve pesca il nucleo
+denso e porta il grado medio da 18,3 a 53, mentre il campione casuale di nodi
+conserva la densita' ma dimezza il clustering, cioe' distrugge proprio i
+triangoli che il termine gwesp deve stimare.
 """
 from __future__ import annotations
 import sys, json, subprocess, shutil, time
@@ -27,8 +38,14 @@ from common import ROOT, Timer
 
 MODELS = ROOT / "data" / "ergm_full"
 
-# Le scale da percorrere. `None` significa la rete intera.
-SCALE = [3_000, 10_000, 25_000, None]
+# Solo la rete intera. Le scale intermedie erano state previste come scala di
+# avvicinamento, ma misurandole si e' visto che nessun campionamento conserva
+# cio' che conta: la palla di neve pesca il nucleo denso e porta il grado medio
+# da 18,3 a 53, mentre il campione casuale di nodi conserva la densita' ma
+# dimezza il clustering (da 0,51 a 0,26), cioe' distrugge proprio i triangoli
+# che il termine gwesp deve stimare. Un livello intermedio non direbbe nulla
+# sulla rete vera, quindi si stima direttamente quella.
+SCALE = [None]
 
 
 def controlli(n: int, cfg) -> dict:
@@ -39,17 +56,26 @@ def controlli(n: int, cfg) -> dict:
     archi, altrimenti il campione e' numeroso ma autocorrelato, e la stima
     sembra precisa senza esserlo.
     """
-    scala = max(1.0, n / 1500)
+    # L'intervallo fra campioni deve crescere con gli ARCHI, non con i nodi:
+    # e' il numero di archi a determinare quanto la catena debba muoversi per
+    # produrre una configurazione indipendente. La regola usata e' un
+    # intervallo dell'ordine di m/15, e un campione piu' contenuto compensato
+    # da catene parallele, che riducono il tempo di attesa senza ridurre
+    # l'informazione.
     return {
-        "samplesize": int(min(4000 * scala ** 0.5, 20000)),
-        "burnin": int(min(20000 * scala, 2_000_000)),
-        "interval": int(min(1000 * scala, 100_000)),
+        "samplesize": 10_000,
+        "burnin": 500_000,
+        "interval": 30_000,
         "maxit": 60,
-        "mple_samplesize": 5_000_000,
-        "parallel": 4 if n > 5000 else 0,
+        "mple_samplesize": 20_000_000,
+        "parallel": 6,
         "gwesp_decay": cfg["ergm"]["gwesp_decay"],
-        # la GOF simula reti intere: sopra una certa taglia costa piu' della
-        # stima stessa, e la si limita alle scale dove e' sostenibile
+        # La bonta' di adattamento simula reti intere: su 57.000 nodi ogni
+        # simulazione costa quanto una iterazione della stima, e cento
+        # simulazioni costerebbero piu' della stima stessa. Sulla rete
+        # integrale la GOF viene quindi saltata, e l'articolo deve dichiararlo:
+        # si hanno i coefficienti, non la verifica che il modello riproduca le
+        # statistiche della rete.
         "gof": n <= 25_000,
         "gof_nsim": 100 if n <= 10_000 else 50,
     }
@@ -129,14 +155,24 @@ def esegui(d: Path, cfg, log) -> dict | None:
         log.error("Rscript non trovato")
         return None
     t0 = time.time()
-    # nessun tempo massimo: e' esattamente cio' che si vuole poter spendere
-    p = subprocess.run([str(rb), str(ROOT / "R" / "ergm_full.R"), str(d),
-                        str(cfg["project"]["seed"])],
-                       capture_output=True, text=True)
-    (d / "R.log").write_text(p.stdout + "\n---STDERR---\n" + p.stderr)
-    log.info(p.stdout.strip()[-2000:] or "(nessun output)")
+    # Nessun tempo massimo: e' esattamente cio' che si vuole poter spendere.
+    # L'output di R viene trascritto riga per riga mentre arriva, invece che
+    # raccolto alla fine: su una stima che puo' durare giorni, sapere a quale
+    # iterazione si e' arrivati e' la differenza fra sorvegliare e sperare.
+    with open(d / "R.log", "w", buffering=1) as fh:
+        p = subprocess.Popen(
+            [str(rb), str(ROOT / "R" / "ergm_full.R"), str(d),
+             str(cfg["project"]["seed"])],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+            text=True, bufsize=1)
+        for riga in p.stdout:
+            riga = riga.rstrip()
+            fh.write(riga + "\n")
+            if riga.strip():
+                log.info(f"  R| {riga}")
+        p.wait()
     if p.returncode != 0:
-        log.error(f"Rscript rc={p.returncode}: {p.stderr[-1500:]}")
+        log.error(f"Rscript rc={p.returncode}")
     log.info(f"  tempo totale: {(time.time()-t0)/3600:.2f} ore")
     f = d / "summary.json"
     return json.loads(f.read_text()) if f.exists() else None
