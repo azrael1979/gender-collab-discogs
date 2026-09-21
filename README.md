@@ -145,3 +145,36 @@ dati. Entrambe le misure sono riportate.
 6. Il livello 2 della cascata (Wikidata per nome) non e' stato popolato: WDQS ha
    risposto con 429/502/504 in modo persistente. Vedi
    `data/wikidata_status.json`.
+
+## Licenza
+
+Questo lavoro — codice, report, figure e tabelle — e' distribuito sotto
+**Creative Commons Attribuzione 4.0 Internazionale (CC BY 4.0)**.
+Testo completo in [`LICENSE`](LICENSE); sintesi leggibile su
+<https://creativecommons.org/licenses/by/4.0/deed.it>.
+
+Sei libero di condividere e adattare il materiale, anche a fini commerciali,
+a condizione di **attribuirne la paternita'**, indicare se hai apportato
+modifiche e fornire un collegamento alla licenza.
+
+Una nota pratica: CC BY nasce per opere dell'ingegno piu' che per il software.
+Copre bene report, figure e tabelle; per chi volesse riusare il solo codice
+sorgente e' meno idiomatica di una licenza come MIT, ma resta pienamente
+valida e permissiva.
+
+### Come citare
+
+```
+Pipeline per l'analisi dell'omofilia di genere nelle collaborazioni musicali
+italiane (2026). https://github.com/azrael1979/gender-collab-discogs
+Distribuito sotto licenza CC BY 4.0.
+```
+
+### Una precisazione sui dati
+
+La licenza copre il materiale di questo repository. **Non si estende ai dati
+Discogs sottostanti**, che restano soggetti alle condizioni della fonte: i
+dump Discogs sono rilasciati in CC0, ma chi li riusa e' tenuto a verificarne
+autonomamente i termini correnti. Il repository non contiene dati Discogs
+grezzi: contiene il codice che li legge e i risultati aggregati che ne
+derivano.
