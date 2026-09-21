@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------- segreti
+.env
+
+# --------------------------------------------------- ambienti installati
+# R+statnet e pandoc+weasyprint, ~2,7 GB: si rigenerano con i comandi in
+# README.md, non hanno motivo di stare in un repository
+opt/
+
+# ------------------------------------------------------- dati e prodotti
+# I dataset intermedi (383 MB) e il pacchetto per i reviewer (420 MB) non
+# stanno in git: si rigenerano con ./run_all.sh e vengono distribuiti a
+# parte. Restano versionati i prodotti piccoli e leggibili: report,
+# figure, tabelle, campione di validazione, query SQL.
+data/*
+!data/validation_sample.csv
+!data/extract.sql
+!data/wikidata_status.json
+!data/report_numbers.json
+!data/figures_made.json
+!data/export_status.json
+!data/report_outputs.json
+
+export/
+*.tar.gz
+
+# --------------------------------------------------------------- cache
+cache/
+
+# ----------------------------------------------------------------- log
+# I log di esecuzione sono utili ma voluminosi e cambiano a ogni run;
+# i tempi, che servono all'appendice tecnica, restano.
+logs/*
+!logs/timings.csv
+
+# -------------------------------------------------------------- Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# ------------------------------------------------------------- sistema
+.DS_Store
+Thumbs.db
+*.swp

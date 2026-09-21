@@ -1,0 +1,9 @@
+rete,nodi_originali,nodi_stimati,archi,campionata,convergenza,modelli_convergenti,gwesp_converge,parziale,solo_mple,aic,gof
+genere_Electronic,10499,1255,4968,True,True,"M0_senza_gwesp, M1_con_gwesp, M2_nodemix_gwesp",True,False,True,56562.6417,True
+genere_Rock,4938,1438,4972,True,True,"M0_senza_gwesp, M1_con_gwesp, M2_nodemix_gwesp",True,False,True,57896.9209,True
+genere_Pop,5236,1057,4989,True,True,"M0_senza_gwesp, M1_con_gwesp, M2_nodemix_gwesp",True,False,True,52948.7076,True
+genere_Folk_World_&_Country,1625,1033,4931,True,True,"M0_senza_gwesp, M1_con_gwesp, M2_nodemix_gwesp",True,False,True,48867.7181,True
+genere_Classical,673,673,1620,False,True,"M0_senza_gwesp, M1_con_gwesp, M2_nodemix_gwesp",True,False,True,17635.1912,True
+epoca_pre2000,23491,1303,4962,True,True,"M0_senza_gwesp, M1_con_gwesp, M2_nodemix_gwesp",True,False,True,52659.1345,True
+epoca_post2000,9400,1373,4961,True,True,"M0_senza_gwesp, M1_con_gwesp, M2_nodemix_gwesp",True,False,True,57806.4165,True
+complessiva,36388,722,4982,True,True,"M0_senza_gwesp, M1_con_gwesp, M2_nodemix_gwesp",True,False,True,40587.2532,True

@@ -1,0 +1,16 @@
+{
+  "figure": [
+    "f1_mixing_gender_oss_att",
+    "f2_mixing_genere_musicale_oss_att",
+    "f3_quota_donne_per_decennio",
+    "f4_quota_donne_genere_x_decennio",
+    "f5_distribuzione_gradi",
+    "f6_assortativita_per_strato",
+    "f7_omofilia_per_genere_musicale",
+    "f8_posizione_per_genere",
+    "f9_ergm_forest_gender",
+    "f10_montecarlo_genere",
+    "f11_sensibilita",
+    "f12_ergm_gof"
+  ]
+}

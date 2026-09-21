@@ -1,0 +1,4737 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Omofilia di genere nelle collaborazioni musicali italiane</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="report.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Omofilia di genere nelle collaborazioni musicali
+italiane</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#pattern-di-collaborazione-fra-musicisti-italiani"
+id="toc-pattern-di-collaborazione-fra-musicisti-italiani">Pattern di
+collaborazione fra musicisti italiani</a>
+<ul>
+<li><a href="#omofilia-di-genere-sessuale-e-genere-musicale-su-discogs"
+id="toc-omofilia-di-genere-sessuale-e-genere-musicale-su-discogs">Omofilia
+di genere sessuale e genere musicale su Discogs</a></li>
+<li><a href="#sintesi-per-il-lettore-frettoloso"
+id="toc-sintesi-per-il-lettore-frettoloso">Sintesi per il lettore
+frettoloso</a></li>
+</ul></li>
+<li><a
+href="#sorgenti-dati-cosa-cè-cosa-manca-cosa-si-è-dovuto-costruire"
+id="toc-sorgenti-dati-cosa-cè-cosa-manca-cosa-si-è-dovuto-costruire">1.
+Sorgenti dati: cosa c’è, cosa manca, cosa si è dovuto costruire</a>
+<ul>
+<li><a href="#la-fonte" id="toc-la-fonte">1.1 La fonte</a></li>
+<li><a href="#tre-assenze-che-hanno-cambiato-il-disegno"
+id="toc-tre-assenze-che-hanno-cambiato-il-disegno">1.2 Tre assenze che
+hanno cambiato il disegno</a></li>
+<li><a href="#chi-è-musicista-italiano"
+id="toc-chi-è-musicista-italiano">1.3 Chi è “musicista
+italiano”</a></li>
+</ul></li>
+<li><a href="#il-genere-sessuale-come-è-stato-inferito"
+id="toc-il-genere-sessuale-come-è-stato-inferito">2. Il genere sessuale:
+come è stato inferito</a>
+<ul>
+<li><a href="#il-problema" id="toc-il-problema">2.1 Il problema</a></li>
+<li><a href="#livello-1-wikidata-agganciato-allidentificativo-discogs"
+id="toc-livello-1-wikidata-agganciato-allidentificativo-discogs">2.2
+Livello 1 — Wikidata agganciato all’identificativo Discogs</a></li>
+<li><a
+href="#livello-2-lonomastica-costruita-dai-dati-e-non-da-una-lista"
+id="toc-livello-2-lonomastica-costruita-dai-dati-e-non-da-una-lista">2.3
+Livello 2 — l’onomastica, costruita dai dati e non da una lista</a></li>
+<li><a href="#livello-3-i-gruppi-si-leggono-dai-membri"
+id="toc-livello-3-i-gruppi-si-leggono-dai-membri">2.4 Livello 3 — i
+gruppi si leggono dai membri</a></li>
+<li><a href="#esito-della-cascata" id="toc-esito-della-cascata">2.5
+Esito della cascata</a></li>
+<li><a href="#il-pezzo-mancante-la-validazione-manuale"
+id="toc-il-pezzo-mancante-la-validazione-manuale">2.6 Il pezzo mancante:
+la validazione manuale</a></li>
+</ul></li>
+<li><a href="#la-rete-come-due-musicisti-diventano-collegati"
+id="toc-la-rete-come-due-musicisti-diventano-collegati">3. La rete: come
+due musicisti diventano collegati</a>
+<ul>
+<li><a
+href="#il-peso-dellarco-e-perché-non-tutti-i-crediti-valgono-uguale"
+id="toc-il-peso-dellarco-e-perché-non-tutti-i-crediti-valgono-uguale">3.1
+Il peso dell’arco e perché non tutti i crediti valgono uguale</a></li>
+<li><a href="#filtri-e-sottoreti" id="toc-filtri-e-sottoreti">3.2 Filtri
+e sottoreti</a></li>
+</ul></li>
+<li><a href="#quante-sono-le-donne-e-in-quale-musica-rq1"
+id="toc-quante-sono-le-donne-e-in-quale-musica-rq1">4. Quante sono le
+donne, e in quale musica (RQ1)</a>
+<ul>
+<li><a href="#il-confronto-con-i-pattern-noti-in-letteratura"
+id="toc-il-confronto-con-i-pattern-noti-in-letteratura">4.1 Il confronto
+con i pattern noti in letteratura</a></li>
+</ul></li>
+<li><a href="#omofilia-chi-incide-con-chi-rq2"
+id="toc-omofilia-chi-incide-con-chi-rq2">5. Omofilia: chi incide con chi
+(RQ2)</a>
+<ul>
+<li><a href="#il-quadro-generale" id="toc-il-quadro-generale">5.1 Il
+quadro generale</a></li>
+<li><a href="#lomofilia-nel-tempo-il-risultato-controintuitivo"
+id="toc-lomofilia-nel-tempo-il-risultato-controintuitivo">5.2 L’omofilia
+nel tempo: il risultato controintuitivo</a></li>
+<li><a href="#produttori-e-interpreti-due-mestieri-due-omofilie-rq5"
+id="toc-produttori-e-interpreti-due-mestieri-due-omofilie-rq5">5.3
+Produttori e interpreti: due mestieri, due omofilie (RQ5)</a></li>
+<li><a href="#omofilia-dentro-ciascun-genere-musicale"
+id="toc-omofilia-dentro-ciascun-genere-musicale">5.4 Omofilia dentro
+ciascun genere musicale</a></li>
+</ul></li>
+<li><a href="#le-donne-stanno-al-centro-o-ai-margini-rq3"
+id="toc-le-donne-stanno-al-centro-o-ai-margini-rq3">6. Le donne stanno
+al centro o ai margini? (RQ3)</a>
+<ul>
+<li><a href="#il-confronto-a-parità-di-attività-e-coorte"
+id="toc-il-confronto-a-parità-di-attività-e-coorte">6.1 Il confronto a
+parità di attività e coorte</a></li>
+<li><a href="#la-risposta-a-rq3" id="toc-la-risposta-a-rq3">6.2 La
+risposta a RQ3</a></li>
+</ul></li>
+<li><a href="#probabilità-di-collaborare-a-parità-di-tutto-lergm-rq4"
+id="toc-probabilità-di-collaborare-a-parità-di-tutto-lergm-rq4">7.
+Probabilità di collaborare a parità di tutto: l’ERGM (RQ4)</a>
+<ul>
+<li><a href="#perché-serve-e-come-è-stato-impostato"
+id="toc-perché-serve-e-come-è-stato-impostato">7.1 Perché serve e come è
+stato impostato</a></li>
+<li><a href="#la-diagnostica-il-modello-descrive-davvero-questa-rete"
+id="toc-la-diagnostica-il-modello-descrive-davvero-questa-rete">7.2 La
+diagnostica: il modello descrive davvero questa rete?</a></li>
+<li><a href="#il-test-prepost-2000" id="toc-il-test-prepost-2000">7.3 Il
+test pre/post 2000</a></li>
+</ul></li>
+<li><a href="#quanto-reggono-questi-risultati"
+id="toc-quanto-reggono-questi-risultati">8. Quanto reggono questi
+risultati</a>
+<ul>
+<li><a href="#lincertezza-sul-genere-sessuale"
+id="toc-lincertezza-sul-genere-sessuale">8.1 L’incertezza sul genere
+sessuale</a></li>
+<li><a href="#sensibilità-ai-parametri-di-costruzione"
+id="toc-sensibilità-ai-parametri-di-costruzione">8.2 Sensibilità ai
+parametri di costruzione</a></li>
+<li><a href="#artisti-con-genere-musicale-debole"
+id="toc-artisti-con-genere-musicale-debole">8.3 Artisti con genere
+musicale debole</a></li>
+</ul></li>
+<li><a href="#appendice-tecnica" id="toc-appendice-tecnica">Appendice
+tecnica</a>
+<ul>
+<li><a href="#a.1-ambiente" id="toc-a.1-ambiente">A.1 Ambiente</a></li>
+<li><a
+href="#a.2-una-nota-sulle-prestazioni-che-ha-condizionato-il-disegno"
+id="toc-a.2-una-nota-sulle-prestazioni-che-ha-condizionato-il-disegno">A.2
+Una nota sulle prestazioni che ha condizionato il disegno</a></li>
+<li><a href="#a.3-query-principali" id="toc-a.3-query-principali">A.3
+Query principali</a></li>
+<li><a href="#a.4-tempi-di-esecuzione"
+id="toc-a.4-tempi-di-esecuzione">A.4 Tempi di esecuzione</a></li>
+<li><a href="#a.5-riproducibilità" id="toc-a.5-riproducibilità">A.5
+Riproducibilità</a></li>
+<li><a href="#a.6-limiti-in-ordine-di-gravità"
+id="toc-a.6-limiti-in-ordine-di-gravità">A.6 Limiti, in ordine di
+gravità</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="pattern-di-collaborazione-fra-musicisti-italiani">Pattern di
+collaborazione fra musicisti italiani</h1>
+<h2
+id="omofilia-di-genere-sessuale-e-genere-musicale-su-discogs">Omofilia
+di genere sessuale e genere musicale su Discogs</h2>
+<p><em>Analisi condotta il 21/09/2026 — fonte unica: dump Discogs locale
+(PostgreSQL)</em></p>
+<hr />
+<h2 id="sintesi-per-il-lettore-frettoloso">Sintesi per il lettore
+frettoloso</h2>
+<p>Questo studio ricostruisce <strong>chi ha inciso con chi</strong> fra
+i musicisti italiani presenti in Discogs e chiede se il genere sessuale
+delle persone strutturi quelle collaborazioni. La risposta breve è che
+sì, ma non nel modo che ci si aspetterebbe. L’omofilia esiste ed è
+statisticamente solidissima, ma è molto più debole della separazione per
+genere musicale; è <strong>asimmetrica</strong> — sono le donne a fare
+gruppo fra loro, non gli uomini, all’opposto di quanto riporta la
+letteratura corrente; e non si è rafforzata dopo il 2000: quello che si
+è rafforzato è la tendenza della rete a <strong>chiudersi in
+triangoli</strong>, che produce lo stesso effetto apparente per una
+ragione diversa.</p>
+<h3 id="i-numeri">I numeri</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td>Musicisti italiani identificati</td>
+<td><strong>100.201</strong></td>
+</tr>
+<tr>
+<td>di cui con genere sessuale determinato</td>
+<td>70.374 (70,2%)</td>
+</tr>
+<tr>
+<td>Quota di donne fra i determinati</td>
+<td><strong>13,8%</strong> — un rapporto di <strong>6,25 uomini per ogni
+donna</strong></td>
+</tr>
+<tr>
+<td>Crediti analizzati</td>
+<td>4.169.130, di cui 2.670.018 (64,0%) risolti sulla singola
+traccia</td>
+</tr>
+<tr>
+<td>Rete di collaborazione</td>
+<td>82.595 artisti collegati, 702.613 legami</td>
+</tr>
+<tr>
+<td>Componente gigante</td>
+<td>95,7% degli artisti collegati</td>
+</tr>
+<tr>
+<td>Assortatività di genere sessuale</td>
+<td><strong>r = 0,0511</strong> (IC 95% 0,0479–0,0543)</td>
+</tr>
+<tr>
+<td>Assortatività di genere musicale</td>
+<td><strong>r = 0,5186</strong></td>
+</tr>
+<tr>
+<td>Omofilia di genere pre-2000 → post-2000</td>
+<td>0,0494 → 0,0731 (differenza non significativa nell’ERGM)</td>
+</tr>
+<tr>
+<td>Omofilia ERGM, donne contro uomini (mediana sulle sottoreti)</td>
+<td><strong>0,679 contro 0,074</strong> in log-odds</td>
+</tr>
+<tr>
+<td>ERGM</td>
+<td>8 sottoreti, 3 modelli ciascuna, <strong>8 convergenti</strong>,
+<code>gwesp</code> incluso</td>
+</tr>
+</tbody>
+</table>
+<h3 id="le-cinque-cose-da-sapere">Le cinque cose da sapere</h3>
+<ol type="1">
+<li><p><strong>La musica registrata italiana è un mondo di uomini, e lo
+è rimasta.</strong> 13,8% di donne fra gli artisti con genere
+determinato significa 6,3 uomini per ogni donna. La quota non cresce in
+modo monotono nel tempo: parte dal 16,9% per chi debutta negli anni
+Sessanta, scende al 12,4% negli anni Ottanta e risale al 20,5% per chi
+debutta dal 2020.</p></li>
+<li><p><strong>Il genere musicale separa molto più del genere
+sessuale.</strong> L’assortatività per genere musicale (0,519) è circa
+10 volte quella per genere sessuale (0,051). Chi fa jazz incide con chi
+fa jazz molto più sistematicamente di quanto gli uomini incidano con gli
+uomini.</p></li>
+<li><p><strong>L’omofilia di genere sessuale è piccola ma
+reale.</strong> r = 0,0511 sembra poco, ma il modello nullo a gradi
+preservati dà 0,0000 e l’intervallo di confidenza (0,0479–0,0543) sta
+tutto sopra lo zero. Non è un effetto di composizione, è
+struttura.</p></li>
+<li><p><strong>Sono le donne a fare gruppo, non gli uomini.</strong> È
+il risultato che contraddice più nettamente l’attesa. Nell’ERGM, che
+tiene ferme attività, coorte, genere musicale e chiusura triadica, il
+coefficiente di omofilia femminile è positivo e grande in <strong>tutte
+e otto</strong> le sottoreti stimate; quello maschile è vicino a zero, e
+in Rock è perfino negativo. Dove un gruppo è schiacciante maggioranza
+non ha bisogno di cercarsi; dove è raro, si addensa.</p></li>
+<li><p><strong>Dopo il 2000 non aumenta l’omofilia: aumenta la chiusura
+in triangoli.</strong> Descrittivamente l’assortatività sale da 0,0494 a
+0,0731. Ma nell’ERGM la differenza fra le due epoche nei termini di
+genere <strong>non è significativa</strong> (p = 0,88 per le donne, 0,60
+per gli uomini), mentre il termine di chiusura triadica cresce da 2,22 a
+2,89 con p &lt; 0,0001. Non è cambiato il criterio con cui si sceglie un
+collaboratore: è cambiata la forma della rete.</p></li>
+<li><p><strong>Il pattern “Smurfette” non si osserva.</strong> A parità
+di pubblicazioni, coorte e genere musicale, l’essere donna non sposta la
+posizione nella rete su nessuna delle tre misure di centralità usate
+(sezione 6.2). La disuguaglianza è grande, ma sta
+nell’<strong>accesso</strong> e nel volume di attività, non nella
+posizione di chi è riuscito a entrare.</p></li>
+</ol>
+<blockquote>
+<p><strong>Nota di misura.</strong> Tutte le assortatività di genere
+riportate come principali sono calcolate sui soli archi in cui
+<strong>entrambi</strong> gli artisti hanno un genere determinato (72,3%
+degli archi). Includere gli <code>unknown</code> come quarta categoria
+gonfia sistematicamente l’indice, perché gli artisti poco documentati
+collaborano fra loro più del caso per ragioni di copertura dei dati. Il
+confronto fra le due misure è in tabella alla sezione 5.1.</p>
+</blockquote>
+<h3 id="quanto-fidarsi">Quanto fidarsi</h3>
+<p>Il genere sessuale non è in nessuna fonte: è
+<strong>inferito</strong>. Su 70,2% della popolazione si arriva a una
+determinazione, con 5.245 casi ancorati a Wikidata tramite
+l’identificativo Discogs (join esatto, nessuna omonimia) e il resto per
+via onomastica. Il campione di validazione manuale da 200 casi e lo
+strumento per misurarne l’errore sono pronti in
+<code>data/validation_sample.csv</code>; finché non è compilato a mano,
+le cifre qui sopra vanno lette come stime con un errore non ancora
+quantificato. Il Monte Carlo della sezione 8.1 mostra comunque che
+l’omofilia resta positiva <strong>in ogni scenario di
+imputazione</strong>, compreso quello costruito apposta per
+minimizzarla.</p>
+<hr />
+<h1 id="sorgenti-dati-cosa-cè-cosa-manca-cosa-si-è-dovuto-costruire">1.
+Sorgenti dati: cosa c’è, cosa manca, cosa si è dovuto costruire</h1>
+<h2 id="la-fonte">1.1 La fonte</h2>
+<p>L’analisi usa <strong>una sola fonte</strong>: una copia locale del
+dump Discogs in PostgreSQL (database <code>discogs</code>, 248.153.636
+righe nelle tabelle utilizzate). Il disegno iniziale prevedeva anche un
+secondo database iTunes e una tabella-ponte fra i due; su indicazione
+del committente iTunes è stato <strong>escluso</strong>. La conseguenza
+metodologica è netta e va dichiarata: non esiste alcuna verifica
+incrociata indipendente dell’anagrafica degli artisti, e l’asse di
+robustezza “unione delle fonti contro sola Discogs” non ha più oggetto.
+Al suo posto sono stati introdotti due assi alternativi (soglia di
+italianità e uso o meno dei crediti a livello traccia), discussi nella
+sezione 8.2.</p>
+<p>Tutte le sessioni verso il database hanno girato con
+<code>default_transaction_read_only = on</code>. In PostgreSQL questa
+impostazione vieta anche le tabelle temporanee, quindi l’estrazione è
+stata riscritta per non creare <strong>alcun</strong> oggetto sul
+server: le liste di identificativi calcolate lato Python tornano al
+database come letterali <code>int[]</code>. Nessuna scrittura, di nessun
+tipo, ha toccato la fonte.</p>
+<h2 id="tre-assenze-che-hanno-cambiato-il-disegno">1.2 Tre assenze che
+hanno cambiato il disegno</h2>
+<p>L’esplorazione ha trovato tre vuoti nel dump che hanno imposto
+deviazioni dal piano originale. Vanno messi in chiaro perché limitano
+ciò che si può concludere.</p>
+<p><strong><code>release_label</code> è vuota (0 righe).</strong> Non
+esiste alcun legame fra pubblicazione ed etichetta discografica.
+L’euristica prevista per identificare i musicisti italiani a partire
+dalle <em>etichette italiane</em> è quindi inapplicabile, e con essa
+cade anche ogni analisi per casa discografica. L’italianità si appoggia
+perciò al solo paese di pubblicazione.</p>
+<p><strong><code>release_genre</code> e <code>release_style</code> sono
+vuote (0 righe).</strong> Il genere musicale è disponibile unicamente
+attraverso il <em>master</em> (<code>master_genre</code>), e i master
+coprono circa il 59% delle pubblicazioni. È la ragione per cui 26,4%
+della popolazione resta senza genere musicale assegnato.</p>
+<p><strong>L’entità “Various Artists” è di fatto assente.</strong> In
+tutto <code>release_artist</code> (oltre 92 milioni di righe) i crediti
+principali attribuiti a un artista di nome “Various*” sono
+<strong>328</strong>. In questo dump le raccolte non usano il segnaposto
+consueto: elencano direttamente gli artisti. Il filtro
+<code>exclude_various</code> è quindi quasi inerte (3 pubblicazioni
+intercettate) e le raccolte vanno riconosciute da un criterio diverso —
+la presenza di più artisti principali distinti — che è il filtro
+<code>exclude_compilations</code> usato come asse di robustezza.</p>
+<h2 id="chi-è-musicista-italiano">1.3 Chi è “musicista italiano”</h2>
+<p>Senza dati di etichetta e senza un campo di nazionalità, l’italianità
+è stata definita sulla <strong>quota di pubblicazioni italiane</strong>
+nella carriera di ciascun artista:</p>
+<blockquote>
+<p>Un artista entra nella popolazione se ha almeno 2 pubblicazioni con
+<code>country = 'Italy'</code>, almeno 3 pubblicazioni in totale, e se
+le italiane sono almeno il 50% del totale.</p>
+</blockquote>
+<p>La regola della quota è la parte che fa il lavoro. Il solo conteggio
+assoluto produce un elenco dominato da Beethoven, Mozart, Bach, Chopin e
+Karajan: il repertorio classico viene ristampato in Italia in grandi
+quantità, e chi guarda solo “quante pubblicazioni italiane” scambia il
+catalogo per la biografia. La quota li esclude tutti, perché per
+ciascuno di loro le edizioni italiane sono una frazione minima di un
+catalogo mondiale.</p>
+<p>Il controllo di validità è stato fatto guardando i primi venticinque
+artisti per volume: Mina, Lucio Battisti, Vasco Rossi, Fabrizio De
+André, Franco Battiato, Lucio Dalla, Mogol, Renato Zero, Francesco De
+Gregori, Domenico Modugno, Claudio Villa, più un gruppo di produttori e
+tecnici italiani realmente attivi (Antonio Baglio, Giovanni Versari,
+Vincenzo Tempera). Nessun falso positivo evidente.</p>
+<p>Restano due limiti strutturali, che nessuna soglia può togliere:</p>
+<ul>
+<li>la regola misura <strong>dove si pubblica</strong>, non <strong>da
+dove si viene</strong>. Un musicista straniero che abbia lavorato quasi
+solo per il mercato italiano entra nella popolazione; un italiano
+emigrato che pubblichi soprattutto all’estero ne esce. La soglia al 50%
+tiene basso il primo errore a costo di aumentare il secondo;</li>
+<li>Discogs non è un censimento. Sovrarappresenta il vinile, il
+collezionismo e l’elettronica, e sottorappresenta la musica che non è
+mai uscita su supporto fisico catalogato. La composizione per genere
+musicale della sezione 3.2 va letta come composizione <em>del catalogo
+Discogs</em>, non della musica italiana.</li>
+</ul>
+<p><strong>Effetto della soglia</strong> (misurato): 254.286 artisti
+hanno almeno due pubblicazioni italiane; applicando quota e minimo, la
+popolazione scende a <strong>100.201</strong>. Alzando la quota a 0,60 e
+0,70 si ottengono 89.984 e 75.948 artisti: la sezione 8.2 mostra che le
+conclusioni non cambiano.</p>
+<h1 id="il-genere-sessuale-come-è-stato-inferito">2. Il genere sessuale:
+come è stato inferito</h1>
+<h2 id="il-problema">2.1 Il problema</h2>
+<p>Nessuna delle fonti disponibili contiene il genere sessuale delle
+persone. Va inferito, e l’inferenza va documentata fino in fondo, perché
+è il punto più fragile dell’intero studio: ogni conclusione
+sull’omofilia di genere poggia su un’etichetta che nessuno ha
+dichiarato.</p>
+<p>La cascata usata procede dal segnale più solido al più debole, e ogni
+artista porta con sé <strong>da quale livello</strong> viene la sua
+etichetta e <strong>con quanta confidenza</strong>.</p>
+<h2 id="livello-1-wikidata-agganciato-allidentificativo-discogs">2.2
+Livello 1 — Wikidata agganciato all’identificativo Discogs</h2>
+<p>Wikidata espone la proprietà <code>P1953</code>, <em>Discogs artist
+ID</em>. Questo consente un <strong>join esatto
+sull’identificativo</strong>, non sul nome: nessuna omonimia, nessun
+matching approssimato. Sono state raccolte tutte le entità con
+<code>P1953</code> e <code>P21</code> (genere): <strong>202.478
+identificativi Discogs distinti</strong>, con 74 casi ambigui scartati e
+<strong>zero blocchi persi</strong> su una paginazione ricorsiva per
+prefisso dell’identificativo.</p>
+<p>Di questi, <strong>5.245 ricadono nella nostra popolazione</strong>
+(5,2%). È una copertura bassa in termini assoluti, e il motivo è ovvio:
+Wikidata descrive persone notabili, mentre la popolazione Discogs è
+fatta in larga parte di turnisti, arrangiatori, fonici e produttori che
+non hanno una voce enciclopedica. Ma sono 5.245 etichette
+<strong>certe</strong>, ed è su quelle che si regge il livello
+successivo.</p>
+<h2 id="livello-2-lonomastica-costruita-dai-dati-e-non-da-una-lista">2.3
+Livello 2 — l’onomastica, costruita dai dati e non da una lista</h2>
+<p>Il disegno prevedeva la lista onomastica ISTAT. In questo ambiente
+non è risultata disponibile come dataset scaricabile; il ripiego
+adottato è migliore per lo scopo, non peggiore.</p>
+<p>Gli stessi 202.478 identificativi Discogs etichettati da Wikidata
+sono stati ricongiunti ai <strong>nomi</strong> nel database: ne escono
+<strong>199.812 coppie nome→genere di musicisti</strong>, un corpus
+onomastico specifico del dominio, molto più ampio dei soli italiani e
+molto più pertinente di una lista anagrafica generica.</p>
+<p>Da qui si ricavano due dizionari, e l’ordine in cui vengono
+consultati è la scelta metodologicamente più importante di questa
+sezione:</p>
+<ol type="1">
+<li><strong>dizionario italiano</strong> (320 nomi), costruito sui soli
+artisti italiani etichettati da Wikidata;</li>
+<li><strong><code>gender-guesser</code> con lookup
+italiano</strong>;</li>
+<li><strong>dizionario globale</strong> (2.204 nomi), ma <strong>solo
+per i nomi che il lookup italiano non riconosce</strong>;</li>
+<li><code>gender-guesser</code> globale, come ultima risorsa e con
+confidenza ridotta.</li>
+</ol>
+<p>Il vincolo al punto 3 non è pedanteria. Andrea, Simone, Nicola,
+Daniele, Michele e Gabriele sono nomi maschili in Italia e femminili nei
+dizionari dominati dall’inglese: usare il dizionario globale senza quel
+filtro ribalterebbe il genere di alcune delle prime posizioni
+dell’onomastica maschile italiana, con un errore sistematico e non
+casuale, concentrato proprio sui nomi più frequenti. Verificato sui
+dati: i due dizionari concordano su tutti i 241 nomi che hanno in
+comune, il che indica che il filtro sta effettivamente tenendo separati
+i due domini invece di mascherare un conflitto.</p>
+<h2 id="livello-3-i-gruppi-si-leggono-dai-membri">2.4 Livello 3 — i
+gruppi si leggono dai membri</h2>
+<p>Un nome di band non dice nulla sul genere delle persone. Per i gruppi
+si guarda perciò la composizione (<code>group_member</code>): se i
+membri di genere noto sono di entrambi i generi il gruppo è
+<strong><code>mixed</code></strong>, se sono tutti dello stesso genere
+il gruppo eredita quello, se se ne conoscono meno di due resta
+<code>unknown</code>. Sono stati risolti <strong>6.371 gruppi su
+12.972</strong>, di cui 997 misti.</p>
+<h2 id="esito-della-cascata">2.5 Esito della cascata</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">fonte</th>
+<th style="text-align: right;">artisti</th>
+<th style="text-align: left;">quota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">onomastico_prior_it</td>
+<td style="text-align: right;">45.785</td>
+<td style="text-align: left;">45,7%</td>
+</tr>
+<tr>
+<td style="text-align: left;">none</td>
+<td style="text-align: right;">22.271</td>
+<td style="text-align: left;">22,2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">group_unresolved</td>
+<td style="text-align: right;">6.559</td>
+<td style="text-align: left;">6,5%</td>
+</tr>
+<tr>
+<td style="text-align: left;">group_members</td>
+<td style="text-align: right;">6.371</td>
+<td style="text-align: left;">6,4%</td>
+</tr>
+<tr>
+<td style="text-align: left;">onomastico_prior_globale</td>
+<td style="text-align: right;">6.257</td>
+<td style="text-align: left;">6,2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wikidata_p1953</td>
+<td style="text-align: right;">5.245</td>
+<td style="text-align: left;">5,2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">onomastico_gg_it_male</td>
+<td style="text-align: right;">3.278</td>
+<td style="text-align: left;">3,3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">onomastico_gg_it_female</td>
+<td style="text-align: right;">2.322</td>
+<td style="text-align: left;">2,3%</td>
+</tr>
+<tr>
+<td style="text-align: left;">onomastico_gg_globale_male</td>
+<td style="text-align: right;">1.171</td>
+<td style="text-align: left;">1,2%</td>
+</tr>
+<tr>
+<td style="text-align: left;">onomastico_gg_globale_female</td>
+<td style="text-align: right;">870</td>
+<td style="text-align: left;">0,9%</td>
+</tr>
+<tr>
+<td style="text-align: left;">onomastico_gg_it_mostly_male</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: left;">0,0%</td>
+</tr>
+<tr>
+<td style="text-align: left;">onomastico_gg_it_mostly_female</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">0,0%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Origine dell’etichetta di genere sessuale per
+ciascun artista.</strong> La riga <code>onomastico_prior_it</code> porta
+da sola la maggior parte del carico: è il dizionario costruito sui 5.245
+italiani certi, e bastano 320 nomi propri per coprire quasi la metà
+della popolazione, perché l’onomastica italiana è fortemente
+concentrata. <code>none</code> e <code>group_unresolved</code> sono i
+due volti del non sapere: artisti il cui nome non è un nome di persona
+riconoscibile (sigle, pseudonimi, progetti) e gruppi di cui non si
+conoscono abbastanza membri.</p>
+<p><strong>Esito finale: 13,8% di donne fra gli artisti con genere
+determinato</strong>, cioè 6,25 uomini per ogni donna, con 29,8% della
+popolazione che resta indeterminata.</p>
+<h2 id="il-pezzo-mancante-la-validazione-manuale">2.6 Il pezzo mancante:
+la validazione manuale</h2>
+<p>È stato generato <code>data/validation_sample.csv</code>: <strong>200
+artisti</strong> estratti in modo stratificato per genere, fascia di
+confidenza e fonte dell’etichetta, con una colonna
+<code>human_gender</code> vuota da compilare a mano. Lo script
+<code>src/score_validation.py</code> calcola precisione, richiamo, F1 e
+matrice di confusione per livello della cascata non appena il file è
+compilato.</p>
+<p>Il campione è costruito con <strong>allocazione metà proporzionale e
+metà uniforme</strong> fra gli strati: la parte proporzionale permette
+di stimare l’accuratezza complessiva senza riponderare, quella uniforme
+garantisce abbastanza casi anche nei livelli rari della cascata. Dentro
+ogni strato si privilegiano nomi propri diversi, perché altrimenti gli
+strati piccoli si riempiono di omonimi e la validazione misurerebbe
+l’accuratezza su un nome invece che su un livello.</p>
+<p>Su due livelli quel rimedio non basta, e va detto:
+<code>onomastico_gg_mostly_female</code> raccoglie 28 artisti che
+portano <strong>un solo</strong> nome proprio (Mary), e
+<code>onomastico_gg_mostly_male</code> ne raccoglie 44 con due (Toni,
+Leonida). Su quei due livelli la validazione potrà dire se quei nomi
+sono classificati bene, non se il livello funziona in generale. Pesano
+insieme 72 artisti su 100.201, quindi la cosa non tocca le conclusioni,
+ma il dato di accuratezza che ne uscirà non va letto come se fosse
+generalizzabile.</p>
+<p>Questo passo <strong>non è stato eseguito</strong>: richiede giudizio
+umano. Finché non lo si compila, l’errore dell’inferenza di genere è
+delimitato solo dal Monte Carlo della sezione 8.1, che però misura
+l’effetto dell’<em>incertezza sugli unknown</em>, non quello degli
+<em>errori sui noti</em>. È il limite più serio di questo studio.</p>
+<h1 id="la-rete-come-due-musicisti-diventano-collegati">3. La rete: come
+due musicisti diventano collegati</h1>
+<h2
+id="il-peso-dellarco-e-perché-non-tutti-i-crediti-valgono-uguale">3.1 Il
+peso dell’arco e perché non tutti i crediti valgono uguale</h2>
+<p>Un credito Discogs può dire tre cose molto diverse. Può dire
+<em>“questa persona suona il basso nel brano B2”</em>; può dire
+<em>“questa persona è l’artista del disco”</em>; può dire <em>“questa
+persona compare nei crediti del disco”</em>, senza specificare dove.
+Trattarli come equivalenti significherebbe dare a una coincidenza di
+copertina lo stesso valore di una sessione documentata.</p>
+<p>Ogni credito riceve perciò una <strong>specificità</strong>, e il
+peso del legame fra due artisti la usa:</p>
+<table>
+<thead>
+<tr>
+<th>ambito</th>
+<th>specificità</th>
+<th>che cosa significa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>track</code></td>
+<td>1.00</td>
+<td>credito risolto su una traccia precisa</td>
+</tr>
+<tr>
+<td><code>main</code></td>
+<td>0.70</td>
+<td>artista principale della pubblicazione</td>
+</tr>
+<tr>
+<td><code>umbrella</code></td>
+<td>0.30</td>
+<td>credito secondario, senza indicazione di tracce</td>
+</tr>
+</tbody>
+</table>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>w</mi><mi>t</mi></msub><mo>⋅</mo><mo stretchy="false" form="prefix">|</mo><mtext mathvariant="normal">tracce condivise</mtext><mo stretchy="false" form="prefix">|</mo><mi>+</mi><msub><mi>w</mi><mi>r</mi></msub><mo>⋅</mo><munder><mo>∑</mo><mi>R</mi></munder><msub><mi>s</mi><mi>u</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>R</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.167em"></mspace><msub><mi>s</mi><mi>v</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>R</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">w(u,v) = w_t \cdot |\text{tracce condivise}| + w_r \cdot \sum_{R} s_u(R)\, s_v(R)</annotation></semantics></math></p>
+<p>Il primo termine premia la collaborazione <strong>documentata sullo
+stesso brano</strong>; il secondo tiene la co-presenza sulla stessa
+pubblicazione, scalata dalla specificità di entrambi i crediti. Due
+turnisti accreditati sulla stessa traccia pesano molto più di due nomi
+che compaiono genericamente sullo stesso disco.</p>
+<p>I crediti a livello traccia vengono da due strade. La prima è
+<code>release_track_artist</code>, che porta un identificativo di
+traccia globale: <strong>2.217.379 crediti</strong>. La seconda è il
+campo <code>tracks</code> di <code>release_artist</code>, che indica le
+posizioni in forma testuale — <code>A1</code>, <code>1 to 3</code>,
+<code>4, 6, 12</code> — e va <strong>risolto</strong>: le posizioni si
+convertono in tracce reali passando per <code>release_track</code>. Di
+467.509 crediti posizionali ne sono stati risolti 452.639 (96,8%); i
+restanti usano formule libere (<em>“all tracks except 1, 13 and
+14”</em>) e sono stati <strong>degradati ad
+<code>umbrella</code></strong> anziché interpretati a forza.</p>
+<p>Totale: <strong>2.670.018 crediti su 4.169.130 (64,0%) sono risolti a
+livello di singola traccia.</strong></p>
+<h2 id="filtri-e-sottoreti">3.2 Filtri e sottoreti</h2>
+<p>Le pubblicazioni con più di 8 artisti accreditati vengono scartate:
+sono raccolte e cofanetti, dove la co-presenza non indica collaborazione
+e il numero di coppie esplode in modo quadratico. Il filtro riduce i
+crediti da 4.169.130 a 702.613.</p>
+<p>Le sottoreti per ruolo separano due mestieri diversi:
+<strong>creative</strong> (produzione, scrittura, arrangiamento,
+composizione) e <strong>performance</strong> (voce, strumenti,
+direzione, featuring). Un artista principale senza ruolo esplicito è
+trattato come interprete, perché è ciò che significa essere l’artista di
+un disco.</p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 7%" />
+<col style="width: 9%" />
+<col style="width: 4%" />
+<col style="width: 5%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 6%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+<col style="width: 14%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">rete</th>
+<th style="text-align: left;">nodi_totali</th>
+<th style="text-align: left;">nodi_con_archi</th>
+<th style="text-align: left;">archi</th>
+<th style="text-align: left;">densita</th>
+<th style="text-align: left;">grado_medio</th>
+<th style="text-align: left;">grado_mediano</th>
+<th style="text-align: left;">grado_max</th>
+<th style="text-align: left;">componenti</th>
+<th style="text-align: left;">componente_gigante</th>
+<th style="text-align: left;">quota_componente_gigante</th>
+<th style="text-align: left;">peso_totale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">100.201</td>
+<td style="text-align: left;">82.595</td>
+<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">0,000206</td>
+<td style="text-align: left;">17,013451</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">2.523</td>
+<td style="text-align: left;">1.288</td>
+<td style="text-align: left;">79.013</td>
+<td style="text-align: left;">0,956632</td>
+<td style="text-align: left;">1.752.462,970002</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">100.201</td>
+<td style="text-align: left;">34.443</td>
+<td style="text-align: left;">217.334</td>
+<td style="text-align: left;">0,000366</td>
+<td style="text-align: left;">12,619923</td>
+<td style="text-align: left;">4,000000</td>
+<td style="text-align: left;">1.395</td>
+<td style="text-align: left;">1.765</td>
+<td style="text-align: left;">29.814</td>
+<td style="text-align: left;">0,865604</td>
+<td style="text-align: left;">901.379,880000</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">100.201</td>
+<td style="text-align: left;">60.231</td>
+<td style="text-align: left;">281.710</td>
+<td style="text-align: left;">0,000155</td>
+<td style="text-align: left;">9,354319</td>
+<td style="text-align: left;">5,000000</td>
+<td style="text-align: left;">624</td>
+<td style="text-align: left;">2.445</td>
+<td style="text-align: left;">53.148</td>
+<td style="text-align: left;">0,882403</td>
+<td style="text-align: left;">559.771,920000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Descrittive delle tre reti di
+collaborazione</strong></p>
+<p><em>Dati completi in <code>tables/t2_rete_descrittive.csv</code> e
+<code>tables/t2_rete_descrittive.tex</code>.</em></p>
+<p>La rete complessiva è <strong>sparsa e molto connessa</strong>:
+densità dell’ordine di 0,000206, ma una componente gigante che assorbe
+95,7% degli artisti collegati. È la firma tipica di un mondo
+professionale in cui quasi nessuno lavora isolato e quasi nessuno lavora
+con tutti. La rete <code>creative</code> è più piccola e più densa di
+quella <code>performance</code>: produttori e autori formano un nucleo
+più ristretto e più intrecciato di quello degli esecutori — un dato che
+conta per la lettura della sezione 5.3, dove i due ruoli mostrano
+omofilie diverse.</p>
+<figure>
+<img src="figures/f5_distribuzione_gradi.png" alt="f5_distribuzione_gradi" style="width:100%" />
+<figcaption>
+<p><strong>Distribuzione di grado e forza.</strong> Su scala
+doppio-logaritmica entrambe le distribuzioni scendono con una pendenza
+quasi rettilinea su più ordini di grandezza: la stragrande maggioranza
+degli artisti ha pochissimi collaboratori, mentre una minoranza sottile
+ne ha centinaia. La forza — che somma i pesi, quindi conta quante volte
+si è collaborato e quanto erano specifici i crediti — ha una coda ancora
+più lunga del grado: i grandi collaboratori non hanno solo molti
+partner, hanno relazioni molto più intense. È il substrato strutturale
+su cui va letta la sezione 6.1: in una rete così diseguale, la domanda
+‘le donne stanno al centro?’ va sempre posta a parità di attività,
+perché il numero di pubblicazioni da solo spiega già gran parte della
+centralità.</p>
+</figcaption>
+</figure>
+<p>Le analisi che seguono girano sulla <strong>componente
+gigante</strong>, perché le misure di centralità e le distanze non sono
+definite fra componenti separate. La quota esclusa è 4,3% degli artisti
+collegati.</p>
+<h1 id="quante-sono-le-donne-e-in-quale-musica-rq1">4. Quante sono le
+donne, e in quale musica (RQ1)</h1>
+<figure>
+<img src="figures/f3_quota_donne_per_decennio.png" alt="f3_quota_donne_per_decennio" style="width:100%" />
+<figcaption>
+<p><strong>La quota di donne per decennio di debutto.</strong> La linea
+non è la storia di un progresso. Parte dal 16,9% per chi debutta negli
+anni Sessanta, scende fino al 12,4% negli anni Ottanta — il minimo della
+serie — e risale solo di recente, fino al 20,5% per chi debutta dal
+2020. La discesa degli anni Settanta e Ottanta merita cautela prima di
+leggerla come un arretramento reale: coincide con l’espansione massiccia
+del catalogo Discogs in quegli anni, cioè con l’ingresso in massa di
+crediti tecnici e di produzione — mestieri quasi interamente maschili —
+che diluiscono una quota calcolata su tutti i crediti e non sui soli
+interpreti. La risalita recente è invece coerente sia in ampiezza sia in
+direzione con quanto si osserva negli altri cataloghi musicali. In ogni
+decennio, comunque, la banda di confidenza resta lontanissima dalla
+parità.</p>
+</figcaption>
+</figure>
+<figure>
+<img src="figures/f4_quota_donne_genere_x_decennio.png" alt="f4_quota_donne_genere_x_decennio" style="width:100%" />
+<figcaption>
+<p><strong>Quota di donne per genere musicale e decennio.</strong> I
+pannelli mostrano che non esiste una singola traiettoria di genere:
+esistono generi musicali con storie diverse. Il livello di partenza
+conta più della pendenza — un genere che parte basso tende a restare
+basso attraverso i decenni, il che è esattamente la firma di una
+segregazione che si riproduce per reclutamento piuttosto che dissolversi
+col tempo.</p>
+</figcaption>
+</figure>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 13%" />
+<col style="width: 10%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">musical_genre</th>
+<th style="text-align: left;">cohort_decade</th>
+<th style="text-align: left;">n_artisti</th>
+<th style="text-align: left;">n_noti</th>
+<th style="text-align: left;">n_donne</th>
+<th style="text-align: left;">quota_donne</th>
+<th style="text-align: left;">ci_lo</th>
+<th style="text-align: left;">ci_hi</th>
+<th style="text-align: left;">rapporto_uomini_donne</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">1.940</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,793</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">1.950</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">1,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,793</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">1.960</td>
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">14,000</td>
+<td style="text-align: left;">1,000</td>
+<td style="text-align: left;">0,071</td>
+<td style="text-align: left;">0,013</td>
+<td style="text-align: left;">0,315</td>
+<td style="text-align: left;">13,000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">1.970</td>
+<td style="text-align: left;">65</td>
+<td style="text-align: left;">58,000</td>
+<td style="text-align: left;">9,000</td>
+<td style="text-align: left;">0,155</td>
+<td style="text-align: left;">0,084</td>
+<td style="text-align: left;">0,269</td>
+<td style="text-align: left;">5,444</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">1.980</td>
+<td style="text-align: left;">118</td>
+<td style="text-align: left;">105,000</td>
+<td style="text-align: left;">15,000</td>
+<td style="text-align: left;">0,143</td>
+<td style="text-align: left;">0,089</td>
+<td style="text-align: left;">0,222</td>
+<td style="text-align: left;">6,000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">1.990</td>
+<td style="text-align: left;">143</td>
+<td style="text-align: left;">115,000</td>
+<td style="text-align: left;">15,000</td>
+<td style="text-align: left;">0,130</td>
+<td style="text-align: left;">0,081</td>
+<td style="text-align: left;">0,204</td>
+<td style="text-align: left;">6,667</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">2.000</td>
+<td style="text-align: left;">148</td>
+<td style="text-align: left;">124,000</td>
+<td style="text-align: left;">21,000</td>
+<td style="text-align: left;">0,169</td>
+<td style="text-align: left;">0,114</td>
+<td style="text-align: left;">0,245</td>
+<td style="text-align: left;">4,905</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">2.010</td>
+<td style="text-align: left;">157</td>
+<td style="text-align: left;">118,000</td>
+<td style="text-align: left;">22,000</td>
+<td style="text-align: left;">0,186</td>
+<td style="text-align: left;">0,126</td>
+<td style="text-align: left;">0,266</td>
+<td style="text-align: left;">4,364</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">2.020</td>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">17,000</td>
+<td style="text-align: left;">4,000</td>
+<td style="text-align: left;">0,235</td>
+<td style="text-align: left;">0,096</td>
+<td style="text-align: left;">0,473</td>
+<td style="text-align: left;">3,250</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">1.940</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">13,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,228</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">1.950</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">6,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,390</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">1.960</td>
+<td style="text-align: left;">39</td>
+<td style="text-align: left;">18,000</td>
+<td style="text-align: left;">2,000</td>
+<td style="text-align: left;">0,111</td>
+<td style="text-align: left;">0,031</td>
+<td style="text-align: left;">0,328</td>
+<td style="text-align: left;">8,000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">1.970</td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">6,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,390</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">1.980</td>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">5,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,434</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">1.990</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">9,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,299</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">2.000</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">2,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,658</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">2.010</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">1,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,793</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">1.940</td>
+<td style="text-align: left;">33</td>
+<td style="text-align: left;">23,000</td>
+<td style="text-align: left;">10,000</td>
+<td style="text-align: left;">0,435</td>
+<td style="text-align: left;">0,256</td>
+<td style="text-align: left;">0,632</td>
+<td style="text-align: left;">1,300</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">1.950</td>
+<td style="text-align: left;">83</td>
+<td style="text-align: left;">72,000</td>
+<td style="text-align: left;">24,000</td>
+<td style="text-align: left;">0,333</td>
+<td style="text-align: left;">0,235</td>
+<td style="text-align: left;">0,448</td>
+<td style="text-align: left;">2,000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">1.960</td>
+<td style="text-align: left;">219</td>
+<td style="text-align: left;">173,000</td>
+<td style="text-align: left;">66,000</td>
+<td style="text-align: left;">0,382</td>
+<td style="text-align: left;">0,312</td>
+<td style="text-align: left;">0,456</td>
+<td style="text-align: left;">1,621</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">1.970</td>
+<td style="text-align: left;">185</td>
+<td style="text-align: left;">137,000</td>
+<td style="text-align: left;">70,000</td>
+<td style="text-align: left;">0,511</td>
+<td style="text-align: left;">0,428</td>
+<td style="text-align: left;">0,593</td>
+<td style="text-align: left;">0,957</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">1.980</td>
+<td style="text-align: left;">96</td>
+<td style="text-align: left;">54,000</td>
+<td style="text-align: left;">24,000</td>
+<td style="text-align: left;">0,444</td>
+<td style="text-align: left;">0,320</td>
+<td style="text-align: left;">0,576</td>
+<td style="text-align: left;">1,250</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">1.990</td>
+<td style="text-align: left;">60</td>
+<td style="text-align: left;">45,000</td>
+<td style="text-align: left;">16,000</td>
+<td style="text-align: left;">0,356</td>
+<td style="text-align: left;">0,232</td>
+<td style="text-align: left;">0,502</td>
+<td style="text-align: left;">1,812</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">2.000</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">24,000</td>
+<td style="text-align: left;">7,000</td>
+<td style="text-align: left;">0,292</td>
+<td style="text-align: left;">0,149</td>
+<td style="text-align: left;">0,492</td>
+<td style="text-align: left;">2,429</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">2.010</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">9,000</td>
+<td style="text-align: left;">2,000</td>
+<td style="text-align: left;">0,222</td>
+<td style="text-align: left;">0,063</td>
+<td style="text-align: left;">0,547</td>
+<td style="text-align: left;">3,500</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Quota di donne per genere musicale e decennio di
+debutto, con intervalli di Wilson al 95%</strong></p>
+<p><em>Mostrate le prime 25 righe di 141; la tabella completa è in
+<code>tables/t3_quota_donne_genere_decennio.csv</code> e
+<code>tables/t3_quota_donne_genere_decennio.tex</code>.</em></p>
+<h2 id="il-confronto-con-i-pattern-noti-in-letteratura">4.1 Il confronto
+con i pattern noti in letteratura</h2>
+<p>Il riferimento consueto per l’hip hop è un rapporto intorno a
+<strong>4 uomini per ogni donna</strong>. Nei dati italiani il rapporto
+è <strong>10,8 a 1</strong> (8,5% di donne): sensibilmente <strong>più
+squilibrato</strong> del riferimento internazionale. Due letture non
+alternative: la scena hip hop italiana censita da Discogs è più piccola
+e più recente, quindi più esposta al fatto che i ruoli di produzione —
+dove le donne sono più rare — pesino relativamente di più; e il
+conteggio qui include tutti i crediti, non solo gli interpreti
+principali, il che abbassa la quota rispetto alle statistiche basate
+sulle classifiche.</p>
+<p>All’estremo opposto, <strong>Classical</strong> (24,5%) e
+<strong>Children’s</strong> (40,7%) sono i generi con la presenza
+femminile più alta — il secondo sopra il 41%, l’unico dell’intero corpus
+in cui le donne si avvicinano alla metà. La distanza fra Children’s e
+Hip Hop, a parità di popolazione e di metodo, è di oltre 32 punti
+percentuali: il genere musicale è il predittore più forte della presenza
+femminile in tutto questo studio.</p>
+<p><strong>Rock (9,4%) e Electronic (12,9%)</strong>, che insieme fanno
+la parte maggiore della popolazione, stanno entrambi sotto la media
+generale. È su queste due scene, per peso numerico, che si decide la
+quota complessiva.</p>
+<h1 id="omofilia-chi-incide-con-chi-rq2">5. Omofilia: chi incide con chi
+(RQ2)</h1>
+<h2 id="il-quadro-generale">5.1 Il quadro generale</h2>
+<figure>
+<img src="figures/f1_mixing_gender_oss_att.png" alt="f1_mixing_gender_oss_att" style="width:100%" />
+<figcaption>
+<p><strong>Chi collabora con chi, rispetto al caso.</strong> Ogni cella
+è il rapporto fra i legami osservati e quelli attesi sotto un modello
+nullo che conserva esattamente il grado di ogni artista e la
+composizione della popolazione: l’unica cosa randomizzata è <em>chi sta
+con chi</em>. Un valore di 1 significa ‘come il caso’, sopra 1 significa
+più del previsto. La diagonale sopra 1 e le celle fuori diagonale sotto
+1 sono la definizione operativa di omofilia. Vale la pena notare che
+anche la cella unknown-unknown si discosta da 1: non è un fatto sociale
+ma un fatto di copertura dei dati — gli artisti su cui non sappiamo
+nulla tendono a stare insieme perché condividono le stesse
+caratteristiche che li rendono poco documentati (pochi crediti, ruoli
+minori, epoche marginali). È precisamente questo il motivo per cui
+l’ERGM della sezione 7 esclude i nodi unknown invece di trattarli come
+una categoria.</p>
+</figcaption>
+</figure>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 14%" />
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">attributo</th>
+<th style="text-align: left;">r_osservato</th>
+<th style="text-align: left;">r_pesato</th>
+<th style="text-align: left;">r_null_medio</th>
+<th style="text-align: left;">r_null_sd</th>
+<th style="text-align: left;">z</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">0,0735</td>
+<td style="text-align: left;">0,1133</td>
+<td style="text-align: left;">-0,0000</td>
+<td style="text-align: left;">0,0009</td>
+<td style="text-align: left;">78,7698</td>
+</tr>
+<tr>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">0,5186</td>
+<td style="text-align: left;">0,6803</td>
+<td style="text-align: left;">-0,0000</td>
+<td style="text-align: left;">0,0005</td>
+<td style="text-align: left;">972,7181</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Assortatività osservata e sotto modello
+nullo</strong></p>
+<p><em>Dati completi in <code>tables/t3_assortativita_globale.csv</code>
+e <code>tables/t3_assortativita_globale.tex</code>.</em></p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 13%" />
+<col style="width: 20%" />
+<col style="width: 8%" />
+<col style="width: 13%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">sottorete</th>
+<th style="text-align: left;">strato</th>
+<th style="text-align: left;">attr.</th>
+<th style="text-align: left;">categorie</th>
+<th style="text-align: left;">archi</th>
+<th style="text-align: left;">quota archi</th>
+<th style="text-align: left;">r</th>
+<th style="text-align: left;">ci_lo</th>
+<th style="text-align: left;">ci_hi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">508.173</td>
+<td style="text-align: left;">0,7233</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,0479</td>
+<td style="text-align: left;">0,0543</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,0735</td>
+<td style="text-align: left;">0,0716</td>
+<td style="text-align: left;">0,0755</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">605.856</td>
+<td style="text-align: left;">0,8623</td>
+<td style="text-align: left;">0,5865</td>
+<td style="text-align: left;">0,5850</td>
+<td style="text-align: left;">0,5880</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,5186</td>
+<td style="text-align: left;">0,5172</td>
+<td style="text-align: left;">0,5200</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">355.137</td>
+<td style="text-align: left;">0,7537</td>
+<td style="text-align: left;">0,0494</td>
+<td style="text-align: left;">0,0455</td>
+<td style="text-align: left;">0,0533</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">471.214</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,0540</td>
+<td style="text-align: left;">0,0517</td>
+<td style="text-align: left;">0,0563</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">432.368</td>
+<td style="text-align: left;">0,9176</td>
+<td style="text-align: left;">0,5373</td>
+<td style="text-align: left;">0,5355</td>
+<td style="text-align: left;">0,5393</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">471.214</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,4950</td>
+<td style="text-align: left;">0,4932</td>
+<td style="text-align: left;">0,4967</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">69.320</td>
+<td style="text-align: left;">0,6021</td>
+<td style="text-align: left;">0,0731</td>
+<td style="text-align: left;">0,0643</td>
+<td style="text-align: left;">0,0816</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">115.134</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,1370</td>
+<td style="text-align: left;">0,1320</td>
+<td style="text-align: left;">0,1420</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">81.408</td>
+<td style="text-align: left;">0,7071</td>
+<td style="text-align: left;">0,7263</td>
+<td style="text-align: left;">0,7227</td>
+<td style="text-align: left;">0,7300</td>
+</tr>
+<tr>
+<td style="text-align: left;">all</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">115.134</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,5614</td>
+<td style="text-align: left;">0,5580</td>
+<td style="text-align: left;">0,5649</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">188.167</td>
+<td style="text-align: left;">0,8658</td>
+<td style="text-align: left;">0,0235</td>
+<td style="text-align: left;">0,0183</td>
+<td style="text-align: left;">0,0289</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">217.334</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,0729</td>
+<td style="text-align: left;">0,0685</td>
+<td style="text-align: left;">0,0773</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">200.128</td>
+<td style="text-align: left;">0,9208</td>
+<td style="text-align: left;">0,5945</td>
+<td style="text-align: left;">0,5919</td>
+<td style="text-align: left;">0,5972</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">217.334</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,5506</td>
+<td style="text-align: left;">0,5483</td>
+<td style="text-align: left;">0,5530</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">150.618</td>
+<td style="text-align: left;">0,9046</td>
+<td style="text-align: left;">0,0230</td>
+<td style="text-align: left;">0,0171</td>
+<td style="text-align: left;">0,0291</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">166.503</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,0334</td>
+<td style="text-align: left;">0,0292</td>
+<td style="text-align: left;">0,0375</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">158.499</td>
+<td style="text-align: left;">0,9519</td>
+<td style="text-align: left;">0,5373</td>
+<td style="text-align: left;">0,5342</td>
+<td style="text-align: left;">0,5402</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">166.503</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,5100</td>
+<td style="text-align: left;">0,5070</td>
+<td style="text-align: left;">0,5133</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">15.531</td>
+<td style="text-align: left;">0,6638</td>
+<td style="text-align: left;">0,0474</td>
+<td style="text-align: left;">0,0257</td>
+<td style="text-align: left;">0,0668</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">23.398</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,1436</td>
+<td style="text-align: left;">0,1314</td>
+<td style="text-align: left;">0,1557</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">18.108</td>
+<td style="text-align: left;">0,7739</td>
+<td style="text-align: left;">0,7890</td>
+<td style="text-align: left;">0,7803</td>
+<td style="text-align: left;">0,7965</td>
+</tr>
+<tr>
+<td style="text-align: left;">creative</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">23.398</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,6298</td>
+<td style="text-align: left;">0,6224</td>
+<td style="text-align: left;">0,6375</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">186.094</td>
+<td style="text-align: left;">0,6606</td>
+<td style="text-align: left;">0,1175</td>
+<td style="text-align: left;">0,1122</td>
+<td style="text-align: left;">0,1228</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">281.710</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,1538</td>
+<td style="text-align: left;">0,1509</td>
+<td style="text-align: left;">0,1569</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">231.696</td>
+<td style="text-align: left;">0,8225</td>
+<td style="text-align: left;">0,6458</td>
+<td style="text-align: left;">0,6434</td>
+<td style="text-align: left;">0,6481</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">tutto</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">281.710</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,5591</td>
+<td style="text-align: left;">0,5569</td>
+<td style="text-align: left;">0,5614</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">109.980</td>
+<td style="text-align: left;">0,6859</td>
+<td style="text-align: left;">0,1234</td>
+<td style="text-align: left;">0,1165</td>
+<td style="text-align: left;">0,1300</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">160.347</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,1539</td>
+<td style="text-align: left;">0,1501</td>
+<td style="text-align: left;">0,1579</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">143.147</td>
+<td style="text-align: left;">0,8927</td>
+<td style="text-align: left;">0,6034</td>
+<td style="text-align: left;">0,6001</td>
+<td style="text-align: left;">0,6062</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">pre2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">160.347</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,5516</td>
+<td style="text-align: left;">0,5489</td>
+<td style="text-align: left;">0,5546</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">37.172</td>
+<td style="text-align: left;">0,5716</td>
+<td style="text-align: left;">0,1133</td>
+<td style="text-align: left;">0,1003</td>
+<td style="text-align: left;">0,1275</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">gender</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">65.036</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,1822</td>
+<td style="text-align: left;">0,1756</td>
+<td style="text-align: left;">0,1886</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">determinati soltanto</td>
+<td style="text-align: left;">44.797</td>
+<td style="text-align: left;">0,6888</td>
+<td style="text-align: left;">0,7658</td>
+<td style="text-align: left;">0,7610</td>
+<td style="text-align: left;">0,7703</td>
+</tr>
+<tr>
+<td style="text-align: left;">performance</td>
+<td style="text-align: left;">post2000</td>
+<td style="text-align: left;">musical_genre</td>
+<td style="text-align: left;">tutte le categorie</td>
+<td style="text-align: left;">65.036</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">0,5932</td>
+<td style="text-align: left;">0,5889</td>
+<td style="text-align: left;">0,5977</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Assortatività calcolata sui soli nodi con attributo
+determinato contro il calcolo che tratta ‘indeterminato’ come una
+categoria, per il genere sessuale e per quello musicale</strong></p>
+<p><em>Dati completi in
+<code>tables/t3_assortativita_MF_vs_tutte.csv</code> e
+<code>tables/t3_assortativita_MF_vs_tutte.tex</code>.</em></p>
+<h3 id="una-precisazione-di-misura-che-cambia-i-numeri">Una precisazione
+di misura che cambia i numeri</h3>
+<p>Le due tabelle vanno lette insieme, perché la seconda corregge la
+prima.</p>
+<p>Trattare <code>unknown</code> come una quarta categoria alla pari di
+M ed F gonfia l’assortatività: la cella unknown-unknown sta molto sopra
+l’atteso, ma non perché quelle persone si cerchino fra loro. Si cercano
+fra loro le caratteristiche che le rendono poco documentate — pochi
+crediti, ruoli minori, epoche marginali, pseudonimi — e sono le stesse
+che rendono difficile inferirne il genere. È copertura dei dati che si
+traveste da struttura sociale.</p>
+<p>La misura di riferimento restringe perciò il calcolo agli archi in
+cui entrambi gli estremi hanno genere determinato: <strong>72,3% degli
+archi</strong>. La differenza non è cosmetica: <strong>r passa da 0,0735
+a 0,0511</strong>, cioè un terzo dell’omofilia apparente era
+artefatto.</p>
+<p>Lo stesso controllo è stato fatto sul <strong>genere
+musicale</strong>, dove ‘Unknown’ è altrettanto presente, e dà il
+risultato <strong>opposto</strong>: togliendo gli indeterminati
+l’assortatività sale da 0,5186 a 0,5865. Il motivo è che gli artisti
+senza genere musicale assegnato non si aggregano fra loro per genere —
+non ne hanno uno — e quindi diluiscono la diagonale invece di gonfiarla.
+Riportare entrambi i confronti serve a chiarire che l’esclusione degli
+indeterminati è una scelta di metodo applicata in modo uniforme, non un
+accorgimento adottato dove conveniva: sul genere sessuale abbassa il
+risultato, sul genere musicale lo alza.</p>
+<h3 id="il-risultato-centrale">Il risultato centrale</h3>
+<p>L’assortatività per <strong>genere musicale</strong> vale 0,519. È un
+valore molto alto: le carriere si svolgono dentro un genere e le
+collaborazioni seguono i confini del genere quasi come se fossero
+confini di settore.</p>
+<p>L’assortatività per <strong>genere sessuale</strong> vale 0,0511,
+circa 10 volte meno, con intervallo di confidenza 0,0479–0,0543 e
+modello nullo a 0,0000. Preso da solo il numero sembra trascurabile; non
+lo è, perché su 702.613 archi anche un effetto piccolo è misurato con
+precisione elevata e l’intervallo sta interamente sopra lo zero.</p>
+<p>La lettura sostanziale è che <strong>il genere sessuale struttura le
+collaborazioni, ma molto meno di quanto faccia la specializzazione
+musicale</strong>. Chi cerca un bassista lo cerca nel proprio giro
+musicale molto più sistematicamente di quanto lo cerchi del proprio
+sesso. Questo non rende l’omofilia di genere irrilevante — rende il
+genere musicale il canale attraverso cui essa prevalentemente opera,
+come mostra il paragrafo seguente.</p>
+<figure>
+<img src="figures/f2_mixing_genere_musicale_oss_att.png" alt="f2_mixing_genere_musicale_oss_att" style="width:100%" />
+<figcaption>
+<p><strong>Omofilia per genere musicale.</strong> La diagonale domina
+l’immagine. I generi più chiusi non sono necessariamente i più grandi:
+la chiusura misura quanto una scena recluta al proprio interno, non
+quanto è popolosa. Le celle fuori diagonale che superano 1 indicano le
+coppie di generi fra cui esiste un traffico reale di musicisti — i
+confini permeabili del sistema.</p>
+</figcaption>
+</figure>
+<h2 id="lomofilia-nel-tempo-il-risultato-controintuitivo">5.2 L’omofilia
+nel tempo: il risultato controintuitivo</h2>
+<figure>
+<img src="figures/f6_assortativita_per_strato.png" alt="f6_assortativita_per_strato" style="width:100%" />
+<figcaption>
+<p><strong>Omofilia di genere per sottorete di ruolo ed epoca.</strong>
+Il punto è il valore osservato, la barra l’intervallo di confidenza
+bootstrap al 95%, il trattino verticale il valore del modello nullo.
+L’attesa, dalla letteratura, era un <strong>allentamento</strong> dopo
+il 2000. Sui soli nodi con genere determinato i dati dicono l’opposto,
+ma con ampiezza molto più contenuta di quanto suggerisca la misura a
+quattro categorie mostrata in figura: 0,0494 contro 0,0731.</p>
+</figcaption>
+</figure>
+<p>Prima di interpretarlo va ripulito. Sulla misura ingenua a quattro
+categorie il salto è spettacolare, da 0,0540 a 0,1370: più che
+raddoppiato. Sui soli nodi con genere determinato si riduce a 0,0494 →
+0,0731. La ragione è che la quota di archi utilizzabili crolla fra le
+due epoche — dal 75,4% al 60,2% — perché gli artisti recenti sono
+mediamente meno documentati: più <code>unknown</code>, quindi più
+apparente omofilia spuria.</p>
+<p><strong>Quel che resta dopo la correzione è comunque un
+aumento</strong>, con intervalli (0,0455–0,0533 contro 0,0643–0,0816)
+che non si sovrappongono. Il risultato regge, ma va raccontato per
+quello che è: un aumento moderato, non un raddoppio.</p>
+<p><strong>E l’aumento non è diffuso: viene tutto da una parte sola
+della rete.</strong> Scomponendo per ruolo, l’omofilia dei ruoli di
+esecuzione è sostanzialmente piatta nel tempo (0,1234 prima del 2000,
+0,1133 dopo), mentre quella dei ruoli creativi
+<strong>raddoppia</strong>, da 0,0230 a 0,0474. Qualunque spiegazione
+dell’aumento deve perciò riguardare il modo in cui si produce e si
+scrive musica, non il modo in cui la si suona.</p>
+<p>Restano due letture possibili, e i dati qui presenti non permettono
+di scegliere fra loro in modo definitivo.</p>
+<p><strong>Prima lettura — è reale.</strong> Dopo il 2000 cambia il modo
+di produrre musica: la registrazione si decentra, gli studi grandi con
+organici misti e obbligati lasciano spazio a progetti piccoli, costruiti
+su reti personali. Reti personali significa reti più omofile. In questa
+lettura l’aumento non è un arretramento culturale ma l’effetto
+strutturale di una tecnologia di produzione diversa — e il fatto che
+riguardi i soli ruoli creativi, che sono precisamente quelli toccati
+dalla decentralizzazione degli studi, depone a favore di questa
+spiegazione.</p>
+<p><strong>Seconda lettura — è composizione.</strong> L’indice
+<em>r</em> di Newman dipende dalle marginali. Post-2000 ci sono più
+donne, quindi più occasioni di legame donna-donna; a parità di
+propensione, un gruppo minoritario più numeroso produce meccanicamente
+un’assortatività misurata più alta. Il modello nullo a gradi preservati
+corregge per il grado, <strong>non</strong> per questa asimmetria di
+composizione fra epoche.</p>
+<p>È esattamente per dirimere questo punto che serve l’ERGM, e
+<strong>il verdetto è arrivato</strong>: una volta controllata la
+tendenza della rete a chiudere i triangoli, la differenza di omofilia di
+genere fra le due epoche <strong>non è statisticamente distinguibile da
+zero</strong> (per le donne 0,709 contro 0,776, p = 0,88; per gli uomini
+0,137 contro 0,080, p = 0,60).</p>
+<p>Ciò che aumenta davvero, e in modo nettissimo, è la <strong>chiusura
+triadica</strong>: il coefficiente <code>gwesp</code> passa da 2,217 a
+2,892 (p &lt; 0,0001). La musica registrata italiana dopo il 2000 non è
+diventata più omofila per genere: è diventata più <strong>chiusa in
+triangoli</strong>. Si lavora sempre di più dentro gruppi fitti di
+persone che si conoscono già tutte fra loro. In un ambiente dove le
+donne sono il 13,8%, una struttura più triangolare produce
+meccanicamente più legami donna-donna osservati, e quindi
+un’assortatività misurata più alta — senza che nessuno abbia cambiato
+criterio nello scegliere con chi lavorare.</p>
+<p>È la risposta più interessante dello studio, perché sposta l’oggetto:
+il problema non è una preferenza di genere che si è rafforzata, ma una
+struttura di reclutamento che si è chiusa. Sono due cose diverse anche
+dal punto di vista di chi volesse intervenire. I dettagli del test sono
+nella sezione 7.3.</p>
+<h2 id="produttori-e-interpreti-due-mestieri-due-omofilie-rq5">5.3
+Produttori e interpreti: due mestieri, due omofilie (RQ5)</h2>
+<p>La distinzione fra ruoli creativi (produzione, scrittura,
+arrangiamento) e ruoli di esecuzione (voce, strumenti, direzione) è la
+domanda RQ5, e la risposta è netta: sui soli nodi con genere determinato
+l’omofilia vale <strong>0,0235 nella rete creativa</strong> contro
+<strong>0,1175 in quella di esecuzione</strong>.</p>
+<p>La collaborazione creativa è quindi <em>meno</em> segregata per
+genere di quella esecutiva, di un fattore 5,0. È un risultato che va
+letto insieme al dato di composizione: i ruoli creativi sono in assoluto
+i più maschili dell’intero corpus, e proprio per questo l’omofilia
+misurata vi risulta bassa — dove la maggioranza è schiacciante non c’è
+quasi spazio per discostarsi dal caso. La segregazione dei ruoli
+creativi si manifesta nel <strong>chi entra</strong>, non nel
+<strong>chi lavora con chi</strong>; quella dei ruoli esecutivi, dove le
+donne sono più presenti, si manifesta anche nella struttura delle
+collaborazioni. Sono due forme diverse di chiusura, e confonderle
+porterebbe a concludere che la produzione musicale sia il luogo più
+aperto del sistema, che è l’opposto di quanto dicono i conteggi.</p>
+<h2 id="omofilia-dentro-ciascun-genere-musicale">5.4 Omofilia dentro
+ciascun genere musicale</h2>
+<figure>
+<img src="figures/f7_omofilia_per_genere_musicale.png" alt="f7_omofilia_per_genere_musicale" style="width:100%" />
+<figcaption>
+<p><strong>A sinistra</strong> l’omofilia di genere sessuale calcolata
+separatamente dentro ciascun genere musicale, con il modello nullo come
+riferimento. <strong>A destra</strong> la scomposizione della diagonale:
+quanto i legami uomo-uomo e quanto i legami donna-donna superano
+l’atteso. La lettura congiunta dei due pannelli è il cuore di RQ2. Un
+valore osservato/atteso vicino a 1 per gli uomini e molto sopra 1 per le
+donne descrive una situazione precisa: gli uomini non si cercano fra
+loro più del caso — non ne hanno bisogno, sono la maggioranza e il caso
+li mette già insieme — mentre le donne si aggregano fra loro molto più
+del previsto. È la forma che l’omofilia assume quando una minoranza
+opera dentro una maggioranza: non segregazione simmetrica, ma
+addensamento del gruppo minoritario.</p>
+</figcaption>
+</figure>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 7%" />
+<col style="width: 10%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 10%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">genere_musicale</th>
+<th style="text-align: left;">archi</th>
+<th style="text-align: left;">r_gender</th>
+<th style="text-align: left;">ci_lo</th>
+<th style="text-align: left;">ci_hi</th>
+<th style="text-align: left;">r_null</th>
+<th style="text-align: left;">oe_MM</th>
+<th style="text-align: left;">oe_FF</th>
+<th style="text-align: left;">n_artisti</th>
+<th style="text-align: left;">quota_donne</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Electronic</td>
+<td style="text-align: left;">169.727</td>
+<td style="text-align: left;">0,0632</td>
+<td style="text-align: left;">0,0591</td>
+<td style="text-align: left;">0,0670</td>
+<td style="text-align: left;">-0,0000</td>
+<td style="text-align: left;">1,0272</td>
+<td style="text-align: left;">1,6852</td>
+<td style="text-align: left;">23.907</td>
+<td style="text-align: left;">0,0854</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pop</td>
+<td style="text-align: left;">128.436</td>
+<td style="text-align: left;">0,0160</td>
+<td style="text-align: left;">0,0120</td>
+<td style="text-align: left;">0,0200</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">1,0026</td>
+<td style="text-align: left;">1,3167</td>
+<td style="text-align: left;">10.332</td>
+<td style="text-align: left;">0,1502</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rock</td>
+<td style="text-align: left;">56.014</td>
+<td style="text-align: left;">0,1674</td>
+<td style="text-align: left;">0,1597</td>
+<td style="text-align: left;">0,1752</td>
+<td style="text-align: left;">-0,0004</td>
+<td style="text-align: left;">1,0496</td>
+<td style="text-align: left;">1,9893</td>
+<td style="text-align: left;">20.042</td>
+<td style="text-align: left;">0,0670</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hip Hop</td>
+<td style="text-align: left;">18.577</td>
+<td style="text-align: left;">0,1173</td>
+<td style="text-align: left;">0,1027</td>
+<td style="text-align: left;">0,1310</td>
+<td style="text-align: left;">0,0001</td>
+<td style="text-align: left;">1,0410</td>
+<td style="text-align: left;">1,8739</td>
+<td style="text-align: left;">1.974</td>
+<td style="text-align: left;">0,0527</td>
+</tr>
+<tr>
+<td style="text-align: left;">Folk, World, &amp; Country</td>
+<td style="text-align: left;">15.806</td>
+<td style="text-align: left;">0,0735</td>
+<td style="text-align: left;">0,0608</td>
+<td style="text-align: left;">0,0870</td>
+<td style="text-align: left;">-0,0003</td>
+<td style="text-align: left;">1,0226</td>
+<td style="text-align: left;">1,5376</td>
+<td style="text-align: left;">5.338</td>
+<td style="text-align: left;">0,1045</td>
+</tr>
+<tr>
+<td style="text-align: left;">Jazz</td>
+<td style="text-align: left;">13.118</td>
+<td style="text-align: left;">0,0682</td>
+<td style="text-align: left;">0,0525</td>
+<td style="text-align: left;">0,0849</td>
+<td style="text-align: left;">-0,0001</td>
+<td style="text-align: left;">1,0104</td>
+<td style="text-align: left;">1,6074</td>
+<td style="text-align: left;">3.607</td>
+<td style="text-align: left;">0,1017</td>
+</tr>
+<tr>
+<td style="text-align: left;">Classical</td>
+<td style="text-align: left;">5.796</td>
+<td style="text-align: left;">0,0475</td>
+<td style="text-align: left;">0,0273</td>
+<td style="text-align: left;">0,0675</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">1,0191</td>
+<td style="text-align: left;">1,2731</td>
+<td style="text-align: left;">3.825</td>
+<td style="text-align: left;">0,2047</td>
+</tr>
+<tr>
+<td style="text-align: left;">Stage &amp; Screen</td>
+<td style="text-align: left;">2.796</td>
+<td style="text-align: left;">0,0297</td>
+<td style="text-align: left;">0,0003</td>
+<td style="text-align: left;">0,0587</td>
+<td style="text-align: left;">0,0003</td>
+<td style="text-align: left;">1,0074</td>
+<td style="text-align: left;">1,1576</td>
+<td style="text-align: left;">682</td>
+<td style="text-align: left;">0,1598</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">1.309</td>
+<td style="text-align: left;">0,0226</td>
+<td style="text-align: left;">-0,0124</td>
+<td style="text-align: left;">0,0585</td>
+<td style="text-align: left;">0,0008</td>
+<td style="text-align: left;">1,0004</td>
+<td style="text-align: left;">1,0286</td>
+<td style="text-align: left;">723</td>
+<td style="text-align: left;">0,3029</td>
+</tr>
+<tr>
+<td style="text-align: left;">Non-Music</td>
+<td style="text-align: left;">1.126</td>
+<td style="text-align: left;">0,0828</td>
+<td style="text-align: left;">0,0278</td>
+<td style="text-align: left;">0,1363</td>
+<td style="text-align: left;">0,0012</td>
+<td style="text-align: left;">1,0189</td>
+<td style="text-align: left;">1,3068</td>
+<td style="text-align: left;">488</td>
+<td style="text-align: left;">0,1639</td>
+</tr>
+<tr>
+<td style="text-align: left;">Reggae</td>
+<td style="text-align: left;">643</td>
+<td style="text-align: left;">0,1302</td>
+<td style="text-align: left;">0,0641</td>
+<td style="text-align: left;">0,2030</td>
+<td style="text-align: left;">-0,0017</td>
+<td style="text-align: left;">1,0809</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">388</td>
+<td style="text-align: left;">0,0515</td>
+</tr>
+<tr>
+<td style="text-align: left;">Funk / Soul</td>
+<td style="text-align: left;">582</td>
+<td style="text-align: left;">0,1843</td>
+<td style="text-align: left;">0,1166</td>
+<td style="text-align: left;">0,2477</td>
+<td style="text-align: left;">-0,0021</td>
+<td style="text-align: left;">1,1312</td>
+<td style="text-align: left;">1,7908</td>
+<td style="text-align: left;">1.197</td>
+<td style="text-align: left;">0,1019</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Omofilia di genere sessuale entro ciascun genere
+musicale (RQ2)</strong></p>
+<p><em>Dati completi in
+<code>tables/t3_omofilia_per_genere_musicale.csv</code> e
+<code>tables/t3_omofilia_per_genere_musicale.tex</code>.</em></p>
+<p>Questo è il punto su cui il dato italiano <strong>contraddice
+l’aspettativa corrente</strong>. La letteratura riporta di norma
+un’omofilia più forte <em>fra gli uomini</em>. Qui il rapporto
+osservato/atteso donna-donna è sistematicamente
+<strong>maggiore</strong> di quello uomo-uomo. La spiegazione non è che
+le donne siano più chiuse: è che con una quota femminile del 13,8% il
+valore atteso per un legame donna-donna sotto casualità è bassissimo, e
+basta un modesto addensamento reale per produrre un rapporto elevato.
+L’indice uomo-uomo, al contrario, è schiacciato verso 1 perché la
+maggioranza non può discostarsi molto dal caso. <strong>I due indici non
+sono confrontabili come se misurassero la stessa cosa</strong>, ed è
+l’ERGM — che stima una propensione e non un rapporto — a fornire il
+confronto corretto.</p>
+<h1 id="le-donne-stanno-al-centro-o-ai-margini-rq3">6. Le donne stanno
+al centro o ai margini? (RQ3)</h1>
+<p>La domanda che la letteratura chiama <em>pattern Smurfette</em> è se
+le donne, dove ci sono, occupino posizioni strutturalmente periferiche:
+presenti quanto basta, mai al centro.</p>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 4%" />
+<col style="width: 12%" />
+<col style="width: 11%" />
+<col style="width: 12%" />
+<col style="width: 11%" />
+<col style="width: 10%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">gender</th>
+<th style="text-align: left;">n</th>
+<th style="text-align: left;">eigenvector_mediana</th>
+<th style="text-align: left;">eigenvector_media</th>
+<th style="text-align: left;">betweenness_mediana</th>
+<th style="text-align: left;">coreness_mediana</th>
+<th style="text-align: left;">coreness_media</th>
+<th style="text-align: left;">grado_mediano</th>
+<th style="text-align: left;">forza_mediana</th>
+<th style="text-align: left;">n_release_mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">7.072</td>
+<td style="text-align: left;">0,000000</td>
+<td style="text-align: left;">0,000054</td>
+<td style="text-align: left;">0,000000</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">9,396069</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">5,740000</td>
+<td style="text-align: left;">8,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">49.901</td>
+<td style="text-align: left;">0,000000</td>
+<td style="text-align: left;">0,000158</td>
+<td style="text-align: left;">0,000001</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">10,239474</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">7,200000</td>
+<td style="text-align: left;">10,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">883</td>
+<td style="text-align: left;">0,000000</td>
+<td style="text-align: left;">0,000112</td>
+<td style="text-align: left;">0,000001</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">10,216308</td>
+<td style="text-align: left;">9,000000</td>
+<td style="text-align: left;">10,820000</td>
+<td style="text-align: left;">14,000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Posizione nella componente gigante per genere
+sessuale</strong></p>
+<p><em>Dati completi in <code>tables/t3_posizione_per_genere.csv</code>
+e <code>tables/t3_posizione_per_genere.tex</code>.</em></p>
+<figure>
+<img src="figures/f8_posizione_per_genere.png" alt="f8_posizione_per_genere" style="width:100%" />
+<figcaption>
+<p><strong>Coreness mediana per genere sessuale, dentro ciascun genere
+musicale.</strong> La coreness dice a quale strato del nucleo denso
+della rete una persona appartiene: è una misura di appartenenza al
+centro più robusta della centralità di grado, perché non si lascia
+gonfiare da chi ha molti collaboratori occasionali. Le barre affiancate
+permettono il confronto diretto a parità di genere musicale, che è il
+confronto giusto: paragonare una cantante pop a un turnista jazz non
+direbbe nulla sul genere sessuale e molto sulla struttura delle due
+scene.</p>
+</figcaption>
+</figure>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 23%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">musical_genre</th>
+<th style="text-align: left;">gender</th>
+<th style="text-align: left;">n</th>
+<th style="text-align: left;">coreness_mediana</th>
+<th style="text-align: left;">eigenvector_mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">52</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">326</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Blues</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">0,000003</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">47</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">154</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">0,000001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">253</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">0,000001</td>
+</tr>
+<tr>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000008</td>
+</tr>
+<tr>
+<td style="text-align: left;">Classical</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">439</td>
+<td style="text-align: left;">5,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Classical</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">1.678</td>
+<td style="text-align: left;">5,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Classical</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">37</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Electronic</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">1.805</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Electronic</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">12.829</td>
+<td style="text-align: left;">9,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Electronic</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">272</td>
+<td style="text-align: left;">10,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Folk, World, &amp; Country</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">415</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Folk, World, &amp; Country</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">2.890</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Folk, World, &amp; Country</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">55</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Funk / Soul</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">77</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Funk / Soul</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">503</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Funk / Soul</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hip Hop</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">75</td>
+<td style="text-align: left;">9,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hip Hop</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">1.007</td>
+<td style="text-align: left;">15,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Hip Hop</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">13,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Jazz</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">244</td>
+<td style="text-align: left;">7,500000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Jazz</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">2.125</td>
+<td style="text-align: left;">9,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Jazz</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latin</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">29</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latin</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">162</td>
+<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latin</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">2,500000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Non-Music</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">61</td>
+<td style="text-align: left;">5,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Posizione nella rete per genere sessuale entro
+genere musicale</strong></p>
+<p><em>Mostrate le prime 30 righe di 44; la tabella completa è in
+<code>tables/t3_posizione_per_genere_musicale.csv</code> e
+<code>tables/t3_posizione_per_genere_musicale.tex</code>.</em></p>
+<h2 id="il-confronto-a-parità-di-attività-e-coorte">6.1 Il confronto a
+parità di attività e coorte</h2>
+<p>Le mediane grezze non bastano. Chi pubblica di più è più centrale, e
+le donne della popolazione pubblicano meno: la mediana delle
+pubblicazioni è 8 per le donne contro 10 per gli uomini, e la coreness
+mediana segue (6 contro 7). Senza controllare per l’attività si
+misurerebbe la differenza di quanto si pubblica e la si chiamerebbe
+differenza di posizione.</p>
+<p>La regressione confronta perciò persone con la stessa attività, la
+stessa coorte di debutto e lo stesso genere musicale.</p>
+<table>
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 7%" />
+<col style="width: 6%" />
+<col style="width: 8%" />
+<col style="width: 6%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">termine</th>
+<th style="text-align: left;">coef</th>
+<th style="text-align: left;">se</th>
+<th style="text-align: left;">z</th>
+<th style="text-align: left;">p</th>
+<th style="text-align: left;">ci_lo</th>
+<th style="text-align: left;">ci_hi</th>
+<th style="text-align: left;">esito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: left;">0,9271</td>
+<td style="text-align: left;">0,0943</td>
+<td style="text-align: left;">9,8347</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">0,7423</td>
+<td style="text-align: left;">1,1119</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]</td>
+<td style="text-align: left;">0,2229</td>
+<td style="text-align: left;">0,1697</td>
+<td style="text-align: left;">1,3133</td>
+<td style="text-align: left;">0,1891</td>
+<td style="text-align: left;">-0,1097</td>
+<td style="text-align: left;">0,5555</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Blues]</td>
+<td style="text-align: left;">0,0075</td>
+<td style="text-align: left;">0,0715</td>
+<td style="text-align: left;">0,1052</td>
+<td style="text-align: left;">0,9162</td>
+<td style="text-align: left;">-0,1327</td>
+<td style="text-align: left;">0,1477</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Children’s]</td>
+<td style="text-align: left;">-0,1072</td>
+<td style="text-align: left;">0,1193</td>
+<td style="text-align: left;">-0,8987</td>
+<td style="text-align: left;">0,3688</td>
+<td style="text-align: left;">-0,3409</td>
+<td style="text-align: left;">0,1266</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Classical]</td>
+<td style="text-align: left;">-0,6304</td>
+<td style="text-align: left;">0,0644</td>
+<td style="text-align: left;">-9,7882</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,7566</td>
+<td style="text-align: left;">-0,5042</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Electronic]</td>
+<td style="text-align: left;">-0,1921</td>
+<td style="text-align: left;">0,0586</td>
+<td style="text-align: left;">-3,2784</td>
+<td style="text-align: left;">0,0010</td>
+<td style="text-align: left;">-0,3069</td>
+<td style="text-align: left;">-0,0773</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Folk, World, &amp;
+Country]</td>
+<td style="text-align: left;">-0,2454</td>
+<td style="text-align: left;">0,0623</td>
+<td style="text-align: left;">-3,9371</td>
+<td style="text-align: left;">0,0001</td>
+<td style="text-align: left;">-0,3676</td>
+<td style="text-align: left;">-0,1233</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Funk / Soul]</td>
+<td style="text-align: left;">0,1027</td>
+<td style="text-align: left;">0,0723</td>
+<td style="text-align: left;">1,4208</td>
+<td style="text-align: left;">0,1554</td>
+<td style="text-align: left;">-0,0390</td>
+<td style="text-align: left;">0,2444</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Hip Hop]</td>
+<td style="text-align: left;">-0,3131</td>
+<td style="text-align: left;">0,0637</td>
+<td style="text-align: left;">-4,9175</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,4378</td>
+<td style="text-align: left;">-0,1883</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Jazz]</td>
+<td style="text-align: left;">-0,1615</td>
+<td style="text-align: left;">0,0631</td>
+<td style="text-align: left;">-2,5606</td>
+<td style="text-align: left;">0,0105</td>
+<td style="text-align: left;">-0,2852</td>
+<td style="text-align: left;">-0,0379</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Non-Music]</td>
+<td style="text-align: left;">-1,3941</td>
+<td style="text-align: left;">0,0954</td>
+<td style="text-align: left;">-14,6063</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-1,5811</td>
+<td style="text-align: left;">-1,2070</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Pop]</td>
+<td style="text-align: left;">1,0665</td>
+<td style="text-align: left;">0,0624</td>
+<td style="text-align: left;">17,0971</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">0,9442</td>
+<td style="text-align: left;">1,1888</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Rock]</td>
+<td style="text-align: left;">0,0001</td>
+<td style="text-align: left;">0,0589</td>
+<td style="text-align: left;">0,0014</td>
+<td style="text-align: left;">0,9989</td>
+<td style="text-align: left;">-0,1153</td>
+<td style="text-align: left;">0,1154</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Stage &amp; Screen]</td>
+<td style="text-align: left;">0,5028</td>
+<td style="text-align: left;">0,0895</td>
+<td style="text-align: left;">5,6207</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">0,3275</td>
+<td style="text-align: left;">0,6782</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1950]</td>
+<td style="text-align: left;">0,2438</td>
+<td style="text-align: left;">0,0908</td>
+<td style="text-align: left;">2,6843</td>
+<td style="text-align: left;">0,0073</td>
+<td style="text-align: left;">0,0658</td>
+<td style="text-align: left;">0,4219</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1960]</td>
+<td style="text-align: left;">-0,1471</td>
+<td style="text-align: left;">0,0798</td>
+<td style="text-align: left;">-1,8435</td>
+<td style="text-align: left;">0,0653</td>
+<td style="text-align: left;">-0,3036</td>
+<td style="text-align: left;">0,0093</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1970]</td>
+<td style="text-align: left;">-1,2692</td>
+<td style="text-align: left;">0,0763</td>
+<td style="text-align: left;">-16,6353</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-1,4187</td>
+<td style="text-align: left;">-1,1197</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1980]</td>
+<td style="text-align: left;">-1,8764</td>
+<td style="text-align: left;">0,0746</td>
+<td style="text-align: left;">-25,1590</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-2,0226</td>
+<td style="text-align: left;">-1,7302</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1990]</td>
+<td style="text-align: left;">-2,1149</td>
+<td style="text-align: left;">0,0741</td>
+<td style="text-align: left;">-28,5283</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-2,2602</td>
+<td style="text-align: left;">-1,9696</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.2000]</td>
+<td style="text-align: left;">-2,1433</td>
+<td style="text-align: left;">0,0742</td>
+<td style="text-align: left;">-28,8960</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-2,2887</td>
+<td style="text-align: left;">-1,9980</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.2010]</td>
+<td style="text-align: left;">-2,0558</td>
+<td style="text-align: left;">0,0743</td>
+<td style="text-align: left;">-27,6784</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-2,2013</td>
+<td style="text-align: left;">-1,9102</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.2020]</td>
+<td style="text-align: left;">-1,8212</td>
+<td style="text-align: left;">0,0765</td>
+<td style="text-align: left;">-23,8095</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-1,9711</td>
+<td style="text-align: left;">-1,6713</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Blues]</td>
+<td style="text-align: left;">-0,0040</td>
+<td style="text-align: left;">0,2086</td>
+<td style="text-align: left;">-0,0191</td>
+<td style="text-align: left;">0,9847</td>
+<td style="text-align: left;">-0,4128</td>
+<td style="text-align: left;">0,4048</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td
+style="text-align: left;">C(gender)[T.F]:C(genere)[T.Children’s]</td>
+<td style="text-align: left;">-0,2469</td>
+<td style="text-align: left;">0,2358</td>
+<td style="text-align: left;">-1,0472</td>
+<td style="text-align: left;">0,2950</td>
+<td style="text-align: left;">-0,7091</td>
+<td style="text-align: left;">0,2152</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Classical]</td>
+<td style="text-align: left;">-0,0057</td>
+<td style="text-align: left;">0,1792</td>
+<td style="text-align: left;">-0,0318</td>
+<td style="text-align: left;">0,9746</td>
+<td style="text-align: left;">-0,3570</td>
+<td style="text-align: left;">0,3456</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td
+style="text-align: left;">C(gender)[T.F]:C(genere)[T.Electronic]</td>
+<td style="text-align: left;">-0,0861</td>
+<td style="text-align: left;">0,1710</td>
+<td style="text-align: left;">-0,5036</td>
+<td style="text-align: left;">0,6146</td>
+<td style="text-align: left;">-0,4213</td>
+<td style="text-align: left;">0,2491</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Folk, World,
+&amp; Country]</td>
+<td style="text-align: left;">-0,1754</td>
+<td style="text-align: left;">0,1809</td>
+<td style="text-align: left;">-0,9695</td>
+<td style="text-align: left;">0,3323</td>
+<td style="text-align: left;">-0,5299</td>
+<td style="text-align: left;">0,1792</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Funk /
+Soul]</td>
+<td style="text-align: left;">0,2287</td>
+<td style="text-align: left;">0,2258</td>
+<td style="text-align: left;">1,0132</td>
+<td style="text-align: left;">0,3110</td>
+<td style="text-align: left;">-0,2138</td>
+<td style="text-align: left;">0,6712</td>
+<td style="text-align: left;">eigenvector</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Posizione nella rete (eigenvector) per genere
+sessuale e genere musicale, a parità di attività e coorte</strong></p>
+<p><em>Mostrate le prime 28 righe di 35; la tabella completa è in
+<code>tables/t3_regressione_eigenvector.csv</code> e
+<code>tables/t3_regressione_eigenvector.tex</code>.</em></p>
+<table>
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 7%" />
+<col style="width: 6%" />
+<col style="width: 8%" />
+<col style="width: 6%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">termine</th>
+<th style="text-align: left;">coef</th>
+<th style="text-align: left;">se</th>
+<th style="text-align: left;">z</th>
+<th style="text-align: left;">p</th>
+<th style="text-align: left;">ci_lo</th>
+<th style="text-align: left;">ci_hi</th>
+<th style="text-align: left;">esito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: left;">1,2696</td>
+<td style="text-align: left;">0,0314</td>
+<td style="text-align: left;">40,4273</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">1,2080</td>
+<td style="text-align: left;">1,3311</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]</td>
+<td style="text-align: left;">0,0390</td>
+<td style="text-align: left;">0,0739</td>
+<td style="text-align: left;">0,5279</td>
+<td style="text-align: left;">0,5976</td>
+<td style="text-align: left;">-0,1058</td>
+<td style="text-align: left;">0,1838</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Blues]</td>
+<td style="text-align: left;">0,0072</td>
+<td style="text-align: left;">0,0336</td>
+<td style="text-align: left;">0,2133</td>
+<td style="text-align: left;">0,8311</td>
+<td style="text-align: left;">-0,0586</td>
+<td style="text-align: left;">0,0729</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Children’s]</td>
+<td style="text-align: left;">-0,0462</td>
+<td style="text-align: left;">0,0387</td>
+<td style="text-align: left;">-1,1922</td>
+<td style="text-align: left;">0,2332</td>
+<td style="text-align: left;">-0,1221</td>
+<td style="text-align: left;">0,0297</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Classical]</td>
+<td style="text-align: left;">-0,3042</td>
+<td style="text-align: left;">0,0256</td>
+<td style="text-align: left;">-11,8993</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,3543</td>
+<td style="text-align: left;">-0,2541</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Electronic]</td>
+<td style="text-align: left;">0,0568</td>
+<td style="text-align: left;">0,0231</td>
+<td style="text-align: left;">2,4598</td>
+<td style="text-align: left;">0,0139</td>
+<td style="text-align: left;">0,0115</td>
+<td style="text-align: left;">0,1021</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Folk, World, &amp;
+Country]</td>
+<td style="text-align: left;">0,0310</td>
+<td style="text-align: left;">0,0244</td>
+<td style="text-align: left;">1,2708</td>
+<td style="text-align: left;">0,2038</td>
+<td style="text-align: left;">-0,0168</td>
+<td style="text-align: left;">0,0789</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Funk / Soul]</td>
+<td style="text-align: left;">0,0324</td>
+<td style="text-align: left;">0,0308</td>
+<td style="text-align: left;">1,0498</td>
+<td style="text-align: left;">0,2938</td>
+<td style="text-align: left;">-0,0281</td>
+<td style="text-align: left;">0,0928</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Hip Hop]</td>
+<td style="text-align: left;">0,3463</td>
+<td style="text-align: left;">0,0266</td>
+<td style="text-align: left;">13,0396</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">0,2942</td>
+<td style="text-align: left;">0,3983</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Jazz]</td>
+<td style="text-align: left;">0,1004</td>
+<td style="text-align: left;">0,0247</td>
+<td style="text-align: left;">4,0605</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">0,0519</td>
+<td style="text-align: left;">0,1489</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Non-Music]</td>
+<td style="text-align: left;">-0,2312</td>
+<td style="text-align: left;">0,0351</td>
+<td style="text-align: left;">-6,5789</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,3001</td>
+<td style="text-align: left;">-0,1624</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Pop]</td>
+<td style="text-align: left;">0,1699</td>
+<td style="text-align: left;">0,0236</td>
+<td style="text-align: left;">7,1891</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">0,1236</td>
+<td style="text-align: left;">0,2162</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Rock]</td>
+<td style="text-align: left;">-0,0217</td>
+<td style="text-align: left;">0,0231</td>
+<td style="text-align: left;">-0,9404</td>
+<td style="text-align: left;">0,3470</td>
+<td style="text-align: left;">-0,0670</td>
+<td style="text-align: left;">0,0235</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(genere)[T.Stage &amp; Screen]</td>
+<td style="text-align: left;">0,1933</td>
+<td style="text-align: left;">0,0330</td>
+<td style="text-align: left;">5,8504</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">0,1286</td>
+<td style="text-align: left;">0,2581</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1950]</td>
+<td style="text-align: left;">0,0518</td>
+<td style="text-align: left;">0,0251</td>
+<td style="text-align: left;">2,0658</td>
+<td style="text-align: left;">0,0388</td>
+<td style="text-align: left;">0,0027</td>
+<td style="text-align: left;">0,1009</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1960]</td>
+<td style="text-align: left;">-0,0291</td>
+<td style="text-align: left;">0,0223</td>
+<td style="text-align: left;">-1,3007</td>
+<td style="text-align: left;">0,1933</td>
+<td style="text-align: left;">-0,0728</td>
+<td style="text-align: left;">0,0147</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1970]</td>
+<td style="text-align: left;">-0,2189</td>
+<td style="text-align: left;">0,0221</td>
+<td style="text-align: left;">-9,9244</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,2621</td>
+<td style="text-align: left;">-0,1757</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1980]</td>
+<td style="text-align: left;">-0,2541</td>
+<td style="text-align: left;">0,0217</td>
+<td style="text-align: left;">-11,6940</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,2967</td>
+<td style="text-align: left;">-0,2115</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.1990]</td>
+<td style="text-align: left;">-0,2618</td>
+<td style="text-align: left;">0,0217</td>
+<td style="text-align: left;">-12,0789</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,3042</td>
+<td style="text-align: left;">-0,2193</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.2000]</td>
+<td style="text-align: left;">-0,3021</td>
+<td style="text-align: left;">0,0219</td>
+<td style="text-align: left;">-13,8040</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,3450</td>
+<td style="text-align: left;">-0,2592</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.2010]</td>
+<td style="text-align: left;">-0,4047</td>
+<td style="text-align: left;">0,0225</td>
+<td style="text-align: left;">-18,0011</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,4488</td>
+<td style="text-align: left;">-0,3606</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(coorte)[T.2020]</td>
+<td style="text-align: left;">-0,4039</td>
+<td style="text-align: left;">0,0272</td>
+<td style="text-align: left;">-14,8668</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">-0,4572</td>
+<td style="text-align: left;">-0,3507</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Blues]</td>
+<td style="text-align: left;">-0,0184</td>
+<td style="text-align: left;">0,1014</td>
+<td style="text-align: left;">-0,1812</td>
+<td style="text-align: left;">0,8562</td>
+<td style="text-align: left;">-0,2170</td>
+<td style="text-align: left;">0,1803</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td
+style="text-align: left;">C(gender)[T.F]:C(genere)[T.Children’s]</td>
+<td style="text-align: left;">0,0108</td>
+<td style="text-align: left;">0,0881</td>
+<td style="text-align: left;">0,1222</td>
+<td style="text-align: left;">0,9027</td>
+<td style="text-align: left;">-0,1619</td>
+<td style="text-align: left;">0,1835</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Classical]</td>
+<td style="text-align: left;">-0,0750</td>
+<td style="text-align: left;">0,0789</td>
+<td style="text-align: left;">-0,9508</td>
+<td style="text-align: left;">0,3417</td>
+<td style="text-align: left;">-0,2296</td>
+<td style="text-align: left;">0,0796</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td
+style="text-align: left;">C(gender)[T.F]:C(genere)[T.Electronic]</td>
+<td style="text-align: left;">-0,0179</td>
+<td style="text-align: left;">0,0747</td>
+<td style="text-align: left;">-0,2395</td>
+<td style="text-align: left;">0,8107</td>
+<td style="text-align: left;">-0,1643</td>
+<td style="text-align: left;">0,1285</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Folk, World,
+&amp; Country]</td>
+<td style="text-align: left;">-0,0641</td>
+<td style="text-align: left;">0,0783</td>
+<td style="text-align: left;">-0,8188</td>
+<td style="text-align: left;">0,4129</td>
+<td style="text-align: left;">-0,2177</td>
+<td style="text-align: left;">0,0894</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+<tr>
+<td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Funk /
+Soul]</td>
+<td style="text-align: left;">-0,0682</td>
+<td style="text-align: left;">0,1010</td>
+<td style="text-align: left;">-0,6745</td>
+<td style="text-align: left;">0,5000</td>
+<td style="text-align: left;">-0,2662</td>
+<td style="text-align: left;">0,1299</td>
+<td style="text-align: left;">coreness</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Appartenenza al nucleo (coreness) per genere
+sessuale e genere musicale, a parità di attività e coorte</strong></p>
+<p><em>Mostrate le prime 28 righe di 35; la tabella completa è in
+<code>tables/t3_regressione_coreness.csv</code> e
+<code>tables/t3_regressione_coreness.tex</code>.</em></p>
+<h2 id="la-risposta-a-rq3">6.2 La risposta a RQ3</h2>
+<p><strong>Il pattern “Smurfette” non si osserva in questi
+dati.</strong> A parità di pubblicazioni, coorte e genere musicale,
+l’effetto principale dell’essere donna sulla posizione nella rete non è
+distinguibile da zero su nessuna delle tre misure:</p>
+<table>
+<thead>
+<tr>
+<th>misura</th>
+<th>coefficiente</th>
+<th>IC 95%</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>eigenvector</td>
+<td>0,223</td>
+<td>-0,110 – 0,555</td>
+<td>0,189</td>
+</tr>
+<tr>
+<td>coreness</td>
+<td>0,039</td>
+<td>-0,106 – 0,184</td>
+<td>0,598</td>
+</tr>
+<tr>
+<td>betweenness</td>
+<td>-0,252</td>
+<td>-0,590 – 0,086</td>
+<td>0,144</td>
+</tr>
+</tbody>
+</table>
+<p>Nemmeno le interazioni con il genere musicale aiutano: su 12 termini
+di interazione stimati, 0 risultano significativi al 5%. Non esiste, in
+questi dati, una scena in cui essere donna sposti sistematicamente verso
+la periferia della rete.</p>
+<p>È un risultato che va enunciato con precisione, perché si presta a
+due letture sbagliate di segno opposto.</p>
+<p><strong>Non significa che non ci sia disuguaglianza.</strong> Le
+donne sono il 13,8% della popolazione e pubblicano meno: la mediana
+delle pubblicazioni è 8 contro 10. La disuguaglianza c’è ed è grande —
+ma si manifesta <strong>nell’accesso e nel volume di attività</strong>,
+non nella posizione strutturale a parità di attività. Chi entra e riesce
+a lavorare, lavora in posizioni comparabili.</p>
+<p><strong>Non significa nemmeno che il controllo per l’attività sia
+neutro.</strong> Il numero di pubblicazioni non è una variabile esogena:
+è esso stesso un esito di processi di accesso che possono essere
+segregati. Controllare per l’attività risponde alla domanda “a parità di
+carriera, la posizione differisce?” e non alla domanda “le carriere
+differiscono?”. La prima ha risposta negativa, la seconda — sezione 4 —
+ha risposta ampiamente positiva.</p>
+<p>Il dato più interessante è la divergenza fra mediana e media
+dell’eigenvector: la mediana è più alta per le donne (7,3 ×
+10<sup>-9</sup> contro 3,4 × 10<sup>-9</sup>) mentre la media è più
+bassa. Significa che la donna tipica della rete è connessa quanto e più
+dell’uomo tipico, ma che gli <strong>hub estremi</strong> — i pochissimi
+nodi con centralità di ordini di grandezza superiore — sono quasi tutti
+uomini. La disuguaglianza di posizione, dove c’è, sta nella coda, non
+nel corpo della distribuzione.</p>
+<h1 id="probabilità-di-collaborare-a-parità-di-tutto-lergm-rq4">7.
+Probabilità di collaborare a parità di tutto: l’ERGM (RQ4)</h1>
+<h2 id="perché-serve-e-come-è-stato-impostato">7.1 Perché serve e come è
+stato impostato</h2>
+<p>Tutte le misure fin qui sono descrittive: dicono <em>che</em> i
+legami sono distribuiti in un certo modo, non <em>perché</em>. Un
+modello esponenziale per grafi casuali (ERGM) stima invece la
+probabilità che un legame esista, tenendo insieme nello stesso modello
+l’omofilia di genere, quella di genere musicale, il livello di attività,
+la coorte e la tendenza della rete a chiudere i triangoli. Quest’ultimo
+punto è decisivo: senza un termine di chiusura triadica
+(<code>gwesp</code>), qualunque tendenza a fare gruppo viene
+erroneamente attribuita all’attributo su cui si sta guardando.</p>
+<p><strong>Sulla rete intera l’ERGM non è stimabile</strong>, e va detto
+chiaramente invece di far finta. Con 82.595 nodi lo spazio dei grafi
+possibili rende il campionamento MCMC impraticabile. Si è quindi
+proceduto come previsto dal disegno, per sottoreti: i cinque generi
+musicali più popolosi, le due epoche, e un campione a palla di neve
+della rete complessiva come riferimento. <strong>Le stime valgono per le
+sottoreti su cui sono calcolate</strong>, non si estendono per
+costruzione all’intera popolazione.</p>
+<p>Dall’ERGM sono esclusi i nodi con genere <code>unknown</code>.
+Tenerli come quarta categoria avrebbe prodotto un termine di omofilia
+spurio che misura la struttura della copertura dei dati — chi è poco
+documentato collabora con chi è poco documentato — invece della
+struttura delle collaborazioni.</p>
+<p>Si stima una <strong>gerarchia di tre modelli</strong>, invece di una
+specifica unica, perché il termine di chiusura triadica è esattamente
+quello che può far fallire la stima e non si vuole perdere tutto insieme
+a lui:</p>
+<ul>
+<li><strong>M0</strong>
+<code>edges + nodematch(gender, diff) + controlli</code> — nessun
+termine di dipendenza fra archi. È il modello di riferimento: stimabile
+sempre.</li>
+<li><strong>M1</strong> M0 + <code>gwesp(0,25; fixed)</code> — la
+specifica prevista dal disegno. Il termine di chiusura triadica rende il
+modello quasi degenere sulle reti molto clusterizzate, e può non
+convergere.</li>
+<li><strong>M2</strong> come il migliore fra M1 e M0, con
+<code>nodemix(gender)</code> al posto di
+<code>nodematch(gender, diff)</code>. Le due parametrizzazioni sono
+ridondanti fra loro e nello stesso modello lo renderebbero non
+identificato.</li>
+</ul>
+<p>I termini di controllo entrano <strong>solo se l’attributo
+varia</strong> nella sottorete. Dentro una sottorete di un solo genere
+musicale <code>nodematch('musical_genre')</code> coincide identicamente
+con <code>edges</code>: includerlo produrrebbe un modello non
+identificato, e nelle prime esecuzioni era proprio questo a impedire la
+convergenza.</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 4%" />
+<col style="width: 6%" />
+<col style="width: 7%" />
+<col style="width: 22%" />
+<col style="width: 8%" />
+<col style="width: 5%" />
+<col style="width: 6%" />
+<col style="width: 5%" />
+<col style="width: 3%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">rete</th>
+<th style="text-align: left;">nodi_originali</th>
+<th style="text-align: left;">nodi_stimati</th>
+<th style="text-align: left;">archi</th>
+<th style="text-align: left;">campionata</th>
+<th style="text-align: left;">convergenza</th>
+<th style="text-align: left;">modelli_convergenti</th>
+<th style="text-align: left;">gwesp_converge</th>
+<th style="text-align: left;">parziale</th>
+<th style="text-align: left;">solo_mple</th>
+<th style="text-align: left;">aic</th>
+<th style="text-align: left;">gof</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">10.499</td>
+<td style="text-align: left;">1.255</td>
+<td style="text-align: left;">4.968</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">M0_senza_gwesp, M1_con_gwesp,
+M2_nodemix_gwesp</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">56.562,642</td>
+<td style="text-align: left;">True</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">4.938</td>
+<td style="text-align: left;">1.438</td>
+<td style="text-align: left;">4.972</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">M0_senza_gwesp, M1_con_gwesp,
+M2_nodemix_gwesp</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">57.896,921</td>
+<td style="text-align: left;">True</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Pop</td>
+<td style="text-align: left;">5.236</td>
+<td style="text-align: left;">1.057</td>
+<td style="text-align: left;">4.989</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">M0_senza_gwesp, M1_con_gwesp,
+M2_nodemix_gwesp</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">52.948,708</td>
+<td style="text-align: left;">True</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Folk_World_&amp;_Country</td>
+<td style="text-align: left;">1.625</td>
+<td style="text-align: left;">1.033</td>
+<td style="text-align: left;">4.931</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">M0_senza_gwesp, M1_con_gwesp,
+M2_nodemix_gwesp</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">48.867,718</td>
+<td style="text-align: left;">True</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Classical</td>
+<td style="text-align: left;">673</td>
+<td style="text-align: left;">673</td>
+<td style="text-align: left;">1.620</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">M0_senza_gwesp, M1_con_gwesp,
+M2_nodemix_gwesp</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">17.635,191</td>
+<td style="text-align: left;">True</td>
+</tr>
+<tr>
+<td style="text-align: left;">epoca_pre2000</td>
+<td style="text-align: left;">23.491</td>
+<td style="text-align: left;">1.303</td>
+<td style="text-align: left;">4.962</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">M0_senza_gwesp, M1_con_gwesp,
+M2_nodemix_gwesp</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">52.659,135</td>
+<td style="text-align: left;">True</td>
+</tr>
+<tr>
+<td style="text-align: left;">epoca_post2000</td>
+<td style="text-align: left;">9.400</td>
+<td style="text-align: left;">1.373</td>
+<td style="text-align: left;">4.961</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">M0_senza_gwesp, M1_con_gwesp,
+M2_nodemix_gwesp</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">57.806,416</td>
+<td style="text-align: left;">True</td>
+</tr>
+<tr>
+<td style="text-align: left;">complessiva</td>
+<td style="text-align: left;">36.388</td>
+<td style="text-align: left;">722</td>
+<td style="text-align: left;">4.982</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">M0_senza_gwesp, M1_con_gwesp,
+M2_nodemix_gwesp</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">False</td>
+<td style="text-align: left;">True</td>
+<td style="text-align: left;">40.587,253</td>
+<td style="text-align: left;">True</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Sintesi delle stime ERGM: dimensione,
+campionamento, convergenza</strong></p>
+<p><em>Dati completi in <code>tables/t4_ergm_sintesi.csv</code> e
+<code>tables/t4_ergm_sintesi.tex</code>.</em></p>
+<p>Sottoreti con almeno un modello convergente: <strong>8 su 8</strong>;
+sottoreti in cui ha retto anche il termine <code>gwesp</code>:
+<strong>8</strong>. Dove <code>gwesp</code> non converge, i coefficienti
+riportati vengono da M0 e <strong>non</strong> controllano per la
+chiusura triadica: vanno quindi letti come stime che possono attribuire
+all’omofilia una parte di ciò che è semplicemente tendenza a formare
+triangoli. È una limitazione, ed è dichiarata qui invece di essere
+nascosta dietro un numero.</p>
+<figure>
+<img src="figures/f9_ergm_forest_gender.png" alt="f9_ergm_forest_gender" style="width:100%" />
+<figcaption>
+<p><strong>Coefficienti di omofilia di genere nei cinque generi musicali
+più popolosi.</strong> Ogni coefficiente è un log-odds: quanto la
+probabilità di un legame aumenta (o diminuisce) se due artisti
+condividono il genere sessuale, <em>a parità</em> di attività, coorte,
+genere musicale e chiusura triadica. Questo è il confronto che le misure
+descrittive della sezione 5.4 non potevano fornire: qui i coefficienti
+maschile e femminile sono sulla stessa scala e sono direttamente
+confrontabili, perché misurano una propensione e non un rapporto
+osservato/atteso schiacciato dalle marginali. Se il coefficiente
+maschile supera quello femminile, il pattern italiano è allineato alla
+letteratura (omofilia più forte fra gli uomini) e l’inversione osservata
+nella sezione 5.4 era un artefatto della rarità delle donne.</p>
+</figcaption>
+</figure>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 14%" />
+<col style="width: 20%" />
+<col style="width: 9%" />
+<col style="width: 6%" />
+<col style="width: 9%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">rete</th>
+<th style="text-align: left;">model</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">estimate</th>
+<th style="text-align: left;">se</th>
+<th style="text-align: left;">p</th>
+<th style="text-align: left;">ci_lo</th>
+<th style="text-align: left;">ci_hi</th>
+<th style="text-align: left;">or</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-9,6104</td>
+<td style="text-align: left;">0,0947</td>
+<td style="text-align: left;">-101,4612</td>
+<td style="text-align: left;">-9,7961</td>
+<td style="text-align: left;">-9,4248</td>
+<td style="text-align: left;">0,0001</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.F</td>
+<td style="text-align: left;">0,6501</td>
+<td style="text-align: left;">0,1016</td>
+<td style="text-align: left;">6,3982</td>
+<td style="text-align: left;">0,4509</td>
+<td style="text-align: left;">0,8492</td>
+<td style="text-align: left;">1,9157</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.M</td>
+<td style="text-align: left;">0,1548</td>
+<td style="text-align: left;">0,0343</td>
+<td style="text-align: left;">4,5141</td>
+<td style="text-align: left;">0,0876</td>
+<td style="text-align: left;">0,2220</td>
+<td style="text-align: left;">1,1674</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.mixed</td>
+<td style="text-align: left;">1,7995</td>
+<td style="text-align: left;">0,2002</td>
+<td style="text-align: left;">8,9895</td>
+<td style="text-align: left;">1,4072</td>
+<td style="text-align: left;">2,1919</td>
+<td style="text-align: left;">6,0468</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodecov.log_nrel</td>
+<td style="text-align: left;">0,4587</td>
+<td style="text-align: left;">0,0096</td>
+<td style="text-align: left;">47,5998</td>
+<td style="text-align: left;">0,4398</td>
+<td style="text-align: left;">0,4776</td>
+<td style="text-align: left;">1,5820</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.cohort_decade</td>
+<td style="text-align: left;">0,9364</td>
+<td style="text-align: left;">0,0286</td>
+<td style="text-align: left;">32,7475</td>
+<td style="text-align: left;">0,8803</td>
+<td style="text-align: left;">0,9924</td>
+<td style="text-align: left;">2,5507</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-8,3712</td>
+<td style="text-align: left;">0,0990</td>
+<td style="text-align: left;">-84,5544</td>
+<td style="text-align: left;">-8,5653</td>
+<td style="text-align: left;">-8,1772</td>
+<td style="text-align: left;">0,0002</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.F</td>
+<td style="text-align: left;">0,4771</td>
+<td style="text-align: left;">0,0889</td>
+<td style="text-align: left;">5,3685</td>
+<td style="text-align: left;">0,3029</td>
+<td style="text-align: left;">0,6513</td>
+<td style="text-align: left;">1,6114</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.M</td>
+<td style="text-align: left;">0,0978</td>
+<td style="text-align: left;">0,0244</td>
+<td style="text-align: left;">4,0055</td>
+<td style="text-align: left;">0,0499</td>
+<td style="text-align: left;">0,1456</td>
+<td style="text-align: left;">1,1027</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.mixed</td>
+<td style="text-align: left;">1,5036</td>
+<td style="text-align: left;">0,1510</td>
+<td style="text-align: left;">9,9574</td>
+<td style="text-align: left;">1,2076</td>
+<td style="text-align: left;">1,7996</td>
+<td style="text-align: left;">4,4979</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodecov.log_nrel</td>
+<td style="text-align: left;">0,1270</td>
+<td style="text-align: left;">0,0081</td>
+<td style="text-align: left;">15,7610</td>
+<td style="text-align: left;">0,1112</td>
+<td style="text-align: left;">0,1428</td>
+<td style="text-align: left;">1,1355</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.cohort_decade</td>
+<td style="text-align: left;">0,5027</td>
+<td style="text-align: left;">0,0332</td>
+<td style="text-align: left;">15,1581</td>
+<td style="text-align: left;">0,4377</td>
+<td style="text-align: left;">0,5677</td>
+<td style="text-align: left;">1,6532</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">gwesp.fixed.0.25</td>
+<td style="text-align: left;">2,3216</td>
+<td style="text-align: left;">0,0627</td>
+<td style="text-align: left;">37,0510</td>
+<td style="text-align: left;">2,1988</td>
+<td style="text-align: left;">2,4444</td>
+<td style="text-align: left;">10,1919</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-7,5427</td>
+<td style="text-align: left;">0,1086</td>
+<td style="text-align: left;">-69,4677</td>
+<td style="text-align: left;">-7,7556</td>
+<td style="text-align: left;">-7,3299</td>
+<td style="text-align: left;">0,0005</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.F.M</td>
+<td style="text-align: left;">-0,8361</td>
+<td style="text-align: left;">0,0598</td>
+<td style="text-align: left;">-13,9753</td>
+<td style="text-align: left;">-0,9534</td>
+<td style="text-align: left;">-0,7188</td>
+<td style="text-align: left;">0,4334</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.M.M</td>
+<td style="text-align: left;">-0,6619</td>
+<td style="text-align: left;">0,0618</td>
+<td style="text-align: left;">-10,7108</td>
+<td style="text-align: left;">-0,7830</td>
+<td style="text-align: left;">-0,5407</td>
+<td style="text-align: left;">0,5159</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.F.mixed</td>
+<td style="text-align: left;">-0,3314</td>
+<td style="text-align: left;">0,1478</td>
+<td style="text-align: left;">-2,2426</td>
+<td style="text-align: left;">-0,6210</td>
+<td style="text-align: left;">-0,0418</td>
+<td style="text-align: left;">0,7179</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.M.mixed</td>
+<td style="text-align: left;">-0,7559</td>
+<td style="text-align: left;">0,0811</td>
+<td style="text-align: left;">-9,3256</td>
+<td style="text-align: left;">-0,9148</td>
+<td style="text-align: left;">-0,5971</td>
+<td style="text-align: left;">0,4696</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.mixed.mixed</td>
+<td style="text-align: left;">0,5991</td>
+<td style="text-align: left;">0,1927</td>
+<td style="text-align: left;">3,1092</td>
+<td style="text-align: left;">0,2214</td>
+<td style="text-align: left;">0,9767</td>
+<td style="text-align: left;">1,8204</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">nodecov.log_nrel</td>
+<td style="text-align: left;">0,1282</td>
+<td style="text-align: left;">0,0084</td>
+<td style="text-align: left;">15,1873</td>
+<td style="text-align: left;">0,1116</td>
+<td style="text-align: left;">0,1447</td>
+<td style="text-align: left;">1,1368</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">nodematch.cohort_decade</td>
+<td style="text-align: left;">0,5610</td>
+<td style="text-align: left;">0,0259</td>
+<td style="text-align: left;">21,6217</td>
+<td style="text-align: left;">0,5101</td>
+<td style="text-align: left;">0,6118</td>
+<td style="text-align: left;">1,7524</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Electronic</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">gwesp.fixed.0.25</td>
+<td style="text-align: left;">2,1816</td>
+<td style="text-align: left;">0,0703</td>
+<td style="text-align: left;">31,0263</td>
+<td style="text-align: left;">2,0437</td>
+<td style="text-align: left;">2,3194</td>
+<td style="text-align: left;">8,8601</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-9,3291</td>
+<td style="text-align: left;">0,0768</td>
+<td style="text-align: left;">-121,5302</td>
+<td style="text-align: left;">-9,4796</td>
+<td style="text-align: left;">-9,1787</td>
+<td style="text-align: left;">0,0001</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.F</td>
+<td style="text-align: left;">0,8337</td>
+<td style="text-align: left;">0,2548</td>
+<td style="text-align: left;">3,2716</td>
+<td style="text-align: left;">0,3342</td>
+<td style="text-align: left;">1,3331</td>
+<td style="text-align: left;">2,3018</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.M</td>
+<td style="text-align: left;">-0,1000</td>
+<td style="text-align: left;">0,0402</td>
+<td style="text-align: left;">-2,4897</td>
+<td style="text-align: left;">-0,1788</td>
+<td style="text-align: left;">-0,0213</td>
+<td style="text-align: left;">0,9048</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.mixed</td>
+<td style="text-align: left;">1,2413</td>
+<td style="text-align: left;">0,2113</td>
+<td style="text-align: left;">5,8744</td>
+<td style="text-align: left;">0,8271</td>
+<td style="text-align: left;">1,6554</td>
+<td style="text-align: left;">3,4599</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodecov.log_nrel</td>
+<td style="text-align: left;">0,4589</td>
+<td style="text-align: left;">0,0080</td>
+<td style="text-align: left;">57,4936</td>
+<td style="text-align: left;">0,4433</td>
+<td style="text-align: left;">0,4746</td>
+<td style="text-align: left;">1,5823</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.cohort_decade</td>
+<td style="text-align: left;">1,3306</td>
+<td style="text-align: left;">0,0286</td>
+<td style="text-align: left;">46,5589</td>
+<td style="text-align: left;">1,2746</td>
+<td style="text-align: left;">1,3867</td>
+<td style="text-align: left;">3,7834</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-10,3651</td>
+<td style="text-align: left;">0,1100</td>
+<td style="text-align: left;">-94,2404</td>
+<td style="text-align: left;">-10,5806</td>
+<td style="text-align: left;">-10,1495</td>
+<td style="text-align: left;">0,0000</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.F</td>
+<td style="text-align: left;">0,7312</td>
+<td style="text-align: left;">0,1842</td>
+<td style="text-align: left;">3,9686</td>
+<td style="text-align: left;">0,3701</td>
+<td style="text-align: left;">1,0922</td>
+<td style="text-align: left;">2,0775</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.M</td>
+<td style="text-align: left;">-0,0756</td>
+<td style="text-align: left;">0,0240</td>
+<td style="text-align: left;">-3,1486</td>
+<td style="text-align: left;">-0,1227</td>
+<td style="text-align: left;">-0,0285</td>
+<td style="text-align: left;">0,9272</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.mixed</td>
+<td style="text-align: left;">-0,5234</td>
+<td style="text-align: left;">0,3615</td>
+<td style="text-align: left;">-1,4479</td>
+<td style="text-align: left;">-1,2319</td>
+<td style="text-align: left;">0,1851</td>
+<td style="text-align: left;">0,5925</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodecov.log_nrel</td>
+<td style="text-align: left;">0,0913</td>
+<td style="text-align: left;">0,0046</td>
+<td style="text-align: left;">19,7145</td>
+<td style="text-align: left;">0,0823</td>
+<td style="text-align: left;">0,1004</td>
+<td style="text-align: left;">1,0956</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.cohort_decade</td>
+<td style="text-align: left;">0,7956</td>
+<td style="text-align: left;">0,0220</td>
+<td style="text-align: left;">36,1783</td>
+<td style="text-align: left;">0,7525</td>
+<td style="text-align: left;">0,8387</td>
+<td style="text-align: left;">2,2159</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">gwesp.fixed.0.25</td>
+<td style="text-align: left;">4,4500</td>
+<td style="text-align: left;">0,0733</td>
+<td style="text-align: left;">60,7193</td>
+<td style="text-align: left;">4,3064</td>
+<td style="text-align: left;">4,5936</td>
+<td style="text-align: left;">85,6275</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-9,8962</td>
+<td style="text-align: left;">0,3335</td>
+<td style="text-align: left;">-29,6768</td>
+<td style="text-align: left;">-10,5498</td>
+<td style="text-align: left;">-9,2426</td>
+<td style="text-align: left;">0,0001</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.F.M</td>
+<td style="text-align: left;">-0,3735</td>
+<td style="text-align: left;">0,3349</td>
+<td style="text-align: left;">-1,1153</td>
+<td style="text-align: left;">-1,0299</td>
+<td style="text-align: left;">0,2829</td>
+<td style="text-align: left;">0,6883</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.M.M</td>
+<td style="text-align: left;">-0,5840</td>
+<td style="text-align: left;">0,3462</td>
+<td style="text-align: left;">-1,6868</td>
+<td style="text-align: left;">-1,2626</td>
+<td style="text-align: left;">0,0946</td>
+<td style="text-align: left;">0,5577</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.F.mixed</td>
+<td style="text-align: left;">-0,9523</td>
+<td style="text-align: left;">0,3283</td>
+<td style="text-align: left;">-2,9006</td>
+<td style="text-align: left;">-1,5958</td>
+<td style="text-align: left;">-0,3088</td>
+<td style="text-align: left;">0,3858</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere_Rock</td>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.M.mixed</td>
+<td style="text-align: left;">-0,5631</td>
+<td style="text-align: left;">0,3339</td>
+<td style="text-align: left;">-1,6863</td>
+<td style="text-align: left;">-1,2176</td>
+<td style="text-align: left;">0,0914</td>
+<td style="text-align: left;">0,5694</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Coefficienti ERGM per sottorete</strong></p>
+<p><em>Mostrate le prime 40 righe di 185; la tabella completa è in
+<code>tables/t4_ergm_coefficienti.csv</code> e
+<code>tables/t4_ergm_coefficienti.tex</code>.</em></p>
+<h3 id="come-si-leggono-questi-coefficienti-e-che-cosa-dicono">Come si
+leggono questi coefficienti, e che cosa dicono</h3>
+<p>I coefficienti sono in log-odds; la colonna <code>or</code> è il loro
+esponenziale, cioè di quanto si moltiplica la probabilità di un legame.
+<code>nodematch.gender.F</code> dice quanto una coppia donna-donna è più
+probabile di una coppia di riferimento <strong>a parità di tutto il
+resto</strong>: attività, coorte, genere musicale e — cosa decisiva —
+tendenza della rete a chiudere i triangoli.</p>
+<p>Il confronto fra <code>nodematch.gender.F</code> e
+<code>nodematch.gender.M</code> è il risultato che la sezione 5.4 non
+poteva dare. Lì i rapporti osservato/atteso non erano confrontabili,
+perché con una quota femminile del 13,8% il valore atteso per un legame
+donna-donna è così basso che qualunque addensamento reale produce un
+rapporto grande. Qui il problema non si pone: i due coefficienti
+misurano la stessa quantità sulla stessa scala. <strong>E il risultato
+regge: la propensione delle donne a lavorare con donne resta nettamente
+superiore a quella degli uomini a lavorare con uomini.</strong> Non è un
+artefatto della rarità; è una proprietà della rete.</p>
+<p>In alcune sottoreti il coefficiente maschile è
+<strong>negativo</strong>: a parità di tutto il resto, due uomini hanno
+una probabilità di collaborare leggermente <em>inferiore</em> al
+riferimento. Non significa che gli uomini si evitino. Significa che, in
+un ambiente dove sono la stragrande maggioranza, il termine
+<code>edges</code> da solo già produce quasi tutti i legami maschili che
+si osservano, e una volta tolta quella quota di base non resta nulla da
+attribuire a una preferenza. È la controprova, dal lato opposto, della
+stessa asimmetria: dove un gruppo domina, l’omofilia non ha modo di
+manifestarsi come effetto misurabile; dove un gruppo è raro, si
+manifesta con forza.</p>
+<p>Merita attenzione anche il confronto fra M0 e M1. Passando dal
+modello senza chiusura triadica a quello con <code>gwesp</code>, il
+coefficiente di omofilia femminile <strong>si riduce</strong>: una parte
+di ciò che sembrava preferenza di genere era in realtà la tendenza
+generale della rete a chiudere i triangoli — se A lavora con B e B con
+C, prima o poi A lavora con C, e in un ambiente dove le donne sono poche
+i triangoli fra donne si formano comunque. Il termine <code>gwesp</code>
+ha un coefficiente molto grande, il che dice quanto forte sia quel
+meccanismo. Ciò che resta dopo averlo tolto è omofilia vera.</p>
+<h2 id="la-diagnostica-il-modello-descrive-davvero-questa-rete">7.2 La
+diagnostica: il modello descrive davvero questa rete?</h2>
+<figure>
+<img src="figures/f12_ergm_gof.png" alt="f12_ergm_gof" style="width:100%" />
+<figcaption>
+<p><strong>Bontà di adattamento.</strong> Per ciascuna sottorete si
+confrontano tre statistiche della rete osservata (punti) con quelle
+delle reti simulate dal modello stimato (linea e banda): la
+distribuzione dei gradi, il numero di partner condivisi da ciascuna
+coppia collegata (ESP) e le distanze geodetiche. Un modello che coglie
+la struttura produce simulazioni la cui banda contiene l’osservato; dove
+il punto esce dalla banda, il modello sta sbagliando proprio
+quell’aspetto. L’ESP è la statistica da guardare con più attenzione,
+perché è quella che il termine gwesp dovrebbe riprodurre: se l’osservato
+ne esce, la chiusura triadica non è stata catturata e i coefficienti di
+omofilia possono averne assorbito una parte. Nei modelli stimati qui il
+centro delle distribuzioni è riprodotto bene, ma <strong>la coda
+no</strong>: i nodi con molti collaboratori e le coppie con molti
+partner in comune sono sistematicamente più numerosi di quanto il
+modello preveda (cerchi rossi). È il limite noto degli ERGM su reti con
+code pesanti, e va tenuto presente leggendo i coefficienti: il modello
+descrive bene il musicista tipico, meno bene i pochi grandi
+collaboratori.</p>
+</figcaption>
+</figure>
+<blockquote>
+<p><em>Tabella «t4_ergm_mcmc» non disponibile.</em></p>
+</blockquote>
+<h2 id="il-test-prepost-2000">7.3 Il test pre/post 2000</h2>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 13%" />
+<col style="width: 14%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 8%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">model</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">estimate_pre</th>
+<th style="text-align: left;">estimate_post</th>
+<th style="text-align: left;">differenza</th>
+<th style="text-align: left;">se_diff</th>
+<th style="text-align: left;">z</th>
+<th style="text-align: left;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-10,1834</td>
+<td style="text-align: left;">-10,1231</td>
+<td style="text-align: left;">0,0603</td>
+<td style="text-align: left;">0,1294</td>
+<td style="text-align: left;">0,4657</td>
+<td style="text-align: left;">0,6414</td>
+</tr>
+<tr>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.F</td>
+<td style="text-align: left;">0,6129</td>
+<td style="text-align: left;">0,3757</td>
+<td style="text-align: left;">-0,2372</td>
+<td style="text-align: left;">0,2690</td>
+<td style="text-align: left;">-0,8817</td>
+<td style="text-align: left;">0,3780</td>
+</tr>
+<tr>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.M</td>
+<td style="text-align: left;">0,0546</td>
+<td style="text-align: left;">0,1506</td>
+<td style="text-align: left;">0,0960</td>
+<td style="text-align: left;">0,0595</td>
+<td style="text-align: left;">1,6145</td>
+<td style="text-align: left;">0,1064</td>
+</tr>
+<tr>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.gender.mixed</td>
+<td style="text-align: left;">1,1725</td>
+<td style="text-align: left;">1,8788</td>
+<td style="text-align: left;">0,7063</td>
+<td style="text-align: left;">1,0520</td>
+<td style="text-align: left;">0,6714</td>
+<td style="text-align: left;">0,5020</td>
+</tr>
+<tr>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.musical_genre</td>
+<td style="text-align: left;">1,8584</td>
+<td style="text-align: left;">0,7809</td>
+<td style="text-align: left;">-1,0775</td>
+<td style="text-align: left;">0,0577</td>
+<td style="text-align: left;">-18,6881</td>
+<td style="text-align: left;">0,0000</td>
+</tr>
+<tr>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodecov.log_nrel</td>
+<td style="text-align: left;">0,3983</td>
+<td style="text-align: left;">0,4749</td>
+<td style="text-align: left;">0,0766</td>
+<td style="text-align: left;">0,0127</td>
+<td style="text-align: left;">6,0327</td>
+<td style="text-align: left;">0,0000</td>
+</tr>
+<tr>
+<td style="text-align: left;">M0_senza_gwesp</td>
+<td style="text-align: left;">nodematch.cohort_decade</td>
+<td style="text-align: left;">0,9962</td>
+<td style="text-align: left;">0,8471</td>
+<td style="text-align: left;">-0,1491</td>
+<td style="text-align: left;">0,0465</td>
+<td style="text-align: left;">-3,2085</td>
+<td style="text-align: left;">0,0013</td>
+</tr>
+<tr>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-8,9452</td>
+<td style="text-align: left;">-8,7947</td>
+<td style="text-align: left;">0,1506</td>
+<td style="text-align: left;">0,1833</td>
+<td style="text-align: left;">0,8216</td>
+<td style="text-align: left;">0,4113</td>
+</tr>
+<tr>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.F</td>
+<td style="text-align: left;">0,7092</td>
+<td style="text-align: left;">0,7763</td>
+<td style="text-align: left;">0,0671</td>
+<td style="text-align: left;">0,4368</td>
+<td style="text-align: left;">0,1536</td>
+<td style="text-align: left;">0,8779</td>
+</tr>
+<tr>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.M</td>
+<td style="text-align: left;">0,1368</td>
+<td style="text-align: left;">0,0797</td>
+<td style="text-align: left;">-0,0571</td>
+<td style="text-align: left;">0,1091</td>
+<td style="text-align: left;">-0,5234</td>
+<td style="text-align: left;">0,6007</td>
+</tr>
+<tr>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.gender.mixed</td>
+<td style="text-align: left;">1,2087</td>
+<td style="text-align: left;">0,6167</td>
+<td style="text-align: left;">-0,5920</td>
+<td style="text-align: left;">1,3414</td>
+<td style="text-align: left;">-0,4414</td>
+<td style="text-align: left;">0,6590</td>
+</tr>
+<tr>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.musical_genre</td>
+<td style="text-align: left;">0,9938</td>
+<td style="text-align: left;">0,2883</td>
+<td style="text-align: left;">-0,7055</td>
+<td style="text-align: left;">0,0936</td>
+<td style="text-align: left;">-7,5364</td>
+<td style="text-align: left;">0,0000</td>
+</tr>
+<tr>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodecov.log_nrel</td>
+<td style="text-align: left;">0,1385</td>
+<td style="text-align: left;">0,0803</td>
+<td style="text-align: left;">-0,0582</td>
+<td style="text-align: left;">0,0214</td>
+<td style="text-align: left;">-2,7217</td>
+<td style="text-align: left;">0,0065</td>
+</tr>
+<tr>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">nodematch.cohort_decade</td>
+<td style="text-align: left;">0,4768</td>
+<td style="text-align: left;">0,3040</td>
+<td style="text-align: left;">-0,1727</td>
+<td style="text-align: left;">0,0844</td>
+<td style="text-align: left;">-2,0462</td>
+<td style="text-align: left;">0,0407</td>
+</tr>
+<tr>
+<td style="text-align: left;">M1_con_gwesp</td>
+<td style="text-align: left;">gwesp.fixed.0.25</td>
+<td style="text-align: left;">2,2169</td>
+<td style="text-align: left;">2,8923</td>
+<td style="text-align: left;">0,6754</td>
+<td style="text-align: left;">0,0799</td>
+<td style="text-align: left;">8,4490</td>
+<td style="text-align: left;">0,0000</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">edges</td>
+<td style="text-align: left;">-7,8019</td>
+<td style="text-align: left;">-7,9375</td>
+<td style="text-align: left;">-0,1357</td>
+<td style="text-align: left;">0,3456</td>
+<td style="text-align: left;">-0,3926</td>
+<td style="text-align: left;">0,6946</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.F.M</td>
+<td style="text-align: left;">-0,7275</td>
+<td style="text-align: left;">-0,8898</td>
+<td style="text-align: left;">-0,1623</td>
+<td style="text-align: left;">0,3460</td>
+<td style="text-align: left;">-0,4692</td>
+<td style="text-align: left;">0,6389</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.M.M</td>
+<td style="text-align: left;">-0,6808</td>
+<td style="text-align: left;">-0,7937</td>
+<td style="text-align: left;">-0,1129</td>
+<td style="text-align: left;">0,3290</td>
+<td style="text-align: left;">-0,3432</td>
+<td style="text-align: left;">0,7315</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.F.mixed</td>
+<td style="text-align: left;">-1,0455</td>
+<td style="text-align: left;">0,0598</td>
+<td style="text-align: left;">1,1053</td>
+<td style="text-align: left;">0,6258</td>
+<td style="text-align: left;">1,7661</td>
+<td style="text-align: left;">0,0774</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.M.mixed</td>
+<td style="text-align: left;">-1,0852</td>
+<td style="text-align: left;">-0,9688</td>
+<td style="text-align: left;">0,1164</td>
+<td style="text-align: left;">0,4379</td>
+<td style="text-align: left;">0,2659</td>
+<td style="text-align: left;">0,7903</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">mix.gender.mixed.mixed</td>
+<td style="text-align: left;">0,0206</td>
+<td style="text-align: left;">0,2712</td>
+<td style="text-align: left;">0,2506</td>
+<td style="text-align: left;">3,2202</td>
+<td style="text-align: left;">0,0778</td>
+<td style="text-align: left;">0,9380</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">nodematch.musical_genre</td>
+<td style="text-align: left;">1,0659</td>
+<td style="text-align: left;">0,2194</td>
+<td style="text-align: left;">-0,8465</td>
+<td style="text-align: left;">0,0710</td>
+<td style="text-align: left;">-11,9154</td>
+<td style="text-align: left;">0,0000</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">nodecov.log_nrel</td>
+<td style="text-align: left;">0,1052</td>
+<td style="text-align: left;">0,0968</td>
+<td style="text-align: left;">-0,0084</td>
+<td style="text-align: left;">0,0179</td>
+<td style="text-align: left;">-0,4684</td>
+<td style="text-align: left;">0,6395</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">nodematch.cohort_decade</td>
+<td style="text-align: left;">0,5239</td>
+<td style="text-align: left;">0,3121</td>
+<td style="text-align: left;">-0,2118</td>
+<td style="text-align: left;">0,0677</td>
+<td style="text-align: left;">-3,1283</td>
+<td style="text-align: left;">0,0018</td>
+</tr>
+<tr>
+<td style="text-align: left;">M2_nodemix_gwesp</td>
+<td style="text-align: left;">gwesp.fixed.0.25</td>
+<td style="text-align: left;">2,1250</td>
+<td style="text-align: left;">2,8679</td>
+<td style="text-align: left;">0,7429</td>
+<td style="text-align: left;">0,0908</td>
+<td style="text-align: left;">8,1822</td>
+<td style="text-align: left;">0,0000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Test della differenza fra i coefficienti ERGM
+pre-2000 e post-2000</strong></p>
+<p><em>Dati completi in
+<code>tables/t4_ergm_differenza_epoche.csv</code> e
+<code>tables/t4_ergm_differenza_epoche.tex</code>.</em></p>
+<p>Questa tabella è la verifica formale del risultato controintuitivo
+della sezione 5.2, e il suo esito è netto.</p>
+<p><strong>L’omofilia di genere non cambia fra le due epoche.</strong>
+Per le donne il coefficiente passa da 0,709 a 0,776 (differenza 0,067, p
+= 0,88); per gli uomini da 0,137 a 0,080 (differenza -0,057, p = 0,60).
+Nessuna delle due differenze si avvicina alla significatività.</p>
+<p><strong>Cambia invece, e moltissimo, la chiusura triadica.</strong>
+Il coefficiente <code>gwesp</code> passa da 2,217 a 2,892, una
+differenza di 0,675 con p &lt; 0,0001: è l’unico termine del modello la
+cui variazione fra epoche sia statisticamente solida.</p>
+<p>La lettura congiunta è quella data alla sezione 5.2: l’aumento
+dell’assortatività osservata dopo il 2000 non è un rafforzamento della
+preferenza di genere, ma la conseguenza di una rete che si chiude in
+gruppi più fitti. Vale la pena notare che questo è esattamente il tipo
+di confusione che un’analisi puramente descrittiva non può sciogliere, e
+per cui l’ERGM era previsto nel disegno.</p>
+<h1 id="quanto-reggono-questi-risultati">8. Quanto reggono questi
+risultati</h1>
+<h2 id="lincertezza-sul-genere-sessuale">8.1 L’incertezza sul genere
+sessuale</h2>
+<figure>
+<img src="figures/f10_montecarlo_genere.png" alt="f10_montecarlo_genere" style="width:100%" />
+<figcaption>
+<p><strong>La distribuzione Monte Carlo dell’assortatività di genere al
+variare dell’imputazione degli 28.830 artisti senza genere
+determinato.</strong> L’istogramma è la distribuzione su 200 estrazioni
+dalla marginale osservata. Le due linee tratteggiate laterali non sono
+stime ma <strong>limiti costruiti apposta</strong>: assegnando a ogni
+artista ignoto il genere prevalente fra i suoi collaboratori si ottiene
+la massima omofilia compatibile con i dati; assegnando il genere opposto
+si ottiene la minima. Il fatto rilevante è che <strong>anche il limite
+inferiore resta positivo</strong>: non esiste assegnazione degli ignoti
+che faccia sparire l’omofilia. La conclusione qualitativa è robusta; la
+sua grandezza esatta no.</p>
+</figcaption>
+</figure>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 10%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">scenario</th>
+<th style="text-align: left;">count</th>
+<th style="text-align: left;">mean</th>
+<th style="text-align: left;">std</th>
+<th style="text-align: left;">min</th>
+<th style="text-align: left;">max</th>
+<th style="text-align: left;">ci_lo</th>
+<th style="text-align: left;">ci_hi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">migliore_omofilia_min</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0,0509</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">0,0509</td>
+<td style="text-align: left;">0,0509</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">peggiore_omofilia_max</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0,0686</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">0,0686</td>
+<td style="text-align: left;">0,0686</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">solo_noti</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">status_quo</td>
+<td style="text-align: left;">200</td>
+<td style="text-align: left;">0,0347</td>
+<td style="text-align: left;">0,0009</td>
+<td style="text-align: left;">0,0325</td>
+<td style="text-align: left;">0,0369</td>
+<td style="text-align: left;">0,0328</td>
+<td style="text-align: left;">0,0364</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Assortatività di genere sotto diversi scenari di
+imputazione</strong></p>
+<p><em>Dati completi in <code>tables/t5_montecarlo_genere.csv</code> e
+<code>tables/t5_montecarlo_genere.tex</code>.</em></p>
+<p>I quattro numeri vanno letti insieme. Sui soli artisti con genere
+determinato l’assortatività vale 0,0511. Imputando gli ignoti per
+estrazione casuale dalla marginale osservata scende a 0,0347:
+l’imputazione casuale non può che diluire la struttura, ed è la ragione
+per cui la misura di riferimento di questo studio è la prima e non la
+seconda. I due limiti costruiti sul vicinato — 0,0509 e 0,0686 —
+delimitano quanto l’omofilia potrebbe valere se gli artisti ignoti
+somigliassero sistematicamente ai loro collaboratori o sistematicamente
+no. <strong>Nessuno dei quattro scenari porta l’omofilia a zero o sotto
+zero.</strong></p>
+<p>Va detto con precisione che cosa questi limiti non fanno: riguardano
+solo gli artisti ignoti che hanno almeno un collaboratore di genere
+noto. Quelli che collaborano soltanto con altri ignoti non portano
+informazione utilizzabile e vengono estratti dalla marginale anche negli
+scenari estremi — assegnarli per maggioranza del vicinato li metterebbe
+tutti nella stessa categoria, creando un blocco artificiale che
+gonfierebbe <em>entrambi</em> gli estremi invece di delimitarli.</p>
+<h2 id="sensibilità-ai-parametri-di-costruzione">8.2 Sensibilità ai
+parametri di costruzione</h2>
+<figure>
+<img src="figures/f11_sensibilita.png" alt="f11_sensibilita" style="width:100%" />
+<figcaption>
+<p><strong>Ogni punto è l’assortatività di genere ottenuta cambiando un
+solo parametro rispetto alla configurazione di default (linea
+tratteggiata).</strong> Gli assi variati sono quelli che potevano
+ragionevolmente cambiare il risultato: quanti artisti al massimo può
+avere una pubblicazione perché conti come collaborazione, quale peso
+minimo deve avere un arco, se escludere le raccolte, quanto strettamente
+definire l’italianità, come pesare la specificità dei crediti, e se
+usare o no i crediti a livello traccia. Quest’ultimo è l’asse più
+informativo: disattivare i crediti di traccia significa tornare a una
+rete costruita solo sulle co-presenze di copertina, ed è il confronto
+che dice quanto il livello traccia stia effettivamente aggiungendo.</p>
+</figcaption>
+</figure>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 7%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 14%" />
+<col style="width: 11%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">variante</th>
+<th style="text-align: left;">nodi</th>
+<th style="text-align: left;">archi</th>
+<th style="text-align: left;">gigante</th>
+<th style="text-align: left;">r genere M/F</th>
+<th style="text-align: left;">r pesata</th>
+<th style="text-align: left;">r gen. musicale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">default</td>
+<td style="text-align: left;">82.595</td>
+<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">0,9566</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,1133</td>
+<td style="text-align: left;">0,5186</td>
+</tr>
+<tr>
+<td style="text-align: left;">max_credits=4</td>
+<td style="text-align: left;">59.325</td>
+<td style="text-align: left;">242.868</td>
+<td style="text-align: left;">0,9080</td>
+<td style="text-align: left;">0,0397</td>
+<td style="text-align: left;">0,1099</td>
+<td style="text-align: left;">0,5443</td>
+</tr>
+<tr>
+<td style="text-align: left;">max_credits=20</td>
+<td style="text-align: left;">93.574</td>
+<td style="text-align: left;">1.788.440</td>
+<td style="text-align: left;">0,9751</td>
+<td style="text-align: left;">0,0556</td>
+<td style="text-align: left;">0,1324</td>
+<td style="text-align: left;">0,4799</td>
+</tr>
+<tr>
+<td style="text-align: left;">peso_min_arco=1.0</td>
+<td style="text-align: left;">54.697</td>
+<td style="text-align: left;">383.680</td>
+<td style="text-align: left;">0,9231</td>
+<td style="text-align: left;">0,0739</td>
+<td style="text-align: left;">0,1200</td>
+<td style="text-align: left;">0,5786</td>
+</tr>
+<tr>
+<td style="text-align: left;">peso_min_arco=2.0</td>
+<td style="text-align: left;">40.391</td>
+<td style="text-align: left;">191.346</td>
+<td style="text-align: left;">0,8671</td>
+<td style="text-align: left;">0,0652</td>
+<td style="text-align: left;">0,1143</td>
+<td style="text-align: left;">0,6188</td>
+</tr>
+<tr>
+<td style="text-align: left;">raccolte_escluse=True</td>
+<td style="text-align: left;">76.911</td>
+<td style="text-align: left;">611.095</td>
+<td style="text-align: left;">0,9529</td>
+<td style="text-align: left;">0,0543</td>
+<td style="text-align: left;">0,1152</td>
+<td style="text-align: left;">0,5269</td>
+</tr>
+<tr>
+<td style="text-align: left;">crediti_traccia=False</td>
+<td style="text-align: left;">81.527</td>
+<td style="text-align: left;">655.967</td>
+<td style="text-align: left;">0,9548</td>
+<td style="text-align: left;">0,0525</td>
+<td style="text-align: left;">0,0853</td>
+<td style="text-align: left;">0,5225</td>
+</tr>
+<tr>
+<td style="text-align: left;">pesi_specificita=1.0/1.0/1.0</td>
+<td style="text-align: left;">82.595</td>
+<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">0,9566</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,0995</td>
+<td style="text-align: left;">0,5186</td>
+</tr>
+<tr>
+<td style="text-align: left;">pesi_specificita=1.0/0.5/0.1</td>
+<td style="text-align: left;">82.595</td>
+<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">0,9566</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,1211</td>
+<td style="text-align: left;">0,5186</td>
+</tr>
+<tr>
+<td style="text-align: left;">soglia_italianita=0.6</td>
+<td style="text-align: left;">74.071</td>
+<td style="text-align: left;">599.807</td>
+<td style="text-align: left;">0,9561</td>
+<td style="text-align: left;">0,0535</td>
+<td style="text-align: left;">0,1134</td>
+<td style="text-align: left;">0,5083</td>
+</tr>
+<tr>
+<td style="text-align: left;">soglia_italianita=0.7</td>
+<td style="text-align: left;">62.981</td>
+<td style="text-align: left;">470.571</td>
+<td style="text-align: left;">0,9541</td>
+<td style="text-align: left;">0,0556</td>
+<td style="text-align: left;">0,1219</td>
+<td style="text-align: left;">0,5005</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Sensibilità delle metriche chiave ai parametri di
+costruzione della rete</strong></p>
+<p><em>Dati completi in <code>tables/t5_sensibilita.csv</code> e
+<code>tables/t5_sensibilita.tex</code>.</em></p>
+<p>Sulle 10 varianti provate, l’assortatività di genere sui soli nodi
+determinati resta compresa fra <strong>0,0397 e 0,0739</strong>, sempre
+positiva e sempre dello stesso ordine di grandezza del valore di
+riferimento (0,0511). Nessuna scelta di costruzione della rete, fra
+quelle difendibili, ribalta la conclusione.</p>
+<h3 id="che-cosa-aggiungono-davvero-i-crediti-a-livello-traccia">Che
+cosa aggiungono davvero i crediti a livello traccia</h3>
+<p>La colonna dell’assortatività <strong>pesata</strong> è l’unica su
+cui la gerarchia di specificità dei crediti può manifestarsi, perché
+cambiare i pesi non cambia quali coppie di artisti siano collegate:
+cambia quanto contano. Il confronto è istruttivo.</p>
+<ul>
+<li>con i crediti di traccia e la gerarchia di default:
+<strong>0,1133</strong></li>
+<li>senza crediti di traccia, cioè tornando alle sole co-presenze di
+copertina: <strong>0,0853</strong></li>
+<li>con tutti i crediti allo stesso peso: 0,0995</li>
+<li>con una gerarchia più ripida (1 / 0,5 / 0,1): 0,1211</li>
+</ul>
+<p>Disattivare il livello traccia abbassa l’omofilia misurata di circa
+25%, e appiattire i pesi la abbassa quasi altrettanto. La lettura è che
+<strong>le collaborazioni documentate in modo più specifico sono anche
+le più omofile</strong>: quando due nomi compaiono insieme sulla stessa
+traccia — non genericamente sullo stesso disco — la probabilità che
+condividano il genere sessuale è più alta. Una rete costruita sulle sole
+co-presenze di copertina sottostima quindi la segregazione, perché
+mescola la collaborazione vera con la coabitazione editoriale. È la
+giustificazione empirica della scelta di disegno descritta alla sezione
+3.1.</p>
+<h2 id="artisti-con-genere-musicale-debole">8.3 Artisti con genere
+musicale debole</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 6%" />
+<col style="width: 9%" />
+<col style="width: 6%" />
+<col style="width: 8%" />
+<col style="width: 10%" />
+<col style="width: 11%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 6%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">variante</th>
+<th style="text-align: left;">nodi</th>
+<th style="text-align: left;">archi</th>
+<th style="text-align: left;">densita</th>
+<th style="text-align: left;">quota_gigante</th>
+<th style="text-align: left;">r_gender</th>
+<th style="text-align: left;">r_gender_MF</th>
+<th style="text-align: left;">r_gender_pesato</th>
+<th style="text-align: left;">r_genere_musicale</th>
+<th style="text-align: left;">quota_donne</th>
+<th style="text-align: left;">peso_mediano</th>
+<th style="text-align: left;">n_artisti</th>
+<th style="text-align: left;">n_generi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">genre_top1</td>
+<td style="text-align: left;">82.595</td>
+<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">0,0002</td>
+<td style="text-align: left;">0,9566</td>
+<td style="text-align: left;">0,0735</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,1133</td>
+<td style="text-align: left;">0,5186</td>
+<td style="text-align: left;">0,1379</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">100.201</td>
+<td style="text-align: left;">16</td>
+</tr>
+<tr>
+<td style="text-align: left;">genre_top2</td>
+<td style="text-align: left;">82.595</td>
+<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">0,0002</td>
+<td style="text-align: left;">0,9566</td>
+<td style="text-align: left;">0,0735</td>
+<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,1133</td>
+<td style="text-align: left;">0,4762</td>
+<td style="text-align: left;">0,1379</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">100.201</td>
+<td style="text-align: left;">16</td>
+</tr>
+<tr>
+<td style="text-align: left;">genre_exclude</td>
+<td style="text-align: left;">54.334</td>
+<td style="text-align: left;">433.408</td>
+<td style="text-align: left;">0,0003</td>
+<td style="text-align: left;">0,9542</td>
+<td style="text-align: left;">0,0736</td>
+<td style="text-align: left;">0,0598</td>
+<td style="text-align: left;">0,1119</td>
+<td style="text-align: left;">0,7231</td>
+<td style="text-align: left;">0,1380</td>
+<td style="text-align: left;">1,0000</td>
+<td style="text-align: left;">65.773</td>
+<td style="text-align: left;">15</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabella — Metriche chiave usando il tag principale, il
+secondo tag, o escludendo gli artisti con attribuzione
+debole</strong></p>
+<p><em>Dati completi in <code>tables/t5_genere_debole.csv</code> e
+<code>tables/t5_genere_debole.tex</code>.</em></p>
+<p>Gli artisti il cui tag di genere principale copre meno del 40% delle
+loro pubblicazioni sono marcati <code>genre_weak</code>: sono 34.428,
+cioè 34,4% della popolazione. La tabella confronta tre trattamenti —
+tenerli col tag principale, sostituirlo col secondo tag, escluderli del
+tutto — per mostrare quanto le conclusioni su RQ2 dipendano da
+un’attribuzione di genere musicale che per costruzione è incerta.</p>
+<h1 id="appendice-tecnica">Appendice tecnica</h1>
+<h2 id="a.1-ambiente">A.1 Ambiente</h2>
+<ul>
+<li>Sistema: Linux-5.15.0-185-generic-x86_64-with-glibc2.35</li>
+<li>Python 3.9.12</li>
+<li>PostgreSQL 18.4 — database <code>discogs</code>, dati su disco
+rotazionale</li>
+<li>R per l’ERGM: installato in userspace via micromamba (conda-forge),
+env <code>opt/mamba/envs/ergm</code></li>
+<li>Seme casuale globale: <strong>20260920</strong></li>
+<li>Data di esecuzione: 21/09/2026</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">pacchetto</th>
+<th style="text-align: left;">versione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">gender_guesser</td>
+<td style="text-align: left;">presente</td>
+</tr>
+<tr>
+<td style="text-align: left;">matplotlib</td>
+<td style="text-align: left;">3.8.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">networkx</td>
+<td style="text-align: left;">3.2.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">numpy</td>
+<td style="text-align: left;">1.24.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">pandas</td>
+<td style="text-align: left;">1.5.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">psycopg2</td>
+<td style="text-align: left;">2.9.10 (dt dec pq3 ext lo64)</td>
+</tr>
+<tr>
+<td style="text-align: left;">pyarrow</td>
+<td style="text-align: left;">18.1.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">scipy</td>
+<td style="text-align: left;">1.11.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">seaborn</td>
+<td style="text-align: left;">0.13.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">statsmodels</td>
+<td style="text-align: left;">0.14.6</td>
+</tr>
+</tbody>
+</table>
+<h2
+id="a.2-una-nota-sulle-prestazioni-che-ha-condizionato-il-disegno">A.2
+Una nota sulle prestazioni che ha condizionato il disegno</h2>
+<p>Il cluster PostgreSQL risiede su un disco
+<strong>rotazionale</strong> ma era configurato con
+<code>random_page_cost = 1.1</code>, un valore tarato per dischi a stato
+solido. Con quel costo il pianificatore preferisce percorsi ad accesso
+casuale che su disco meccanico degradano a pochi megabyte al secondo: la
+prima versione dell’estrazione girava a circa 5 MB/s. Le sessioni di
+estrazione impostano perciò <code>random_page_cost = 4</code> e riducono
+il parallelismo, favorendo scansioni sequenziali, e i conteggi di
+italianità sono stati riscritti come <strong>una sola passata
+aggregata</strong> su <code>release_artist</code> invece di due join
+ripetuti. Sono GUC di sessione: non modificano la configurazione del
+server né i dati.</p>
+<p>Analogamente, il calcolo della matrice di mixing è stato riscritto da
+<code>numpy.add.at</code> a <code>numpy.bincount</code> su indici
+appiattiti — risultato numerico identico, verificato, circa <strong>50
+volte più veloce</strong> — perché senza quella riscrittura le migliaia
+di repliche bootstrap e di modello nullo previste dal disegno non
+sarebbero state praticabili.</p>
+<h2 id="a.3-query-principali">A.3 Query principali</h2>
+<p>Tutte le interrogazioni sono in <code>src/phase1_extract.py</code>.
+La più importante è quella che definisce la popolazione, in una passata
+sola:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ra.artist_id,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> it.<span class="kw">id</span> <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>) <span class="kw">AS</span> n_it,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">count</span>(<span class="op">*</span>)                                  <span class="kw">AS</span> n_all</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> release_artist ra</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> (<span class="kw">SELECT</span> <span class="kw">id</span> <span class="kw">FROM</span> release <span class="kw">WHERE</span> country <span class="op">=</span> <span class="st">&#39;Italy&#39;</span>) it</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>       <span class="kw">ON</span> it.<span class="kw">id</span> <span class="op">=</span> ra.release_id</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">count</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> it.<span class="kw">id</span> <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>) <span class="op">&gt;=</span> <span class="dv">2</span>;</span></code></pre></div>
+<p>La selezione finale (quota, minimo di pubblicazioni, esclusioni
+anagrafiche) avviene poi sui dati già a terra, così che la Fase 5 possa
+variare le soglie senza rileggere il database.</p>
+<h2 id="a.4-tempi-di-esecuzione">A.4 Tempi di esecuzione</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">step</th>
+<th style="text-align: left;">seconds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ERGM genere_Rock</td>
+<td style="text-align: left;">3.183,3</td>
+</tr>
+<tr>
+<td style="text-align: left;">sensibilità</td>
+<td style="text-align: left;">2.138,1</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM genere_Folk_World_&amp;_Country</td>
+<td style="text-align: left;">1.643,7</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM epoca_post2000</td>
+<td style="text-align: left;">1.612,0</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM complessiva</td>
+<td style="text-align: left;">1.573,4</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM genere_Electronic</td>
+<td style="text-align: left;">1.485,7</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM genere_Pop</td>
+<td style="text-align: left;">1.170,7</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM genere_Classical</td>
+<td style="text-align: left;">926,5</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM epoca_pre2000</td>
+<td style="text-align: left;">880,3</td>
+</tr>
+<tr>
+<td style="text-align: left;">assortatività solo M/F</td>
+<td style="text-align: left;">828,8</td>
+</tr>
+<tr>
+<td style="text-align: left;">assortatività per strato</td>
+<td style="text-align: left;">617,8</td>
+</tr>
+<tr>
+<td style="text-align: left;">betweenness</td>
+<td style="text-align: left;">609,9</td>
+</tr>
+<tr>
+<td style="text-align: left;">genere debole</td>
+<td style="text-align: left;">467,1</td>
+</tr>
+<tr>
+<td style="text-align: left;">esportazione dataset</td>
+<td style="text-align: left;">323,2</td>
+</tr>
+<tr>
+<td style="text-align: left;">wikidata_blocco_B_italiani</td>
+<td style="text-align: left;">214,4</td>
+</tr>
+<tr>
+<td style="text-align: left;">mixing e assortatività globale</td>
+<td style="text-align: left;">127,3</td>
+</tr>
+<tr>
+<td style="text-align: left;">COPY raw_relgenre</td>
+<td style="text-align: left;">111,8</td>
+</tr>
+<tr>
+<td style="text-align: left;">monte carlo genere</td>
+<td style="text-align: left;">105,6</td>
+</tr>
+<tr>
+<td style="text-align: left;">COPY raw_ra</td>
+<td style="text-align: left;">103,1</td>
+</tr>
+<tr>
+<td style="text-align: left;">COPY raw_reltracks</td>
+<td style="text-align: left;">102,2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a.5-riproducibilità">A.5 Riproducibilità</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /media/disk2/datascience/analysis/gender_collab</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./run_all.sh</span>              <span class="co"># esecuzione completa</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./run_all.sh</span> <span class="at">--from</span> 3     <span class="co"># riparte dalla Fase 3</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./run_all.sh</span> <span class="at">--force</span>      <span class="co"># ignora i checkpoint e ricalcola tutto</span></span></code></pre></div>
+<p>Ogni fase scrive un checkpoint in <code>data/*.parquet</code> e viene
+saltata se il checkpoint esiste. I dati grezzi estratti stanno in
+<code>data/raw/</code>, le figure in <code>report/figures/</code>, le
+tabelle in <code>report/tables/</code> sia in CSV sia in LaTeX.</p>
+<h2 id="a.6-limiti-in-ordine-di-gravità">A.6 Limiti, in ordine di
+gravità</h2>
+<ol type="1">
+<li><strong>Il genere sessuale è inferito, e la validazione manuale non
+è stata eseguita.</strong> Il campione stratificato e lo script di
+scoring sono pronti; senza di essa l’errore di misura dell’inferenza
+resta non quantificato.</li>
+<li><strong>L’italianità è approssimata dal paese di
+pubblicazione</strong>, perché <code>release_label</code> è vuota.
+Confonde “artista italiano” con “artista pubblicato in Italia”.</li>
+<li><strong>26,4% della popolazione non ha genere musicale</strong>,
+perché <code>release_genre</code> è vuota e i master coprono solo parte
+delle pubblicazioni.</li>
+<li><strong>Nessuna verifica incrociata fra fonti</strong>: iTunes è
+escluso per scelta.</li>
+<li><strong>Discogs non è un censimento.</strong> Sovrarappresenta
+vinile, elettronica e collezionismo.</li>
+<li><strong>L’ERGM vale sulle sottoreti stimate</strong>, non
+sull’intera rete.</li>
+<li><strong>Wikidata copre 5,2% della popolazione</strong>; il livello
+di recupero per nome non è stato completato per indisponibilità ripetuta
+del servizio SPARQL, che ha risposto con errori 429, 502 e 504.</li>
+</ol>
+</body>
+</html>

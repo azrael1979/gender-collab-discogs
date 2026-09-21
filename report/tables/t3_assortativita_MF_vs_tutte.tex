@@ -1,0 +1,47 @@
+\begin{table}
+\centering
+\caption{Assortatività calcolata sui soli archi fra nodi con attributo determinato, a confronto con il calcolo che tratta 'indeterminato' come una categoria. Il confronto è fatto sia per il genere sessuale sia per quello musicale}
+\label{tab:t3_assortativita_MF_vs_tutte}
+\begin{tabular}{llllrrrrrrrrr}
+\toprule
+  sottorete &   strato &     attributo &            categorie &  n\_categorie &  archi\_usati &  archi\_totali &  quota\_archi\_usati &     r &  ci\_lo &  ci\_hi &  r\_null &       z \\
+\midrule
+        all &    tutto &        gender & determinati soltanto &            2 &       508173 &        702613 &              0.723 & 0.051 &  0.048 &  0.054 &   0.000 &  36.397 \\
+        all &    tutto &        gender &   tutte le categorie &            4 &       702613 &        702613 &              1.000 & 0.073 &  0.072 &  0.076 &   0.000 &  81.509 \\
+        all &    tutto & musical\_genre & determinati soltanto &           15 &       605856 &        702613 &              0.862 & 0.587 &  0.585 &  0.588 &   0.000 & 935.816 \\
+        all &    tutto & musical\_genre &   tutte le categorie &           16 &       702613 &        702613 &              1.000 & 0.519 &  0.517 &  0.520 &   0.000 & 918.343 \\
+        all &  pre2000 &        gender & determinati soltanto &            2 &       355137 &        471214 &              0.754 & 0.049 &  0.046 &  0.053 &  -0.000 &  29.589 \\
+        all &  pre2000 &        gender &   tutte le categorie &            4 &       471214 &        471214 &              1.000 & 0.054 &  0.052 &  0.056 &  -0.000 &  55.128 \\
+        all &  pre2000 & musical\_genre & determinati soltanto &           15 &       432368 &        471214 &              0.918 & 0.537 &  0.536 &  0.539 &  -0.000 & 685.560 \\
+        all &  pre2000 & musical\_genre &   tutte le categorie &           16 &       471214 &        471214 &              1.000 & 0.495 &  0.493 &  0.497 &  -0.000 & 709.331 \\
+        all & post2000 &        gender & determinati soltanto &            2 &        69320 &        115134 &              0.602 & 0.073 &  0.064 &  0.082 &  -0.000 &  19.601 \\
+        all & post2000 &        gender &   tutte le categorie &            4 &       115134 &        115134 &              1.000 & 0.137 &  0.132 &  0.142 &   0.000 &  56.029 \\
+        all & post2000 & musical\_genre & determinati soltanto &           15 &        81408 &        115134 &              0.707 & 0.726 &  0.723 &  0.730 &  -0.000 & 382.991 \\
+        all & post2000 & musical\_genre &   tutte le categorie &           16 &       115134 &        115134 &              1.000 & 0.561 &  0.558 &  0.565 &   0.000 & 366.999 \\
+   creative &    tutto &        gender & determinati soltanto &            2 &       188167 &        217334 &              0.866 & 0.023 &  0.018 &  0.029 &   0.000 &   9.972 \\
+   creative &    tutto &        gender &   tutte le categorie &            4 &       217334 &        217334 &              1.000 & 0.073 &  0.069 &  0.077 &  -0.000 &  41.853 \\
+   creative &    tutto & musical\_genre & determinati soltanto &           15 &       200128 &        217334 &              0.921 & 0.594 &  0.592 &  0.597 &  -0.000 & 436.458 \\
+   creative &    tutto & musical\_genre &   tutte le categorie &           16 &       217334 &        217334 &              1.000 & 0.551 &  0.548 &  0.553 &   0.000 & 458.015 \\
+   creative &  pre2000 &        gender & determinati soltanto &            2 &       150618 &        166503 &              0.905 & 0.023 &  0.017 &  0.029 &   0.000 &   8.982 \\
+   creative &  pre2000 &        gender &   tutte le categorie &            4 &       166503 &        166503 &              1.000 & 0.033 &  0.029 &  0.038 &  -0.000 &  17.655 \\
+   creative &  pre2000 & musical\_genre & determinati soltanto &           15 &       158499 &        166503 &              0.952 & 0.537 &  0.534 &  0.540 &   0.000 & 371.069 \\
+   creative &  pre2000 & musical\_genre &   tutte le categorie &           16 &       166503 &        166503 &              1.000 & 0.510 &  0.507 &  0.513 &  -0.000 & 359.140 \\
+   creative & post2000 &        gender & determinati soltanto &            2 &        15531 &         23398 &              0.664 & 0.047 &  0.026 &  0.067 &   0.001 &   6.047 \\
+   creative & post2000 &        gender &   tutte le categorie &            4 &        23398 &         23398 &              1.000 & 0.144 &  0.131 &  0.156 &   0.000 &  25.954 \\
+   creative & post2000 & musical\_genre & determinati soltanto &           15 &        18108 &         23398 &              0.774 & 0.789 &  0.780 &  0.796 &   0.000 & 174.657 \\
+   creative & post2000 & musical\_genre &   tutte le categorie &           16 &        23398 &         23398 &              1.000 & 0.630 &  0.622 &  0.637 &  -0.000 & 172.648 \\
+performance &    tutto &        gender & determinati soltanto &            2 &       186094 &        281710 &              0.661 & 0.117 &  0.112 &  0.123 &  -0.000 &  47.333 \\
+performance &    tutto &        gender &   tutte le categorie &            4 &       281710 &        281710 &              1.000 & 0.154 &  0.151 &  0.157 &  -0.000 & 110.887 \\
+performance &    tutto & musical\_genre & determinati soltanto &           15 &       231696 &        281710 &              0.822 & 0.646 &  0.643 &  0.648 &  -0.000 & 666.530 \\
+performance &    tutto & musical\_genre &   tutte le categorie &           16 &       281710 &        281710 &              1.000 & 0.559 &  0.557 &  0.561 &   0.000 & 675.262 \\
+performance &  pre2000 &        gender & determinati soltanto &            2 &       109980 &        160347 &              0.686 & 0.123 &  0.117 &  0.130 &  -0.000 &  39.771 \\
+performance &  pre2000 &        gender &   tutte le categorie &            4 &       160347 &        160347 &              1.000 & 0.154 &  0.150 &  0.158 &   0.000 &  83.183 \\
+performance &  pre2000 & musical\_genre & determinati soltanto &           15 &       143147 &        160347 &              0.893 & 0.603 &  0.600 &  0.606 &  -0.000 & 508.939 \\
+performance &  pre2000 & musical\_genre &   tutte le categorie &           16 &       160347 &        160347 &              1.000 & 0.552 &  0.549 &  0.555 &   0.000 & 485.479 \\
+performance & post2000 &        gender & determinati soltanto &            2 &        37172 &         65036 &              0.572 & 0.113 &  0.100 &  0.127 &   0.000 &  21.370 \\
+performance & post2000 &        gender &   tutte le categorie &            4 &        65036 &         65036 &              1.000 & 0.182 &  0.176 &  0.189 &   0.000 &  58.048 \\
+performance & post2000 & musical\_genre & determinati soltanto &           15 &        44797 &         65036 &              0.689 & 0.766 &  0.761 &  0.770 &  -0.000 & 281.011 \\
+performance & post2000 & musical\_genre &   tutte le categorie &           16 &        65036 &         65036 &              1.000 & 0.593 &  0.589 &  0.598 &  -0.000 & 294.995 \\
+\bottomrule
+\end{tabular}
+\end{table}

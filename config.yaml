@@ -1,0 +1,188 @@
+# ==========================================================================
+# Omofilia di genere nelle collaborazioni musicali italiane — configurazione
+# Fonte UNICA: PostgreSQL `discogs` (sola lettura). iTunes escluso per scelta
+# metodologica (vedi report, sezione "Sorgenti dati").
+# ==========================================================================
+
+project:
+  name: gender_collab_it
+  root: /media/disk2/datascience/analysis/gender_collab
+  seed: 20260920
+
+db:
+  host: localhost
+  port: 5432
+  user: postgres
+  # La password NON sta nel file: si legge dalla variabile d'ambiente indicata
+  # qui sotto. Il valore puo' stare in un file `.env` locale (non versionato),
+  # oppure essere esportato nella shell prima di lanciare la pipeline.
+  password_env: PGPASSWORD_DISCOGS
+  dbname: discogs
+  read_only: true          # default_transaction_read_only=on su ogni sessione
+  statement_timeout_ms: 0
+
+# --------------------------------------------------------------------------
+# FASE 1 — popolazione italiana
+# --------------------------------------------------------------------------
+population:
+  country_label: Italy
+  min_italian_releases: 2      # n_it >= 2
+  min_total_releases: 3        # n_all >= 3
+  min_italian_share: 0.50      # n_it / n_all >= 0.50
+  exclude_name_patterns:       # esclusioni anagrafiche (regex, case-insensitive)
+    - '^various( artists?)?( \(\d+\))?$'
+    - '^unknown artist'
+    - '^no artist'
+    - '^traditional$'
+  strip_disambiguation: true   # "Mina (3)" -> "Mina"
+
+cohort:
+  min_year: 1900
+  max_year: 2026
+  decade_floor: 1950           # decenni < 1950 accorpati in "pre-1950"
+
+musical_genre:
+  source: master_genre         # release_genre e' vuota nel dump
+  fallback_style: true         # se nessun genere, usa master_style mappato
+  weak_threshold: 0.40         # genre_weak se quota del tag top < 40%
+  min_tagged_releases: 1
+
+# --------------------------------------------------------------------------
+# FASE 1e — inferenza del genere sessuale (cascata)
+# --------------------------------------------------------------------------
+gender:
+  cascade: [wikidata, onomastic, group_members]
+  wikidata:
+    enabled: true
+    endpoint: https://query.wikidata.org/sparql
+    user_agent: "ItalianMusicCollabResearch/1.0 (ricerca accademica; azrael1979@gmail.com)"
+    country_qid: Q38                 # Italia
+    # Occupazioni musicali. NB: niente P106/P279* (manda WDQS in timeout) e
+    # niente Q639, che NON e' "musicista" (l'identificativo corretto e'
+    # Q639669); la lista errata restituiva zero righe.
+    occupation_qids:
+      [Q639669, Q177220, Q36834, Q486748, Q855091, Q753110, Q183945, Q158852,
+       Q2865819, Q488205, Q386854, Q12800682, Q806349, Q584301]
+    timeout_s: 120
+    max_retries: 5
+    backoff_s: 10
+    cache_dir: cache/wikidata
+    confidence: 0.98
+  onomastic:
+    gender_guesser_confidence: {male: 0.90, female: 0.90, mostly_male: 0.72, mostly_female: 0.72}
+    istat_confidence: 0.93
+    min_confidence_accept: 0.70
+    use_realname_first: true         # "Mina (3)" -> realname "Mina Anna Mazzini"
+  group_members:
+    min_members_known: 2
+    confidence_homogeneous: 0.85
+    confidence_mixed: 0.90
+  validation:
+    n: 200
+    strata: [gender, confidence_bin, label_source]
+
+# --------------------------------------------------------------------------
+# FASE 2 — rete
+# --------------------------------------------------------------------------
+network:
+  # Specificita' del credito -> forza del legame.
+  # I crediti risolti a livello traccia sono i piu' forti; i crediti release
+  # con campo `tracks` popolato vengono risolti a traccia e valgono uguale;
+  # i crediti "a ombrello" (release, senza tracce) pesano meno.
+  credit_scope_weight:
+    track:    1.00      # release_track_artist, oppure release_artist.tracks parsato
+    main:     0.70      # release_artist.extra=0 (artista principale della release)
+    umbrella: 0.30      # release_artist.extra=1 con tracks vuoto
+  w_track_shared: 1.00  # peso per ogni traccia condivisa
+  w_release_pair: 1.00  # moltiplicatore del termine s_u * s_v a livello release
+  use_track_credits: true
+  parse_release_track_field: true
+
+  max_credits: 8              # release con piu' di N artisti accreditati -> scartata
+  min_edge_weight: 0.0        # filtro sul peso finale dell'arco
+  exclude_various: true       # release attribuite a "Various Artists"
+  exclude_compilations: false # opzione di robustness
+
+  roles:
+    creative:   ['Producer','Written-By','Composed By','Arranged By','Lyrics By','Music By',
+                 'Songwriter','Written By','Executive-Producer','Co-producer','Remix',
+                 'Orchestrated By','Adapted By','Score']
+    performance: ['Vocals','Backing Vocals','Lead Vocals','Guitar','Bass','Drums','Piano',
+                 'Keyboards','Percussion','Violin','Trumpet','Saxophone','Performer',
+                 'Featuring','Conductor','Orchestra','Choir','Electric Guitar','Acoustic Guitar',
+                 'Synthesizer','Organ','Flute','Cello','Accordion','Harmonica','Trombone','Clarinet']
+    technical:  ['Engineer','Mixed By','Mastered By','Recorded By','Lacquer Cut By',
+                 'Edited By','Programmed By']
+  subnetworks: [all, creative, performance]
+  giant_component_only: true
+
+# --------------------------------------------------------------------------
+# FASE 3 — omofilia
+# --------------------------------------------------------------------------
+homophily:
+  bootstrap_B: 1000
+  null_model: configuration     # grado e composizione preservati
+  null_model_reps: 500
+  ci_level: 0.95
+  eras:
+    pre2000: [1900, 1999]
+    post2000: [2000, 2026]
+  moving_decades: [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020]
+  # La betweenness esatta su 79.000 nodi e 700.000 archi non e' praticabile in
+  # tempi ragionevoli (ne' con networkx ne' con igraph, provati entrambi). Si
+  # usa l'approssimazione di Brandes-Pich su un campione di sorgenti: con 400
+  # sorgenti l'errore relativo sui nodi ad alta centralita' e' contenuto, ed e'
+  # la misura meno centrale delle tre usate per RQ3.
+  betweenness_exact_max_n: 20000   # oltre: approssimazione campionaria
+  betweenness_k_sample: 400
+
+# --------------------------------------------------------------------------
+# FASE 4 — ERGM
+# --------------------------------------------------------------------------
+ergm:
+  enabled: true
+  r_env: opt/mamba/envs/ergm
+  # La rete intera (~100k nodi) non converge: si stima su sottoreti. Il costo
+  # dell'ERGM dipende dalla DENSITA' piu' che dal numero di nodi, quindi le
+  # sottoreti vengono anche sfoltite dei legami piu' deboli.
+  top_genres_n: 5
+  max_nodes_per_model: 1500        # campionamento a palla di neve se superato
+  max_edges_per_model: 5000        # tetto sulla DENSITA': e' lei a determinare
+                                   # costo e stabilita' numerica dell'ERGM
+  min_edge_weight_ergm: 1.0        # solo legami con almeno una collaborazione piena
+  timeout_s: 3600                  # oltre, i modelli sono dichiarati non convergenti
+  gwesp_decay: 0.25
+  # Campione MCMC FISSO: disattivare il dimensionamento adattivo di ergm 4.x
+  # (MCMLE.effectiveSize) e' cio' che rende la stima praticabile, vedi il
+  # commento in R/ergm_models.R.
+  mcmc:
+    samplesize: 4000
+    burnin: 20000
+    interval: 1000
+    maxit: 25                      # iterazioni MCMLE: oltre, non convergenza
+    seed: 20260920
+  gof_terms: ['degree', 'espartners', 'distance']
+  fallback_python_logit: true      # se R/ergm non disponibile o non converge
+
+# --------------------------------------------------------------------------
+# FASE 5 — robustness
+# --------------------------------------------------------------------------
+robustness:
+  montecarlo_B: 200
+  gender_scenarios: [status_quo, best_case, worst_case]
+  sensitivity:
+    max_credits: [4, 8, 20]
+    min_edge_weight: [0.0, 1.0, 2.0]
+    exclude_compilations: [false, true]
+    italian_share: [0.50, 0.60, 0.70]
+    credit_scope_weight:                       # terne alternative (track, main, umbrella)
+      - {track: 1.00, main: 0.70, umbrella: 0.30}   # default
+      - {track: 1.00, main: 1.00, umbrella: 1.00}   # nessuna gerarchia
+      - {track: 1.00, main: 0.50, umbrella: 0.10}   # gerarchia forte
+    use_track_credits: [true, false]
+  genre_weak_variants: [top1, top2, exclude]
+
+report:
+  lang: it
+  dpi: 300
+  formats: [md, html, pdf]
