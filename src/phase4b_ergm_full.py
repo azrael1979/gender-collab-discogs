@@ -56,19 +56,30 @@ def controlli(n: int, cfg) -> dict:
     archi, altrimenti il campione e' numeroso ma autocorrelato, e la stima
     sembra precisa senza esserlo.
     """
-    # L'intervallo fra campioni deve crescere con gli ARCHI, non con i nodi:
-    # e' il numero di archi a determinare quanto la catena debba muoversi per
-    # produrre una configurazione indipendente. La regola usata e' un
-    # intervallo dell'ordine di m/15, e un campione piu' contenuto compensato
-    # da catene parallele, che riducono il tempo di attesa senza ridurre
-    # l'informazione.
+    # Parametri tarati sulla MEMORIA, non sulla velocita'.
+    #
+    # Una prima versione usava venti milioni di diadi per la MPLE e sei catene
+    # parallele. Misurando: la matrice di disegno della MPLE occupa da sola
+    # circa un gigabyte ogni quattro milioni di diadi, e con PSOCK viene
+    # copiata in OGNI worker. Il risultato erano otto processi R per sessanta
+    # gigabyte complessivi, con la macchina in swap e gli altri servizi
+    # affamati. Un milione di diadi basta ampiamente a inizializzare la stima
+    # e costa 2,8 GB di picco.
+    #
+    # Il campione MCMC scende da diecimila a tremila: per sette parametri e'
+    # piu' che sufficiente, purche' l'intervallo resti ampio abbastanza da
+    # decorrelare, ed e' l'intervallo — non la numerosita' — a garantire che i
+    # campioni siano indipendenti. Due sole catene tengono il totale sotto i
+    # dieci gigabyte.
+    #
+    # Il prezzo e' il tempo, che qui non e' un vincolo.
     return {
-        "samplesize": 10_000,
-        "burnin": 500_000,
+        "samplesize": 3_000,
+        "burnin": 300_000,
         "interval": 30_000,
-        "maxit": 60,
-        "mple_samplesize": 20_000_000,
-        "parallel": 6,
+        "maxit": 100,
+        "mple_samplesize": 1_000_000,
+        "parallel": 2,
         "gwesp_decay": cfg["ergm"]["gwesp_decay"],
         # La bonta' di adattamento simula reti intere: su 57.000 nodi ogni
         # simulazione costa quanto una iterazione della stima, e cento
@@ -79,6 +90,28 @@ def controlli(n: int, cfg) -> dict:
         "gof": n <= 25_000,
         "gof_nsim": 100 if n <= 10_000 else 50,
     }
+
+
+def memoria_disponibile_gb() -> float:
+    """Memoria realmente disponibile, non quella semplicemente 'libera'."""
+    for riga in Path("/proc/meminfo").read_text().splitlines():
+        if riga.startswith("MemAvailable:"):
+            return int(riga.split()[1]) / 1048576
+    return 0.0
+
+
+def verifica_memoria(log, richiesta_gb: float = 14.0) -> None:
+    """La stima non parte se non c'e' margine. La macchina ospita altri
+    servizi, e mandarla in swap li danneggia mentre rallenta anche noi: su
+    disco rotante una catena MCMC che swappa perde piu' di quanto guadagni
+    qualunque parallelismo."""
+    disp = memoria_disponibile_gb()
+    log.info(f"memoria disponibile: {disp:.0f} GB (richieste ~{richiesta_gb:.0f})")
+    if disp < richiesta_gb:
+        raise SystemExit(
+            f"Memoria insufficiente: {disp:.0f} GB disponibili, ne servono "
+            f"almeno {richiesta_gb:.0f}. Liberare memoria o ridurre "
+            f"`parallel` e `mple_samplesize` in controlli().")
 
 
 def rete_completa(cfg, log):
@@ -200,6 +233,7 @@ def main(force: bool = False):
     cfg = common.load_config()
     log = common.setup_logging("phase4b_ergm_full", cfg)
     MODELS.mkdir(parents=True, exist_ok=True)
+    verifica_memoria(log)
     G, pop = rete_completa(cfg, log)
 
     for scala in SCALE:
