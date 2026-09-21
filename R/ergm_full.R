@@ -59,10 +59,16 @@ if (length(unique(nodes$musical_genre)) > 1)
   parti <- c("nodematch('musical_genre')", parti)
 if (length(unique(nodes$cohort_decade)) > 1)
   parti <- c(parti, "nodematch('cohort_decade')")
+# Il termine di dipendenza arriva dal control.json: e' la variante che si sta
+# provando. Su questa rete gwesp(0.25) non converge — lo step dell'ottimizzatore
+# crolla di due ordini di grandezza alla seconda iterazione, che e' la firma
+# della quasi-degenerazione — quindi si prova una sequenza di specifiche
+# alternative, ognuna con la propria cartella.
 rhs <- paste(c("edges", "nodematch('gender', diff = TRUE)", parti,
-               sprintf("gwesp(%s, fixed = TRUE)", ctrl$gwesp_decay)),
+               ctrl$dipendenza),
              collapse = " + ")
 cat(sprintf("  formula: net ~ %s\n", rhs))
+cat(sprintf("  metodo: %s\n", if (!is.null(ctrl$metodo)) ctrl$metodo else "MCMLE"))
 f <- as.formula(paste("net ~", rhs))
 
 estrai <- function(m, etichetta, secondi, metodo) {
@@ -99,7 +105,9 @@ if (!inherits(mple, "try-error")) {
 
 # ---- 2. MCMLE: la stima vera ---------------------------------------------
 cat("  -> MCMLE\n")
+metodo <- if (!is.null(ctrl$metodo)) ctrl$metodo else "MCMLE"
 ctl <- control.ergm(
+  main.method         = metodo,
   MCMLE.effectiveSize = NULL,
   MCMLE.termination   = "Hummel",
   MCMC.samplesize     = ctrl$samplesize,

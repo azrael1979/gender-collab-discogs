@@ -47,6 +47,34 @@ MODELS = ROOT / "data" / "ergm_full"
 # sulla rete vera, quindi si stima direttamente quella.
 SCALE = [None]
 
+# Le specifiche da provare, in ordine. gwesp(0.25) e' quella prevista dal
+# disegno, ma sulla rete integrale non converge: lo step dell'ottimizzatore
+# crolla da 0,48 a 0,005 alla seconda iterazione, in due tentativi
+# indipendenti con parametri MCMC diversi. E' la firma della quasi-degenerazione.
+#
+# Le alternative seguono la diagnosi. Con decay basso gwesp si comporta quasi
+# come un conteggio di triangoli, che e' la forma piu' instabile; alzandolo si
+# avvicina al conteggio di partner condivisi, molto meglio condizionato. Se
+# non basta, si aggiunge un termine sulla distribuzione dei gradi, che in
+# letteratura stabilizza i modelli con gwesp vincolando l'altra dimensione
+# lungo cui il modello puo' degenerare. Come ultima risorsa si cambia
+# algoritmo: la Stochastic-Approximation non insegue il massimo della
+# verosimiglianza per passi, quindi non soffre del collasso dello step.
+VARIANTI = [
+    ("gwesp050", "gwesp(0.5, fixed = TRUE)", "MCMLE"),
+    ("gwesp075", "gwesp(0.75, fixed = TRUE)", "MCMLE"),
+    ("gwesp025_gwdeg", "gwesp(0.25, fixed = TRUE) + gwdegree(0.5, fixed = TRUE)", "MCMLE"),
+    ("gwesp050_stocapp", "gwesp(0.5, fixed = TRUE)", "Stochastic-Approximation"),
+]
+
+# Soglie per l'abbandono precoce. Aspettare cento iterazioni una stima che ha
+# gia' mostrato il collasso costa giorni e non produce nulla: se lo step resta
+# sotto la soglia per piu' iterazioni consecutive, si passa alla variante
+# successiva.
+STEP_MINIMO = 0.02
+COLLASSI_TOLLERATI = 3
+ORE_MASSIME = 12
+
 
 def controlli(n: int, cfg) -> dict:
     """Parametri MCMC scalati sulla dimensione della rete.
@@ -80,6 +108,8 @@ def controlli(n: int, cfg) -> dict:
         "maxit": 100,
         "mple_samplesize": 1_000_000,
         "parallel": 2,
+        "dipendenza": None,   # riempito dalla variante
+        "metodo": "MCMLE",    # idem
         "gwesp_decay": cfg["ergm"]["gwesp_decay"],
         # La bonta' di adattamento simula reti intere: su 57.000 nodi ogni
         # simulazione costa quanto una iterazione della stima, e cento
@@ -164,7 +194,9 @@ def campiona(G: nx.Graph, n_max: int, seed: int, log) -> nx.Graph:
     return H.subgraph(comps[0]).copy()
 
 
-def prepara(G: nx.Graph, pop: pd.DataFrame, nome: str, cfg) -> Path:
+def prepara(G: nx.Graph, pop: pd.DataFrame, nome: str, cfg,
+            dipendenza: str = "gwesp(0.25, fixed = TRUE)",
+            metodo: str = "MCMLE") -> Path:
     d = MODELS / nome
     d.mkdir(parents=True, exist_ok=True)
     attrs = pop.set_index("artist_id")
@@ -176,7 +208,9 @@ def prepara(G: nx.Graph, pop: pd.DataFrame, nome: str, cfg) -> Path:
         .to_csv(d / "nodes.csv", index=False)
     nx.to_pandas_edgelist(G, source="u", target="v")[["u", "v"]] \
         .to_csv(d / "edges.csv", index=False)
-    (d / "control.json").write_text(json.dumps(controlli(G.number_of_nodes(), cfg)))
+    c = controlli(G.number_of_nodes(), cfg)
+    c["dipendenza"], c["metodo"] = dipendenza, metodo
+    (d / "control.json").write_text(json.dumps(c))
     return d
 
 
@@ -192,6 +226,9 @@ def esegui(d: Path, cfg, log) -> dict | None:
     # L'output di R viene trascritto riga per riga mentre arriva, invece che
     # raccolto alla fine: su una stima che puo' durare giorni, sapere a quale
     # iterazione si e' arrivati e' la differenza fra sorvegliare e sperare.
+    import re as _re
+    step_re = _re.compile(r"step length\s+([0-9.]+)")
+    collassi, abbandonata = 0, None
     with open(d / "R.log", "w", buffering=1) as fh:
         p = subprocess.Popen(
             [str(rb), str(ROOT / "R" / "ergm_full.R"), str(d),
@@ -203,8 +240,31 @@ def esegui(d: Path, cfg, log) -> dict | None:
             fh.write(riga + "\n")
             if riga.strip():
                 log.info(f"  R| {riga}")
-        p.wait()
-    if p.returncode != 0:
+            # sorveglianza: uno step minuscolo, ripetuto, significa che il
+            # modello genera reti lontanissime da quella osservata e che
+            # l'ottimizzatore non ha spazio per muoversi
+            mm = step_re.search(riga)
+            if mm:
+                passo = float(mm.group(1))
+                collassi = collassi + 1 if passo < STEP_MINIMO else 0
+                if collassi >= COLLASSI_TOLLERATI:
+                    abbandonata = (f"step sotto {STEP_MINIMO} per "
+                                   f"{collassi} iterazioni consecutive")
+                    log.warning(f"  ABBANDONO: {abbandonata}")
+                    p.terminate()
+                    break
+            if (time.time() - t0) / 3600 > ORE_MASSIME:
+                abbandonata = f"superate {ORE_MASSIME} ore"
+                log.warning(f"  ABBANDONO: {abbandonata}")
+                p.terminate()
+                break
+        try:
+            p.wait(timeout=60)
+        except subprocess.TimeoutExpired:
+            p.kill()
+    if abbandonata:
+        (d / "abbandonata.txt").write_text(abbandonata)
+    elif p.returncode != 0:
         log.error(f"Rscript rc={p.returncode}")
     log.info(f"  tempo totale: {(time.time()-t0)/3600:.2f} ore")
     f = d / "summary.json"
@@ -236,23 +296,36 @@ def main(force: bool = False):
     verifica_memoria(log)
     G, pop = rete_completa(cfg, log)
 
-    for scala in SCALE:
-        nome = "integrale" if scala is None else f"n{scala}"
+    esiti = []
+    for nome, dipendenza, metodo in VARIANTI:
         d = MODELS / nome
         if (d / "summary.json").exists() and not force:
             log.info(f"--- {nome}: gia' stimata, salto")
             continue
-        H = G if scala is None else campiona(G, scala, cfg["project"]["seed"], log)
-        log.info(f"--- {nome}: {H.number_of_nodes():,} nodi, "
-                 f"{H.number_of_edges():,} archi "
-                 f"(grado medio {2*H.number_of_edges()/H.number_of_nodes():.1f})")
-        d = prepara(H, pop, nome, cfg)
+        log.info(f"=== variante {nome}: {dipendenza} [{metodo}] ===")
+        d = prepara(G, pop, nome, cfg, dipendenza, metodo)
         with Timer(f"ERGM {nome}", log):
             s = esegui(d, cfg, log)
-        if s is None or not s.get("mcmle"):
-            log.error(f"{nome}: MCMLE non converge; si prosegue comunque")
+        riuscita = bool(s and s.get("mcmle"))
+        esiti.append({"variante": nome, "dipendenza": dipendenza,
+                      "metodo": metodo, "convergenza": riuscita,
+                      "abbandonata": (d / "abbandonata.txt").exists(),
+                      "motivo": (d / "abbandonata.txt").read_text()
+                                if (d / "abbandonata.txt").exists() else None,
+                      "ore": round(s.get("ore", 0), 2) if s else None})
+        common.save(pd.DataFrame(esiti), "ergm_full_esiti.parquet")
         raccogli(log)
+        if riuscita:
+            log.info(f"=== {nome} CONVERGE: la rete integrale e' stimata ===")
+            break
+        log.warning(f"--- {nome} non converge, passo alla variante successiva")
 
+    df = pd.DataFrame(esiti)
+    if len(df):
+        common.save_table(df, "t4_ergm_integrale_varianti",
+                          "Specifiche provate sulla rete integrale ed esito di "
+                          "ciascuna")
+        log.info("\n" + df.to_string(index=False))
     raccogli(log)
     Timer.dump(ROOT / "logs" / "timings.csv")
 
