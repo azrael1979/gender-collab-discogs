@@ -146,6 +146,20 @@ dati. Entrambe le misure sono riportate.
    risposto con 429/502/504 in modo persistente. Vedi
    `data/wikidata_status.json`.
 
+## L'articolo
+
+`paper/` contiene il manoscritto in inglese destinato alla rivista *Poetics*,
+in Markdown, PDF e DOCX, con le figure in PNG a 300 dpi e in PDF vettoriale.
+Come il report, non contiene cifre scritte a mano: si rigenera con
+
+```bash
+python3 src/paper_figures.py && python3 src/paper.py
+```
+
+**Prima di sottomettere leggi `paper/NOTE_PER_AUTORE.md`**: elenca le
+citazioni da verificare, gli elementi editoriali mancanti e la validazione
+manuale del genere, che resta da fare.
+
 ## Licenza
 
 Questo lavoro — codice, report, figure e tabelle — e' distribuito sotto

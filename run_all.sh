@@ -61,6 +61,8 @@ run 5 "robustezza"                                src/phase5_robustness.py
 run 6 "figure"                                    src/phase6_figures.py
 run 7 "report Markdown, HTML, PDF"                src/phase7_report.py
 run 8 "pacchetto dati per i reviewer"             src/phase8_export.py
+run 9 "figure del paper (inglese)"                src/paper_figures.py
+run 9 "paper per Poetics (EN): MD, PDF, DOCX"     src/paper.py
 
 echo "" | tee -a "$MAIN"
 if [[ ${#FAILED[@]} -eq 0 ]]; then
