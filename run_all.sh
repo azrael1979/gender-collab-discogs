@@ -52,6 +52,8 @@ run 1 "Wikidata: P21 via Discogs ID"              src/phase1b_wikidata.py
 run 1 "nomi degli artisti etichettati"            src/phase1b2_names.py
 run 1 "popolazione, coorti, genere musicale"      src/phase1c_population.py
 run 1 "inferenza del genere sessuale"             src/phase1d_gender.py
+run 1 "arricchimento Wikidata per lotti"          src/wikidata_enrich.py
+run 1 "verifica euristica di italianita"          src/phase1e_validate_italy.py
 run 2 "costruzione delle reti"                    src/phase2_network.py
 run 3 "omofilia e mixing"                         src/phase3_homophily.py
 run 3 "assortativita M/F soltanto"             src/phase3c_mf_only.py
