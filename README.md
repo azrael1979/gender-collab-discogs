@@ -91,12 +91,16 @@ src/
   phase3_homophily.py      mixing matrix, assortativita', modello nullo
   phase3b_position.py      centralita', coreness, regressioni
   phase3c_mf_only.py       assortativita' sui soli nodi con genere determinato
-  phase4_ergm.py           driver ERGM
+  phase4_ergm.py           driver ERGM su sottoreti campionate
+  phase4b_ergm_full.py     ERGM sulla rete integrale, per scala crescente
+  wikidata_enrich.py       genere, cittadinanza e occupazione per lotti di QID
+  wikidata_dump.py         alternativa: passata sul dump Wikidata completo
   phase5_robustness.py     Monte Carlo e analisi di sensibilita'
   phase6_figures.py        figure PNG a 300 dpi
   phase7_report.py         report Markdown -> HTML -> PDF
   score_validation.py      metriche sul campione annotato a mano
-R/ergm_models.R            modelli ERGM (statnet)
+R/ergm_models.R            modelli ERGM su sottorete (statnet)
+R/ergm_full.R              modelli ERGM sulla rete integrale
 data/                      parquet, checkpoint, dati grezzi estratti
 report/                    report.md/html/pdf, figures/, tables/ (CSV + LaTeX)
 logs/                      un log per fase, piu' i tempi di esecuzione
