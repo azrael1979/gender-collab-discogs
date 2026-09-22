@@ -1,0 +1,18 @@
+\begin{table}
+\centering
+\caption{Logit diadico caso-controllo sulla rete integrale, con intervalli bootstrap sui nodi}
+\label{tab:t4_logit_diadico}
+\begin{tabular}{lrrrrrr}
+\toprule
+    termine &   coef &  se\_naive &  ci\_lo\_bootstrap &  ci\_hi\_bootstrap &    or &  repliche\_bootstrap \\
+\midrule
+      const & -0.615 &     0.009 &           -0.662 &           -0.567 & 0.541 &                 200 \\
+     same\_F &  0.317 &     0.019 &            0.236 &            0.382 & 1.374 &                 200 \\
+     same\_M &  0.231 &     0.005 &            0.206 &            0.259 & 1.260 &                 200 \\
+ same\_mixed &  0.305 &     0.104 &           -0.026 &            0.656 & 1.357 &                 200 \\
+ same\_genre &  1.634 &     0.004 &            1.610 &            1.661 & 5.124 &                 200 \\
+same\_cohort &  1.308 &     0.005 &            1.281 &            1.326 & 3.698 &                 200 \\
+sum\_lognrel &  0.659 &     0.001 &            0.652 &            0.666 & 1.933 &                 200 \\
+\bottomrule
+\end{tabular}
+\end{table}

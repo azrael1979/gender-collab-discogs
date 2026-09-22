@@ -415,3 +415,13 @@ composizione paper,0.67
 compilazione PDF/DOCX,3.56
 composizione paper,2.86
 compilazione PDF/DOCX,70.44
+logit diadico,3.36
+bootstrap sui nodi (B=200),183.74
+logit diadico completo,197.87
+permutazioni QAP (n=1000),59.96
+QAP,60.71
+logit diadico,3.25
+bootstrap sui nodi (B=200),183.8
+logit diadico completo,195.49
+permutazioni QAP (n=1000),58.89
+QAP,59.65

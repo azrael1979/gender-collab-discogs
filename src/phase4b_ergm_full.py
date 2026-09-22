@@ -26,7 +26,7 @@ conserva la densita' ma dimezza il clustering, cioe' distrugge proprio i
 triangoli che il termine gwesp deve stimare.
 """
 from __future__ import annotations
-import sys, json, re, subprocess, shutil, time
+import sys, json, re, subprocess, shutil, threading, time
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -60,9 +60,21 @@ SCALE = [None]
 # lungo cui il modello puo' degenerare. Come ultima risorsa si cambia
 # algoritmo: la Stochastic-Approximation non insegue il massimo della
 # verosimiglianza per passi, quindi non soffre del collasso dello step.
+# gwesp(0.25) e gwesp(0.5) sono gia' stati provati e falliscono allo stesso
+# modo: passo iniziale sano, poi crollo a ~0,01 e iterazioni che raddoppiano di
+# durata (29, 62, 125, oltre 243 minuti). Alzare ancora il decay a 0,75 non ha
+# motivo di comportarsi diversamente, quindi si salta. Restano le due
+# alternative che attaccano il problema da un'altra parte:
+#
+#   gwdegree      vincola la distribuzione dei gradi, cioe' l'altra dimensione
+#                 lungo cui il modello puo' degenerare. Se la degenerazione
+#                 nasce da una combinazione gradi/triangoli, fissare entrambe
+#                 puo' dare all'ottimizzatore lo spazio che non trova ora.
+#   Stoc.-Appr.   non usa la ricerca del passo: aggiorna i parametri con
+#                 un'approssimazione stocastica, quindi il collasso dello step
+#                 — che e' il modo esatto in cui le altre falliscono — non la
+#                 riguarda.
 VARIANTI = [
-    ("gwesp050", "gwesp(0.5, fixed = TRUE)", "MCMLE"),
-    ("gwesp075", "gwesp(0.75, fixed = TRUE)", "MCMLE"),
     ("gwesp025_gwdeg", "gwesp(0.25, fixed = TRUE) + gwdegree(0.5, fixed = TRUE)", "MCMLE"),
     ("gwesp050_stocapp", "gwesp(0.5, fixed = TRUE)", "Stochastic-Approximation"),
 ]
@@ -77,6 +89,13 @@ STEP_MINIMO = 0.02
 # noi. La memoria va sorvegliata durante, non solo all'avvio: e' durante
 # che cresce.
 MEMORIA_MINIMA_GB = 12
+# Massimo silenzio tollerato da R. Le iterazioni di gwesp(0.5) sono raddoppiate
+# di durata a ogni passo — 29 minuti, 62, 125, oltre 243 — e proiettando la
+# serie la settima sarebbe durata trentadue ore. Una stima che si allunga cosi'
+# non sta convergendo: sta divergendo lentamente. Senza questo limite nessuna
+# guardia poteva intervenire, perche' tutte leggevano l'output di R e R non
+# scriveva nulla.
+SILENZIO_MASSIMO_ORE = 4
 COLLASSI_TOLLERATI = 3
 ORE_MASSIME = 30
 
@@ -244,6 +263,57 @@ def leggi_passo(riga: str, log) -> float | None:
         return None
 
 
+class Sorvegliante(threading.Thread):
+    """Controlla tempo, memoria e silenzio di R, indipendentemente dal fatto
+    che R stia scrivendo qualcosa.
+
+    E' la correzione di un difetto reale: una prima versione teneva tutte le
+    guardie dentro il ciclo di lettura dell'output. Ma il passo
+    dell'ottimizzatore viene stampato alla FINE di un'iterazione, e quando le
+    iterazioni si allungano senza limite — come e' accaduto — l'output tace per
+    ore e nessuna guardia puo' scattare. Un sorvegliante che dipende da cio'
+    che sorveglia non sorveglia.
+    """
+
+    def __init__(self, proc, log, t0):
+        super().__init__(daemon=True)
+        self.proc, self.log, self.t0 = proc, log, t0
+        self.motivo = None
+        self.ultima_riga = time.time()
+        self._stop = threading.Event()
+
+    def segnala_attivita(self):
+        self.ultima_riga = time.time()
+
+    def ferma(self):
+        self._stop.set()
+
+    def run(self):
+        while not self._stop.wait(60):
+            if self.proc.poll() is not None:
+                return
+            ore = (time.time() - self.t0) / 3600
+            silenzio = (time.time() - self.ultima_riga) / 3600
+            mem = memoria_disponibile_gb()
+            if int(ore * 60) % 15 == 0:
+                self.log.info(f"  [battito] {ore:.1f}h, {mem:.0f} GB liberi, "
+                              f"silenzio da {silenzio*60:.0f} min")
+            if mem < MEMORIA_MINIMA_GB:
+                self.motivo = f"memoria scesa a {mem:.0f} GB"
+            elif silenzio > SILENZIO_MASSIMO_ORE:
+                self.motivo = (f"nessun output da {silenzio:.1f} ore: "
+                               f"l'iterazione non sta convergendo")
+            elif ore > ORE_MASSIME:
+                self.motivo = f"superate {ORE_MASSIME} ore"
+            if self.motivo:
+                self.log.warning(f"  ABBANDONO: {self.motivo}")
+                try:
+                    self.proc.terminate()
+                except Exception:
+                    pass
+                return
+
+
 def leggi_righe(p, fh, log):
     """Righe dell'output di R, trascritte sul file e restituite una a una.
 
@@ -292,24 +362,13 @@ def esegui(d: Path, cfg, log) -> dict | None:
             # R in una sessione sua: un segnale diretto all'orchestratore non
             # se lo porta dietro, e resta il tempo di chiuderlo con ordine
             start_new_session=True)
-        ultimo_battito = time.time()
+        sorv = Sorvegliante(p, log, t0)
+        sorv.start()
         for riga in leggi_righe(p, fh, log):
+            sorv.segnala_attivita()
             # sorveglianza: uno step minuscolo, ripetuto, significa che il
             # modello genera reti lontanissime da quella osservata e che
             # l'ottimizzatore non ha spazio per muoversi
-            # Battito: un log puo' restare muto per mezz'ora fra due
-            # iterazioni, e senza questo non si distingue "lento" da "morto".
-            if time.time() - ultimo_battito > 900:
-                ultimo_battito = time.time()
-                mem = memoria_disponibile_gb()
-                log.info(f"  [battito] {(time.time()-t0)/3600:.1f}h trascorse, "
-                         f"{mem:.0f} GB liberi")
-                if mem < MEMORIA_MINIMA_GB:
-                    abbandonata = (f"memoria scesa a {mem:.0f} GB, sotto la "
-                                   f"soglia di {MEMORIA_MINIMA_GB}")
-                    log.warning(f"  ABBANDONO: {abbandonata}")
-                    p.terminate()
-                    break
             passo = leggi_passo(riga, log)
             if passo is not None:
                 collassi = collassi + 1 if passo < STEP_MINIMO else 0
@@ -319,11 +378,9 @@ def esegui(d: Path, cfg, log) -> dict | None:
                     log.warning(f"  ABBANDONO: {abbandonata}")
                     p.terminate()
                     break
-            if (time.time() - t0) / 3600 > ORE_MASSIME:
-                abbandonata = f"superate {ORE_MASSIME} ore"
-                log.warning(f"  ABBANDONO: {abbandonata}")
-                p.terminate()
-                break
+        sorv.ferma()
+        if sorv.motivo and not abbandonata:
+            abbandonata = sorv.motivo
         try:
             p.wait(timeout=60)
         except subprocess.TimeoutExpired:

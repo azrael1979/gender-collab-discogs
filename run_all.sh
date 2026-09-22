@@ -58,7 +58,8 @@ run 2 "costruzione delle reti"                    src/phase2_network.py
 run 3 "omofilia e mixing"                         src/phase3_homophily.py
 run 3 "assortativita M/F soltanto"             src/phase3c_mf_only.py
 run 3 "centralita, coreness, regressioni"       src/phase3b_position.py
-run 4 "ERGM (R + statnet)"                        src/phase4_ergm.py
+run 4 "ERGM (R + statnet) su sottoreti"           src/phase4_ergm.py
+run 4 "omofilia sulla rete integrale (logit, QAP)" src/phase4c_dyadic.py
 run 5 "robustezza"                                src/phase5_robustness.py
 run 6 "figure"                                    src/phase6_figures.py
 run 7 "report Markdown, HTML, PDF"                src/phase7_report.py
