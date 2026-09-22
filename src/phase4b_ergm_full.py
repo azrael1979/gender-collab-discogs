@@ -26,7 +26,7 @@ conserva la densita' ma dimezza il clustering, cioe' distrugge proprio i
 triangoli che il termine gwesp deve stimare.
 """
 from __future__ import annotations
-import sys, json, subprocess, shutil, time
+import sys, json, re, subprocess, shutil, time
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -72,8 +72,13 @@ VARIANTI = [
 # sotto la soglia per piu' iterazioni consecutive, si passa alla variante
 # successiva.
 STEP_MINIMO = 0.02
+# Sotto questa soglia la stima viene interrotta: sulla macchina girano
+# altri servizi, e mandarla in swap danneggia loro mentre rallenta anche
+# noi. La memoria va sorvegliata durante, non solo all'avvio: e' durante
+# che cresce.
+MEMORIA_MINIMA_GB = 12
 COLLASSI_TOLLERATI = 3
-ORE_MASSIME = 12
+ORE_MASSIME = 30
 
 
 def controlli(n: int, cfg) -> dict:
@@ -214,6 +219,54 @@ def prepara(G: nx.Graph, pop: pd.DataFrame, nome: str, cfg,
     return d
 
 
+# La riga che interessa ha la forma "1 Optimizing with step length 0.5774.".
+# Il punto finale chiude la frase e NON fa parte del numero: una prima versione
+# lo includeva nel gruppo catturato, float() sollevava ValueError, l'eccezione
+# usciva dal ciclo di lettura e uccideva l'orchestratore — lasciando poi R a
+# morire di SIGPIPE. La sorveglianza aveva interrotto proprio la stima che
+# doveva proteggere, e per giunta una che stava andando bene.
+STEP_RE = re.compile(r"step length\s+([0-9]*\.?[0-9]+)")
+
+
+def leggi_passo(riga: str, log) -> float | None:
+    """Estrae il passo dell'ottimizzatore, se la riga lo contiene.
+
+    Non solleva mai: la sorveglianza e' un ausilio, e nessun errore di lettura
+    deve poter fermare una stima che dura giorni.
+    """
+    m = STEP_RE.search(riga)
+    if not m:
+        return None
+    try:
+        return float(m.group(1))
+    except ValueError:
+        log.warning(f"  passo non interpretabile: {m.group(1)!r}")
+        return None
+
+
+def leggi_righe(p, fh, log):
+    """Righe dell'output di R, trascritte sul file e restituite una a una.
+
+    Qualunque errore di lettura viene registrato e ingoiato. La sorveglianza
+    e' un ausilio: non deve poter interrompere la stima che sorveglia. E'
+    esattamente quello che era gia' successo una volta, con una regex che
+    catturava il punto finale della frase e faceva fallire float(), uccidendo
+    una stima che stava andando bene.
+    """
+    try:
+        for riga in p.stdout:
+            riga = riga.rstrip()
+            try:
+                fh.write(riga + "\n")
+            except Exception as e:
+                log.warning(f"  scrittura del log fallita: {e!r}")
+            if riga.strip():
+                log.info(f"  R| {riga}")
+            yield riga
+    except Exception as e:
+        log.error(f"  lettura dell'output di R interrotta: {e!r}")
+
+
 def esegui(d: Path, cfg, log) -> dict | None:
     rb = ROOT / cfg["ergm"]["r_env"] / "bin" / "Rscript"
     if not rb.exists():
@@ -226,26 +279,39 @@ def esegui(d: Path, cfg, log) -> dict | None:
     # L'output di R viene trascritto riga per riga mentre arriva, invece che
     # raccolto alla fine: su una stima che puo' durare giorni, sapere a quale
     # iterazione si e' arrivati e' la differenza fra sorvegliare e sperare.
-    import re as _re
-    step_re = _re.compile(r"step length\s+([0-9.]+)")
     collassi, abbandonata = 0, None
     with open(d / "R.log", "w", buffering=1) as fh:
         p = subprocess.Popen(
             [str(rb), str(ROOT / "R" / "ergm_full.R"), str(d),
              str(cfg["project"]["seed"])],
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-            text=True, bufsize=1)
-        for riga in p.stdout:
-            riga = riga.rstrip()
-            fh.write(riga + "\n")
-            if riga.strip():
-                log.info(f"  R| {riga}")
+            text=True, bufsize=1,
+            # un byte non decodificabile nell'output di R non deve far cadere
+            # una stima di giorni
+            errors="replace",
+            # R in una sessione sua: un segnale diretto all'orchestratore non
+            # se lo porta dietro, e resta il tempo di chiuderlo con ordine
+            start_new_session=True)
+        ultimo_battito = time.time()
+        for riga in leggi_righe(p, fh, log):
             # sorveglianza: uno step minuscolo, ripetuto, significa che il
             # modello genera reti lontanissime da quella osservata e che
             # l'ottimizzatore non ha spazio per muoversi
-            mm = step_re.search(riga)
-            if mm:
-                passo = float(mm.group(1))
+            # Battito: un log puo' restare muto per mezz'ora fra due
+            # iterazioni, e senza questo non si distingue "lento" da "morto".
+            if time.time() - ultimo_battito > 900:
+                ultimo_battito = time.time()
+                mem = memoria_disponibile_gb()
+                log.info(f"  [battito] {(time.time()-t0)/3600:.1f}h trascorse, "
+                         f"{mem:.0f} GB liberi")
+                if mem < MEMORIA_MINIMA_GB:
+                    abbandonata = (f"memoria scesa a {mem:.0f} GB, sotto la "
+                                   f"soglia di {MEMORIA_MINIMA_GB}")
+                    log.warning(f"  ABBANDONO: {abbandonata}")
+                    p.terminate()
+                    break
+            passo = leggi_passo(riga, log)
+            if passo is not None:
                 collassi = collassi + 1 if passo < STEP_MINIMO else 0
                 if collassi >= COLLASSI_TOLLERATI:
                     abbandonata = (f"step sotto {STEP_MINIMO} per "
@@ -272,15 +338,28 @@ def esegui(d: Path, cfg, log) -> dict | None:
 
 
 def raccogli(log):
-    righe = [pd.read_csv(f).assign(scala=f.parent.name)
-             for f in sorted(MODELS.glob("*/coef.csv"))]
+    """Unisce i coefficienti delle varianti concluse.
+
+    Protetta per singolo file: un CSV troncato — possibile se una variante e'
+    stata interrotta mentre scriveva — non deve impedire di raccogliere le
+    altre, ne' fermare il ciclo.
+    """
+    righe = []
+    for f in sorted(MODELS.glob("*/coef.csv")):
+        try:
+            righe.append(pd.read_csv(f).assign(scala=f.parent.name))
+        except Exception as e:
+            log.warning(f"  {f.parent.name}/coef.csv illeggibile: {e!r}")
     if not righe:
         return
     coef = pd.concat(righe, ignore_index=True)
-    common.save(coef, "ergm_full_coef.parquet")
-    common.save_table(coef, "t4_ergm_integrale_coefficienti",
-                      "Coefficienti ERGM al crescere della dimensione della rete, "
-                      "fino alla rete integrale")
+    try:
+        common.save(coef, "ergm_full_coef.parquet")
+        common.save_table(coef, "t4_ergm_integrale_coefficienti",
+                          "Coefficienti ERGM sulla rete integrale, per specifica "
+                          "del termine di dipendenza")
+    except Exception as e:
+        log.warning(f"  salvataggio dei coefficienti fallito: {e!r}")
     m = coef[(coef.metodo == "MCMLE") &
              coef.term.str.contains("nodematch.gender|gwesp")]
     if len(m):
@@ -303,9 +382,15 @@ def main(force: bool = False):
             log.info(f"--- {nome}: gia' stimata, salto")
             continue
         log.info(f"=== variante {nome}: {dipendenza} [{metodo}] ===")
-        d = prepara(G, pop, nome, cfg, dipendenza, metodo)
-        with Timer(f"ERGM {nome}", log):
-            s = esegui(d, cfg, log)
+        # Ogni variante e' isolata: un errore imprevisto in un tentativo non
+        # puo' costare l'intera sequenza. E' il caso che si e' gia' verificato.
+        s = None
+        try:
+            d = prepara(G, pop, nome, cfg, dipendenza, metodo)
+            with Timer(f"ERGM {nome}", log):
+                s = esegui(d, cfg, log)
+        except Exception as e:
+            log.error(f"  {nome}: errore imprevisto {e!r}", exc_info=True)
         riuscita = bool(s and s.get("mcmle"))
         esiti.append({"variante": nome, "dipendenza": dipendenza,
                       "metodo": metodo, "convergenza": riuscita,
@@ -313,8 +398,11 @@ def main(force: bool = False):
                       "motivo": (d / "abbandonata.txt").read_text()
                                 if (d / "abbandonata.txt").exists() else None,
                       "ore": round(s.get("ore", 0), 2) if s else None})
-        common.save(pd.DataFrame(esiti), "ergm_full_esiti.parquet")
-        raccogli(log)
+        try:
+            common.save(pd.DataFrame(esiti), "ergm_full_esiti.parquet")
+            raccogli(log)
+        except Exception as e:
+            log.warning(f"  raccolta intermedia fallita: {e!r}")
         if riuscita:
             log.info(f"=== {nome} CONVERGE: la rete integrale e' stimata ===")
             break
