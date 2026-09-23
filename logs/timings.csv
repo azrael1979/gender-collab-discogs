@@ -425,3 +425,14 @@ bootstrap sui nodi (B=200),183.8
 logit diadico completo,195.49
 permutazioni QAP (n=1000),58.89
 QAP,59.65
+datazione degli archi,4.57
+"periodo 1950s (15,298 archi)",2.71
+"periodo 1960s (45,566 archi)",6.02
+"periodo 1970s (47,783 archi)",6.4
+"periodo 1980s (55,010 archi)",7.19
+"periodo 1990s (95,251 archi)",12.04
+"periodo 2000s (101,890 archi)",13.07
+"periodo 2010s (87,931 archi)",11.94
+"periodo 2020s (35,971 archi)",4.93
+ERGM gwesp025_gwdeg,45780.46
+ERGM gwesp050_stocapp,4406.36

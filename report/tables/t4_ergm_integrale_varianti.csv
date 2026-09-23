@@ -1,0 +1,3 @@
+variante,dipendenza,metodo,convergenza,abbandonata,motivo,ore
+gwesp025_gwdeg,"gwesp(0.25, fixed = TRUE) + gwdegree(0.5, fixed = TRUE)",MCMLE,False,True,nessun output da 4.0 ore: l'iterazione non sta convergendo,
+gwesp050_stocapp,"gwesp(0.5, fixed = TRUE)",Stochastic-Approximation,True,False,,1.14

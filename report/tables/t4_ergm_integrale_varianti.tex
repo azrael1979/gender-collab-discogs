@@ -1,0 +1,13 @@
+\begin{table}
+\centering
+\caption{Specifiche provate sulla rete integrale ed esito di ciascuna}
+\label{tab:t4_ergm_integrale_varianti}
+\begin{tabular}{llllllr}
+\toprule
+        variante &                                         dipendenza &                   metodo &  convergenza &  abbandonata &                                             motivo &   ore \\
+\midrule
+  gwesp025\_gwdeg & gwesp(0.25, fixed = TRUE) + gwdegree(0.5, fixed... &                    MCMLE &        False &         True & nessun output da 4.0 ore: l'iterazione non sta ... &   NaN \\
+gwesp050\_stocapp &                           gwesp(0.5, fixed = TRUE) & Stochastic-Approximation &         True &        False &                                               None & 1.140 \\
+\bottomrule
+\end{tabular}
+\end{table}
