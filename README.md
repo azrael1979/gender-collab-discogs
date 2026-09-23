@@ -13,6 +13,23 @@ italiani, a partire da un dump Discogs locale in PostgreSQL.
 | **RQ4** | Probabilita' di collaborare a parita' di attivita' e coorte (ERGM) |
 | **RQ5** | Differenze fra ruoli creativi e ruoli di esecuzione |
 
+## Documentazione di processo
+
+Il codice e' documentato nei docstring; **come si e' arrivati ai risultati** e'
+documentato in [`docs/`](docs/). Quella cartella contiene le decisioni prese e
+quelle rovesciate, gli errori trovati e che cosa hanno cambiato, e i test che
+non hanno deciso nulla — comprese le strade chiuse, che sono documentate quanto
+quelle aperte.
+
+| | |
+|---|---|
+| [`docs/01-percorso.md`](docs/01-percorso.md) | la narrazione: dal mandato a oggi, con i punti in cui l'impostazione e' cambiata |
+| [`docs/02-decisioni.md`](docs/02-decisioni.md) | registro delle decisioni metodologiche, con le alternative scartate |
+| [`docs/03-errori.md`](docs/03-errori.md) | errori trovati, come sono emersi, quali numeri hanno cambiato |
+| [`docs/04-calcolo-esatto.md`](docs/04-calcolo-esatto.md) | che cosa significa «esatto» qui, la matematica, come e' verificata |
+| [`docs/05-ergm.md`](docs/05-ergm.md) | il verbale completo dei tentativi ERGM e del risultato negativo |
+| [`docs/06-risultati.md`](docs/06-risultati.md) | stato dei risultati, etichettati per solidita' |
+
 ## Prerequisiti
 
 * **PostgreSQL** con il dump Discogs caricato nel database `discogs`. La
