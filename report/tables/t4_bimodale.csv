@@ -1,0 +1,5 @@
+esp0_oss_su_sim,centro_oss_su_sim,coda_oss_su_sim,ampiezza_U,bin_fuori_scala,bin_totali,variante,riuscita,dipendenza,aic,motivo
+8.690869086908691,0.41997589701015603,5.5060115933201565,16.90201840307699,15.0,337.0,gwesp(0.25) — riferimento,True,,,
+,,,,,,due_scale,False,"gwesp(0.25, fixed = TRUE) + gwesp(1.5, fixed = TRUE)",,
+,,,,,,gwesp_esp0,False,"gwesp(0.25, fixed = TRUE) + esp(0)",,step sotto 0.02 per 3 iterazioni consecutive
+,,,,,,decay_alto,False,"gwesp(0.75, fixed = TRUE)",,step sotto 0.02 per 3 iterazioni consecutive

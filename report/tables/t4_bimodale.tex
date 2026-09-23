@@ -1,0 +1,15 @@
+\begin{table}
+\centering
+\caption{Controllo positivo sulla diagnosi di bimodalita': decennio 1940 riestimato con termini di dipendenza a due componenti, e forma residua dello scarto di adattamento sui partner condivisi}
+\label{tab:t4_bimodale}
+\begin{tabular}{rrrrrrlllrl}
+\toprule
+ esp0\_oss\_su\_sim &  centro\_oss\_su\_sim &  coda\_oss\_su\_sim &  ampiezza\_U &  bin\_fuori\_scala &  bin\_totali &                  variante &  riuscita &                                         dipendenza &  aic &                                       motivo \\
+\midrule
+           8.691 &              0.420 &            5.506 &      16.902 &           15.000 &     337.000 & gwesp(0.25) — riferimento &      True &                                                NaN &  NaN &                                          NaN \\
+             NaN &                NaN &              NaN &         NaN &              NaN &         NaN &                 due\_scale &     False & gwesp(0.25, fixed = TRUE) + gwesp(1.5, fixed = ... &  NaN &                                         None \\
+             NaN &                NaN &              NaN &         NaN &              NaN &         NaN &                gwesp\_esp0 &     False &                 gwesp(0.25, fixed = TRUE) + esp(0) &  NaN & step sotto 0.02 per 3 iterazioni consecutive \\
+             NaN &                NaN &              NaN &         NaN &              NaN &         NaN &                decay\_alto &     False &                          gwesp(0.75, fixed = TRUE) &  NaN & step sotto 0.02 per 3 iterazioni consecutive \\
+\bottomrule
+\end{tabular}
+\end{table}
