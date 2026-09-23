@@ -63,7 +63,18 @@ MAX_NEWTON = 40
 # nella stessa passata costa cinque prodotti scalari sulla stessa matrice, cioe'
 # quasi nulla rispetto al costruirla.
 FRAZIONI = np.array([1.0, 0.5, 0.25, 0.125, 0.0625, 0.03125])
-TOLLERANZA = 1e-9
+# Soglia sul passo. Non puo' essere arbitrariamente piccola: la
+# log-verosimiglianza e' una somma di 1,6 miliardi di termini in virgola mobile
+# a doppia precisione, e l'errore di accumulo pone un pavimento intorno a 1e-7
+# sul passo. Una tolleranza a 1e-9 non viene mai raggiunta e il programma gira
+# a vuoto — e' successo: tre iterazioni con log-verosimiglianza identica e
+# coefficienti stabili alla quarta decimale, con il passo fermo a 5e-8.
+# A 1e-6 i coefficienti sono determinati tre ordini di grandezza meglio del
+# loro errore standard piu' piccolo, che e' dell'ordine di 1e-3.
+TOLLERANZA = 1e-6
+# Secondo criterio, indipendente dal primo: se la verosimiglianza non migliora
+# in modo misurabile, non c'e' piu' nulla da guadagnare qualunque sia il passo.
+MIGLIORAMENTO_MINIMO = 1e-3
 
 TERMINI = ["intercetta", "same_F", "same_M", "same_mixed",
            "same_genre", "same_cohort", "sum_lognrel"]
@@ -199,9 +210,10 @@ def logit_esatto(n, attrs, A, log, avvio=None) -> pd.DataFrame:
         with Timer(f"passata {it+1}b (ricerca di linea)", log):
             ll_c, _, _ = _passata(cand, n, attrs, A, False)
         j = int(np.argmax(ll_c))
-        if ll_c[j] <= ll:
-            log.info(f"  nessuna frazione del passo migliora logL: "
-                     f"massimo gia' raggiunto (logL={ll:,.2f})")
+        if ll_c[j] <= ll + MIGLIORAMENTO_MINIMO:
+            log.info(f"  nessuna frazione del passo migliora logL di piu' di "
+                     f"{MIGLIORAMENTO_MINIMO}: massimo raggiunto "
+                     f"(logL={ll:,.2f})")
             break
         f = FRAZIONI[j]
         b = cand[j]
@@ -209,6 +221,13 @@ def logit_esatto(n, attrs, A, log, avvio=None) -> pd.DataFrame:
         log.info(f"    adottato x{f:g}: logL {ll:,.2f} -> {ll_c[j]:,.2f}, "
                  f"max|passo| {adottato:.3e}")
         log.info("    " + "  ".join(f"{t}={v:+.4f}" for t, v in zip(TERMINI, b)))
+        # Checkpoint a ogni iterazione: una passata costa quattordici minuti e
+        # una stima interrotta non deve ricominciare dall'inizio.
+        try:
+            common.save(pd.DataFrame({"termine": TERMINI, "coef": b}),
+                        "logit_esatto_parziale.parquet")
+        except Exception as e:
+            log.warning(f"  checkpoint non salvato: {e!r}")
         if adottato < TOLLERANZA:
             log.info(f"  convergenza esatta dopo {it+1} iterazioni")
             ll = float(ll_c[j])
@@ -369,7 +388,13 @@ def main(force: bool = False):
     # sbagliato di tredici unita' costa passate inutili. L'intercetta parte
     # dalla densita' osservata, che e' sempre nel giusto ordine di grandezza.
     avvio = None
-    if common.exists("dyadic_logit.parquet"):
+    # un checkpoint di una stima interrotta ha la precedenza: e' gia' vicino
+    if common.exists("logit_esatto_parziale.parquet"):
+        c = common.load("logit_esatto_parziale.parquet").set_index("termine")
+        if all(t in c.index for t in TERMINI):
+            avvio = c.loc[TERMINI, "coef"].values
+            log.info("ripresa da checkpoint")
+    if avvio is None and common.exists("dyadic_logit.parquet"):
         d = common.load("dyadic_logit.parquet").set_index("termine")
         if all(c in d.index for c in TERMINI[1:]):
             dens = A.nnz / 2 / (n * (n - 1) / 2)

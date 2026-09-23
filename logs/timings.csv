@@ -436,3 +436,20 @@ datazione degli archi,4.57
 "periodo 2020s (35,971 archi)",4.93
 ERGM gwesp025_gwdeg,45780.46
 ERGM gwesp050_stocapp,4406.36
+logit diadico,3.91
+bootstrap sui nodi (B=200),224.14
+logit diadico completo,238.53
+permutazioni QAP (n=1000),76.63
+QAP,77.64
+indici artista-release,15.31
+adiacenza,1.31
+"partner condivisi, arco per arco",10.48
+eigenvector,5.09
+betweenness,3270.27
+coreness e grado,96.05
+OLS eigenvector,0.98
+OLS coreness,0.8
+OLS betweenness,0.79
+indici artista-release,14.27
+adiacenza,1.3
+"partner condivisi, arco per arco",11.12
