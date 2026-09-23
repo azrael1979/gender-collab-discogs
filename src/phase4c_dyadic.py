@@ -142,6 +142,12 @@ def logit_diadico(G, attrs, cfg, log):
     n = G.number_of_nodes()
     diadi_tot = n * (n - 1) // 2
     frazione = n_ctrl / (diadi_tot - n_casi)
+    # Prentice-Pyke: con tutti i casi tenuti e una frazione f dei controlli,
+    # l'intercetta di popolazione e' quella del campione PIU' log(f), che e'
+    # negativo. Una prima versione la sottraeva, e l'errore era invisibile
+    # perche' le pendenze non ne risentono: dava -0,615 dove il calcolo esatto
+    # su tutte le diadi da' un valore molto piu' basso, coerente con una
+    # densita' di 3,2 su diecimila.
     correzione = np.log(frazione)
     log.info(f"frazione di non connesse campionata: {frazione:.3e} "
              f"(correzione dell'intercetta: {correzione:+.3f})")
@@ -150,7 +156,7 @@ def logit_diadico(G, attrs, cfg, log):
     with Timer("logit diadico", log):
         m = sm.Logit(y, Xc).fit(disp=0)
     coef = m.params.copy()
-    coef["const"] = coef["const"] - correzione
+    coef["const"] = coef["const"] + correzione
 
     # Bootstrap sui NODI: due diadi che condividono un artista non sono
     # indipendenti, quindi ricampionare le diadi darebbe intervalli troppo
@@ -175,7 +181,7 @@ def logit_diadico(G, attrs, cfg, log):
     # resta quella del disegno, quindi senza questo la riga dell'intercetta
     # confronterebbe una stima corretta con intervalli non corretti.
     if len(boot):
-        boot[:, list(Xc.columns).index("const")] -= correzione
+        boot[:, list(Xc.columns).index("const")] += correzione
     lo = np.percentile(boot, 2.5, axis=0)
     hi = np.percentile(boot, 97.5, axis=0)
 

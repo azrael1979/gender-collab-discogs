@@ -29,6 +29,43 @@ def giant(G: nx.Graph, log) -> nx.Graph:
     return g
 
 
+def betweenness(G: nx.Graph, cfg, log):
+    """Betweenness esatta, con igraph se disponibile.
+
+    La betweenness di Brandes costa O(nm): su questa rete sono 79.013 sorgenti
+    per 698.846 archi, che in Python puro non finirebbero mai — da qui la
+    versione campionata su k sorgenti usata in una prima stesura. Ma
+    l'implementazione in C di igraph percorre tutte le sorgenti in meno di
+    un'ora, e non c'e' ragione di approssimare cio' che si puo' calcolare: una
+    betweenness su 400 sorgenti stima bene i valori alti e malissimo quelli
+    bassi, e i valori bassi sono esattamente quelli che interessano la domanda
+    sulla marginalita'.
+
+    Se igraph manca si ripiega sul campione, dichiarandolo.
+    """
+    n = G.number_of_nodes()
+    try:
+        import igraph as ig
+    except ImportError:
+        ig = None
+    if ig is not None:
+        nodi = list(G.nodes())
+        pos = {a: i for i, a in enumerate(nodi)}
+        g = ig.Graph(n=len(nodi),
+                     edges=[(pos[u], pos[v]) for u, v in G.edges()])
+        log.info(f"betweenness ESATTA con igraph su tutte le {n:,} sorgenti "
+                 f"(nessun campionamento)")
+        # normalizzazione come networkx: 2/((n-1)(n-2)) sul grafo non orientato
+        scala = 2.0 / ((n - 1) * (n - 2)) if n > 2 else 1.0
+        b = g.betweenness()
+        return {a: v * scala for a, v in zip(nodi, b)}, False
+
+    k = min(cfg["homophily"]["betweenness_k_sample"], n)
+    log.warning(f"igraph assente: betweenness approssimata su k={k:,} sorgenti")
+    return nx.betweenness_centrality(G, k=k, normalized=True,
+                                     seed=cfg["project"]["seed"]), True
+
+
 def centralities(G: nx.Graph, cfg, log) -> pd.DataFrame:
     h = cfg["homophily"]
     out = {}
@@ -41,17 +78,7 @@ def centralities(G: nx.Graph, cfg, log) -> pd.DataFrame:
                                                            max_iter=1000, tol=1e-6)
     n = G.number_of_nodes()
     with Timer("betweenness", log):
-        if n <= h["betweenness_exact_max_n"]:
-            out["betweenness"] = nx.betweenness_centrality(G, normalized=True)
-            approx = False
-        else:
-            k = min(h["betweenness_k_sample"], n)
-            out["betweenness"] = nx.betweenness_centrality(
-                G, k=k, normalized=True, seed=cfg["project"]["seed"])
-            approx = True
-            log.info(f"betweenness approssimata su k={k:,} sorgenti campionate "
-                     f"(rete da {n:,} nodi): la versione esatta richiederebbe "
-                     f"{n:,} sorgenti e non e' praticabile")
+        out["betweenness"], approx = betweenness(G, cfg, log)
     with Timer("coreness e grado", log):
         H = nx.Graph(G)
         H.remove_edges_from(nx.selfloop_edges(H))
