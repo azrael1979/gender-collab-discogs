@@ -1,0 +1,15 @@
+\begin{table}
+\centering
+\caption{Esito della stima ERGM per decennio di formazione del legame, dal più piccolo al più grande. La previsione dichiarata prima di lanciare — convergenza fino agli anni Sessanta o Settanta — era sbagliata: la stima si rompe già a 15.177 archi, con due firme di degenerazione distinte}
+\label{tab:t4_ergm_decenni_esiti}
+\begin{tabular}{rrrlllr}
+\toprule
+ decennio &  nodi &  archi &  riuscita &                                             motivo &   gof &  secondi \\
+\midrule
+     1930 &   150 &    514 &      True &                                               None &  True & 1280.379 \\
+     1940 &   338 &   1932 &      True &                                               None &  True & 3133.399 \\
+     1950 &  1398 &  15177 &     False & nessun output da 2.0 ore: l'iterazione non sta ... & False &      NaN \\
+     2020 & 11772 &  33548 &     False &       step sotto 0.02 per 3 iterazioni consecutive & False &      NaN \\
+\bottomrule
+\end{tabular}
+\end{table}

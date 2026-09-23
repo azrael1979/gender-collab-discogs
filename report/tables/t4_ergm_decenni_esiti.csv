@@ -1,0 +1,5 @@
+decennio,nodi,archi,riuscita,motivo,gof,secondi
+1930,150,514,True,,True,1280.3787
+1940,338,1932,True,,True,3133.3995
+1950,1398,15177,False,nessun output da 2.0 ore: l'iterazione non sta convergendo,False,
+2020,11772,33548,False,step sotto 0.02 per 3 iterazioni consecutive,False,
