@@ -453,3 +453,119 @@ OLS betweenness,0.79
 indici artista-release,14.27
 adiacenza,1.3
 "partner condivisi, arco per arco",11.12
+permutazione esatta,0.04
+passata 1a (derivate),327.49
+passata 1b (ricerca di linea),514.37
+passata 2a (derivate),337.72
+passata finale (errori standard),327.24
+logit esatto su tutte le diadi,1506.83
+passata 1a (derivate),0.03
+"periodo 1930s (163 nodi, 13,203 diadi)",0.03
+passata 1a (derivate),0.07
+"periodo 1940s (364 nodi, 66,066 diadi)",0.07
+passata 1a (derivate),0.56
+passata 1b (ricerca di linea),0.69
+passata 2a (derivate),0.6
+passata 2b (ricerca di linea),0.7
+passata 3a (derivate),0.6
+passata 3b (ricerca di linea),0.69
+passata 4a (derivate),0.61
+passata 4b (ricerca di linea),0.7
+passata 5a (derivate),0.58
+passata 5b (ricerca di linea),0.7
+passata 6a (derivate),0.61
+passata 6b (ricerca di linea),0.7
+passata finale (errori standard),0.65
+"periodo 1950s (1,515 nodi, 1,146,855 diadi)",8.43
+passata 1a (derivate),3.83
+passata 1b (ricerca di linea),4.45
+passata 2a (derivate),3.91
+passata 2b (ricerca di linea),4.54
+passata 3a (derivate),3.86
+passata 3b (ricerca di linea),4.4
+passata 4a (derivate),3.83
+passata 4b (ricerca di linea),4.42
+passata 5a (derivate),3.82
+passata 5b (ricerca di linea),4.37
+passata 6a (derivate),3.87
+passata 6b (ricerca di linea),4.44
+passata finale (errori standard),3.77
+"periodo 1960s (4,812 nodi, 11,575,266 diadi)",53.54
+passata 1a (derivate),7.45
+passata 1b (ricerca di linea),9.1
+passata 2a (derivate),7.51
+passata 2b (ricerca di linea),9.06
+passata 3a (derivate),7.44
+passata 3b (ricerca di linea),9.04
+passata 4a (derivate),7.72
+passata 4b (ricerca di linea),10.38
+passata 5a (derivate),7.65
+passata 5b (ricerca di linea),9.28
+passata 6a (derivate),7.64
+passata 6b (ricerca di linea),9.65
+passata finale (errori standard),7.97
+"periodo 1970s (7,263 nodi, 26,371,953 diadi)",109.92
+passata 1a (derivate),18.41
+passata 1b (ricerca di linea),24.56
+passata 2a (derivate),18.52
+passata 2b (ricerca di linea),24.72
+passata 3a (derivate),17.88
+passata 3b (ricerca di linea),26.4
+passata 4a (derivate),18.3
+passata 4b (ricerca di linea),23.6
+passata 5a (derivate),18.45
+passata 5b (ricerca di linea),25.3
+passata finale (errori standard),17.52
+"periodo 1980s (11,688 nodi, 68,298,828 diadi)",233.68
+passata 1a (derivate),41.87
+passata 1b (ricerca di linea),61.82
+passata 2a (derivate),41.66
+passata 2b (ricerca di linea),56.4
+passata 3a (derivate),40.5
+passata 3b (ricerca di linea),57.01
+passata 4a (derivate),42.98
+passata 4b (ricerca di linea),60.14
+passata 5a (derivate),42.4
+passata 5b (ricerca di linea),58.25
+passata 6a (derivate),41.46
+passata 6b (ricerca di linea),60.65
+passata finale (errori standard),42.3
+"periodo 1990s (18,522 nodi, 171,522,981 diadi)",647.49
+passata 1a (derivate),60.1
+passata 1b (ricerca di linea),89.15
+passata 2a (derivate),57.53
+passata 2b (ricerca di linea),88.29
+passata 3a (derivate),59.33
+passata 3b (ricerca di linea),80.46
+passata 4a (derivate),57.48
+passata 4b (ricerca di linea),79.28
+passata 5a (derivate),55.29
+passata 5b (ricerca di linea),84.83
+passata 6a (derivate),58.97
+passata finale (errori standard),58.98
+"periodo 2000s (22,460 nodi, 252,214,570 diadi)",829.74
+passata 1a (derivate),74.48
+passata 1b (ricerca di linea),110.86
+passata 2a (derivate),72.71
+passata 2b (ricerca di linea),109.37
+passata 3a (derivate),72.75
+passata 3b (ricerca di linea),103.08
+passata 4a (derivate),70.25
+passata 4b (ricerca di linea),107.46
+passata 5a (derivate),74.12
+passata 5b (ricerca di linea),106.71
+passata finale (errori standard),72.8
+"periodo 2010s (25,116 nodi, 315,394,170 diadi)",974.64
+passata 1a (derivate),25.39
+passata 1b (ricerca di linea),36.88
+passata 2a (derivate),25.72
+passata 2b (ricerca di linea),35.37
+passata 3a (derivate),24.51
+passata 3b (ricerca di linea),34.11
+passata 4a (derivate),25.12
+passata 4b (ricerca di linea),35.82
+passata 5a (derivate),25.33
+passata 5b (ricerca di linea),35.17
+passata finale (errori standard),25.79
+"periodo 2020s (14,179 nodi, 100,514,931 diadi)",329.27
+serie temporale esatta,3188.9

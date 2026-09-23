@@ -1,0 +1,18 @@
+\begin{table}
+\centering
+\caption{Regressione logistica diadica calcolata su tutte le 1,62 miliardi di diadi della rete integrale, senza campionamento}
+\label{tab:t4_logit_esatto}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+    termine &    coef &    se &         z &   ci\_lo &   ci\_hi &    or &      diadi &         logL \\
+\midrule
+ intercetta & -14.018 & 0.006 & -2342.729 & -14.030 & -14.006 & 0.000 & 1619630155 & -3601952.057 \\
+     same\_F &   0.348 & 0.013 &    26.568 &   0.322 &   0.374 & 1.416 & 1619630155 & -3601952.057 \\
+     same\_M &   0.209 & 0.004 &    57.551 &   0.202 &   0.216 & 1.233 & 1619630155 & -3601952.057 \\
+ same\_mixed &   0.533 & 0.057 &     9.407 &   0.422 &   0.645 & 1.705 & 1619630155 & -3601952.057 \\
+ same\_genre &   1.667 & 0.003 &   574.799 &   1.661 &   1.673 & 5.296 & 1619630155 & -3601952.057 \\
+same\_cohort &   1.192 & 0.003 &   412.348 &   1.186 &   1.198 & 3.294 & 1619630155 & -3601952.057 \\
+sum\_lognrel &   0.741 & 0.001 &  1325.495 &   0.740 &   0.742 & 2.099 & 1619630155 & -3601952.057 \\
+\bottomrule
+\end{tabular}
+\end{table}
