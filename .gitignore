@@ -43,3 +43,8 @@ venv/
 .DS_Store
 Thumbs.db
 *.swp
+
+# -------------------------------------------------------------- articolo
+# Il manoscritto non va nel repository pubblico finche' non e' pubblicato:
+# si rigenera in locale con src/paper_figures.py e src/paper.py.
+paper/

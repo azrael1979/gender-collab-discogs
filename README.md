@@ -201,20 +201,12 @@ dati. Entrambe le misure sono riportate.
 
 ## L'articolo
 
-`paper/` contiene il manoscritto in inglese destinato alla rivista *Poetics*,
-in Markdown, PDF e DOCX, con le figure in PNG a 300 dpi e in PDF vettoriale.
-Il testo principale sta sotto le 8.000 parole (conteggio in
-`data/paper_status.json`); la versione lunga precedente e' in
-`paper/versioni/2026-09-24_v2_12811-parole/` e nel tag git `paper-v2-12811`.
-Come il report, non contiene cifre scritte a mano: si rigenera con
+Il manoscritto per *Poetics* **non è nel repository**: resta in locale in
+`paper/`, escluso da `.gitignore`, finché non è pubblicato. Si rigenera con
 
 ```bash
 python3 src/paper_figures.py && python3 src/paper.py
 ```
-
-**Prima di sottomettere leggi `paper/NOTE_PER_AUTORE.md`**: elenca le
-citazioni da verificare, gli elementi editoriali mancanti e la validazione
-manuale del genere, che resta da fare.
 
 ## Licenza
 
