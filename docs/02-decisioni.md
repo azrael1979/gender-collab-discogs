@@ -180,3 +180,69 @@ poco.
 sulla rete integrale — una stima che dichiarava successo producendo reti con il
 40% degli archi osservati e il 4% dei legami fra donne. Senza, quel risultato
 sarebbe finito nell'articolo.
+
+---
+
+## D12 — Il nullo di riferimento condiziona sull'attività
+
+**Scelta.** I rapporti osservato/atteso della serie temporale si calcolano
+permutando le etichette **entro strati di grado** (Fase 4j). La permutazione
+uniforme in forma chiusa resta riportata, come confronto.
+
+**Alternativa.** La permutazione uniforme, che era il riferimento fino al 24
+settembre ed è esatta.
+
+**Perché scartata.** È esatta come calcolo ma risponde a un'altra domanda:
+«le donne si legano fra loro più di quanto farebbero etichette assegnate a caso
+a *qualunque* artista?». Le donne hanno meno legami, e quel nullo le confronta
+con artisti più attivi di loro. La domanda dell'articolo è se le donne si
+leghino fra loro più di quanto farebbero artisti *con la stessa attività*. Vedi
+E13 in [`03-errori.md`](03-errori.md).
+
+**Perché la scelta non è opportunistica.** Indebolisce il risultato più
+spettacolare — l'inversione di segno scompare — e ne rafforza un altro: il
+livello recente passa da 1,17-1,66 a un plateau stabile attorno a 1,7. E
+concorda con i due strumenti già presenti che condizionavano sull'attività, il
+mixing a grado preservato e il logit con `sum_lognrel`.
+
+---
+
+## D13 — Il paper sta in 8.000 parole di testo principale
+
+**Scelta.** Dall'abstract alla conclusione, tabelle e didascalie comprese,
+bibliografia e appendici escluse — la convenzione delle riviste Elsevier. Il
+conteggio è in `paper.py` e finisce in `data/paper_status.json`; i separatori
+delle tabelle Markdown e i percorsi delle immagini non contano come parole.
+
+**Alternativa.** Il conteggio grezzo di tutto il file, che era quello riportato
+prima (12.811) e che contava anche i `|` delle tabelle.
+
+**Conseguenza.** La versione lunga è conservata in
+`paper/versioni/2026-09-24_v2_12811-parole/` e nel tag git `paper-v2-12811`.
+
+---
+
+## D14 — Ipotesi dichiarate, e che cosa resta esplorativo
+
+**Scelta.** Il paper formula una domanda di ricerca e sei ipotesi (H1-H6, con
+un'ipotesi concorrente H2′). Le differenze fra generi musicali e la
+sensibilità al nullo che tiene conto dell'attività sono dichiarate
+**esplorative**.
+
+**Alternativa.** Trasformare in ipotesi anche questi due risultati, che
+rafforzerebbero l'articolo.
+
+**Perché scartata.** Sono nati dall'analisi (Fasi 4j e 4k, 24 settembre), non
+dalla teoria: presentarli come ipotesi sarebbe HARKing (formulare le ipotesi dopo
+aver visto i risultati), e questa documentazione, che è pubblica, lo
+mostrerebbe. Per lo stesso motivo **H3 non ha direzione**: nel mandato si
+chiedeva *se* l'omofilia cambiasse nel tempo, non che salisse.
+
+**Cautela sulle altre.** Il paper dice che le ipotesi derivano dalla
+letteratura, non che furono registrate prima dell'analisi. Il mandato poneva le
+domande di H1, H4 e H5 (genere musicale, ruoli, posizione), ma non la direzione
+di H4, e H2 è stata messa per iscritto dopo le prime stime. Le formulazioni
+seguono la letteratura citata, e H4 e H5 sono respinte: non sono state
+aggiustate sui risultati. Ma nessuna è pre-registrata, e non va detto che lo
+sia.
+

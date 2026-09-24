@@ -3,15 +3,24 @@
 Pipeline analitica per uno studio sui pattern di collaborazione fra musicisti
 italiani, a partire da un dump Discogs locale in PostgreSQL.
 
-## Domande di ricerca
+## Domanda di ricerca
 
-| | |
-|---|---|
-| **RQ1** | Quota di donne per genere musicale e decennio |
-| **RQ2** | Omofilia di genere sessuale: varia per genere musicale? |
-| **RQ3** | Posizione delle donne nella rete (pattern "Smurfette") |
-| **RQ4** | Probabilita' di collaborare a parita' di attivita' e coorte (ERGM) |
-| **RQ5** | Differenze fra ruoli creativi e ruoli di esecuzione |
+> L'omofilia di genere nelle collaborazioni della musica registrata italiana è
+> cambiata fra il 1950 e il 2026? E se sì, quando, fra chi e in quali generi
+> musicali, tenendo conto della dimensione dei gruppi e dell'attività?
+
+| | ipotesi (dall'articolo, §2.7) | esito |
+|---|---|---|
+| **H1** | la collaborazione segue il genere musicale più del genere sessuale | confermata |
+| **H2** | a parità di attività, genere musicale e coorte, l'omofilia è più alta fra le donne che fra gli uomini (contro **H2′**, chiusura della maggioranza) | confermata; H2′ respinta |
+| **H3** | l'omofilia varia fra i decenni di formazione del legame (senza direzione) | confermata: emerge dagli anni Settanta |
+| **H4** | l'omofilia è più forte nei ruoli creativi e tecnici che in quelli esecutivi | respinta: il contrario, di un fattore 5 |
+| **H5** | a parità di attività le donne occupano posizioni più periferiche | respinta |
+| **H6** | su una rete proiettata, la riproiezione casuale senza parametri riproduce i partner condivisi almeno quanto un ERGM | confermata, 6 volte meglio |
+
+Esplorative: le differenze fra generi musicali e la sensibilità al nullo che
+tiene conto dell'attività. Le domande del mandato iniziale (quota di donne,
+omofilia per genere musicale, posizione, ruoli) sono tutte coperte.
 
 ## Documentazione di processo
 
@@ -34,8 +43,9 @@ quelle aperte.
 
 * **PostgreSQL** con il dump Discogs caricato nel database `discogs`. La
   pipeline lo legge in sola lettura e non vi scrive mai nulla.
-* **Python 3.9+** con: pandas, numpy, networkx, scipy, statsmodels, matplotlib,
-  seaborn, pyarrow, psycopg2, gender-guesser, pyyaml.
+* **Python 3.9+** con: pandas, numpy, networkx, python-igraph (betweenness
+  esatta), scipy, statsmodels, matplotlib, seaborn, pyarrow, psycopg2,
+  gender-guesser, pyyaml, tabulate.
 * **R con statnet** per gli ERGM, e **pandoc + weasyprint** per il report. Se
   non sono disponibili nel sistema si installano in userspace, senza permessi
   di amministratore, con micromamba:
@@ -79,8 +89,13 @@ Il file `.env` e' escluso dal versionamento.
 python3 src/score_validation.py   # dopo aver compilato data/validation_sample.csv
 ```
 
-Il risultato e' `report/report.pdf` (e `.html`, `.md`), piu' il pacchetto dati
-in `export/`.
+I prodotti sono l'articolo in `paper/` (Markdown, PDF, DOCX), il pacchetto
+dati per i reviewer in `export/` e il report italiano in `report/`.
+
+> **Attenzione:** il report italiano (`report/report.*`, Fase 7) e' fermo al 21
+> settembre e racconta la tesi ritirata (ERGM su sottoreti, «omofilia di
+> minoranza»). Il riferimento aggiornato e' l'articolo, con `docs/` per il
+> percorso.
 
 ## Che cosa NON sta nel repository
 
@@ -108,14 +123,29 @@ src/
   phase3_homophily.py      mixing matrix, assortativita', modello nullo
   phase3b_position.py      centralita', coreness, regressioni
   phase3c_mf_only.py       assortativita' sui soli nodi con genere determinato
-  phase4_ergm.py           driver ERGM su sottoreti campionate
-  phase4b_ergm_full.py     ERGM sulla rete integrale, per scala crescente
+  phase4_ergm.py           driver ERGM su sottoreti campionate (stime ritirate)
+  phase4b_ergm_full.py     ERGM sulla rete integrale: quattro tentativi falliti
+  phase4c_dyadic.py        logit diadico caso-controllo e QAP (superati dalla 4e)
+  phase4d_temporal.py      archi datati alla prima release condivisa
+  phase4e_esatto.py        logit esatto su tutte le diadi, permutazione in forma chiusa
+  phase4f_ergm_decenni.py  ERGM per decennio: convergono solo 1930 e 1940
+  phase4g_proiezione.py    quota dei partner condivisi imposta dalla proiezione
+  phase4h_bimodale.py      controllo della bimodalita' (esito negativo, atteso)
+  phase4i_proiezione_nulla.py  proiezione bipartita randomizzata contro ERGM
+  phase4j_nullo_grado.py   permutazione entro strati di grado: il nullo di riferimento
+  phase4k_densita_genere.py  probabilita' di legame FF, MM, MF per decennio e genere
   wikidata_enrich.py       genere, cittadinanza e occupazione per lotti di QID
   wikidata_dump.py         alternativa: passata sul dump Wikidata completo
   phase5_robustness.py     Monte Carlo e analisi di sensibilita'
   phase6_figures.py        figure PNG a 300 dpi
-  phase7_report.py         report Markdown -> HTML -> PDF
+  phase7_report.py         report Markdown -> HTML -> PDF (fermo al 21 settembre)
+  phase8_export.py         pacchetto dati per i reviewer, con manifesto e dizionario
+  paper_figures.py         figure del paper, PNG 300 dpi + PDF
+  paper.py                 il paper per Poetics, con il conteggio delle parole
   score_validation.py      metriche sul campione annotato a mano
+tests/                     verifiche delle affermazioni di esattezza (tests/README.md)
+docs/                      documentazione di processo
+paper/                     manoscritto, figure, NOTE_PER_AUTORE.md, versioni/
 R/ergm_models.R            modelli ERGM su sottorete (statnet)
 R/ergm_full.R              modelli ERGM sulla rete integrale
 data/                      parquet, checkpoint, dati grezzi estratti
@@ -162,7 +192,9 @@ dati. Entrambe le misure sono riportate.
    un quarto della popolazione resta senza.
 4. iTunes e' escluso per scelta del committente: nessuna verifica incrociata fra
    fonti.
-5. L'ERGM vale sulle sottoreti stimate, non sull'intera rete.
+5. Nessun ERGM e' stimabile oltre circa 2.000 archi: l'omofilia non e' stimata
+   congiuntamente alla chiusura triadica. Le stime su sottoreti a valanga sono
+   state ritirate (`docs/05-ergm.md`).
 6. Il livello 2 della cascata (Wikidata per nome) non e' stato popolato: WDQS ha
    risposto con 429/502/504 in modo persistente. Vedi
    `data/wikidata_status.json`.
@@ -171,6 +203,9 @@ dati. Entrambe le misure sono riportate.
 
 `paper/` contiene il manoscritto in inglese destinato alla rivista *Poetics*,
 in Markdown, PDF e DOCX, con le figure in PNG a 300 dpi e in PDF vettoriale.
+Il testo principale sta sotto le 8.000 parole (conteggio in
+`data/paper_status.json`); la versione lunga precedente e' in
+`paper/versioni/2026-09-24_v2_12811-parole/` e nel tag git `paper-v2-12811`.
 Come il report, non contiene cifre scritte a mano: si rigenera con
 
 ```bash

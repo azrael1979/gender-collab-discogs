@@ -115,7 +115,7 @@ DESCRIZIONI = {
     "women_share": ("3", "Quota di donne per genere musicale e decennio di debutto, "
         "con intervalli di Wilson."),
     "position": ("3", "Centralita' di ogni nodo della componente gigante: "
-        "eigenvector, betweenness (approssimata), coreness, grado, forza, "
+        "eigenvector, betweenness (esatta, su tutte le sorgenti), coreness, grado, forza, "
         "clustering; piu' tutti gli attributi dell'artista."),
     "position_regressions": ("3", "Coefficienti delle regressioni OLS sulla posizione "
         "nella rete, con errori standard robusti HC3."),
@@ -133,12 +133,84 @@ DESCRIZIONI = {
         "costruzione della rete, una variazione per volta."),
     "genre_weak_variants": ("5", "Metriche chiave trattando in tre modi diversi gli "
         "artisti con attribuzione di genere musicale debole."),
+
+    # --- Fase 1e: verifica dell'italianita'
+    "italy_validation": ("1", "Artisti della popolazione con cittadinanza (P27) "
+        "registrata in Wikidata: la verifica dell'euristica di italianita'. "
+        "`italiano` dice se almeno una cittadinanza e' italiana, stati storici compresi."),
+    "wikidata_enriched": ("1", "Entita' Wikidata con identificativo Discogs (P1953): "
+        "genere (P21), cittadinanze (P27), occupazioni, per lotti di QID."),
+    "wd_italian": ("1", "Entita' Wikidata con cittadinanza italiana usate per il "
+        "dizionario onomastico italiano."),
+
+    # --- Fase 4c-4j: rete integrale, calcolo esatto, proiezione
+    "dyadic_logit": ("4", "Logit diadico caso-controllo (Fase 4c), SUPERATO dal "
+        "calcolo esatto: resta come termine di confronto. Intercetta gia' corretta "
+        "con il segno giusto (errore E1)."),
+    "qap_gender": ("4", "Test QAP a mille permutazioni (Fase 4c), superato dalla "
+        "forma chiusa di `permutazione_esatta`."),
+    "edges_datati": ("4", "Ogni arco datato con l'anno della prima release condivisa "
+        "dai due artisti, e il decennio corrispondente. Base di tutta la serie "
+        "temporale."),
+    "homophily_temporal": ("4", "Serie temporale campionata (Fase 4d), superata da "
+        "`temporale_esatto`."),
+    "logit_esatto": ("4", "**Logit diadico esatto** su tutte le 1.619.630.155 diadi "
+        "della rete a genere determinato: coefficienti, errori standard "
+        "dall'informazione osservata (che assumono indipendenza fra diadi), "
+        "log-verosimiglianza."),
+    "logit_esatto_parziale": ("4", "Checkpoint per iterazione del Newton esatto; "
+        "serve solo a riprendere una stima interrotta."),
+    "permutazione_esatta": ("4", "Permutazione UNIFORME delle etichette sulla rete "
+        "intera: media e deviazione in forma chiusa. Cieca all'attivita': vedi "
+        "`nullo_grado`."),
+    "temporale_esatto": ("4", "Serie per decennio di formazione dell'arco: quota di "
+        "donne, rapporti sotto permutazione uniforme in forma chiusa, logit esatto "
+        "per decennio su tutte le diadi del periodo."),
+    "nullo_grado": ("4", "**Nullo di riferimento della serie temporale** (Fase 4j): "
+        "legami entro-genere osservati su attesi permutando le etichette fra artisti "
+        "con lo stesso numero di legami (2.000 permutazioni per decennio), accanto al "
+        "nullo uniforme e al rapporto sul modello di configurazione."),
+    "densita_genere": ("4", "Per decennio e genere musicale (legami fra artisti dello "
+        "stesso genere): probabilita' che una coppia donna-donna, uomo-uomo o mista "
+        "sia legata, rapporti fra queste probabilita' con intervalli di Poisson "
+        "(ottimistici), e osservato/atteso per tipo di coppia sotto la permutazione "
+        "per strati di grado, con z. `affidabile` = almeno 30 donne e 10 legami FF."),
+    "proiezione_esp": ("4", "Per ogni arco: partner condivisi totali, quelli imposti "
+        "dalla proiezione bipartita, il cast della release condivisa piu' grande e "
+        "se l'arco sta oltre il tetto che una sola release puo' imporre."),
+    "proiezione_distribuzione": ("4", "Quota di partner condivisi imposti dalla "
+        "proiezione, per numero di partner condivisi."),
+    "proiezione_riassunto": ("4", "Riassunto della misura di proiezione su tutti gli "
+        "archi."),
+    "proiezione_tetto": ("4", "Archi entro e oltre il tetto di proiezione, con la "
+        "quota di partner condivisi spiegata in ciascun gruppo (98,8% contro 27,6%)."),
+    "proiezione_nulla": ("4", "Distribuzione dei partner condivisi osservata e da "
+        "proiezione bipartita randomizzata a gradi invariati (Fase 4i), per tre "
+        "insiemi."),
+    "ergm_full_coef": ("4", "Coefficienti delle stime ERGM sulla rete integrale "
+        "(Fase 4b). Nessuna e' valida: vedi `ergm_full_esiti` e docs/05-ergm.md."),
+    "ergm_full_esiti": ("4", "Esito delle stime ERGM sulla rete integrale, con il "
+        "motivo dell'abbandono."),
+    "ergm_decenni_coef": ("4", "Coefficienti ERGM per decennio (Fase 4f); validi solo "
+        "per i decenni convergiti, 1930 e 1940."),
+    "ergm_decenni_esiti": ("4", "Esito delle stime ERGM per decennio."),
+    "ergm_bimodale": ("4", "Controllo della bimodalita' sul decennio 1940 (Fase 4h): "
+        "ampiezza dello scarto a U per il riferimento; le tre varianti non "
+        "convergono, controllo negativo compreso."),
 }
 
 # --------------------------------------------------------------------------
 # Significato delle colonne che ricorrono.
 # --------------------------------------------------------------------------
 DIZIONARIO = {
+    "decennio": "Decennio di formazione dell'arco: anno della prima release condivisa dai due artisti.",
+    "rapporto_uniforme": "Archi entro-categoria osservati su attesi permutando le etichette su tutti i nodi, "
+                         "senza tener conto del grado. Cieco all'attivita'.",
+    "rapporto_grado": "Archi entro-categoria osservati su attesi permutando le etichette solo fra nodi "
+                      "con lo stesso grado (strati di almeno 30). Riferimento dell'articolo.",
+    "z_grado": "Scarto dell'osservato dalla media della permutazione per strati, in deviazioni standard.",
+    "grado_medio_relativo": "Grado medio dei nodi della categoria diviso per il grado medio di tutti i nodi.",
+    "esp": "Edgewise shared partners: numero di vicini comuni ai due estremi di un arco.",
     "artist_id": "Identificativo Discogs dell'artista. Chiave di join fra tutte le tavole.",
     "release_id": "Identificativo Discogs della pubblicazione.",
     "track_key": "Identificativo della traccia: `track_id` di Discogs quando c'e', "
@@ -278,9 +350,24 @@ def copia_contorno(log):
               ROOT / "report" / "report.pdf"]:
         if f.exists():
             shutil.copy2(f, EXPORT / f.name)
+    # l'articolo, e la documentazione di processo che dice come ci si e' arrivati
+    # (il report italiano qui sopra e' fermo al 21 settembre: fa fede l'articolo)
+    art = EXPORT / "articolo"
+    art.mkdir(parents=True, exist_ok=True)
+    for f in (ROOT / "paper").glob("paper_poetics.*"):
+        shutil.copy2(f, art / f.name)
+    for f in [ROOT / "paper" / "NOTE_PER_AUTORE.md", ROOT / "paper" / "VERIFICA_CITAZIONI.md"]:
+        if f.exists():
+            shutil.copy2(f, art / f.name)
+    for sorg, dest in [(ROOT / "paper" / "figures", art / "figures"),
+                       (ROOT / "docs", EXPORT / "docs")]:
+        if dest.exists():
+            shutil.rmtree(dest)
+        shutil.copytree(sorg, dest)
     # il codice, cosi' che ogni numero sia rintracciabile fino alla riga che lo produce
     for sorg, dest in [(ROOT / "src", EXPORT / "codice" / "src"),
-                       (ROOT / "R", EXPORT / "codice" / "R")]:
+                       (ROOT / "R", EXPORT / "codice" / "R"),
+                       (ROOT / "tests", EXPORT / "codice" / "tests")]:
         if dest.exists():
             shutil.rmtree(dest)
         shutil.copytree(sorg, dest, ignore=shutil.ignore_patterns("__pycache__"))
@@ -375,7 +462,10 @@ manifest.csv       lo stesso manifesto in forma tabellare
 CHECKSUMS.sha256   impronta di ogni file
 config.yaml        tutti i parametri usati in questa esecuzione
 extract.sql        le query di estrazione dal database
-report.pdf/.html/.md   il report
+articolo/          l'articolo per Poetics (MD, PDF, DOCX), figure, note per l'autore
+docs/              la documentazione di processo: decisioni, errori, verbale ERGM
+report.pdf/.html/.md   il report italiano, FERMO AL 21 SETTEMBRE: racconta la
+                       tesi ritirata. Fa fede l'articolo
 validation_sample.csv  campione per la validazione manuale del genere (da compilare)
 wikidata_status.json   esito del recupero da Wikidata, degradazioni incluse
 report_numbers.json    ogni cifra citata nel report, in forma leggibile da macchina
@@ -386,7 +476,7 @@ tabelle/           le tabelle del report               (CSV + LaTeX)
 figure/            le figure                           (PNG 300 dpi)
 ergm/              input e output grezzi di ogni modello ERGM
 log/               log di esecuzione e tempi di ogni fase
-codice/            il codice sorgente completo
+codice/            il codice sorgente completo, con i test di verifica
 ```
 
 ## Come aprirli
@@ -418,7 +508,10 @@ sono compressi con gzip (`pandas.read_csv` li legge direttamente).
 | l'inferenza del genere | `dati/elaborati/population_gender.parquet` piu' `wd_by_discogs.parquet` e i due `onomastic_prior_*` |
 | il peso degli archi | `dati/elaborati/credits.parquet` (colonne `scope` e `source`) e `edges_all.parquet` |
 | l'omofilia | `assortativity_mf.parquet` e' la misura di riferimento; `assortativity_strata.parquet` quella a quattro categorie |
-| la posizione nella rete | `position.parquet` |
+| la posizione nella rete | `position.parquet` e `position_regressions.parquet` |
+| la serie temporale (risultato centrale) | `edges_datati.parquet`, poi `nullo_grado.parquet` (nullo di riferimento) e `temporale_esatto.parquet` (nullo uniforme e logit per decennio) |
+| il logit sulla rete intera | `logit_esatto.parquet`; il confronto caso-controllo in `dyadic_logit.parquet` |
+| l'artefatto di proiezione | `proiezione_esp.parquet` (arco per arco), `proiezione_tetto.parquet`, `proiezione_nulla.parquet` |
 | gli ERGM | `ergm/<sottorete>/` contiene nodes.csv, edges.csv, control.json e i risultati |
 
 ## Riproducibilita'

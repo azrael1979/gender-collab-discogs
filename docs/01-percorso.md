@@ -99,7 +99,8 @@ adattamento.
 ## I tre punti in cui l'impostazione è cambiata
 
 Il lavoro non è proceduto in linea retta. Tre interventi esterni lo hanno
-riorientato, e ciascuno ha migliorato il risultato.
+riorientato, e ciascuno ha migliorato il risultato. Un quarto cambiamento è
+venuto dall'interno, riscrivendo l'articolo.
 
 ### Primo: «voglio la rete integrale, non sottoreti campionate»
 
@@ -129,24 +130,52 @@ chiusa; la betweenness su 400 sorgenti invece che su tutte e 79.013.
 Rimuoverle ha prodotto tre effetti, documentati in
 [`04-calcolo-esatto.md`](04-calcolo-esatto.md) e [`03-errori.md`](03-errori.md):
 
-* due approssimazioni su quattro **distorcevano i risultati sistematicamente**,
-  sempre attenuando l'effetto;
+* due approssimazioni su quattro **distorcevano i risultati**: il logit
+  caso-controllo attenuava il divario fra donne e uomini, la betweenness
+  campionata esagerava un effetto di marginalità che non c'è;
 * il confronto fra esatto e approssimato ha rivelato un **errore di segno**
   nella correzione caso-controllo, invisibile per altra via;
 * il divario fra omofilia femminile e maschile è risultato **quasi doppio** di
   quanto sembrasse.
 
+### Quarto: «il paper è troppo lungo»
+
+Riducendo l'articolo a 8.000 parole, due numeri sulla stessa rete sono finiti
+a poche righe di distanza: la matrice di mixing a grado preservato dava 1,54
+per i legami donna-donna, la permutazione uniforme 0,82. Il testo spiegava il
+secondo con una ragione che i dati non sostenevano. La causa era il nullo: la
+permutazione uniforme non tiene conto che le donne hanno meno legami, e legge
+la scarsità di legami come distanza fra donne.
+
+La Fase 4j ripete la serie permutando le etichette fra artisti con lo stesso
+numero di legami. Il deficit dei primi decenni sparisce, e con esso
+l'inversione di segno: resta un'**emersione**, da nessuna omofilia negli anni
+Cinquanta e Sessanta a circa il 70% in più del caso dal 2000. Vedi E13 in
+[`03-errori.md`](03-errori.md) e D12 in [`02-decisioni.md`](02-decisioni.md).
+
 ## Dove siamo
 
-La tesi è cambiata. Non più «omofilia di minoranza» come stato stabile, ma
-un'**inversione datata**: fino agli anni Settanta le musiciste italiane erano
-collegate fra loro *meno* di quanto il caso prevedesse; dagli anni Novanta *più*;
-negli anni Venti di questo secolo molto di più — mentre la loro quota **non
-cresce**, anzi scende dal 15,5% al 9,6% prima di risalire appena.
+La tesi è cambiata due volte. Non più «omofilia di minoranza» come stato
+stabile; e non più un'inversione di segno, che era prodotta dal nullo. Resta
+un'**emersione datata**: fra artisti ugualmente attivi, fino agli anni Sessanta
+le musiciste italiane non si legavano fra loro più del caso; dagli anni Settanta
+sì, e dal 2000 circa 1,7 volte il caso — mentre la loro quota **non cresce**,
+anzi scende dal 15,5% al 9,6% prima di risalire appena. Gli uomini restano al
+caso in ogni decennio.
 
-A questa si è aggiunto un contributo metodologico che non era previsto: la
-dimostrazione, misurata arco per arco, che su una rete ottenuta per proiezione
-bipartita un termine di chiusura triadica misura in buona parte la dimensione
-dei cast e non un processo sociale. Vale per qualunque rete di co-autorialità.
+A questa si sono aggiunti due contributi metodologici non previsti. Il primo: su
+una rete ottenuta per proiezione bipartita un termine di chiusura triadica
+misura in buona parte la dimensione dei cast e non un processo sociale — misurato
+arco per arco e confermato facendo girare il meccanismo. Il secondo: in un campo
+dove la minoranza è anche meno attiva, un nullo cieco all'attività fabbrica
+risultati, e li fabbrica nella direzione che rende un articolo più
+interessante.
 
-Resta da riscrivere l'articolo con questi risultati.
+L'articolo è stato riscritto attorno a questa tesi (24 settembre) e ridotto da
+11.247 a 7.719 parole di testo principale; poi vi sono stati integrati i
+risultati per tipo di coppia e genere musicale (Fase 4k), che lo riportano a
+8.541, poi ricompattato a 7.936 spostando nelle
+appendici i dettagli di calcolo e togliendo le ripetizioni; la versione lunga è
+conservata in `paper/versioni/` e nel tag `paper-v2-12811`. Restano la
+validazione manuale del genere e gli elementi editoriali: vedi
+[`06-risultati.md`](06-risultati.md#che-cosa-resta-aperto).

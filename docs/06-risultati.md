@@ -7,31 +7,35 @@ essere sbagliata anche se il fatto è giusto).
 
 ---
 
-## Il risultato centrale — l'inversione
+## Il risultato centrale — l'emersione
 
 **Statuto: misurato.** Il test di permutazione non assume indipendenza fra
-diadi: permuta le etichette tenendo la rete fissa, quindi chiusura triadica e
-distribuzione dei gradi restano identiche per costruzione. I momenti sono in
-forma chiusa.
+diadi: permuta le etichette tenendo la rete fissa. Il riferimento è la
+permutazione **entro strati di grado** (Fase 4j), che confronta ogni donna con
+artisti che hanno lo stesso numero di legami; quella uniforme, cieca
+all'attività, è riportata accanto perché era la lettura precedente.
 
-| decennio | quota donne | legami F–F oss/attesi | *z* esatto | logit `same_F` | logit `same_M` |
-|---|---|---|---|---|---|
-| 1950 | 12,9% | 0,479 | **−2,2** | +0,054 | −0,013 |
-| 1960 | 15,5% | 0,499 | **−3,5** | +0,047 | +0,003 |
-| 1970 | 13,1% | 0,606 | **−3,6** | +0,071 | +0,144 |
-| 1980 | 11,0% | 0,901 | −0,9 | +0,209 | +0,155 |
-| 1990 | 10,4% | 1,236 | **+2,6** | +0,352 | +0,123 |
-| 2000 | 9,6% | 1,224 | **+3,0** | +0,482 | +0,230 |
-| 2010 | 10,0% | 1,168 | **+2,6** | +0,519 | +0,215 |
-| 2020 | 10,8% | **1,664** | **+8,6** | **+0,739** | +0,069 |
+| decennio | quota donne | F–F oss/attesi, per grado | *z* | F–F, uniforme | M–M, per grado | logit `same_F` | logit `same_M` |
+|---|---|---|---|---|---|---|---|
+| 1950 | 12,9% | 1,125 | 1,3 | 0,479 | 1,003 | +0,054 | −0,013 |
+| 1960 | 15,5% | 1,074 | 1,7 | 0,499 | 1,000 | +0,047 | +0,003 |
+| 1970 | 13,1% | **1,178** | **3,7** | 0,606 | 1,006 | +0,071 | +0,144 |
+| 1980 | 11,0% | **1,289** | **5,9** | 0,901 | 1,007 | +0,209 | +0,155 |
+| 1990 | 10,4% | **1,561** | **13,3** | 1,236 | 1,011 | +0,352 | +0,123 |
+| 2000 | 9,6% | **1,710** | **19,3** | 1,224 | 1,007 | +0,482 | +0,230 |
+| 2010 | 10,0% | **1,669** | **17,9** | 1,168 | 1,009 | +0,519 | +0,215 |
+| 2020 | 10,8% | **1,703** | **15,0** | 1,664 | 1,010 | **+0,739** | +0,069 |
 
 Tre fatti distinti, che insieme fanno il risultato:
 
-1. **È un'inversione di segno, non una deriva.** Fino agli anni Settanta le
-   musiciste erano collegate fra loro *meno* del caso; dagli anni Novanta *più*.
-   Il punto di svolta è negli anni Ottanta.
-2. **È asimmetrica.** `same_M` oscilla fra 0,00 e 0,23 senza tendenza, e il
-   rapporto maschile resta fra 1,02 e 1,11 in ogni decennio.
+1. **È un'emersione, non un'inversione.** Fra artisti ugualmente attivi, negli
+   anni Cinquanta e Sessanta le donne non si legavano fra loro né più né meno
+   del caso. L'eccesso diventa significativo negli anni Settanta, cresce fino
+   ai Duemila e da lì resta attorno a 1,7. Il logit, che controlla genere
+   musicale, coorte e attività, dice lo stesso: `same_F` non significativo fino
+   agli anni Settanta, poi in salita fino a +0,739.
+2. **È asimmetrica.** Il rapporto maschile sta fra 1,000 e 1,011 in ogni
+   decennio; `same_M` non supera 0,23 e non ha tendenza.
 3. **Non è composizione.** La quota femminile **scende** dal 15,5% al 9,6% e
    risale appena. Con *meno* donne in proporzione, quelle che ci sono
    collaborano fra loro sempre di più.
@@ -39,7 +43,59 @@ Tre fatti distinti, che insieme fanno il risultato:
 > Le musiciste italiane non hanno guadagnato terreno in numero.
 > Si sono trovate fra loro.
 
-Figura: `report/figures/f_omofilia_nel_tempo_esatta.png`.
+**Che cosa è caduto.** La versione precedente, costruita sul nullo uniforme,
+parlava di un'inversione di segno: legami fra donne *sotto* il caso fino agli
+anni Settanta (0,48-0,61, *z* fino a −3,6) e un balzo negli anni Venti (1,66).
+Il deficit era un effetto di attività — le donne di quei decenni avevano
+0,65-0,70 volte il grado medio — e il balzo in parte lo stesso effetto al
+contrario, perché negli anni Venti il loro grado raggiunge quello degli uomini.
+Vedi E13 in [`03-errori.md`](03-errori.md) e la sezione D di
+[`04-calcolo-esatto.md`](04-calcolo-esatto.md).
+
+Figura: `paper/figures/fig3_emergence.png` (serie per grado, con quella
+uniforme tratteggiata).
+
+---
+
+## Per tipo di coppia, decennio e genere musicale (Fase 4k)
+
+**Statuto: misurato** (le densità); **stimato** l'intervallo di Poisson dei
+rapporti, che assume indipendenza fra legami ed è ottimistico. Tabella completa
+in `data/densita_genere.parquet` e `report/tables/t6_densita_genere.csv`.
+
+La probabilità che una coppia sia legata, per tipo di coppia, su tutti i
+generi:
+
+| decennio | donna–donna / mista | uomo–uomo / mista | donna–donna / uomo–uomo | FF oss/att per grado | MF oss/att per grado |
+|---|---|---|---|---|---|
+| 1950 | 0,71 | 1,62 | 0,44 | 1,06 | 0,96 |
+| 1970 | 0,85 | 1,55 | 0,55 | 1,22 | 0,98 |
+| 1990 | 1,50 | 1,24 | 1,22 | 1,60 | 0,93 |
+| 2020 | 1,83 | 1,12 | 1,63 | 1,73 | 0,92 |
+
+Le densità grezze non tengono conto dell'attività: negli anni Cinquanta due
+uomini hanno 2,3 volte la probabilità di due donne di collaborare, ma a parità
+di numero di legami la differenza sparisce.
+
+Le coppie miste scendono sotto il caso (0,92 negli anni Venti, *z* fino a −19
+nei Duemiladieci), ma **non è una prova in più**: il nullo tiene fisso il
+numero di legami di ogni artista, quindi ogni legame donna–donna oltre l'atteso
+è un legame donna–uomo sotto l'atteso. È lo stesso fatto visto dall'altro lato.
+Dice però una cosa che le altre colonne non dicono: i legami fra donne hanno
+**sostituito** quelli con gli uomini, non si sono aggiunti. Una prima lettura lo
+aveva presentato come un secondo risultato; è stata corretta prima di entrare
+nell'articolo.
+
+**L'emersione non è uniforme fra i generi.** Pop, rock ed elettronica la
+portano: il pop passa da circa 1,0 (non significativo) fino agli anni Settanta
+a 1,3-1,8 dagli Ottanta, il rock sta a 2,0-2,7 dagli Ottanta, l'elettronica
+sale con regolarità da 1,05 a 2,0. La classica resta a 1,1-1,5 in ogni
+decennio, quasi mai significativa: nessuna emersione. Jazz e folk hanno picchi
+(2,7 negli anni Novanta per il jazz) senza tendenza netta. Hip hop e teatro
+hanno troppe poche donne per dire qualcosa: 23 celle su 59 sono marcate come
+poco affidabili (meno di 30 donne o 10 legami donna–donna).
+
+Nell'articolo: sezione 4.4, Tabella 5, Figura 4, più un paragrafo in 5.1.
 
 ---
 
@@ -74,7 +130,9 @@ diadi, e quell'assunzione è falsa in modo strutturale: sono ottimistici.
 
 Gli intervalli di `same_F` e `same_M` non si sovrappongono: a parità di genere
 musicale, coorte e attività, un legame fra due donne è più probabile di uno fra
-due uomini.
+due uomini. La permutazione per strati di grado concorda sulla rete intera
+(F 1,436, *z* 26,9; M 1,008); quella uniforme dà F 0,819, per la ragione detta
+sopra.
 
 ---
 
@@ -103,9 +161,11 @@ sorgenti.
 | coreness | +0,039 | 0,60 |
 | betweenness | −0,236 | 0,21 |
 
-Nessun effetto significativo su nessun asse, e **zero interazioni significative
-su dodici** con il genere musicale. Non c'è evidenza che le donne, dove ci sono,
-occupino posizioni marginali.
+Nessun effetto significativo su nessun asse. Delle 36 interazioni con il genere
+musicale sulle tre misure, una (coreness) è significativa al 5%: meno di quante
+ne produrrebbe il caso. Non c'è evidenza che le donne, dove ci sono, occupino
+posizioni marginali. La disuguaglianza sta nella coda: fra i 100 artisti con
+autovettore più alto le donne sono 2.
 
 ---
 
@@ -188,10 +248,12 @@ condivisi, il **processo sociale** ne spiega la *concentrazione*.
 
 ## Che cosa resta aperto
 
-* **Riscrivere l'articolo.** La tesi non è più «omofilia di minoranza» come
-  stato ma un'inversione datata, e la parte metodologica diventa un risultato
-  invece di una giustificazione per l'ERGM mancato.
 * **Validazione manuale** del campione in `data/validation_sample.csv`: richiede
-  giudizio umano, non è stata eseguita.
-* **Verifica delle citazioni** elencate in `paper/NOTE_PER_AUTORE.md`.
-* **Deposito Zenodo** del pacchetto dati per i reviewer (239 MB), opzionale.
+  giudizio umano, non è stata eseguita. È il limite principale del paper.
+* **Citazioni**: verificate il 24 settembre contro Crossref e le fonti
+  editoriali; esito e correzioni in `paper/NOTE_PER_AUTORE.md`.
+* **Elementi editoriali** del paper (autori, dichiarazioni): vedi
+  `paper/NOTE_PER_AUTORE.md`.
+* **Report italiano** (`report/report.md`, Fase 7): fermo al 21 settembre,
+  racconta ancora la tesi ritirata. Va riscritto o dichiarato superato.
+* **Deposito Zenodo** del pacchetto dati per i reviewer, opzionale.

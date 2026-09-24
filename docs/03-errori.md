@@ -4,7 +4,126 @@ Sono elencati tutti, anche quelli che non hanno cambiato alcun numero. Un
 errore che non cambia i risultati oggi può cambiarli domani, e sapere *come* è
 stato trovato vale quanto sapere che è stato corretto.
 
-Gli errori sono ordinati per gravità, non per data.
+Gli errori sono ordinati per gravità, non per data; il numero dice invece
+l'ordine in cui sono stati trovati.
+
+---
+
+## E13 — Il nullo della tesi centrale era cieco all'attività
+
+**Gravità: la più alta.** Cambiava la forma del risultato centrale e il titolo
+che lo riassumeva.
+
+**Che cos'era.** La serie per decennio — «fino agli anni Settanta le donne
+erano legate fra loro *meno* del caso, dagli anni Novanta *più*: un'inversione
+di segno» — poggiava sulla permutazione uniforme delle etichette. Quel nullo dà
+a ogni artista la stessa probabilità di essere donna, qualunque sia il suo
+numero di legami. Nei primi decenni le donne avevano fra 0,65 e 0,70 volte il
+grado medio: il nullo si aspettava legami che loro non avevano occasione di
+formare, e il deficit che ne risultava (0,48-0,61) era scarsità di legami, non
+distanza fra donne.
+
+**Come è emerso.** Rileggendo il paper per accorciarlo: la Figura 2 (mixing a
+grado preservato) dava 1,54 per donna-donna sulla rete intera, la Tabella della
+permutazione uniforme 0,82. Due numeri sullo stesso dato con segno opposto, e
+il testo spiegava il secondo con una ragione («dominato dai decenni in cui si
+sono formati più legami») che i dati non sostenevano: proprio quei decenni
+avevano rapporti sopra 1. Il logit per decennio, che controlla l'attività,
+aveva già `same_F` non significativo fino agli anni Settanta — il segnale c'era
+ed era stato letto come conferma invece che come obiezione.
+
+**Come è stato verificato.** Fase 4j: permutazione entro strati di grado, più
+un controllo positivo su una rete senza omofilia con la stessa sproporzione di
+attività (il nullo uniforme vede 0,41, quello per strati 0,94). Previsione
+scritta nel docstring prima di eseguire.
+
+**Che cosa ha cambiato.** Fra artisti ugualmente attivi il rapporto F è 1,13 e
+1,07 negli anni Cinquanta e Sessanta (non significativo), 1,18 nei Settanta
+(*z* 3,7), 1,56 nei Novanta, ~1,7 dal 2000. **Nessuna inversione di segno:
+un'emersione.** Il balzo degli anni Venti (1,66 contro 1,17 del decennio prima)
+era in parte lo stesso artefatto al contrario, perché in quel decennio il grado
+delle donne raggiunge quello degli uomini; col nullo per strati è un plateau.
+Il risultato che sopravvive è più solido — e il titolo «the emergence of…» gli
+calza meglio di quanto calzasse all'inversione.
+
+**Lezione.** Tenere fissa la rete non basta a rendere un nullo neutrale: conta
+che cosa si permuta rispetto a che cosa. In un campo dove la minoranza è anche
+meno attiva, un nullo cieco all'attività confonde evitamento e scarsità.
+
+---
+
+## E14 — Il paper riportava la betweenness campionata come se fosse esatta
+
+**Gravità: media.** Un coefficiente e un *p* sbagliati in tabella, e una
+contraddizione interna.
+
+**Che cos'era.** `paper.py` leggeva gli effetti di posizione da
+`report_numbers.json`, scritto dalla Fase 7 il 21 settembre — prima che la
+Fase 3b passasse alla betweenness esatta. La tabella della posizione mostrava
+quindi −0,252 (*p* 0,14), mentre la tabella «che cosa costava approssimare»
+dichiarava esatto −0,236 (*p* 0,21).
+
+**Correzione.** Il paper legge le regressioni direttamente da
+`position_regressions.parquet`. Il valore campionato, non più riproducibile dai
+dati, resta in `paper.py` come costante documentata per il confronto.
+
+**Principio.** Un file di numeri intermedio scritto da un'altra fase è una
+cache, e le cache invecchiano. Ogni cifra va letta dal prodotto della fase che
+la calcola.
+
+---
+
+## E15 — Incoerenze interne del paper, trovate alla riscrittura
+
+**Gravità: media, cumulativamente.** Nessuna cambiava un risultato; tutte le
+avrebbe trovate un referee.
+
+* **«Sempre nella direzione di attenuare»** — detto di due approssimazioni su
+  quattro, nel paper e in `04-calcolo-esatto.md`. Vero per il logit
+  caso-controllo; falso per la betweenness campionata, che *esagerava* un
+  effetto di marginalità inesistente.
+* **Conteggio dei fallimenti ERGM** sulla rete integrale: «quattro falliti più un
+  quinto ad approssimazione stocastica». Erano quattro in tutto, il quarto era
+  quello stocastico.
+* **Rimandi interni sbagliati**: 1.2 → «Section 4.6» (era 4.8); 3.1 e 3.2 →
+  «Section 4.7» (era 4.9); 3.4 → «Section 4.1» (era 4.3). La nota di commit
+  diceva «21 rinvii interni risolti»: esistevano, ma non puntavano giusto.
+* **Numerazione**: due Tabelle 3, due Tabelle 5, nessuna Figura 2 — la figura
+  del mixing veniva generata ma non inclusa.
+* **Residui della tesi ritirata**: la 2.2 diceva di usare gli ERGM «proprio per
+  questa ragione»; i limiti citavano la «coorte post-2000 dell'ERGM» e le
+  «dimensioni appaiate delle sottoreti»; la robustezza descriveva la bontà di
+  adattamento dei vecchi modelli su sottorete («riproducono bene il centro»),
+  il contrario di quanto mostrano i decenni; l'Appendice B affermava che la
+  terminazione di Hummel «porta ogni modello a convergenza in pochi minuti».
+* **«0,17 per decennio»**: lo scarto del caso-controllo era una sottostima di
+  `same_F` di 0,17 negli anni Venti, non una pendenza.
+* **«Esatta alla quarta cifra decimale»** per la permutazione a mille repliche,
+  due righe sotto la tabella che diceva «entro lo 0,4%».
+* **«Zero interazioni significative su dodici»**: erano dodici per il solo
+  autovettore. Sulle tre misure le interazioni sono 36 e una (coreness) è
+  significativa al 5% — meno di quante ne produrrebbe il caso.
+
+---
+
+## E16 — Un test che falliva da giorni, e una cifra che ne dipendeva
+
+**Gravità: bassa sui risultati, alta sul metodo.** Nessuna stima era sbagliata;
+un'affermazione di precisione sì.
+
+**Che cos'era.** `tests/test_logit_esatto.py` chiedeva scarti assoluti sotto
+10⁻⁷ fra il Newton a blocchi e `statsmodels`. Dopo E8 il Newton si ferma anche
+quando la log-verosimiglianza migliora meno di 10⁻³, e sulla rete di prova
+questo lo arresta a scarti di 10⁻⁵ sui coefficienti. Il test falliva da allora.
+Nel frattempo `04-calcolo-esatto.md` e il paper continuavano a dichiarare una
+coincidenza «entro 10⁻⁹», misurata prima di E8.
+
+**Come è emerso.** Rieseguendo tutti i test dopo aver aggiunto la Fase 4j. Un
+test che nessuno riesegue non verifica niente.
+
+**Correzione.** Soglia in unità di errore standard (scarto massimo osservato:
+3,7·10⁻⁴ errori standard; log-verosimiglianza identica alla quarta decimale) e
+testo corretto nel documento e nel paper.
 
 ---
 
@@ -222,6 +341,22 @@ separare le operazioni e **uccidere per PID**.
 
 ---
 
+## E11 — Errori minori di ambiente
+
+Raccolti per completezza; nessuno ha toccato i risultati.
+
+* `groupby.nth` con `KeyError` su pandas 1.5 → sostituito con `cumcount()`.
+* Backslash in f-string, vietato in Python 3.9 → didascalie a virgolette doppie.
+* WDQS che risponde 429, 502, 504 e JSON troncato → suddivisione ricorsiva dei
+  lotti, con il 429 contato separatamente dai fallimenti veri.
+* `nodematch("musical_genre")` collineare con `edges` dentro sottoreti a genere
+  unico → termine incluso solo quando l'attributo varia.
+* Tabelle della Fase 4f mai scritte perché il ciclo è stato interrotto e la
+  raccolta avviene in fondo → prodotte a mano; `data/` non è versionato, quindi
+  senza sarebbero andate perse.
+
+---
+
 ## E12 — L'attendente che aspetta sé stesso
 
 **Gravità: bassa.** Variante di E10, con un bersaglio diverso.
@@ -245,19 +380,3 @@ riferirsi al file di log per via indiretta.
 
 **Costo.** Nessun risultato sbagliato; nove ore di ritardo nel leggere un
 risultato già pronto.
-
----
-
-## E11 — Errori minori di ambiente
-
-Raccolti per completezza; nessuno ha toccato i risultati.
-
-* `groupby.nth` con `KeyError` su pandas 1.5 → sostituito con `cumcount()`.
-* Backslash in f-string, vietato in Python 3.9 → didascalie a virgolette doppie.
-* WDQS che risponde 429, 502, 504 e JSON troncato → suddivisione ricorsiva dei
-  lotti, con il 429 contato separatamente dai fallimenti veri.
-* `nodematch("musical_genre")` collineare con `edges` dentro sottoreti a genere
-  unico → termine incluso solo quando l'attributo varia.
-* Tabelle della Fase 4f mai scritte perché il ciclo è stato interrotto e la
-  raccolta avviene in fondo → prodotte a mano; `data/` non è versionato, quindi
-  senza sarebbero andate perse.

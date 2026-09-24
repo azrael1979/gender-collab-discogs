@@ -50,5 +50,17 @@ print(cmp.to_string(index=False, float_format=lambda x: f"{x: .8f}"))
 print(f"\nmax scarto coefficienti: {cmp['diff'].max():.2e}")
 print(f"max scarto errori std : {cmp['diff_se'].max():.2e}")
 print(f"logL statsmodels {rif.llf:,.4f}   blocchi {mio.logL.iloc[0]:,.4f}")
-assert cmp["diff"].max() < 1e-7 and cmp["diff_se"].max() < 1e-7, "NON COINCIDONO"
-print("\nOK: identico a statsmodels sul completo")
+# Il criterio e' in unita' di errore standard, non assoluto. Il Newton si ferma
+# quando il passo scende sotto 1e-6 OPPURE la log-verosimiglianza migliora meno
+# di 1e-3 (errore E8): sulla rete intera servono entrambi, perche' una somma di
+# 1,6 miliardi di termini ha un pavimento numerico. Su questa rete di prova il
+# secondo criterio ferma il Newton a scarti di ~1e-5 sui coefficienti, cioe' a
+# meno di un millesimo di errore standard: numericamente irrilevante rispetto
+# all'incertezza statistica. Una soglia assoluta di 1e-7 (quella della prima
+# versione del test, scritta prima di E8) non misurava nulla di utile.
+cmp["diff_in_se"] = cmp["diff"] / cmp.se_sm
+print(f"max scarto in errori std: {cmp['diff_in_se'].max():.2e}")
+assert cmp["diff_in_se"].max() < 1e-3, "coefficienti oltre un millesimo di errore standard"
+assert (cmp["diff_se"] / cmp.se_sm).max() < 1e-3, "errori standard non coincidono"
+assert abs(rif.llf - mio.logL.iloc[0]) < 1e-3, "log-verosimiglianza diversa"
+print("\nOK: coincide con statsmodels sul completo entro 1e-3 errori standard")

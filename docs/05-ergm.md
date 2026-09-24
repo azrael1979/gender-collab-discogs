@@ -133,14 +133,18 @@ esito già determinato.
 | 1930 | +2,391 | −0,262 (p 0,79) | +0,011 (p 0,89) | +0,275 |
 | 1940 | +3,582 | −0,246 (p 0,36) | **−0,173** (p<10⁻⁴) | +0,361 |
 
-Nessuna omofilia femminile, semmai negativa. **Concorda con la permutazione
-esatta**, che per quei decenni dà rapporti F di 0,24 e 0,50.
+Nessuna omofilia femminile. **Concorda con la permutazione**: per quei decenni
+il nullo per strati di grado dà rapporti F di 0,70 e 0,74, con *z* −0,4 e −1,1,
+cioè indistinguibili dal caso. (Il nullo uniforme dava 0,24 e 0,50, e una prima
+lettura li aveva presi per una conferma di omofilia *negativa*: era l'effetto
+dell'attività minore delle donne, vedi E13.)
 
-Due metodi con assunzioni opposte — l'ERGM controlla per la chiusura triadica,
-la permutazione tiene la struttura fissa per costruzione — dicono la stessa cosa
-sul periodo in cui entrambi funzionano. Il che rafforza l'estremo opposto:
-l'aggregazione degli anni Novanta-Venti è un cambiamento reale, non un artefatto
-di misura che varrebbe per tutta la serie.
+Due metodi con assunzioni opposte — l'ERGM controlla per la chiusura triadica e
+per l'attività, la permutazione tiene la struttura fissa per costruzione —
+dicono la stessa cosa sul periodo in cui entrambi funzionano: in quei decenni
+non c'è omofilia di genere. Il che rafforza l'estremo opposto: l'eccesso degli
+anni Novanta-Venti è un cambiamento reale, non un artefatto di misura che
+varrebbe per tutta la serie.
 
 ---
 
@@ -249,12 +253,15 @@ centro (esp 1-2); **1 significa piatta**.
 | `gwesp(0.25)` — riferimento | ✅ converge, **U = 16,90** (esp0 8,69; centro 0,42; coda 5,51) |
 | `gwesp(0.25) + gwesp(1.5)` | ❌ non converge (28 min) |
 | `gwesp(0.25) + esp(0)` | ❌ non converge (60 min) |
-| `gwesp(0.75)` — controllo negativo | in corso |
+| `gwesp(0.75)` — controllo negativo | ❌ non converge (2,4 ore; passo sotto 0,02 per tre iterazioni) |
 
-**Entrambe le specifiche a due componenti falliscono su un decennio dove quella
-a una componente converge in 52 minuti.** La previsione era che ammettere la
-bimodalità appiattisse la U; invece aggiungere una seconda componente di
-dipendenza rompe la stima del tutto.
+**Tutte e tre le varianti falliscono su un decennio dove quella di riferimento
+converge in 52 minuti — controllo negativo compreso.** È il controllo negativo
+a decidere come leggere l'esito: `gwesp(0.75)` ha una sola componente, come il
+riferimento, e cambia soltanto il decay. Se fallisce anche lui, il fallimento
+delle specifiche a due componenti non dice nulla sulla bimodalità: dice che la
+stima, su questo decennio, non regge **alcuna** modifica della specifica.
+Il test non ha deciso nulla, in nessuna direzione.
 
 ### Che cosa cade e che cosa no
 
@@ -372,9 +379,10 @@ esaurisce i dati, e il testo deve dirlo.
 
 ## Conclusione
 
-L'ERGM **non è stimabile su questa rete** oltre i ~2.000 archi. Sei fallimenti
-documentati su quattro parametrizzazioni della rete integrale, due decenni e due
-specifiche a due componenti.
+L'ERGM **non è stimabile su questa rete** oltre i ~2.000 archi. Nove stime
+fallite: quattro parametrizzazioni sulla rete integrale (tre MCMLE e una ad
+approssimazione stocastica, con convergenza falsa), due decenni (1950, 2020) e
+tre varianti sul decennio 1940 (due a due componenti e il controllo negativo).
 
 Ma la ragione non è la taglia in sé, ed è questo il risultato: su una rete
 ottenuta per proiezione bipartita, un termine di chiusura triadica misura in
