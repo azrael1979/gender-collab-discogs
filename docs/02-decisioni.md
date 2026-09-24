@@ -217,8 +217,8 @@ delle tabelle Markdown e i percorsi delle immagini non contano come parole.
 **Alternativa.** Il conteggio grezzo di tutto il file, che era quello riportato
 prima (12.811) e che contava anche i `|` delle tabelle.
 
-**Conseguenza.** La versione lunga è conservata in
-`paper/versioni/2026-09-24_v2_12811-parole/` e nel tag git `paper-v2-12811`.
+**Conseguenza.** La versione lunga è conservata in locale in
+`paper/versioni/2026-09-24_v2_12811-parole/`.
 
 ---
 
@@ -245,4 +245,21 @@ di H4, e H2 è stata messa per iscritto dopo le prime stime. Le formulazioni
 seguono la letteratura citata, e H4 e H5 sono respinte: non sono state
 aggiustate sui risultati. Ma nessuna è pre-registrata, e non va detto che lo
 sia.
+
+---
+
+## D15 — Il manoscritto fuori dal repository pubblico
+
+**Scelta.** `paper/` e i due script che generano l'articolo (`src/paper.py`,
+che ne contiene l'intero testo, e `src/paper_figures.py`) non sono versionati,
+e sono stati rimossi da **tutta la storia** del repository il 24 settembre, con
+riscrittura e force push. Restano in locale.
+
+**Perché.** Il repository è pubblico, e un manoscritto in sottomissione non
+deve circolare prima della pubblicazione.
+
+**Conseguenza.** La fase 9 di `run_all.sh` gira solo dove quei file sono
+presenti. Tutto il resto — dati, analisi, test, documentazione — resta
+verificabile da terzi. Gli hash dei commit anteriori al 24 settembre sono
+cambiati, e il tag `paper-v2-12811` non esiste più.
 

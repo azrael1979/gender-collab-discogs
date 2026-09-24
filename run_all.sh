@@ -74,8 +74,14 @@ run 5 "robustezza"                                src/phase5_robustness.py
 run 6 "figure"                                    src/phase6_figures.py
 run 7 "report Markdown, HTML, PDF"                src/phase7_report.py
 run 8 "pacchetto dati per i reviewer"             src/phase8_export.py
-run 9 "figure del paper (inglese)"                src/paper_figures.py
-run 9 "paper per Poetics (EN): MD, PDF, DOCX"     src/paper.py
+# Il manoscritto non e' nel repository pubblico: la fase 9 gira solo dove
+# src/paper.py e src/paper_figures.py sono presenti in locale.
+if [[ -f src/paper.py && -f src/paper_figures.py ]]; then
+  run 9 "figure del paper (inglese)"                src/paper_figures.py
+  run 9 "paper per Poetics (EN): MD, PDF, DOCX"     src/paper.py
+else
+  echo "── fase 9 (paper): saltata, manoscritto non presente in locale" | tee -a "$MAIN"
+fi
 
 echo "" | tee -a "$MAIN"
 if [[ ${#FAILED[@]} -eq 0 ]]; then

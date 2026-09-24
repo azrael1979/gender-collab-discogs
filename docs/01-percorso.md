@@ -176,6 +176,7 @@ L'articolo è stato riscritto attorno a questa tesi (24 settembre) e ridotto da
 risultati per tipo di coppia e genere musicale (Fase 4k), che lo riportano a
 8.541, poi ricompattato a 7.936 spostando nelle
 appendici i dettagli di calcolo e togliendo le ripetizioni; la versione lunga è
-conservata in `paper/versioni/` e nel tag `paper-v2-12811`. Restano la
+conservata in locale in `paper/versioni/`. Il manoscritto non è nel repository
+pubblico (vedi D15 in [`02-decisioni.md`](02-decisioni.md)). Restano la
 validazione manuale del genere e gli elementi editoriali: vedi
 [`06-risultati.md`](06-risultati.md#che-cosa-resta-aperto).

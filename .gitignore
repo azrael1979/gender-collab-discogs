@@ -46,5 +46,8 @@ Thumbs.db
 
 # -------------------------------------------------------------- articolo
 # Il manoscritto non va nel repository pubblico finche' non e' pubblicato:
-# si rigenera in locale con src/paper_figures.py e src/paper.py.
+# si rigenera in locale con src/paper_figures.py e src/paper.py, che per
+# lo stesso motivo restano fuori: paper.py contiene l'intero testo.
 paper/
+src/paper.py
+src/paper_figures.py

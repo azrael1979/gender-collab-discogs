@@ -140,12 +140,9 @@ src/
   phase6_figures.py        figure PNG a 300 dpi
   phase7_report.py         report Markdown -> HTML -> PDF (fermo al 21 settembre)
   phase8_export.py         pacchetto dati per i reviewer, con manifesto e dizionario
-  paper_figures.py         figure del paper, PNG 300 dpi + PDF
-  paper.py                 il paper per Poetics, con il conteggio delle parole
   score_validation.py      metriche sul campione annotato a mano
 tests/                     verifiche delle affermazioni di esattezza (tests/README.md)
 docs/                      documentazione di processo
-paper/                     manoscritto, figure, NOTE_PER_AUTORE.md, versioni/
 R/ergm_models.R            modelli ERGM su sottorete (statnet)
 R/ergm_full.R              modelli ERGM sulla rete integrale
 data/                      parquet, checkpoint, dati grezzi estratti
@@ -201,12 +198,10 @@ dati. Entrambe le misure sono riportate.
 
 ## L'articolo
 
-Il manoscritto per *Poetics* **non è nel repository**: resta in locale in
-`paper/`, escluso da `.gitignore`, finché non è pubblicato. Si rigenera con
-
-```bash
-python3 src/paper_figures.py && python3 src/paper.py
-```
+Il manoscritto per *Poetics* **non è nel repository**, e non lo sono i due
+script che lo generano (`src/paper.py`, `src/paper_figures.py`): restano in
+locale, esclusi da `.gitignore`, finché l'articolo non è pubblicato. La fase 9
+di `run_all.sh` gira solo dove quei file sono presenti.
 
 ## Licenza
 
