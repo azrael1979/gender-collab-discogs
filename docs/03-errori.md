@@ -222,6 +222,32 @@ separare le operazioni e **uccidere per PID**.
 
 ---
 
+## E12 — L'attendente che aspetta sé stesso
+
+**Gravità: bassa.** Variante di E10, con un bersaglio diverso.
+
+**Che cos'era.** Un processo in attesa della fine di una fase, scritto come
+
+    until ! pgrep -f "phase4i_proiezione_null[a]"; do sleep 60; done
+    tail -4 logs/phase4i_proiezione_nulla.log
+
+Il trucco delle parentesi protegge `pgrep` dal corrispondere a sé stesso — ma
+**solo per quella occorrenza**. La riga successiva nomina
+`logs/phase4i_proiezione_nulla.log`, che corrisponde al pattern; l'attendente
+trovava sé stesso e aspettava all'infinito.
+
+**Come è emerso.** La fase era finita da nove ore ma l'attendente risultava
+ancora vivo, con carico macchina a 0,07 — cioè nessuno stava calcolando nulla.
+
+**Correzione.** Il pattern deve essere assente dall'**intera** riga di comando,
+non solo dall'invocazione di `pgrep`. In pratica: attendere per PID, o
+riferirsi al file di log per via indiretta.
+
+**Costo.** Nessun risultato sbagliato; nove ore di ritardo nel leggere un
+risultato già pronto.
+
+---
+
 ## E11 — Errori minori di ambiente
 
 Raccolti per completezza; nessuno ha toccato i risultati.

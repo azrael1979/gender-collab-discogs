@@ -572,3 +572,9 @@ serie temporale esatta,3188.9
 ERGM due_scale,1687.39
 ERGM gwesp_esp0,3585.46
 ERGM decay_alto,8509.82
+1940s: proiezione osservata,0.01
+1940s: 100 riproiezioni randomizzate,12.21
+1950s: proiezione osservata,0.15
+1950s: 100 riproiezioni randomizzate,150.8
+rete intera: proiezione osservata,8.18
+rete intera: 20 riproiezioni randomizzate,1794.84

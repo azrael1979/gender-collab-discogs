@@ -62,6 +62,12 @@ run 4 "ERGM (R + statnet) su sottoreti"           src/phase4_ergm.py
 run 4 "omofilia sulla rete integrale (logit, QAP)" src/phase4c_dyadic.py
 run 4 "omofilia nel tempo (archi datati)"          src/phase4d_temporal.py
 run 4 "calcolo esatto su tutte le 1,62 mld diadi" src/phase4e_esatto.py
+run 4 "proiezione: i triangoli sono meccanici?"     src/phase4g_proiezione.py
+# La 4h e' un esperimento a esito NEGATIVO, conservato perche' un risultato
+# negativo va riprodotto quanto uno positivo: nessuna delle tre specifiche
+# converge, controllo negativo compreso, e costa circa due ore e mezza.
+run 4 "controllo bimodalita' (fallisce: atteso)"    src/phase4h_bimodale.py
+run 4 "proiezione randomizzata: la conferma"        src/phase4i_proiezione_nulla.py
 run 5 "robustezza"                                src/phase5_robustness.py
 run 6 "figure"                                    src/phase6_figures.py
 run 7 "report Markdown, HTML, PDF"                src/phase7_report.py

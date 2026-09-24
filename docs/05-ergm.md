@@ -262,10 +262,13 @@ dipendenza rompe la stima del tutto.
 *misura* sui dati, non un'affermazione su un modello. E resta lo scarto a U,
 osservato in due decenni indipendenti con la stessa forma.
 
-**Cade:** la dimostrazione causale. Non si può dire «un modello che ammette la
-bimodalità si adatta», perché quel modello non è stimabile. Nell'articolo la
-bimodalità resta un'**interpretazione plausibile** dello scarto, non una causa
-dimostrata, e il tentativo fallito va scritto.
+**Cade:** la dimostrazione causale *per questa via*. Non si può dire «un
+modello che ammette la bimodalità si adatta», perché quel modello non è
+stimabile. Il tentativo fallito resta scritto.
+
+La conferma è poi arrivata da un'altra strada — vedi
+[La conferma, fuori dall'ERGM](#la-conferma-fuori-dallergm) — che non passa da
+alcuna stima.
 
 ### La strada che non funziona, e perché
 
@@ -275,14 +278,95 @@ se due artisti condividono una release hanno un arco per costruzione, quindi
 quella covariata sarebbe non nulla esattamente sugli archi e nulla altrove —
 separerebbe perfettamente i dati.
 
-### Il test che resta da fare
+---
 
-Non passa dall'ERGM, ed è stato un errore cercarlo lì. Se l'ipotesi è che la
-proiezione bipartita produca la forma bimodale, **si simula la proiezione**: si
-tengono le dimensioni reali dei cast e il numero di release per artista, si
-riassegnano gli artisti a caso, si proietta, e si confronta la distribuzione dei
-partner condivisi con quella osservata. Nessuna stima, nessun ERGM, un processo
-generativo noto.
+## La conferma, fuori dall'ERGM
+
+Cercare la conferma **dentro** l'ERGM era l'errore di impostazione. Se l'ERGM
+non sa descrivere questa rete, non può nemmeno servire a dimostrare *perché*
+non sa descriverla. L'affermazione da verificare non riguarda un modello:
+riguarda il **meccanismo** che genera la rete, e un meccanismo si verifica
+facendolo girare.
+
+### Il disegno
+
+Si prende la struttura bipartita artisti-release, la si randomizza conservando
+**esattamente** entrambe le distribuzioni di grado — quante release per artista,
+quanti artisti per release — e la si riproietta, cento volte. Nessuna
+preferenza sociale vi entra: gli artisti sono assegnati alle release a caso.
+Contiene **solo il meccanismo**.
+
+Il confronto è di **forma**, ciascun modello contro il *proprio* osservato e
+normalizzato a quote. Gli insiemi differiscono per costruzione — l'ERGM gira
+sui 338 nodi a genere determinato della componente gigante, la proiezione su
+tutti i 515 artisti del decennio — e confrontarli direttamente sarebbe
+scorretto. Una prima lettura lo faceva ed è stata rifatta.
+
+Prima di lanciare è stato verificato che il doppio scambio bipartito conservi
+esattamente entrambe le distribuzioni di grado, non crei doppioni e randomizzi
+davvero l'appaiamento (99,6% dei crediti riappaiati). Se lo scambio sbagliasse
+i gradi il confronto non varrebbe nulla. Test in
+`tests/test_scambio_bipartito.py`.
+
+### L'esito
+
+Rapporto fra quota simulata e quota osservata, anni Quaranta:
+
+| partner condivisi | ERGM stimato | proiezione randomizzata |
+|---|---|---|
+| 0 | **0,13** | 0,49 |
+| 1 | **2,59** | 0,72 |
+| 2 | **2,67** | 0,74 |
+| 4 | 0,85 | 0,86 |
+| 6 | **0,25** | 0,83 |
+| 8 | **0,17** | 0,97 |
+| 12 | **0,27** | 0,98 |
+
+Scarto medio in log₂, replicato su tre insiemi indipendenti:
+
+| insieme | archi osservati | archi randomizzati | scarto \|log₂\| |
+|---|---|---|---|
+| 1940s — ERGM | 1.932 | 1.749 | **1,799** |
+| 1940s — proiezione | 3.016 | 4.465 | **0,297** |
+| 1950s — proiezione | 21.990 | 43.690 | **0,768** |
+| rete intera — proiezione | 898.475 | 2.189.834 | **0,322** |
+
+Conta la **forma**, non il livello. L'ERGM oscilla di un fattore venti fra 0,13
+e 2,67 — è la U. La proiezione randomizzata è monotona e piatta in tutti e tre
+gli insiemi: `0,49 → 0,72 → 0,80 → 0,86 → 0,96` negli anni Quaranta, senza
+alcuna inversione.
+
+E lo fa un modello **senza alcun parametro stimato**, che batte di sei volte un
+ERGM con sei parametri adattati sui dati.
+
+> La forma bimodale della distribuzione dei partner condivisi è prodotta dal
+> meccanismo di proiezione bipartita, non da un processo di chiusura triadica.
+> La U è una proprietà del modello, non dei dati.
+
+**Statuto: dimostrato.** Nessun parametro stimato, nessuna assunzione
+inferenziale: si è fatto girare un processo noto e si è guardato che forma
+produce.
+
+### Un secondo risultato, non previsto
+
+La randomizzazione produce **sistematicamente più archi dell'osservato**: 1,5
+volte negli anni Quaranta, 2,0 nei Cinquanta, **2,4 sulla rete intera**.
+
+Significa che i musicisti italiani **ricollaborano con le stesse persone** molto
+più di quanto il caso produrrebbe: le stesse coppie ricorrono su release
+diverse, quindi generano meno archi *distinti*. La randomizzazione le disperde.
+
+È sostantivo, non metodologico, e scompone il fenomeno in due parti che vanno
+tenute separate:
+
+* il **meccanismo** spiega la *forma* della distribuzione dei partner condivisi;
+* il **processo sociale** spiega la sua *concentrazione*.
+
+### Che cosa resta non spiegato
+
+A esp = 0 la proiezione randomizzata dà 0,49: sottoproduce della metà gli archi
+isolati. Molto meglio dell'ERGM (0,13), ma non perfetta. Il meccanismo non
+esaurisce i dati, e il testo deve dirlo.
 
 ---
 
@@ -294,9 +378,11 @@ specifiche a due componenti.
 
 Ma la ragione non è la taglia in sé, ed è questo il risultato: su una rete
 ottenuta per proiezione bipartita, un termine di chiusura triadica misura in
-buona parte la **dimensione dei cast** e non un processo sociale. Vale per
-qualunque rete di co-autorialità, che è metà della letteratura su
-collaborazione e omofilia.
+buona parte la **dimensione dei cast** e non un processo sociale. Non è più
+un'interpretazione: un modello nullo senza parametri riproduce la forma della
+distribuzione dei partner condivisi **sei volte meglio** dell'ERGM stimato, e
+senza produrre la U. Vale per qualunque rete di co-autorialità, che è metà
+della letteratura su collaborazione e omofilia.
 
 E giustifica a posteriori la scelta di calcolare invece di stimare: se la
 dipendenza che l'ERGM doveva assorbire è in buona parte meccanica, allora il

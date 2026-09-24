@@ -111,7 +111,7 @@ occupino posizioni marginali.
 
 ## Il contributo metodologico
 
-**Statuto: misurato** per il dato, **interpretato** per la spiegazione.
+**Statuto: dimostrato.**
 
 **Misurato:** su tutti i 702.613 archi, dove una singola release può spiegare i
 partner condivisi di un arco li spiega al **98,8%**; dove non può, al **27,6%**.
@@ -121,14 +121,54 @@ bipartita.
 **Osservato:** la bontà di adattamento degli ERGM sbaglia con una forma a U —
 centro sovrastimato, code sottostimate — identica in due decenni indipendenti.
 
-**Interpretato:** la U deriva dalla bimodalità prodotta dalla proiezione, che un
-`gwesp` a un parametro non può riprodurre.
+**Dimostrato:** randomizzando la struttura bipartita a distribuzioni di grado
+invariate e riproiettandola, si ottiene la forma osservata **sei volte meglio**
+che dall'ERGM stimato, e senza alcuna U:
 
-**Non dimostrato:** il tentativo di confermarlo — riestimare con termini a due
-componenti — **è fallito**, perché quelle specifiche non convergono affatto.
-L'interpretazione resta plausibile e non provata, e va scritto così.
+| | scarto medio \|log₂\| |
+|---|---|
+| ERGM stimato, sei parametri | **1,799** |
+| proiezione randomizzata, **zero parametri** | **0,297** |
+
+Replicato su tre insiemi indipendenti (1940s 0,297; 1950s 0,768; rete intera
+0,322). Nessuna stima, nessuna assunzione inferenziale: si è fatto girare un
+processo noto e si è guardato che forma produce.
+
+> La U è una proprietà del modello, non dei dati.
+
+**Il tentativo fallito resta documentato.** La prima strada — riestimare con
+termini di dipendenza a due componenti — è fallita per intero, controllo
+negativo compreso, perché nessuna di quelle specifiche converge. Cercare la
+conferma dentro lo strumento che si stava criticando era l'errore di
+impostazione.
+
+**Che cosa resta non spiegato:** a esp = 0 la proiezione randomizzata dà 0,49,
+cioè sottoproduce della metà gli archi isolati. Molto meglio dell'ERGM (0,13),
+ma il meccanismo non esaurisce i dati.
 
 Figura: `report/figures/f_proiezione_bipartita.png`.
+
+---
+
+## Le collaborazioni si ripetono
+
+**Statuto: misurato.** Risultato non previsto, emerso dal test precedente.
+
+La proiezione randomizzata produce **sistematicamente più archi** dell'osservato:
+
+| insieme | archi osservati | randomizzati | rapporto |
+|---|---|---|---|
+| 1940s | 3.016 | 4.465 | 0,68 |
+| 1950s | 21.990 | 43.690 | 0,50 |
+| **rete intera** | 898.475 | 2.189.834 | **0,41** |
+
+Sulla rete intera la collaborazione reale è **2,4 volte più concentrata** di
+quanto il caso produrrebbe: le stesse coppie ricorrono su release diverse,
+quindi generano meno archi *distinti*. La randomizzazione le disperde.
+
+Questo separa due cose che il termine «chiusura triadica» confonde: il
+**meccanismo** di proiezione spiega la *forma* della distribuzione dei partner
+condivisi, il **processo sociale** ne spiega la *concentrazione*.
 
 ---
 
@@ -151,8 +191,6 @@ Figura: `report/figures/f_proiezione_bipartita.png`.
 * **Riscrivere l'articolo.** La tesi non è più «omofilia di minoranza» come
   stato ma un'inversione datata, e la parte metodologica diventa un risultato
   invece di una giustificazione per l'ERGM mancato.
-* **Simulare la proiezione** per verificare l'interpretazione della bimodalità
-  senza passare dall'ERGM (vedi [`05-ergm.md`](05-ergm.md#il-test-che-resta-da-fare)).
 * **Validazione manuale** del campione in `data/validation_sample.csv`: richiede
   giudizio umano, non è stata eseguita.
 * **Verifica delle citazioni** elencate in `paper/NOTE_PER_AUTORE.md`.

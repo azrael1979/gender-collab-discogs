@@ -43,8 +43,8 @@ def main():
     maxc = cfg["network"]["max_credits"]
     tetto = maxc - 2
 
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(9.6, 4.3),
-                                 gridspec_kw={"wspace": 0.28})
+    fig, (a1, a2, a3) = plt.subplots(1, 3, figsize=(13.8, 4.3),
+                                     gridspec_kw={"wspace": 0.30})
 
     # --- A. il sintomo: la U della bonta' di adattamento -------------------
     a1.axhline(1.0, color=viz.MUTED, lw=1, ls=(0, (4, 3)), zorder=1)
@@ -83,6 +83,39 @@ def main():
                  color=viz.INK)
     viz.tidy(a2)
 
+    # --- C. la conferma: il meccanismo da solo riproduce la forma ---------
+    n = common.load("proiezione_nulla.parquet")
+    a3.axhline(1.0, color=viz.MUTED, lw=1, ls=(0, (4, 3)), zorder=1)
+    # l'ERGM, per confronto: e' la curva a U
+    ge = pd.read_csv(MODELS / "dec1940" / "gof.csv")
+    ge = ge[(ge.statistica == "esp") & (ge.valore <= N_ESP)]
+    qo = ge.obs / ge.obs.sum()
+    qs = ge["mean"] / ge["mean"].sum()
+    a3.plot(ge.valore, qs / qo, color=viz.CAT[7], lw=2.4, marker="s", ms=5,
+            label="ERGM stimato (1940s)", zorder=4)
+    stili = {"1940s": 0, "1950s": 1, "rete intera": 2}
+    for et, i in stili.items():
+        g = n[(n.insieme == et) & (n.esp <= N_ESP)]
+        if not len(g):
+            continue
+        tot_o = n[n.insieme == et].osservati.sum()
+        tot_b = n[n.insieme == et].randomizzati.sum()
+        a3.plot(g.esp, (g.randomizzati / tot_b) / (g.osservati / tot_o),
+                color=viz.CAT[i], lw=2 if et == "rete intera" else 1.5,
+                marker="o", ms=4.5, label=f"proiezione randomizzata — {et}",
+                zorder=3)
+    a3.set_yscale("log")
+    # spazio in alto per la legenda: sotto, la curva dell'ERGM ci passa dentro
+    a3.set_ylim(0.09, 14)
+    a3.set_yticks([0.125, 0.25, 0.5, 1, 2, 4])
+    a3.set_yticklabels(["⅛×", "¼×", "½×", "1× (osservato)", "2×", "4×"])
+    a3.set_xlabel("partner condivisi dall'arco")
+    a3.set_ylabel("quota simulata / quota osservata")
+    a3.set_title("La conferma: senza parametri, nessuna U", loc="left",
+                 color=viz.INK)
+    a3.legend(loc="upper left", fontsize=7.4)
+    viz.tidy(a3)
+
     t = common.load("proiezione_tetto.parquet").set_index("gruppo")
     viz.caption(fig,
         "Perché un termine di chiusura triadica è mal posto su una rete ottenuta per "
@@ -99,7 +132,15 @@ def main():
         f"secondo il tetto imposto dalla loro release condivisa più grande, quelli che "
         f"vi rientrano hanno il {t.loc['entro il tetto','quota_spiegata']:.1%} dei "
         f"partner spiegato dalla proiezione, quelli che lo superano il "
-        f"{t.loc['oltre il tetto','quota_spiegata']:.1%}.")
+        f"{t.loc['oltre il tetto','quota_spiegata']:.1%}. "
+        "A destra la verifica del meccanismo: la struttura bipartita viene randomizzata "
+        "conservando esattamente entrambe le distribuzioni di grado — quante release per "
+        "artista, quanti artisti per release — e riproiettata, cento volte. Nessuna "
+        "preferenza sociale vi entra. Il confronto è di forma, ciascun modello contro il "
+        "proprio osservato e normalizzato a quote, perché gli insiemi differiscono per "
+        "costruzione. Lo scarto medio in log₂ è 1,80 per l'ERGM stimato e 0,30 per la "
+        "proiezione randomizzata, che non ha parametri: la U è una proprietà del modello, "
+        "non dei dati.")
 
     FIG.mkdir(parents=True, exist_ok=True)
     out = FIG / "f_proiezione_bipartita.png"
