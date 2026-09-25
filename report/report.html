@@ -243,7 +243,7 @@ collaborazione fra musicisti italiani</h1>
 <h2
 id="omofilia-di-genere-sessuale-e-genere-musicale-su-discogs">Omofilia
 di genere sessuale e genere musicale su Discogs</h2>
-<p><em>Analisi condotta il 21/09/2026 — fonte unica: dump Discogs locale
+<p><em>Analisi condotta il 25/09/2026 — fonte unica: dump Discogs locale
 (PostgreSQL)</em></p>
 <hr />
 <h2 id="sintesi-per-il-lettore-frettoloso">Sintesi per il lettore
@@ -268,41 +268,41 @@ ragione diversa.</p>
 <tbody>
 <tr>
 <td>Musicisti italiani identificati</td>
-<td><strong>100.201</strong></td>
+<td><strong>87.229</strong></td>
 </tr>
 <tr>
 <td>di cui con genere sessuale determinato</td>
-<td>70.374 (70,2%)</td>
+<td>65.093 (74,6%)</td>
 </tr>
 <tr>
 <td>Quota di donne fra i determinati</td>
-<td><strong>13,8%</strong> — un rapporto di <strong>6,25 uomini per ogni
+<td><strong>14,8%</strong> — un rapporto di <strong>5,77 uomini per ogni
 donna</strong></td>
 </tr>
 <tr>
 <td>Crediti analizzati</td>
-<td>4.169.130, di cui 2.670.018 (64,0%) risolti sulla singola
+<td>3.682.616, di cui 2.360.057 (64,1%) risolti sulla singola
 traccia</td>
 </tr>
 <tr>
 <td>Rete di collaborazione</td>
-<td>82.595 artisti collegati, 702.613 legami</td>
+<td>70.712 artisti collegati, 586.040 legami</td>
 </tr>
 <tr>
 <td>Componente gigante</td>
-<td>95,7% degli artisti collegati</td>
+<td>95,4% degli artisti collegati</td>
 </tr>
 <tr>
 <td>Assortatività di genere sessuale</td>
-<td><strong>r = 0,0511</strong> (IC 95% 0,0479–0,0543)</td>
+<td><strong>r = 0,0432</strong> (IC 95% 0,0399–0,0465)</td>
 </tr>
 <tr>
 <td>Assortatività di genere musicale</td>
-<td><strong>r = 0,5186</strong></td>
+<td><strong>r = 0,4970</strong></td>
 </tr>
 <tr>
 <td>Omofilia di genere pre-2000 → post-2000</td>
-<td>0,0494 → 0,0731 (differenza non significativa nell’ERGM)</td>
+<td>0,0406 → 0,0693 (differenza non significativa nell’ERGM)</td>
 </tr>
 <tr>
 <td>Omofilia ERGM, donne contro uomini (mediana sulle sottoreti)</td>
@@ -318,19 +318,19 @@ traccia</td>
 <h3 id="le-cinque-cose-da-sapere">Le cinque cose da sapere</h3>
 <ol type="1">
 <li><p><strong>La musica registrata italiana è un mondo di uomini, e lo
-è rimasta.</strong> 13,8% di donne fra gli artisti con genere
-determinato significa 6,3 uomini per ogni donna. La quota non cresce in
-modo monotono nel tempo: parte dal 16,9% per chi debutta negli anni
-Sessanta, scende al 12,4% negli anni Ottanta e risale al 20,5% per chi
+è rimasta.</strong> 14,8% di donne fra gli artisti con genere
+determinato significa 5,8 uomini per ogni donna. La quota non cresce in
+modo monotono nel tempo: parte dal 17,8% per chi debutta negli anni
+Sessanta, scende al 13,2% negli anni Ottanta e risale al 21,4% per chi
 debutta dal 2020.</p></li>
 <li><p><strong>Il genere musicale separa molto più del genere
-sessuale.</strong> L’assortatività per genere musicale (0,519) è circa
-10 volte quella per genere sessuale (0,051). Chi fa jazz incide con chi
+sessuale.</strong> L’assortatività per genere musicale (0,497) è circa
+12 volte quella per genere sessuale (0,043). Chi fa jazz incide con chi
 fa jazz molto più sistematicamente di quanto gli uomini incidano con gli
 uomini.</p></li>
 <li><p><strong>L’omofilia di genere sessuale è piccola ma
-reale.</strong> r = 0,0511 sembra poco, ma il modello nullo a gradi
-preservati dà 0,0000 e l’intervallo di confidenza (0,0479–0,0543) sta
+reale.</strong> r = 0,0432 sembra poco, ma il modello nullo a gradi
+preservati dà 0,0001 e l’intervallo di confidenza (0,0399–0,0465) sta
 tutto sopra lo zero. Non è un effetto di composizione, è
 struttura.</p></li>
 <li><p><strong>Sono le donne a fare gruppo, non gli uomini.</strong> È
@@ -341,8 +341,8 @@ e otto</strong> le sottoreti stimate; quello maschile è vicino a zero, e
 in Rock è perfino negativo. Dove un gruppo è schiacciante maggioranza
 non ha bisogno di cercarsi; dove è raro, si addensa.</p></li>
 <li><p><strong>Dopo il 2000 non aumenta l’omofilia: aumenta la chiusura
-in triangoli.</strong> Descrittivamente l’assortatività sale da 0,0494 a
-0,0731. Ma nell’ERGM la differenza fra le due epoche nei termini di
+in triangoli.</strong> Descrittivamente l’assortatività sale da 0,0406 a
+0,0693. Ma nell’ERGM la differenza fra le due epoche nei termini di
 genere <strong>non è significativa</strong> (p = 0,88 per le donne, 0,60
 per gli uomini), mentre il termine di chiusura triadica cresce da 2,22 a
 2,89 con p &lt; 0,0001. Non è cambiato il criterio con cui si sceglie un
@@ -357,7 +357,7 @@ posizione di chi è riuscito a entrare.</p></li>
 <blockquote>
 <p><strong>Nota di misura.</strong> Tutte le assortatività di genere
 riportate come principali sono calcolate sui soli archi in cui
-<strong>entrambi</strong> gli artisti hanno un genere determinato (72,3%
+<strong>entrambi</strong> gli artisti hanno un genere determinato (80,3%
 degli archi). Includere gli <code>unknown</code> come quarta categoria
 gonfia sistematicamente l’indice, perché gli artisti poco documentati
 collaborano fra loro più del caso per ragioni di copertura dei dati. Il
@@ -365,8 +365,8 @@ confronto fra le due misure è in tabella alla sezione 5.1.</p>
 </blockquote>
 <h3 id="quanto-fidarsi">Quanto fidarsi</h3>
 <p>Il genere sessuale non è in nessuna fonte: è
-<strong>inferito</strong>. Su 70,2% della popolazione si arriva a una
-determinazione, con 5.245 casi ancorati a Wikidata tramite
+<strong>inferito</strong>. Su 74,6% della popolazione si arriva a una
+determinazione, con 5.203 casi ancorati a Wikidata tramite
 l’identificativo Discogs (join esatto, nessuna omonimia) e il resto per
 via onomastica. Il campione di validazione manuale da 200 casi e lo
 strumento per misurarne l’errore sono pronti in
@@ -412,7 +412,7 @@ perciò al solo paese di pubblicazione.</p>
 <p><strong><code>release_genre</code> e <code>release_style</code> sono
 vuote (0 righe).</strong> Il genere musicale è disponibile unicamente
 attraverso il <em>master</em> (<code>master_genre</code>), e i master
-coprono circa il 59% delle pubblicazioni. È la ragione per cui 26,4%
+coprono circa il 59% delle pubblicazioni. È la ragione per cui 26,9%
 della popolazione resta senza genere musicale assegnato.</p>
 <p><strong>L’entità “Various Artists” è di fatto assente.</strong> In
 tutto <code>release_artist</code> (oltre 92 milioni di righe) i crediti
@@ -460,8 +460,8 @@ Discogs</em>, non della musica italiana.</li>
 </ul>
 <p><strong>Effetto della soglia</strong> (misurato): 254.286 artisti
 hanno almeno due pubblicazioni italiane; applicando quota e minimo, la
-popolazione scende a <strong>100.201</strong>. Alzando la quota a 0,60 e
-0,70 si ottengono 89.984 e 75.948 artisti: la sezione 8.2 mostra che le
+popolazione scende a <strong>87.229</strong>. Alzando la quota a 0,60 e
+0,70 si ottengono 78.448 e 66.113 artisti: la sezione 8.2 mostra che le
 conclusioni non cambiano.</p>
 <h1 id="il-genere-sessuale-come-è-stato-inferito">2. Il genere sessuale:
 come è stato inferito</h1>
@@ -484,11 +484,11 @@ matching approssimato. Sono state raccolte tutte le entità con
 identificativi Discogs distinti</strong>, con 74 casi ambigui scartati e
 <strong>zero blocchi persi</strong> su una paginazione ricorsiva per
 prefisso dell’identificativo.</p>
-<p>Di questi, <strong>5.245 ricadono nella nostra popolazione</strong>
-(5,2%). È una copertura bassa in termini assoluti, e il motivo è ovvio:
+<p>Di questi, <strong>5.203 ricadono nella nostra popolazione</strong>
+(6,0%). È una copertura bassa in termini assoluti, e il motivo è ovvio:
 Wikidata descrive persone notabili, mentre la popolazione Discogs è
 fatta in larga parte di turnisti, arrangiatori, fonici e produttori che
-non hanno una voce enciclopedica. Ma sono 5.245 etichette
+non hanno una voce enciclopedica. Ma sono 5.203 etichette
 <strong>certe</strong>, ed è su quelle che si regge il livello
 successivo.</p>
 <h2 id="livello-2-lonomastica-costruita-dai-dati-e-non-da-una-lista">2.3
@@ -530,8 +530,8 @@ si guarda perciò la composizione (<code>group_member</code>): se i
 membri di genere noto sono di entrambi i generi il gruppo è
 <strong><code>mixed</code></strong>, se sono tutti dello stesso genere
 il gruppo eredita quello, se se ne conoscono meno di due resta
-<code>unknown</code>. Sono stati risolti <strong>6.371 gruppi su
-12.972</strong>, di cui 997 misti.</p>
+<code>unknown</code>. Sono stati risolti <strong>0 gruppi su 0</strong>,
+di cui 0 misti.</p>
 <h2 id="esito-della-cascata">2.5 Esito della cascata</h2>
 <table>
 <thead>
@@ -544,58 +544,53 @@ il gruppo eredita quello, se se ne conoscono meno di due resta
 <tbody>
 <tr>
 <td style="text-align: left;">onomastico_prior_it</td>
-<td style="text-align: right;">45.785</td>
-<td style="text-align: left;">45,7%</td>
+<td style="text-align: right;">44.618</td>
+<td style="text-align: left;">51,2%</td>
 </tr>
 <tr>
 <td style="text-align: left;">none</td>
-<td style="text-align: right;">22.271</td>
-<td style="text-align: left;">22,2%</td>
-</tr>
-<tr>
-<td style="text-align: left;">group_unresolved</td>
-<td style="text-align: right;">6.559</td>
-<td style="text-align: left;">6,5%</td>
-</tr>
-<tr>
-<td style="text-align: left;">group_members</td>
-<td style="text-align: right;">6.371</td>
-<td style="text-align: left;">6,4%</td>
+<td style="text-align: right;">22.136</td>
+<td style="text-align: left;">25,4%</td>
 </tr>
 <tr>
 <td style="text-align: left;">onomastico_prior_globale</td>
-<td style="text-align: right;">6.257</td>
-<td style="text-align: left;">6,2%</td>
+<td style="text-align: right;">6.217</td>
+<td style="text-align: left;">7,1%</td>
 </tr>
 <tr>
 <td style="text-align: left;">wikidata_p1953</td>
-<td style="text-align: right;">5.245</td>
-<td style="text-align: left;">5,2%</td>
+<td style="text-align: right;">5.203</td>
+<td style="text-align: left;">6,0%</td>
 </tr>
 <tr>
 <td style="text-align: left;">onomastico_gg_it_male</td>
-<td style="text-align: right;">3.278</td>
-<td style="text-align: left;">3,3%</td>
+<td style="text-align: right;">3.196</td>
+<td style="text-align: left;">3,7%</td>
 </tr>
 <tr>
 <td style="text-align: left;">onomastico_gg_it_female</td>
-<td style="text-align: right;">2.322</td>
-<td style="text-align: left;">2,3%</td>
+<td style="text-align: right;">2.262</td>
+<td style="text-align: left;">2,6%</td>
+</tr>
+<tr>
+<td style="text-align: left;">wikidata_name</td>
+<td style="text-align: right;">1.5</td>
+<td style="text-align: left;">1,7%</td>
 </tr>
 <tr>
 <td style="text-align: left;">onomastico_gg_globale_male</td>
-<td style="text-align: right;">1.171</td>
-<td style="text-align: left;">1,2%</td>
+<td style="text-align: right;">1.162</td>
+<td style="text-align: left;">1,3%</td>
 </tr>
 <tr>
 <td style="text-align: left;">onomastico_gg_globale_female</td>
-<td style="text-align: right;">870</td>
-<td style="text-align: left;">0,9%</td>
+<td style="text-align: right;">863</td>
+<td style="text-align: left;">1,0%</td>
 </tr>
 <tr>
 <td style="text-align: left;">onomastico_gg_it_mostly_male</td>
 <td style="text-align: right;">44</td>
-<td style="text-align: left;">0,0%</td>
+<td style="text-align: left;">0,1%</td>
 </tr>
 <tr>
 <td style="text-align: left;">onomastico_gg_it_mostly_female</td>
@@ -606,15 +601,15 @@ il gruppo eredita quello, se se ne conoscono meno di due resta
 </table>
 <p><strong>Tabella — Origine dell’etichetta di genere sessuale per
 ciascun artista.</strong> La riga <code>onomastico_prior_it</code> porta
-da sola la maggior parte del carico: è il dizionario costruito sui 5.245
+da sola la maggior parte del carico: è il dizionario costruito sui 5.203
 italiani certi, e bastano 320 nomi propri per coprire quasi la metà
 della popolazione, perché l’onomastica italiana è fortemente
 concentrata. <code>none</code> e <code>group_unresolved</code> sono i
 due volti del non sapere: artisti il cui nome non è un nome di persona
 riconoscibile (sigle, pseudonimi, progetti) e gruppi di cui non si
 conoscono abbastanza membri.</p>
-<p><strong>Esito finale: 13,8% di donne fra gli artisti con genere
-determinato</strong>, cioè 6,25 uomini per ogni donna, con 29,8% della
+<p><strong>Esito finale: 14,8% di donne fra gli artisti con genere
+determinato</strong>, cioè 5,77 uomini per ogni donna, con 25,4% della
 popolazione che resta indeterminata.</p>
 <h2 id="il-pezzo-mancante-la-validazione-manuale">2.6 Il pezzo mancante:
 la validazione manuale</h2>
@@ -638,7 +633,7 @@ portano <strong>un solo</strong> nome proprio (Mary), e
 <code>onomastico_gg_mostly_male</code> ne raccoglie 44 con due (Toni,
 Leonida). Su quei due livelli la validazione potrà dire se quei nomi
 sono classificati bene, non se il livello funziona in generale. Pesano
-insieme 72 artisti su 100.201, quindi la cosa non tocca le conclusioni,
+insieme 72 artisti su 87.229, quindi la cosa non tocca le conclusioni,
 ma il dato di accuratezza che ne uscirà non va letto come se fosse
 generalizzabile.</p>
 <p>Questo passo <strong>non è stato eseguito</strong>: richiede giudizio
@@ -693,22 +688,22 @@ turnisti accreditati sulla stessa traccia pesano molto più di due nomi
 che compaiono genericamente sullo stesso disco.</p>
 <p>I crediti a livello traccia vengono da due strade. La prima è
 <code>release_track_artist</code>, che porta un identificativo di
-traccia globale: <strong>2.217.379 crediti</strong>. La seconda è il
+traccia globale: <strong>1.932.237 crediti</strong>. La seconda è il
 campo <code>tracks</code> di <code>release_artist</code>, che indica le
 posizioni in forma testuale — <code>A1</code>, <code>1 to 3</code>,
 <code>4, 6, 12</code> — e va <strong>risolto</strong>: le posizioni si
 convertono in tracce reali passando per <code>release_track</code>. Di
-467.509 crediti posizionali ne sono stati risolti 452.639 (96,8%); i
+442.050 crediti posizionali ne sono stati risolti 427.820 (96,8%); i
 restanti usano formule libere (<em>“all tracks except 1, 13 and
 14”</em>) e sono stati <strong>degradati ad
 <code>umbrella</code></strong> anziché interpretati a forza.</p>
-<p>Totale: <strong>2.670.018 crediti su 4.169.130 (64,0%) sono risolti a
+<p>Totale: <strong>2.360.057 crediti su 3.682.616 (64,1%) sono risolti a
 livello di singola traccia.</strong></p>
 <h2 id="filtri-e-sottoreti">3.2 Filtri e sottoreti</h2>
 <p>Le pubblicazioni con più di 8 artisti accreditati vengono scartate:
 sono raccolte e cofanetti, dove la co-presenza non indica collaborazione
 e il numero di coppie esplode in modo quadratico. Il filtro riduce i
-crediti da 4.169.130 a 702.613.</p>
+crediti da 3.682.616 a 586.040.</p>
 <p>Le sottoreti per ruolo separano due mestieri diversi:
 <strong>creative</strong> (produzione, scrittura, arrangiamento,
 composizione) e <strong>performance</strong> (voce, strumenti,
@@ -749,45 +744,45 @@ un disco.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">all</td>
-<td style="text-align: left;">100.201</td>
-<td style="text-align: left;">82.595</td>
-<td style="text-align: left;">702.613</td>
-<td style="text-align: left;">0,000206</td>
-<td style="text-align: left;">17,013451</td>
+<td style="text-align: left;">87.229</td>
+<td style="text-align: left;">70.712</td>
+<td style="text-align: left;">586.040</td>
+<td style="text-align: left;">0,000234</td>
+<td style="text-align: left;">16,575404</td>
 <td style="text-align: left;">7,000000</td>
-<td style="text-align: left;">2.523</td>
-<td style="text-align: left;">1.288</td>
-<td style="text-align: left;">79.013</td>
-<td style="text-align: left;">0,956632</td>
-<td style="text-align: left;">1.752.462,970002</td>
+<td style="text-align: left;">2.258</td>
+<td style="text-align: left;">1.204</td>
+<td style="text-align: left;">67.443</td>
+<td style="text-align: left;">0,953770</td>
+<td style="text-align: left;">1.495.529,570002</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
-<td style="text-align: left;">100.201</td>
-<td style="text-align: left;">34.443</td>
-<td style="text-align: left;">217.334</td>
-<td style="text-align: left;">0,000366</td>
-<td style="text-align: left;">12,619923</td>
+<td style="text-align: left;">87.229</td>
+<td style="text-align: left;">30.440</td>
+<td style="text-align: left;">199.832</td>
+<td style="text-align: left;">0,000431</td>
+<td style="text-align: left;">13,129566</td>
 <td style="text-align: left;">4,000000</td>
-<td style="text-align: left;">1.395</td>
-<td style="text-align: left;">1.765</td>
-<td style="text-align: left;">29.814</td>
-<td style="text-align: left;">0,865604</td>
-<td style="text-align: left;">901.379,880000</td>
+<td style="text-align: left;">1.348</td>
+<td style="text-align: left;">1.530</td>
+<td style="text-align: left;">26.538</td>
+<td style="text-align: left;">0,871813</td>
+<td style="text-align: left;">866.621,310000</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
-<td style="text-align: left;">100.201</td>
-<td style="text-align: left;">60.231</td>
-<td style="text-align: left;">281.710</td>
-<td style="text-align: left;">0,000155</td>
-<td style="text-align: left;">9,354319</td>
-<td style="text-align: left;">5,000000</td>
-<td style="text-align: left;">624</td>
-<td style="text-align: left;">2.445</td>
-<td style="text-align: left;">53.148</td>
-<td style="text-align: left;">0,882403</td>
-<td style="text-align: left;">559.771,920000</td>
+<td style="text-align: left;">87.229</td>
+<td style="text-align: left;">49.152</td>
+<td style="text-align: left;">211.751</td>
+<td style="text-align: left;">0,000175</td>
+<td style="text-align: left;">8,616170</td>
+<td style="text-align: left;">4,000000</td>
+<td style="text-align: left;">598</td>
+<td style="text-align: left;">2.493</td>
+<td style="text-align: left;">42.013</td>
+<td style="text-align: left;">0,854757</td>
+<td style="text-align: left;">430.596,670000</td>
 </tr>
 </tbody>
 </table>
@@ -796,8 +791,8 @@ collaborazione</strong></p>
 <p><em>Dati completi in <code>tables/t2_rete_descrittive.csv</code> e
 <code>tables/t2_rete_descrittive.tex</code>.</em></p>
 <p>La rete complessiva è <strong>sparsa e molto connessa</strong>:
-densità dell’ordine di 0,000206, ma una componente gigante che assorbe
-95,7% degli artisti collegati. È la firma tipica di un mondo
+densità dell’ordine di 0,000234, ma una componente gigante che assorbe
+95,4% degli artisti collegati. È la firma tipica di un mondo
 professionale in cui quasi nessuno lavora isolato e quasi nessuno lavora
 con tutti. La rete <code>creative</code> è più piccola e più densa di
 quella <code>performance</code>: produttori e autori formano un nucleo
@@ -823,7 +818,7 @@ centralità.</p>
 </figure>
 <p>Le analisi che seguono girano sulla <strong>componente
 gigante</strong>, perché le misure di centralità e le distanze non sono
-definite fra componenti separate. La quota esclusa è 4,3% degli artisti
+definite fra componenti separate. La quota esclusa è 4,6% degli artisti
 collegati.</p>
 <h1 id="quante-sono-le-donne-e-in-quale-musica-rq1">4. Quante sono le
 donne, e in quale musica (RQ1)</h1>
@@ -831,9 +826,9 @@ donne, e in quale musica (RQ1)</h1>
 <img src="figures/f3_quota_donne_per_decennio.png" alt="f3_quota_donne_per_decennio" style="width:100%" />
 <figcaption>
 <p><strong>La quota di donne per decennio di debutto.</strong> La linea
-non è la storia di un progresso. Parte dal 16,9% per chi debutta negli
-anni Sessanta, scende fino al 12,4% negli anni Ottanta — il minimo della
-serie — e risale solo di recente, fino al 20,5% per chi debutta dal
+non è la storia di un progresso. Parte dal 17,8% per chi debutta negli
+anni Sessanta, scende fino al 13,2% negli anni Ottanta — il minimo della
+serie — e risale solo di recente, fino al 21,4% per chi debutta dal
 2020. La discesa degli anni Settanta e Ottanta merita cautela prima di
 leggerla come un arretramento reale: coincide con l’espansione massiccia
 del catalogo Discogs in quegli anni, cioè con l’ingresso in massa di
@@ -897,84 +892,84 @@ col tempo.</p>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">1.950</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">1,000</td>
+<td style="text-align: left;">3</td>
 <td style="text-align: left;">0,000</td>
 <td style="text-align: left;">0,000</td>
-<td style="text-align: left;">0,000</td>
-<td style="text-align: left;">0,793</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">n.d.</td>
 <td style="text-align: left;">n.d.</td>
 </tr>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">1.960</td>
-<td style="text-align: left;">19</td>
-<td style="text-align: left;">14,000</td>
-<td style="text-align: left;">1,000</td>
-<td style="text-align: left;">0,071</td>
-<td style="text-align: left;">0,013</td>
-<td style="text-align: left;">0,315</td>
+<td style="text-align: left;">17</td>
 <td style="text-align: left;">13,000</td>
+<td style="text-align: left;">1,000</td>
+<td style="text-align: left;">0,077</td>
+<td style="text-align: left;">0,014</td>
+<td style="text-align: left;">0,333</td>
+<td style="text-align: left;">12,000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">1.970</td>
-<td style="text-align: left;">65</td>
-<td style="text-align: left;">58,000</td>
+<td style="text-align: left;">61</td>
+<td style="text-align: left;">54,000</td>
 <td style="text-align: left;">9,000</td>
-<td style="text-align: left;">0,155</td>
-<td style="text-align: left;">0,084</td>
-<td style="text-align: left;">0,269</td>
-<td style="text-align: left;">5,444</td>
+<td style="text-align: left;">0,167</td>
+<td style="text-align: left;">0,090</td>
+<td style="text-align: left;">0,287</td>
+<td style="text-align: left;">5,000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">1.980</td>
-<td style="text-align: left;">118</td>
-<td style="text-align: left;">105,000</td>
+<td style="text-align: left;">105</td>
+<td style="text-align: left;">98,000</td>
 <td style="text-align: left;">15,000</td>
-<td style="text-align: left;">0,143</td>
-<td style="text-align: left;">0,089</td>
-<td style="text-align: left;">0,222</td>
-<td style="text-align: left;">6,000</td>
+<td style="text-align: left;">0,153</td>
+<td style="text-align: left;">0,095</td>
+<td style="text-align: left;">0,237</td>
+<td style="text-align: left;">5,533</td>
 </tr>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">1.990</td>
-<td style="text-align: left;">143</td>
-<td style="text-align: left;">115,000</td>
+<td style="text-align: left;">129</td>
+<td style="text-align: left;">106,000</td>
 <td style="text-align: left;">15,000</td>
-<td style="text-align: left;">0,130</td>
-<td style="text-align: left;">0,081</td>
-<td style="text-align: left;">0,204</td>
-<td style="text-align: left;">6,667</td>
+<td style="text-align: left;">0,142</td>
+<td style="text-align: left;">0,088</td>
+<td style="text-align: left;">0,220</td>
+<td style="text-align: left;">6,067</td>
 </tr>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">2.000</td>
-<td style="text-align: left;">148</td>
-<td style="text-align: left;">124,000</td>
+<td style="text-align: left;">137</td>
+<td style="text-align: left;">121,000</td>
 <td style="text-align: left;">21,000</td>
-<td style="text-align: left;">0,169</td>
-<td style="text-align: left;">0,114</td>
-<td style="text-align: left;">0,245</td>
-<td style="text-align: left;">4,905</td>
+<td style="text-align: left;">0,174</td>
+<td style="text-align: left;">0,116</td>
+<td style="text-align: left;">0,251</td>
+<td style="text-align: left;">4,762</td>
 </tr>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">2.010</td>
-<td style="text-align: left;">157</td>
-<td style="text-align: left;">118,000</td>
+<td style="text-align: left;">141</td>
+<td style="text-align: left;">114,000</td>
 <td style="text-align: left;">22,000</td>
-<td style="text-align: left;">0,186</td>
-<td style="text-align: left;">0,126</td>
-<td style="text-align: left;">0,266</td>
-<td style="text-align: left;">4,364</td>
+<td style="text-align: left;">0,193</td>
+<td style="text-align: left;">0,131</td>
+<td style="text-align: left;">0,275</td>
+<td style="text-align: left;">4,182</td>
 </tr>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">2.020</td>
-<td style="text-align: left;">23</td>
+<td style="text-align: left;">22</td>
 <td style="text-align: left;">17,000</td>
 <td style="text-align: left;">4,000</td>
 <td style="text-align: left;">0,235</td>
@@ -986,11 +981,11 @@ col tempo.</p>
 <td style="text-align: left;">Brass &amp; Military</td>
 <td style="text-align: left;">1.940</td>
 <td style="text-align: left;">24</td>
-<td style="text-align: left;">13,000</td>
+<td style="text-align: left;">14,000</td>
 <td style="text-align: left;">0,000</td>
 <td style="text-align: left;">0,000</td>
 <td style="text-align: left;">0,000</td>
-<td style="text-align: left;">0,228</td>
+<td style="text-align: left;">0,215</td>
 <td style="text-align: left;">n.d.</td>
 </tr>
 <tr>
@@ -1007,7 +1002,7 @@ col tempo.</p>
 <tr>
 <td style="text-align: left;">Brass &amp; Military</td>
 <td style="text-align: left;">1.960</td>
-<td style="text-align: left;">39</td>
+<td style="text-align: left;">38</td>
 <td style="text-align: left;">18,000</td>
 <td style="text-align: left;">2,000</td>
 <td style="text-align: left;">0,111</td>
@@ -1018,7 +1013,7 @@ col tempo.</p>
 <tr>
 <td style="text-align: left;">Brass &amp; Military</td>
 <td style="text-align: left;">1.970</td>
-<td style="text-align: left;">15</td>
+<td style="text-align: left;">13</td>
 <td style="text-align: left;">6,000</td>
 <td style="text-align: left;">0,000</td>
 <td style="text-align: left;">0,000</td>
@@ -1051,23 +1046,23 @@ col tempo.</p>
 <tr>
 <td style="text-align: left;">Brass &amp; Military</td>
 <td style="text-align: left;">2.000</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">2,000</td>
-<td style="text-align: left;">0,000</td>
-<td style="text-align: left;">0,000</td>
-<td style="text-align: left;">0,000</td>
-<td style="text-align: left;">0,658</td>
-<td style="text-align: left;">n.d.</td>
-</tr>
-<tr>
-<td style="text-align: left;">Brass &amp; Military</td>
-<td style="text-align: left;">2.010</td>
-<td style="text-align: left;">3</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: left;">1,000</td>
 <td style="text-align: left;">0,000</td>
 <td style="text-align: left;">0,000</td>
 <td style="text-align: left;">0,000</td>
 <td style="text-align: left;">0,793</td>
+<td style="text-align: left;">n.d.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Brass &amp; Military</td>
+<td style="text-align: left;">2.010</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">0,000</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">n.d.</td>
+<td style="text-align: left;">n.d.</td>
 <td style="text-align: left;">n.d.</td>
 </tr>
 <tr>
@@ -1084,7 +1079,7 @@ col tempo.</p>
 <tr>
 <td style="text-align: left;">Children’s</td>
 <td style="text-align: left;">1.950</td>
-<td style="text-align: left;">83</td>
+<td style="text-align: left;">79</td>
 <td style="text-align: left;">72,000</td>
 <td style="text-align: left;">24,000</td>
 <td style="text-align: left;">0,333</td>
@@ -1095,7 +1090,7 @@ col tempo.</p>
 <tr>
 <td style="text-align: left;">Children’s</td>
 <td style="text-align: left;">1.960</td>
-<td style="text-align: left;">219</td>
+<td style="text-align: left;">208</td>
 <td style="text-align: left;">173,000</td>
 <td style="text-align: left;">66,000</td>
 <td style="text-align: left;">0,382</td>
@@ -1106,24 +1101,24 @@ col tempo.</p>
 <tr>
 <td style="text-align: left;">Children’s</td>
 <td style="text-align: left;">1.970</td>
-<td style="text-align: left;">185</td>
-<td style="text-align: left;">137,000</td>
+<td style="text-align: left;">170</td>
+<td style="text-align: left;">131,000</td>
 <td style="text-align: left;">70,000</td>
-<td style="text-align: left;">0,511</td>
-<td style="text-align: left;">0,428</td>
-<td style="text-align: left;">0,593</td>
-<td style="text-align: left;">0,957</td>
+<td style="text-align: left;">0,534</td>
+<td style="text-align: left;">0,449</td>
+<td style="text-align: left;">0,618</td>
+<td style="text-align: left;">0,871</td>
 </tr>
 <tr>
 <td style="text-align: left;">Children’s</td>
 <td style="text-align: left;">1.980</td>
-<td style="text-align: left;">96</td>
-<td style="text-align: left;">54,000</td>
+<td style="text-align: left;">85</td>
+<td style="text-align: left;">53,000</td>
 <td style="text-align: left;">24,000</td>
-<td style="text-align: left;">0,444</td>
-<td style="text-align: left;">0,320</td>
-<td style="text-align: left;">0,576</td>
-<td style="text-align: left;">1,250</td>
+<td style="text-align: left;">0,453</td>
+<td style="text-align: left;">0,327</td>
+<td style="text-align: left;">0,585</td>
+<td style="text-align: left;">1,208</td>
 </tr>
 <tr>
 <td style="text-align: left;">Children’s</td>
@@ -1139,18 +1134,18 @@ col tempo.</p>
 <tr>
 <td style="text-align: left;">Children’s</td>
 <td style="text-align: left;">2.000</td>
-<td style="text-align: left;">30</td>
-<td style="text-align: left;">24,000</td>
+<td style="text-align: left;">27</td>
+<td style="text-align: left;">23,000</td>
 <td style="text-align: left;">7,000</td>
-<td style="text-align: left;">0,292</td>
-<td style="text-align: left;">0,149</td>
-<td style="text-align: left;">0,492</td>
-<td style="text-align: left;">2,429</td>
+<td style="text-align: left;">0,304</td>
+<td style="text-align: left;">0,156</td>
+<td style="text-align: left;">0,509</td>
+<td style="text-align: left;">2,286</td>
 </tr>
 <tr>
 <td style="text-align: left;">Children’s</td>
 <td style="text-align: left;">2.010</td>
-<td style="text-align: left;">16</td>
+<td style="text-align: left;">13</td>
 <td style="text-align: left;">9,000</td>
 <td style="text-align: left;">2,000</td>
 <td style="text-align: left;">0,222</td>
@@ -1169,7 +1164,7 @@ debutto, con intervalli di Wilson al 95%</strong></p>
 con i pattern noti in letteratura</h2>
 <p>Il riferimento consueto per l’hip hop è un rapporto intorno a
 <strong>4 uomini per ogni donna</strong>. Nei dati italiani il rapporto
-è <strong>10,8 a 1</strong> (8,5% di donne): sensibilmente <strong>più
+è <strong>10,4 a 1</strong> (8,8% di donne): sensibilmente <strong>più
 squilibrato</strong> del riferimento internazionale. Due letture non
 alternative: la scena hip hop italiana censita da Discogs è più piccola
 e più recente, quindi più esposta al fatto che i ruoli di produzione —
@@ -1177,14 +1172,14 @@ dove le donne sono più rare — pesino relativamente di più; e il
 conteggio qui include tutti i crediti, non solo gli interpreti
 principali, il che abbassa la quota rispetto alle statistiche basate
 sulle classifiche.</p>
-<p>All’estremo opposto, <strong>Classical</strong> (24,5%) e
-<strong>Children’s</strong> (40,7%) sono i generi con la presenza
+<p>All’estremo opposto, <strong>Classical</strong> (24,7%) e
+<strong>Children’s</strong> (41,3%) sono i generi con la presenza
 femminile più alta — il secondo sopra il 41%, l’unico dell’intero corpus
 in cui le donne si avvicinano alla metà. La distanza fra Children’s e
-Hip Hop, a parità di popolazione e di metodo, è di oltre 32 punti
+Hip Hop, a parità di popolazione e di metodo, è di oltre 33 punti
 percentuali: il genere musicale è il predittore più forte della presenza
 femminile in tutto questo studio.</p>
-<p><strong>Rock (9,4%) e Electronic (12,9%)</strong>, che insieme fanno
+<p><strong>Rock (10,5%) e Electronic (14,2%)</strong>, che insieme fanno
 la parte maggiore della popolazione, stanno entrambi sotto la media
 generale. È su queste due scene, per peso numerico, che si decide la
 quota complessiva.</p>
@@ -1232,19 +1227,19 @@ una categoria.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">gender</td>
-<td style="text-align: left;">0,0735</td>
-<td style="text-align: left;">0,1133</td>
+<td style="text-align: left;">0,0810</td>
+<td style="text-align: left;">0,1254</td>
 <td style="text-align: left;">-0,0000</td>
-<td style="text-align: left;">0,0009</td>
-<td style="text-align: left;">78,7698</td>
+<td style="text-align: left;">0,0010</td>
+<td style="text-align: left;">81,4605</td>
 </tr>
 <tr>
 <td style="text-align: left;">musical_genre</td>
-<td style="text-align: left;">0,5186</td>
-<td style="text-align: left;">0,6803</td>
-<td style="text-align: left;">-0,0000</td>
-<td style="text-align: left;">0,0005</td>
-<td style="text-align: left;">972,7181</td>
+<td style="text-align: left;">0,4970</td>
+<td style="text-align: left;">0,6675</td>
+<td style="text-align: left;">-0,0001</td>
+<td style="text-align: left;">0,0006</td>
+<td style="text-align: left;">790,6131</td>
 </tr>
 </tbody>
 </table>
@@ -1283,396 +1278,396 @@ e <code>tables/t3_assortativita_globale.tex</code>.</em></p>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">508.173</td>
-<td style="text-align: left;">0,7233</td>
-<td style="text-align: left;">0,0511</td>
-<td style="text-align: left;">0,0479</td>
-<td style="text-align: left;">0,0543</td>
+<td style="text-align: left;">470.690</td>
+<td style="text-align: left;">0,8032</td>
+<td style="text-align: left;">0,0432</td>
+<td style="text-align: left;">0,0399</td>
+<td style="text-align: left;">0,0465</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">586.040</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,0735</td>
-<td style="text-align: left;">0,0716</td>
-<td style="text-align: left;">0,0755</td>
+<td style="text-align: left;">0,0810</td>
+<td style="text-align: left;">0,0788</td>
+<td style="text-align: left;">0,0834</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">605.856</td>
-<td style="text-align: left;">0,8623</td>
-<td style="text-align: left;">0,5865</td>
-<td style="text-align: left;">0,5850</td>
-<td style="text-align: left;">0,5880</td>
+<td style="text-align: left;">503.971</td>
+<td style="text-align: left;">0,8600</td>
+<td style="text-align: left;">0,5622</td>
+<td style="text-align: left;">0,5606</td>
+<td style="text-align: left;">0,5638</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">586.040</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,5186</td>
-<td style="text-align: left;">0,5172</td>
-<td style="text-align: left;">0,5200</td>
+<td style="text-align: left;">0,4970</td>
+<td style="text-align: left;">0,4955</td>
+<td style="text-align: left;">0,4984</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">355.137</td>
-<td style="text-align: left;">0,7537</td>
-<td style="text-align: left;">0,0494</td>
-<td style="text-align: left;">0,0455</td>
-<td style="text-align: left;">0,0533</td>
+<td style="text-align: left;">333.067</td>
+<td style="text-align: left;">0,8444</td>
+<td style="text-align: left;">0,0406</td>
+<td style="text-align: left;">0,0367</td>
+<td style="text-align: left;">0,0443</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">471.214</td>
+<td style="text-align: left;">394.423</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,0540</td>
-<td style="text-align: left;">0,0517</td>
-<td style="text-align: left;">0,0563</td>
+<td style="text-align: left;">0,0576</td>
+<td style="text-align: left;">0,0548</td>
+<td style="text-align: left;">0,0605</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">432.368</td>
-<td style="text-align: left;">0,9176</td>
-<td style="text-align: left;">0,5373</td>
-<td style="text-align: left;">0,5355</td>
-<td style="text-align: left;">0,5393</td>
+<td style="text-align: left;">362.127</td>
+<td style="text-align: left;">0,9181</td>
+<td style="text-align: left;">0,5103</td>
+<td style="text-align: left;">0,5082</td>
+<td style="text-align: left;">0,5124</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">471.214</td>
+<td style="text-align: left;">394.423</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,4950</td>
-<td style="text-align: left;">0,4932</td>
-<td style="text-align: left;">0,4967</td>
+<td style="text-align: left;">0,4704</td>
+<td style="text-align: left;">0,4685</td>
+<td style="text-align: left;">0,4721</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">69.320</td>
-<td style="text-align: left;">0,6021</td>
-<td style="text-align: left;">0,0731</td>
-<td style="text-align: left;">0,0643</td>
-<td style="text-align: left;">0,0816</td>
+<td style="text-align: left;">61.015</td>
+<td style="text-align: left;">0,6563</td>
+<td style="text-align: left;">0,0693</td>
+<td style="text-align: left;">0,0598</td>
+<td style="text-align: left;">0,0788</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">115.134</td>
+<td style="text-align: left;">92.968</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,1370</td>
-<td style="text-align: left;">0,1320</td>
-<td style="text-align: left;">0,1420</td>
+<td style="text-align: left;">0,1479</td>
+<td style="text-align: left;">0,1416</td>
+<td style="text-align: left;">0,1533</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">81.408</td>
-<td style="text-align: left;">0,7071</td>
-<td style="text-align: left;">0,7263</td>
-<td style="text-align: left;">0,7227</td>
-<td style="text-align: left;">0,7300</td>
+<td style="text-align: left;">64.388</td>
+<td style="text-align: left;">0,6926</td>
+<td style="text-align: left;">0,7101</td>
+<td style="text-align: left;">0,7062</td>
+<td style="text-align: left;">0,7141</td>
 </tr>
 <tr>
 <td style="text-align: left;">all</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">115.134</td>
+<td style="text-align: left;">92.968</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,5614</td>
-<td style="text-align: left;">0,5580</td>
-<td style="text-align: left;">0,5649</td>
+<td style="text-align: left;">0,5445</td>
+<td style="text-align: left;">0,5407</td>
+<td style="text-align: left;">0,5482</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">188.167</td>
-<td style="text-align: left;">0,8658</td>
-<td style="text-align: left;">0,0235</td>
-<td style="text-align: left;">0,0183</td>
-<td style="text-align: left;">0,0289</td>
+<td style="text-align: left;">179.908</td>
+<td style="text-align: left;">0,9003</td>
+<td style="text-align: left;">0,0224</td>
+<td style="text-align: left;">0,0172</td>
+<td style="text-align: left;">0,0279</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">217.334</td>
+<td style="text-align: left;">199.832</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,0729</td>
-<td style="text-align: left;">0,0685</td>
-<td style="text-align: left;">0,0773</td>
+<td style="text-align: left;">0,0703</td>
+<td style="text-align: left;">0,0658</td>
+<td style="text-align: left;">0,0750</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">200.128</td>
-<td style="text-align: left;">0,9208</td>
-<td style="text-align: left;">0,5945</td>
-<td style="text-align: left;">0,5919</td>
-<td style="text-align: left;">0,5972</td>
+<td style="text-align: left;">184.147</td>
+<td style="text-align: left;">0,9215</td>
+<td style="text-align: left;">0,5770</td>
+<td style="text-align: left;">0,5743</td>
+<td style="text-align: left;">0,5799</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">217.334</td>
+<td style="text-align: left;">199.832</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,5506</td>
-<td style="text-align: left;">0,5483</td>
-<td style="text-align: left;">0,5530</td>
+<td style="text-align: left;">0,5351</td>
+<td style="text-align: left;">0,5323</td>
+<td style="text-align: left;">0,5377</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">150.618</td>
-<td style="text-align: left;">0,9046</td>
-<td style="text-align: left;">0,0230</td>
-<td style="text-align: left;">0,0171</td>
-<td style="text-align: left;">0,0291</td>
+<td style="text-align: left;">146.391</td>
+<td style="text-align: left;">0,9325</td>
+<td style="text-align: left;">0,0224</td>
+<td style="text-align: left;">0,0165</td>
+<td style="text-align: left;">0,0282</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">166.503</td>
+<td style="text-align: left;">156.982</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,0334</td>
-<td style="text-align: left;">0,0292</td>
-<td style="text-align: left;">0,0375</td>
+<td style="text-align: left;">0,0269</td>
+<td style="text-align: left;">0,0224</td>
+<td style="text-align: left;">0,0316</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">158.499</td>
-<td style="text-align: left;">0,9519</td>
-<td style="text-align: left;">0,5373</td>
-<td style="text-align: left;">0,5342</td>
-<td style="text-align: left;">0,5402</td>
+<td style="text-align: left;">149.499</td>
+<td style="text-align: left;">0,9523</td>
+<td style="text-align: left;">0,5209</td>
+<td style="text-align: left;">0,5177</td>
+<td style="text-align: left;">0,5243</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">166.503</td>
+<td style="text-align: left;">156.982</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,5100</td>
-<td style="text-align: left;">0,5070</td>
-<td style="text-align: left;">0,5133</td>
+<td style="text-align: left;">0,4945</td>
+<td style="text-align: left;">0,4914</td>
+<td style="text-align: left;">0,4977</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">15.531</td>
-<td style="text-align: left;">0,6638</td>
-<td style="text-align: left;">0,0474</td>
-<td style="text-align: left;">0,0257</td>
-<td style="text-align: left;">0,0668</td>
+<td style="text-align: left;">13.668</td>
+<td style="text-align: left;">0,7079</td>
+<td style="text-align: left;">0,0444</td>
+<td style="text-align: left;">0,0227</td>
+<td style="text-align: left;">0,0655</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">23.398</td>
+<td style="text-align: left;">19.308</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,1436</td>
-<td style="text-align: left;">0,1314</td>
-<td style="text-align: left;">0,1557</td>
+<td style="text-align: left;">0,1616</td>
+<td style="text-align: left;">0,1478</td>
+<td style="text-align: left;">0,1753</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">18.108</td>
-<td style="text-align: left;">0,7739</td>
-<td style="text-align: left;">0,7890</td>
-<td style="text-align: left;">0,7803</td>
-<td style="text-align: left;">0,7965</td>
+<td style="text-align: left;">14.659</td>
+<td style="text-align: left;">0,7592</td>
+<td style="text-align: left;">0,7868</td>
+<td style="text-align: left;">0,7788</td>
+<td style="text-align: left;">0,7953</td>
 </tr>
 <tr>
 <td style="text-align: left;">creative</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">23.398</td>
+<td style="text-align: left;">19.308</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,6298</td>
-<td style="text-align: left;">0,6224</td>
-<td style="text-align: left;">0,6375</td>
+<td style="text-align: left;">0,6235</td>
+<td style="text-align: left;">0,6145</td>
+<td style="text-align: left;">0,6320</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">186.094</td>
-<td style="text-align: left;">0,6606</td>
-<td style="text-align: left;">0,1175</td>
-<td style="text-align: left;">0,1122</td>
-<td style="text-align: left;">0,1228</td>
+<td style="text-align: left;">160.881</td>
+<td style="text-align: left;">0,7598</td>
+<td style="text-align: left;">0,1054</td>
+<td style="text-align: left;">0,0996</td>
+<td style="text-align: left;">0,1115</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">281.710</td>
+<td style="text-align: left;">211.751</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,1538</td>
-<td style="text-align: left;">0,1509</td>
-<td style="text-align: left;">0,1569</td>
+<td style="text-align: left;">0,1704</td>
+<td style="text-align: left;">0,1667</td>
+<td style="text-align: left;">0,1741</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">231.696</td>
-<td style="text-align: left;">0,8225</td>
-<td style="text-align: left;">0,6458</td>
-<td style="text-align: left;">0,6434</td>
-<td style="text-align: left;">0,6481</td>
+<td style="text-align: left;">171.934</td>
+<td style="text-align: left;">0,8120</td>
+<td style="text-align: left;">0,6153</td>
+<td style="text-align: left;">0,6125</td>
+<td style="text-align: left;">0,6177</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">tutto</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">281.710</td>
+<td style="text-align: left;">211.751</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,5591</td>
-<td style="text-align: left;">0,5569</td>
-<td style="text-align: left;">0,5614</td>
+<td style="text-align: left;">0,5305</td>
+<td style="text-align: left;">0,5279</td>
+<td style="text-align: left;">0,5327</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">109.980</td>
-<td style="text-align: left;">0,6859</td>
-<td style="text-align: left;">0,1234</td>
-<td style="text-align: left;">0,1165</td>
-<td style="text-align: left;">0,1300</td>
+<td style="text-align: left;">95.250</td>
+<td style="text-align: left;">0,8164</td>
+<td style="text-align: left;">0,1106</td>
+<td style="text-align: left;">0,1028</td>
+<td style="text-align: left;">0,1180</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">160.347</td>
+<td style="text-align: left;">116.673</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,1539</td>
-<td style="text-align: left;">0,1501</td>
-<td style="text-align: left;">0,1579</td>
+<td style="text-align: left;">0,1733</td>
+<td style="text-align: left;">0,1679</td>
+<td style="text-align: left;">0,1785</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">143.147</td>
-<td style="text-align: left;">0,8927</td>
-<td style="text-align: left;">0,6034</td>
-<td style="text-align: left;">0,6001</td>
-<td style="text-align: left;">0,6062</td>
+<td style="text-align: left;">103.792</td>
+<td style="text-align: left;">0,8896</td>
+<td style="text-align: left;">0,5612</td>
+<td style="text-align: left;">0,5582</td>
+<td style="text-align: left;">0,5647</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">pre2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">160.347</td>
+<td style="text-align: left;">116.673</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,5516</td>
-<td style="text-align: left;">0,5489</td>
-<td style="text-align: left;">0,5546</td>
+<td style="text-align: left;">0,5132</td>
+<td style="text-align: left;">0,5101</td>
+<td style="text-align: left;">0,5164</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">37.172</td>
-<td style="text-align: left;">0,5716</td>
-<td style="text-align: left;">0,1133</td>
-<td style="text-align: left;">0,1003</td>
-<td style="text-align: left;">0,1275</td>
+<td style="text-align: left;">31.344</td>
+<td style="text-align: left;">0,6306</td>
+<td style="text-align: left;">0,1050</td>
+<td style="text-align: left;">0,0913</td>
+<td style="text-align: left;">0,1180</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">gender</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">65.036</td>
+<td style="text-align: left;">49.702</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,1822</td>
-<td style="text-align: left;">0,1756</td>
-<td style="text-align: left;">0,1886</td>
+<td style="text-align: left;">0,1985</td>
+<td style="text-align: left;">0,1909</td>
+<td style="text-align: left;">0,2066</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">determinati soltanto</td>
-<td style="text-align: left;">44.797</td>
-<td style="text-align: left;">0,6888</td>
-<td style="text-align: left;">0,7658</td>
-<td style="text-align: left;">0,7610</td>
-<td style="text-align: left;">0,7703</td>
+<td style="text-align: left;">33.316</td>
+<td style="text-align: left;">0,6703</td>
+<td style="text-align: left;">0,7482</td>
+<td style="text-align: left;">0,7428</td>
+<td style="text-align: left;">0,7533</td>
 </tr>
 <tr>
 <td style="text-align: left;">performance</td>
 <td style="text-align: left;">post2000</td>
 <td style="text-align: left;">musical_genre</td>
 <td style="text-align: left;">tutte le categorie</td>
-<td style="text-align: left;">65.036</td>
+<td style="text-align: left;">49.702</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">0,5932</td>
-<td style="text-align: left;">0,5889</td>
-<td style="text-align: left;">0,5977</td>
+<td style="text-align: left;">0,5737</td>
+<td style="text-align: left;">0,5685</td>
+<td style="text-align: left;">0,5787</td>
 </tr>
 </tbody>
 </table>
@@ -1694,14 +1689,14 @@ crediti, ruoli minori, epoche marginali, pseudonimi — e sono le stesse
 che rendono difficile inferirne il genere. È copertura dei dati che si
 traveste da struttura sociale.</p>
 <p>La misura di riferimento restringe perciò il calcolo agli archi in
-cui entrambi gli estremi hanno genere determinato: <strong>72,3% degli
-archi</strong>. La differenza non è cosmetica: <strong>r passa da 0,0735
-a 0,0511</strong>, cioè un terzo dell’omofilia apparente era
+cui entrambi gli estremi hanno genere determinato: <strong>80,3% degli
+archi</strong>. La differenza non è cosmetica: <strong>r passa da 0,0810
+a 0,0432</strong>, cioè un terzo dell’omofilia apparente era
 artefatto.</p>
 <p>Lo stesso controllo è stato fatto sul <strong>genere
 musicale</strong>, dove ‘Unknown’ è altrettanto presente, e dà il
 risultato <strong>opposto</strong>: togliendo gli indeterminati
-l’assortatività sale da 0,5186 a 0,5865. Il motivo è che gli artisti
+l’assortatività sale da 0,4970 a 0,5622. Il motivo è che gli artisti
 senza genere musicale assegnato non si aggregano fra loro per genere —
 non ne hanno uno — e quindi diluiscono la diagonale invece di gonfiarla.
 Riportare entrambi i confronti serve a chiarire che l’esclusione degli
@@ -1709,14 +1704,14 @@ indeterminati è una scelta di metodo applicata in modo uniforme, non un
 accorgimento adottato dove conveniva: sul genere sessuale abbassa il
 risultato, sul genere musicale lo alza.</p>
 <h3 id="il-risultato-centrale">Il risultato centrale</h3>
-<p>L’assortatività per <strong>genere musicale</strong> vale 0,519. È un
+<p>L’assortatività per <strong>genere musicale</strong> vale 0,497. È un
 valore molto alto: le carriere si svolgono dentro un genere e le
 collaborazioni seguono i confini del genere quasi come se fossero
 confini di settore.</p>
-<p>L’assortatività per <strong>genere sessuale</strong> vale 0,0511,
-circa 10 volte meno, con intervallo di confidenza 0,0479–0,0543 e
-modello nullo a 0,0000. Preso da solo il numero sembra trascurabile; non
-lo è, perché su 702.613 archi anche un effetto piccolo è misurato con
+<p>L’assortatività per <strong>genere sessuale</strong> vale 0,0432,
+circa 12 volte meno, con intervallo di confidenza 0,0399–0,0465 e
+modello nullo a 0,0001. Preso da solo il numero sembra trascurabile; non
+lo è, perché su 586.040 archi anche un effetto piccolo è misurato con
 precisione elevata e l’intervallo sta interamente sopra lo zero.</p>
 <p>La lettura sostanziale è che <strong>il genere sessuale struttura le
 collaborazioni, ma molto meno di quanto faccia la specializzazione
@@ -1747,25 +1742,25 @@ bootstrap al 95%, il trattino verticale il valore del modello nullo.
 L’attesa, dalla letteratura, era un <strong>allentamento</strong> dopo
 il 2000. Sui soli nodi con genere determinato i dati dicono l’opposto,
 ma con ampiezza molto più contenuta di quanto suggerisca la misura a
-quattro categorie mostrata in figura: 0,0494 contro 0,0731.</p>
+quattro categorie mostrata in figura: 0,0406 contro 0,0693.</p>
 </figcaption>
 </figure>
 <p>Prima di interpretarlo va ripulito. Sulla misura ingenua a quattro
-categorie il salto è spettacolare, da 0,0540 a 0,1370: più che
-raddoppiato. Sui soli nodi con genere determinato si riduce a 0,0494 →
-0,0731. La ragione è che la quota di archi utilizzabili crolla fra le
-due epoche — dal 75,4% al 60,2% — perché gli artisti recenti sono
+categorie il salto è spettacolare, da 0,0576 a 0,1479: più che
+raddoppiato. Sui soli nodi con genere determinato si riduce a 0,0406 →
+0,0693. La ragione è che la quota di archi utilizzabili crolla fra le
+due epoche — dal 84,4% al 65,6% — perché gli artisti recenti sono
 mediamente meno documentati: più <code>unknown</code>, quindi più
 apparente omofilia spuria.</p>
 <p><strong>Quel che resta dopo la correzione è comunque un
-aumento</strong>, con intervalli (0,0455–0,0533 contro 0,0643–0,0816)
+aumento</strong>, con intervalli (0,0367–0,0443 contro 0,0598–0,0788)
 che non si sovrappongono. Il risultato regge, ma va raccontato per
 quello che è: un aumento moderato, non un raddoppio.</p>
 <p><strong>E l’aumento non è diffuso: viene tutto da una parte sola
 della rete.</strong> Scomponendo per ruolo, l’omofilia dei ruoli di
-esecuzione è sostanzialmente piatta nel tempo (0,1234 prima del 2000,
-0,1133 dopo), mentre quella dei ruoli creativi
-<strong>raddoppia</strong>, da 0,0230 a 0,0474. Qualunque spiegazione
+esecuzione è sostanzialmente piatta nel tempo (0,1106 prima del 2000,
+0,1050 dopo), mentre quella dei ruoli creativi
+<strong>raddoppia</strong>, da 0,0224 a 0,0444. Qualunque spiegazione
 dell’aumento deve perciò riguardare il modo in cui si produce e si
 scrive musica, non il modo in cui la si suona.</p>
 <p>Restano due letture possibili, e i dati qui presenti non permettono
@@ -1798,7 +1793,7 @@ triadica</strong>: il coefficiente <code>gwesp</code> passa da 2,217 a
 diventata più omofila per genere: è diventata più <strong>chiusa in
 triangoli</strong>. Si lavora sempre di più dentro gruppi fitti di
 persone che si conoscono già tutte fra loro. In un ambiente dove le
-donne sono il 13,8%, una struttura più triangolare produce
+donne sono il 14,8%, una struttura più triangolare produce
 meccanicamente più legami donna-donna osservati, e quindi
 un’assortatività misurata più alta — senza che nessuno abbia cambiato
 criterio nello scegliere con chi lavorare.</p>
@@ -1812,10 +1807,10 @@ Produttori e interpreti: due mestieri, due omofilie (RQ5)</h2>
 <p>La distinzione fra ruoli creativi (produzione, scrittura,
 arrangiamento) e ruoli di esecuzione (voce, strumenti, direzione) è la
 domanda RQ5, e la risposta è netta: sui soli nodi con genere determinato
-l’omofilia vale <strong>0,0235 nella rete creativa</strong> contro
-<strong>0,1175 in quella di esecuzione</strong>.</p>
+l’omofilia vale <strong>0,0224 nella rete creativa</strong> contro
+<strong>0,1054 in quella di esecuzione</strong>.</p>
 <p>La collaborazione creativa è quindi <em>meno</em> segregata per
-genere di quella esecutiva, di un fattore 5,0. È un risultato che va
+genere di quella esecutiva, di un fattore 4,7. È un risultato che va
 letto insieme al dato di composizione: i ruoli creativi sono in assoluto
 i più maschili dell’intero corpus, e proprio per questo l’omofilia
 misurata vi risulta bassa — dove la maggioranza è schiacciante non c’è
@@ -1875,147 +1870,123 @@ addensamento del gruppo minoritario.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">Electronic</td>
-<td style="text-align: left;">169.727</td>
-<td style="text-align: left;">0,0632</td>
-<td style="text-align: left;">0,0591</td>
-<td style="text-align: left;">0,0670</td>
-<td style="text-align: left;">-0,0000</td>
-<td style="text-align: left;">1,0272</td>
-<td style="text-align: left;">1,6852</td>
-<td style="text-align: left;">23.907</td>
-<td style="text-align: left;">0,0854</td>
+<td style="text-align: left;">128.659</td>
+<td style="text-align: left;">0,0692</td>
+<td style="text-align: left;">0,0643</td>
+<td style="text-align: left;">0,0739</td>
+<td style="text-align: left;">0,0000</td>
+<td style="text-align: left;">1,0241</td>
+<td style="text-align: left;">1,3588</td>
+<td style="text-align: left;">19.969</td>
+<td style="text-align: left;">0,0985</td>
 </tr>
 <tr>
 <td style="text-align: left;">Pop</td>
-<td style="text-align: left;">128.436</td>
-<td style="text-align: left;">0,0160</td>
-<td style="text-align: left;">0,0120</td>
-<td style="text-align: left;">0,0200</td>
-<td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">1,0026</td>
-<td style="text-align: left;">1,3167</td>
-<td style="text-align: left;">10.332</td>
-<td style="text-align: left;">0,1502</td>
+<td style="text-align: left;">109.924</td>
+<td style="text-align: left;">0,0233</td>
+<td style="text-align: left;">0,0183</td>
+<td style="text-align: left;">0,0284</td>
+<td style="text-align: left;">0,0001</td>
+<td style="text-align: left;">1,0028</td>
+<td style="text-align: left;">1,3115</td>
+<td style="text-align: left;">9.446</td>
+<td style="text-align: left;">0,1637</td>
 </tr>
 <tr>
 <td style="text-align: left;">Rock</td>
-<td style="text-align: left;">56.014</td>
-<td style="text-align: left;">0,1674</td>
-<td style="text-align: left;">0,1597</td>
-<td style="text-align: left;">0,1752</td>
-<td style="text-align: left;">-0,0004</td>
-<td style="text-align: left;">1,0496</td>
-<td style="text-align: left;">1,9893</td>
-<td style="text-align: left;">20.042</td>
-<td style="text-align: left;">0,0670</td>
+<td style="text-align: left;">41.007</td>
+<td style="text-align: left;">0,1608</td>
+<td style="text-align: left;">0,1515</td>
+<td style="text-align: left;">0,1708</td>
+<td style="text-align: left;">0,0001</td>
+<td style="text-align: left;">1,0353</td>
+<td style="text-align: left;">1,7579</td>
+<td style="text-align: left;">16.617</td>
+<td style="text-align: left;">0,0806</td>
 </tr>
 <tr>
 <td style="text-align: left;">Hip Hop</td>
-<td style="text-align: left;">18.577</td>
-<td style="text-align: left;">0,1173</td>
-<td style="text-align: left;">0,1027</td>
-<td style="text-align: left;">0,1310</td>
-<td style="text-align: left;">0,0001</td>
-<td style="text-align: left;">1,0410</td>
-<td style="text-align: left;">1,8739</td>
-<td style="text-align: left;">1.974</td>
-<td style="text-align: left;">0,0527</td>
+<td style="text-align: left;">17.507</td>
+<td style="text-align: left;">0,1429</td>
+<td style="text-align: left;">0,1277</td>
+<td style="text-align: left;">0,1567</td>
+<td style="text-align: left;">-0,0001</td>
+<td style="text-align: left;">1,0445</td>
+<td style="text-align: left;">2,1820</td>
+<td style="text-align: left;">1.822</td>
+<td style="text-align: left;">0,0565</td>
 </tr>
 <tr>
 <td style="text-align: left;">Folk, World, &amp; Country</td>
-<td style="text-align: left;">15.806</td>
-<td style="text-align: left;">0,0735</td>
-<td style="text-align: left;">0,0608</td>
-<td style="text-align: left;">0,0870</td>
-<td style="text-align: left;">-0,0003</td>
-<td style="text-align: left;">1,0226</td>
-<td style="text-align: left;">1,5376</td>
-<td style="text-align: left;">5.338</td>
-<td style="text-align: left;">0,1045</td>
+<td style="text-align: left;">13.639</td>
+<td style="text-align: left;">0,0769</td>
+<td style="text-align: left;">0,0625</td>
+<td style="text-align: left;">0,0919</td>
+<td style="text-align: left;">-0,0005</td>
+<td style="text-align: left;">1,0175</td>
+<td style="text-align: left;">1,5411</td>
+<td style="text-align: left;">4.863</td>
+<td style="text-align: left;">0,1143</td>
 </tr>
 <tr>
 <td style="text-align: left;">Jazz</td>
-<td style="text-align: left;">13.118</td>
-<td style="text-align: left;">0,0682</td>
-<td style="text-align: left;">0,0525</td>
-<td style="text-align: left;">0,0849</td>
-<td style="text-align: left;">-0,0001</td>
-<td style="text-align: left;">1,0104</td>
-<td style="text-align: left;">1,6074</td>
-<td style="text-align: left;">3.607</td>
-<td style="text-align: left;">0,1017</td>
+<td style="text-align: left;">11.762</td>
+<td style="text-align: left;">0,0333</td>
+<td style="text-align: left;">0,0171</td>
+<td style="text-align: left;">0,0497</td>
+<td style="text-align: left;">0,0001</td>
+<td style="text-align: left;">1,0044</td>
+<td style="text-align: left;">1,5144</td>
+<td style="text-align: left;">3.124</td>
+<td style="text-align: left;">0,1172</td>
 </tr>
 <tr>
 <td style="text-align: left;">Classical</td>
-<td style="text-align: left;">5.796</td>
-<td style="text-align: left;">0,0475</td>
-<td style="text-align: left;">0,0273</td>
-<td style="text-align: left;">0,0675</td>
-<td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">1,0191</td>
-<td style="text-align: left;">1,2731</td>
-<td style="text-align: left;">3.825</td>
-<td style="text-align: left;">0,2047</td>
+<td style="text-align: left;">5.264</td>
+<td style="text-align: left;">0,0512</td>
+<td style="text-align: left;">0,0292</td>
+<td style="text-align: left;">0,0739</td>
+<td style="text-align: left;">-0,0002</td>
+<td style="text-align: left;">1,0166</td>
+<td style="text-align: left;">1,2704</td>
+<td style="text-align: left;">3.674</td>
+<td style="text-align: left;">0,2131</td>
 </tr>
 <tr>
 <td style="text-align: left;">Stage &amp; Screen</td>
-<td style="text-align: left;">2.796</td>
-<td style="text-align: left;">0,0297</td>
-<td style="text-align: left;">0,0003</td>
-<td style="text-align: left;">0,0587</td>
-<td style="text-align: left;">0,0003</td>
-<td style="text-align: left;">1,0074</td>
-<td style="text-align: left;">1,1576</td>
-<td style="text-align: left;">682</td>
-<td style="text-align: left;">0,1598</td>
-</tr>
-<tr>
-<td style="text-align: left;">Children’s</td>
-<td style="text-align: left;">1.309</td>
-<td style="text-align: left;">0,0226</td>
-<td style="text-align: left;">-0,0124</td>
-<td style="text-align: left;">0,0585</td>
-<td style="text-align: left;">0,0008</td>
-<td style="text-align: left;">1,0004</td>
-<td style="text-align: left;">1,0286</td>
-<td style="text-align: left;">723</td>
-<td style="text-align: left;">0,3029</td>
+<td style="text-align: left;">2.693</td>
+<td style="text-align: left;">0,0186</td>
+<td style="text-align: left;">-0,0141</td>
+<td style="text-align: left;">0,0548</td>
+<td style="text-align: left;">-0,0019</td>
+<td style="text-align: left;">1,0035</td>
+<td style="text-align: left;">1,1863</td>
+<td style="text-align: left;">641</td>
+<td style="text-align: left;">0,1700</td>
 </tr>
 <tr>
 <td style="text-align: left;">Non-Music</td>
-<td style="text-align: left;">1.126</td>
-<td style="text-align: left;">0,0828</td>
-<td style="text-align: left;">0,0278</td>
-<td style="text-align: left;">0,1363</td>
-<td style="text-align: left;">0,0012</td>
-<td style="text-align: left;">1,0189</td>
-<td style="text-align: left;">1,3068</td>
-<td style="text-align: left;">488</td>
-<td style="text-align: left;">0,1639</td>
+<td style="text-align: left;">1.106</td>
+<td style="text-align: left;">0,0762</td>
+<td style="text-align: left;">0,0171</td>
+<td style="text-align: left;">0,1351</td>
+<td style="text-align: left;">-0,0002</td>
+<td style="text-align: left;">1,0151</td>
+<td style="text-align: left;">1,3163</td>
+<td style="text-align: left;">477</td>
+<td style="text-align: left;">0,1698</td>
 </tr>
 <tr>
-<td style="text-align: left;">Reggae</td>
-<td style="text-align: left;">643</td>
-<td style="text-align: left;">0,1302</td>
-<td style="text-align: left;">0,0641</td>
-<td style="text-align: left;">0,2030</td>
-<td style="text-align: left;">-0,0017</td>
-<td style="text-align: left;">1,0809</td>
-<td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">388</td>
-<td style="text-align: left;">0,0515</td>
-</tr>
-<tr>
-<td style="text-align: left;">Funk / Soul</td>
-<td style="text-align: left;">582</td>
-<td style="text-align: left;">0,1843</td>
-<td style="text-align: left;">0,1166</td>
-<td style="text-align: left;">0,2477</td>
-<td style="text-align: left;">-0,0021</td>
-<td style="text-align: left;">1,1312</td>
-<td style="text-align: left;">1,7908</td>
-<td style="text-align: left;">1.197</td>
-<td style="text-align: left;">0,1019</td>
+<td style="text-align: left;">Children’s</td>
+<td style="text-align: left;">1.075</td>
+<td style="text-align: left;">0,0340</td>
+<td style="text-align: left;">-0,0101</td>
+<td style="text-align: left;">0,0780</td>
+<td style="text-align: left;">-0,0005</td>
+<td style="text-align: left;">1,0120</td>
+<td style="text-align: left;">1,0144</td>
+<td style="text-align: left;">676</td>
+<td style="text-align: left;">0,3240</td>
 </tr>
 </tbody>
 </table>
@@ -2029,7 +2000,7 @@ l’aspettativa corrente</strong>. La letteratura riporta di norma
 un’omofilia più forte <em>fra gli uomini</em>. Qui il rapporto
 osservato/atteso donna-donna è sistematicamente
 <strong>maggiore</strong> di quello uomo-uomo. La spiegazione non è che
-le donne siano più chiuse: è che con una quota femminile del 13,8% il
+le donne siano più chiuse: è che con una quota femminile del 14,8% il
 valore atteso per un legame donna-donna sotto casualità è bassissimo, e
 basta un modesto addensamento reale per produrre un rapporto elevato.
 L’indice uomo-uomo, al contrario, è schiacciato verso 1 perché la
@@ -2072,39 +2043,27 @@ presenti quanto basta, mai al centro.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">F</td>
-<td style="text-align: left;">7.072</td>
+<td style="text-align: left;">6.961</td>
 <td style="text-align: left;">0,000000</td>
-<td style="text-align: left;">0,000054</td>
+<td style="text-align: left;">0,000055</td>
 <td style="text-align: left;">0,000000</td>
 <td style="text-align: left;">6,000000</td>
-<td style="text-align: left;">9,396069</td>
+<td style="text-align: left;">9,011062</td>
 <td style="text-align: left;">7,000000</td>
-<td style="text-align: left;">5,740000</td>
+<td style="text-align: left;">5,190000</td>
 <td style="text-align: left;">8,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">49.901</td>
+<td style="text-align: left;">44.869</td>
 <td style="text-align: left;">0,000000</td>
-<td style="text-align: left;">0,000158</td>
-<td style="text-align: left;">0,000001</td>
-<td style="text-align: left;">7,000000</td>
-<td style="text-align: left;">10,239474</td>
+<td style="text-align: left;">0,000174</td>
+<td style="text-align: left;">0,000002</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">10,028327</td>
 <td style="text-align: left;">8,000000</td>
-<td style="text-align: left;">7,200000</td>
-<td style="text-align: left;">10,000000</td>
-</tr>
-<tr>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">883</td>
-<td style="text-align: left;">0,000000</td>
-<td style="text-align: left;">0,000112</td>
-<td style="text-align: left;">0,000001</td>
-<td style="text-align: left;">7,000000</td>
-<td style="text-align: left;">10,216308</td>
+<td style="text-align: left;">6,490000</td>
 <td style="text-align: left;">9,000000</td>
-<td style="text-align: left;">10,820000</td>
-<td style="text-align: left;">14,000000</td>
 </tr>
 </tbody>
 </table>
@@ -2147,36 +2106,29 @@ scene.</p>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">F</td>
-<td style="text-align: left;">52</td>
-<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">53</td>
+<td style="text-align: left;">5,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Blues</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">326</td>
+<td style="text-align: left;">305</td>
 <td style="text-align: left;">6,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
-<td style="text-align: left;">Blues</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">8,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Brass &amp; Military</td>
 <td style="text-align: left;">F</td>
 <td style="text-align: left;">2</td>
-<td style="text-align: left;">8,000000</td>
-<td style="text-align: left;">0,000003</td>
+<td style="text-align: left;">7,500000</td>
+<td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Brass &amp; Military</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">47</td>
-<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">46</td>
+<td style="text-align: left;">8,500000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
@@ -2189,77 +2141,49 @@ scene.</p>
 <tr>
 <td style="text-align: left;">Children’s</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">253</td>
-<td style="text-align: left;">8,000000</td>
+<td style="text-align: left;">245</td>
+<td style="text-align: left;">7,000000</td>
 <td style="text-align: left;">0,000001</td>
 </tr>
 <tr>
-<td style="text-align: left;">Children’s</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">9</td>
-<td style="text-align: left;">6,000000</td>
-<td style="text-align: left;">0,000008</td>
-</tr>
-<tr>
 <td style="text-align: left;">Classical</td>
 <td style="text-align: left;">F</td>
-<td style="text-align: left;">439</td>
-<td style="text-align: left;">5,000000</td>
+<td style="text-align: left;">436</td>
+<td style="text-align: left;">4,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Classical</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">1.678</td>
+<td style="text-align: left;">1.642</td>
 <td style="text-align: left;">5,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
-<td style="text-align: left;">Classical</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">37</td>
-<td style="text-align: left;">6,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Electronic</td>
 <td style="text-align: left;">F</td>
-<td style="text-align: left;">1.805</td>
+<td style="text-align: left;">1.722</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Electronic</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">10.938</td>
 <td style="text-align: left;">8,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
-<td style="text-align: left;">Electronic</td>
-<td style="text-align: left;">M</td>
-<td style="text-align: left;">12.829</td>
-<td style="text-align: left;">9,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
-<td style="text-align: left;">Electronic</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">272</td>
-<td style="text-align: left;">10,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Folk, World, &amp; Country</td>
 <td style="text-align: left;">F</td>
-<td style="text-align: left;">415</td>
+<td style="text-align: left;">413</td>
 <td style="text-align: left;">7,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Folk, World, &amp; Country</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">2.890</td>
-<td style="text-align: left;">8,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
-<td style="text-align: left;">Folk, World, &amp; Country</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">55</td>
+<td style="text-align: left;">2.760</td>
 <td style="text-align: left;">7,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
@@ -2273,57 +2197,36 @@ scene.</p>
 <tr>
 <td style="text-align: left;">Funk / Soul</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">503</td>
+<td style="text-align: left;">473</td>
 <td style="text-align: left;">7,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
-<td style="text-align: left;">Funk / Soul</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">11</td>
-<td style="text-align: left;">6,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
 <td style="text-align: left;">Hip Hop</td>
 <td style="text-align: left;">F</td>
-<td style="text-align: left;">75</td>
-<td style="text-align: left;">9,000000</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">10,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Hip Hop</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">1.007</td>
+<td style="text-align: left;">966</td>
 <td style="text-align: left;">15,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
-<td style="text-align: left;">Hip Hop</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">13,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
 <td style="text-align: left;">Jazz</td>
 <td style="text-align: left;">F</td>
-<td style="text-align: left;">244</td>
-<td style="text-align: left;">7,500000</td>
+<td style="text-align: left;">245</td>
+<td style="text-align: left;">7,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Jazz</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">2.125</td>
+<td style="text-align: left;">1.919</td>
 <td style="text-align: left;">9,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
-<td style="text-align: left;">Jazz</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">26</td>
-<td style="text-align: left;">6,000000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
@@ -2336,37 +2239,93 @@ scene.</p>
 <tr>
 <td style="text-align: left;">Latin</td>
 <td style="text-align: left;">M</td>
-<td style="text-align: left;">162</td>
-<td style="text-align: left;">8,000000</td>
-<td style="text-align: left;">0,000000</td>
-</tr>
-<tr>
-<td style="text-align: left;">Latin</td>
-<td style="text-align: left;">mixed</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">2,500000</td>
+<td style="text-align: left;">150</td>
+<td style="text-align: left;">7,500000</td>
 <td style="text-align: left;">0,000000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Non-Music</td>
 <td style="text-align: left;">F</td>
-<td style="text-align: left;">61</td>
+<td style="text-align: left;">62</td>
+<td style="text-align: left;">5,500000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Non-Music</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">298</td>
+<td style="text-align: left;">7,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pop</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">1.150</td>
+<td style="text-align: left;">11,000000</td>
+<td style="text-align: left;">0,000004</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pop</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">5.608</td>
+<td style="text-align: left;">13,000000</td>
+<td style="text-align: left;">0,000003</td>
+</tr>
+<tr>
+<td style="text-align: left;">Reggae</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">4,500000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Reggae</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">166</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rock</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">774</td>
 <td style="text-align: left;">5,000000</td>
 <td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Rock</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">8.587</td>
+<td style="text-align: left;">6,000000</td>
+<td style="text-align: left;">0,000000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Stage &amp; Screen</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">88</td>
+<td style="text-align: left;">9,000000</td>
+<td style="text-align: left;">0,000002</td>
+</tr>
+<tr>
+<td style="text-align: left;">Stage &amp; Screen</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">394</td>
+<td style="text-align: left;">11,000000</td>
+<td style="text-align: left;">0,000002</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Tabella — Posizione nella rete per genere sessuale entro
 genere musicale</strong></p>
-<p><em>Mostrate le prime 30 righe di 44; la tabella completa è in
+<p><em>Dati completi in
 <code>tables/t3_posizione_per_genere_musicale.csv</code> e
 <code>tables/t3_posizione_per_genere_musicale.tex</code>.</em></p>
 <h2 id="il-confronto-a-parità-di-attività-e-coorte">6.1 Il confronto a
 parità di attività e coorte</h2>
 <p>Le mediane grezze non bastano. Chi pubblica di più è più centrale, e
 le donne della popolazione pubblicano meno: la mediana delle
-pubblicazioni è 8 per le donne contro 10 per gli uomini, e la coreness
-mediana segue (6 contro 7). Senza controllare per l’attività si
+pubblicazioni è 8 per le donne contro 9 per gli uomini, e la coreness
+mediana segue (6 contro 6). Senza controllare per l’attività si
 misurerebbe la differenza di quanto si pubblica e la si chiamerebbe
 differenza di posizione.</p>
 <p>La regressione confronta perciò persone con la stessa attività, la
@@ -2397,287 +2356,287 @@ stessa coorte di debutto e lo stesso genere musicale.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">Intercept</td>
-<td style="text-align: left;">0,9271</td>
-<td style="text-align: left;">0,0943</td>
-<td style="text-align: left;">9,8347</td>
+<td style="text-align: left;">0,8390</td>
+<td style="text-align: left;">0,0966</td>
+<td style="text-align: left;">8,6891</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">0,7423</td>
-<td style="text-align: left;">1,1119</td>
+<td style="text-align: left;">0,6497</td>
+<td style="text-align: left;">1,0282</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]</td>
-<td style="text-align: left;">0,2229</td>
-<td style="text-align: left;">0,1697</td>
-<td style="text-align: left;">1,3133</td>
-<td style="text-align: left;">0,1891</td>
-<td style="text-align: left;">-0,1097</td>
-<td style="text-align: left;">0,5555</td>
+<td style="text-align: left;">0,1801</td>
+<td style="text-align: left;">0,1754</td>
+<td style="text-align: left;">1,0265</td>
+<td style="text-align: left;">0,3047</td>
+<td style="text-align: left;">-0,1638</td>
+<td style="text-align: left;">0,5239</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Blues]</td>
-<td style="text-align: left;">0,0075</td>
-<td style="text-align: left;">0,0715</td>
-<td style="text-align: left;">0,1052</td>
-<td style="text-align: left;">0,9162</td>
-<td style="text-align: left;">-0,1327</td>
-<td style="text-align: left;">0,1477</td>
+<td style="text-align: left;">-0,0114</td>
+<td style="text-align: left;">0,0764</td>
+<td style="text-align: left;">-0,1498</td>
+<td style="text-align: left;">0,8809</td>
+<td style="text-align: left;">-0,1612</td>
+<td style="text-align: left;">0,1383</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Children’s]</td>
-<td style="text-align: left;">-0,1072</td>
-<td style="text-align: left;">0,1193</td>
-<td style="text-align: left;">-0,8987</td>
-<td style="text-align: left;">0,3688</td>
-<td style="text-align: left;">-0,3409</td>
-<td style="text-align: left;">0,1266</td>
+<td style="text-align: left;">-0,1781</td>
+<td style="text-align: left;">0,1203</td>
+<td style="text-align: left;">-1,4802</td>
+<td style="text-align: left;">0,1388</td>
+<td style="text-align: left;">-0,4140</td>
+<td style="text-align: left;">0,0577</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Classical]</td>
-<td style="text-align: left;">-0,6304</td>
-<td style="text-align: left;">0,0644</td>
-<td style="text-align: left;">-9,7882</td>
+<td style="text-align: left;">-0,6635</td>
+<td style="text-align: left;">0,0683</td>
+<td style="text-align: left;">-9,7184</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,7566</td>
-<td style="text-align: left;">-0,5042</td>
+<td style="text-align: left;">-0,7974</td>
+<td style="text-align: left;">-0,5297</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Electronic]</td>
-<td style="text-align: left;">-0,1921</td>
-<td style="text-align: left;">0,0586</td>
-<td style="text-align: left;">-3,2784</td>
-<td style="text-align: left;">0,0010</td>
-<td style="text-align: left;">-0,3069</td>
-<td style="text-align: left;">-0,0773</td>
+<td style="text-align: left;">-0,1863</td>
+<td style="text-align: left;">0,0627</td>
+<td style="text-align: left;">-2,9721</td>
+<td style="text-align: left;">0,0030</td>
+<td style="text-align: left;">-0,3092</td>
+<td style="text-align: left;">-0,0634</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Folk, World, &amp;
 Country]</td>
-<td style="text-align: left;">-0,2454</td>
-<td style="text-align: left;">0,0623</td>
-<td style="text-align: left;">-3,9371</td>
-<td style="text-align: left;">0,0001</td>
-<td style="text-align: left;">-0,3676</td>
-<td style="text-align: left;">-0,1233</td>
+<td style="text-align: left;">-0,2480</td>
+<td style="text-align: left;">0,0663</td>
+<td style="text-align: left;">-3,7436</td>
+<td style="text-align: left;">0,0002</td>
+<td style="text-align: left;">-0,3779</td>
+<td style="text-align: left;">-0,1182</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Funk / Soul]</td>
-<td style="text-align: left;">0,1027</td>
-<td style="text-align: left;">0,0723</td>
-<td style="text-align: left;">1,4208</td>
-<td style="text-align: left;">0,1554</td>
-<td style="text-align: left;">-0,0390</td>
-<td style="text-align: left;">0,2444</td>
+<td style="text-align: left;">0,0681</td>
+<td style="text-align: left;">0,0760</td>
+<td style="text-align: left;">0,8962</td>
+<td style="text-align: left;">0,3702</td>
+<td style="text-align: left;">-0,0808</td>
+<td style="text-align: left;">0,2171</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Hip Hop]</td>
-<td style="text-align: left;">-0,3131</td>
-<td style="text-align: left;">0,0637</td>
-<td style="text-align: left;">-4,9175</td>
+<td style="text-align: left;">-0,3351</td>
+<td style="text-align: left;">0,0680</td>
+<td style="text-align: left;">-4,9293</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,4378</td>
-<td style="text-align: left;">-0,1883</td>
+<td style="text-align: left;">-0,4683</td>
+<td style="text-align: left;">-0,2018</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Jazz]</td>
-<td style="text-align: left;">-0,1615</td>
-<td style="text-align: left;">0,0631</td>
-<td style="text-align: left;">-2,5606</td>
-<td style="text-align: left;">0,0105</td>
-<td style="text-align: left;">-0,2852</td>
-<td style="text-align: left;">-0,0379</td>
+<td style="text-align: left;">-0,1980</td>
+<td style="text-align: left;">0,0674</td>
+<td style="text-align: left;">-2,9391</td>
+<td style="text-align: left;">0,0033</td>
+<td style="text-align: left;">-0,3300</td>
+<td style="text-align: left;">-0,0660</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Non-Music]</td>
-<td style="text-align: left;">-1,3941</td>
-<td style="text-align: left;">0,0954</td>
-<td style="text-align: left;">-14,6063</td>
+<td style="text-align: left;">-1,4207</td>
+<td style="text-align: left;">0,0969</td>
+<td style="text-align: left;">-14,6663</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-1,5811</td>
-<td style="text-align: left;">-1,2070</td>
+<td style="text-align: left;">-1,6105</td>
+<td style="text-align: left;">-1,2308</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Pop]</td>
-<td style="text-align: left;">1,0665</td>
-<td style="text-align: left;">0,0624</td>
-<td style="text-align: left;">17,0971</td>
+<td style="text-align: left;">1,0434</td>
+<td style="text-align: left;">0,0662</td>
+<td style="text-align: left;">15,7589</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">0,9442</td>
-<td style="text-align: left;">1,1888</td>
+<td style="text-align: left;">0,9137</td>
+<td style="text-align: left;">1,1732</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Rock]</td>
-<td style="text-align: left;">0,0001</td>
-<td style="text-align: left;">0,0589</td>
-<td style="text-align: left;">0,0014</td>
-<td style="text-align: left;">0,9989</td>
-<td style="text-align: left;">-0,1153</td>
-<td style="text-align: left;">0,1154</td>
+<td style="text-align: left;">0,0077</td>
+<td style="text-align: left;">0,0629</td>
+<td style="text-align: left;">0,1223</td>
+<td style="text-align: left;">0,9027</td>
+<td style="text-align: left;">-0,1156</td>
+<td style="text-align: left;">0,1310</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Stage &amp; Screen]</td>
-<td style="text-align: left;">0,5028</td>
-<td style="text-align: left;">0,0895</td>
-<td style="text-align: left;">5,6207</td>
-<td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">0,3275</td>
-<td style="text-align: left;">0,6782</td>
+<td style="text-align: left;">0,3258</td>
+<td style="text-align: left;">0,0914</td>
+<td style="text-align: left;">3,5651</td>
+<td style="text-align: left;">0,0004</td>
+<td style="text-align: left;">0,1467</td>
+<td style="text-align: left;">0,5049</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1950]</td>
-<td style="text-align: left;">0,2438</td>
-<td style="text-align: left;">0,0908</td>
-<td style="text-align: left;">2,6843</td>
-<td style="text-align: left;">0,0073</td>
-<td style="text-align: left;">0,0658</td>
-<td style="text-align: left;">0,4219</td>
+<td style="text-align: left;">0,2381</td>
+<td style="text-align: left;">0,0906</td>
+<td style="text-align: left;">2,6284</td>
+<td style="text-align: left;">0,0086</td>
+<td style="text-align: left;">0,0605</td>
+<td style="text-align: left;">0,4156</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1960]</td>
-<td style="text-align: left;">-0,1471</td>
-<td style="text-align: left;">0,0798</td>
-<td style="text-align: left;">-1,8435</td>
-<td style="text-align: left;">0,0653</td>
-<td style="text-align: left;">-0,3036</td>
-<td style="text-align: left;">0,0093</td>
+<td style="text-align: left;">-0,1393</td>
+<td style="text-align: left;">0,0793</td>
+<td style="text-align: left;">-1,7560</td>
+<td style="text-align: left;">0,0791</td>
+<td style="text-align: left;">-0,2947</td>
+<td style="text-align: left;">0,0162</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1970]</td>
-<td style="text-align: left;">-1,2692</td>
-<td style="text-align: left;">0,0763</td>
-<td style="text-align: left;">-16,6353</td>
+<td style="text-align: left;">-1,2591</td>
+<td style="text-align: left;">0,0757</td>
+<td style="text-align: left;">-16,6331</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-1,4187</td>
-<td style="text-align: left;">-1,1197</td>
+<td style="text-align: left;">-1,4075</td>
+<td style="text-align: left;">-1,1108</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1980]</td>
-<td style="text-align: left;">-1,8764</td>
-<td style="text-align: left;">0,0746</td>
-<td style="text-align: left;">-25,1590</td>
+<td style="text-align: left;">-1,8311</td>
+<td style="text-align: left;">0,0739</td>
+<td style="text-align: left;">-24,7652</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-2,0226</td>
-<td style="text-align: left;">-1,7302</td>
+<td style="text-align: left;">-1,9760</td>
+<td style="text-align: left;">-1,6862</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1990]</td>
-<td style="text-align: left;">-2,1149</td>
-<td style="text-align: left;">0,0741</td>
-<td style="text-align: left;">-28,5283</td>
+<td style="text-align: left;">-2,0707</td>
+<td style="text-align: left;">0,0735</td>
+<td style="text-align: left;">-28,1849</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-2,2602</td>
-<td style="text-align: left;">-1,9696</td>
+<td style="text-align: left;">-2,2147</td>
+<td style="text-align: left;">-1,9267</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.2000]</td>
-<td style="text-align: left;">-2,1433</td>
-<td style="text-align: left;">0,0742</td>
-<td style="text-align: left;">-28,8960</td>
+<td style="text-align: left;">-2,1104</td>
+<td style="text-align: left;">0,0735</td>
+<td style="text-align: left;">-28,6968</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-2,2887</td>
-<td style="text-align: left;">-1,9980</td>
+<td style="text-align: left;">-2,2546</td>
+<td style="text-align: left;">-1,9663</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.2010]</td>
-<td style="text-align: left;">-2,0558</td>
-<td style="text-align: left;">0,0743</td>
-<td style="text-align: left;">-27,6784</td>
+<td style="text-align: left;">-2,0327</td>
+<td style="text-align: left;">0,0737</td>
+<td style="text-align: left;">-27,5984</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-2,2013</td>
-<td style="text-align: left;">-1,9102</td>
+<td style="text-align: left;">-2,1770</td>
+<td style="text-align: left;">-1,8883</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.2020]</td>
-<td style="text-align: left;">-1,8212</td>
-<td style="text-align: left;">0,0765</td>
-<td style="text-align: left;">-23,8095</td>
+<td style="text-align: left;">-1,7953</td>
+<td style="text-align: left;">0,0763</td>
+<td style="text-align: left;">-23,5242</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-1,9711</td>
-<td style="text-align: left;">-1,6713</td>
+<td style="text-align: left;">-1,9449</td>
+<td style="text-align: left;">-1,6457</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Blues]</td>
-<td style="text-align: left;">-0,0040</td>
-<td style="text-align: left;">0,2086</td>
-<td style="text-align: left;">-0,0191</td>
-<td style="text-align: left;">0,9847</td>
-<td style="text-align: left;">-0,4128</td>
-<td style="text-align: left;">0,4048</td>
+<td style="text-align: left;">0,0528</td>
+<td style="text-align: left;">0,2128</td>
+<td style="text-align: left;">0,2483</td>
+<td style="text-align: left;">0,8039</td>
+<td style="text-align: left;">-0,3643</td>
+<td style="text-align: left;">0,4700</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td
 style="text-align: left;">C(gender)[T.F]:C(genere)[T.Children’s]</td>
-<td style="text-align: left;">-0,2469</td>
-<td style="text-align: left;">0,2358</td>
-<td style="text-align: left;">-1,0472</td>
-<td style="text-align: left;">0,2950</td>
-<td style="text-align: left;">-0,7091</td>
-<td style="text-align: left;">0,2152</td>
+<td style="text-align: left;">-0,1451</td>
+<td style="text-align: left;">0,2392</td>
+<td style="text-align: left;">-0,6068</td>
+<td style="text-align: left;">0,5440</td>
+<td style="text-align: left;">-0,6138</td>
+<td style="text-align: left;">0,3236</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Classical]</td>
-<td style="text-align: left;">-0,0057</td>
-<td style="text-align: left;">0,1792</td>
-<td style="text-align: left;">-0,0318</td>
-<td style="text-align: left;">0,9746</td>
-<td style="text-align: left;">-0,3570</td>
-<td style="text-align: left;">0,3456</td>
+<td style="text-align: left;">0,0347</td>
+<td style="text-align: left;">0,1850</td>
+<td style="text-align: left;">0,1875</td>
+<td style="text-align: left;">0,8513</td>
+<td style="text-align: left;">-0,3279</td>
+<td style="text-align: left;">0,3973</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td
 style="text-align: left;">C(gender)[T.F]:C(genere)[T.Electronic]</td>
-<td style="text-align: left;">-0,0861</td>
-<td style="text-align: left;">0,1710</td>
-<td style="text-align: left;">-0,5036</td>
-<td style="text-align: left;">0,6146</td>
-<td style="text-align: left;">-0,4213</td>
-<td style="text-align: left;">0,2491</td>
+<td style="text-align: left;">-0,0192</td>
+<td style="text-align: left;">0,1768</td>
+<td style="text-align: left;">-0,1085</td>
+<td style="text-align: left;">0,9136</td>
+<td style="text-align: left;">-0,3657</td>
+<td style="text-align: left;">0,3274</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Folk, World,
 &amp; Country]</td>
-<td style="text-align: left;">-0,1754</td>
-<td style="text-align: left;">0,1809</td>
-<td style="text-align: left;">-0,9695</td>
-<td style="text-align: left;">0,3323</td>
-<td style="text-align: left;">-0,5299</td>
-<td style="text-align: left;">0,1792</td>
+<td style="text-align: left;">-0,1365</td>
+<td style="text-align: left;">0,1863</td>
+<td style="text-align: left;">-0,7323</td>
+<td style="text-align: left;">0,4640</td>
+<td style="text-align: left;">-0,5016</td>
+<td style="text-align: left;">0,2287</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Funk /
 Soul]</td>
-<td style="text-align: left;">0,2287</td>
-<td style="text-align: left;">0,2258</td>
-<td style="text-align: left;">1,0132</td>
-<td style="text-align: left;">0,3110</td>
-<td style="text-align: left;">-0,2138</td>
-<td style="text-align: left;">0,6712</td>
+<td style="text-align: left;">0,2858</td>
+<td style="text-align: left;">0,2295</td>
+<td style="text-align: left;">1,2451</td>
+<td style="text-align: left;">0,2131</td>
+<td style="text-align: left;">-0,1641</td>
+<td style="text-align: left;">0,7357</td>
 <td style="text-align: left;">eigenvector</td>
 </tr>
 </tbody>
@@ -2713,287 +2672,287 @@ sessuale e genere musicale, a parità di attività e coorte</strong></p>
 <tbody>
 <tr>
 <td style="text-align: left;">Intercept</td>
-<td style="text-align: left;">1,2696</td>
-<td style="text-align: left;">0,0314</td>
-<td style="text-align: left;">40,4273</td>
+<td style="text-align: left;">1,1580</td>
+<td style="text-align: left;">0,0329</td>
+<td style="text-align: left;">35,2227</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">1,2080</td>
-<td style="text-align: left;">1,3311</td>
+<td style="text-align: left;">1,0936</td>
+<td style="text-align: left;">1,2224</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]</td>
-<td style="text-align: left;">0,0390</td>
-<td style="text-align: left;">0,0739</td>
-<td style="text-align: left;">0,5279</td>
-<td style="text-align: left;">0,5976</td>
-<td style="text-align: left;">-0,1058</td>
-<td style="text-align: left;">0,1838</td>
+<td style="text-align: left;">0,0362</td>
+<td style="text-align: left;">0,0792</td>
+<td style="text-align: left;">0,4572</td>
+<td style="text-align: left;">0,6475</td>
+<td style="text-align: left;">-0,1190</td>
+<td style="text-align: left;">0,1915</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Blues]</td>
-<td style="text-align: left;">0,0072</td>
-<td style="text-align: left;">0,0336</td>
-<td style="text-align: left;">0,2133</td>
-<td style="text-align: left;">0,8311</td>
-<td style="text-align: left;">-0,0586</td>
-<td style="text-align: left;">0,0729</td>
+<td style="text-align: left;">0,0051</td>
+<td style="text-align: left;">0,0360</td>
+<td style="text-align: left;">0,1416</td>
+<td style="text-align: left;">0,8874</td>
+<td style="text-align: left;">-0,0654</td>
+<td style="text-align: left;">0,0756</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Children’s]</td>
-<td style="text-align: left;">-0,0462</td>
-<td style="text-align: left;">0,0387</td>
-<td style="text-align: left;">-1,1922</td>
-<td style="text-align: left;">0,2332</td>
-<td style="text-align: left;">-0,1221</td>
-<td style="text-align: left;">0,0297</td>
+<td style="text-align: left;">-0,0135</td>
+<td style="text-align: left;">0,0396</td>
+<td style="text-align: left;">-0,3415</td>
+<td style="text-align: left;">0,7328</td>
+<td style="text-align: left;">-0,0912</td>
+<td style="text-align: left;">0,0642</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Classical]</td>
-<td style="text-align: left;">-0,3042</td>
-<td style="text-align: left;">0,0256</td>
-<td style="text-align: left;">-11,8993</td>
+<td style="text-align: left;">-0,2867</td>
+<td style="text-align: left;">0,0278</td>
+<td style="text-align: left;">-10,3191</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,3543</td>
-<td style="text-align: left;">-0,2541</td>
+<td style="text-align: left;">-0,3411</td>
+<td style="text-align: left;">-0,2322</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Electronic]</td>
-<td style="text-align: left;">0,0568</td>
-<td style="text-align: left;">0,0231</td>
-<td style="text-align: left;">2,4598</td>
-<td style="text-align: left;">0,0139</td>
-<td style="text-align: left;">0,0115</td>
-<td style="text-align: left;">0,1021</td>
+<td style="text-align: left;">0,0474</td>
+<td style="text-align: left;">0,0256</td>
+<td style="text-align: left;">1,8549</td>
+<td style="text-align: left;">0,0636</td>
+<td style="text-align: left;">-0,0027</td>
+<td style="text-align: left;">0,0976</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Folk, World, &amp;
 Country]</td>
-<td style="text-align: left;">0,0310</td>
-<td style="text-align: left;">0,0244</td>
-<td style="text-align: left;">1,2708</td>
-<td style="text-align: left;">0,2038</td>
-<td style="text-align: left;">-0,0168</td>
-<td style="text-align: left;">0,0789</td>
+<td style="text-align: left;">0,0516</td>
+<td style="text-align: left;">0,0268</td>
+<td style="text-align: left;">1,9281</td>
+<td style="text-align: left;">0,0538</td>
+<td style="text-align: left;">-0,0009</td>
+<td style="text-align: left;">0,1041</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Funk / Soul]</td>
-<td style="text-align: left;">0,0324</td>
-<td style="text-align: left;">0,0308</td>
-<td style="text-align: left;">1,0498</td>
-<td style="text-align: left;">0,2938</td>
-<td style="text-align: left;">-0,0281</td>
-<td style="text-align: left;">0,0928</td>
+<td style="text-align: left;">0,0480</td>
+<td style="text-align: left;">0,0333</td>
+<td style="text-align: left;">1,4400</td>
+<td style="text-align: left;">0,1499</td>
+<td style="text-align: left;">-0,0173</td>
+<td style="text-align: left;">0,1134</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Hip Hop]</td>
-<td style="text-align: left;">0,3463</td>
-<td style="text-align: left;">0,0266</td>
-<td style="text-align: left;">13,0396</td>
+<td style="text-align: left;">0,3801</td>
+<td style="text-align: left;">0,0291</td>
+<td style="text-align: left;">13,0492</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">0,2942</td>
-<td style="text-align: left;">0,3983</td>
+<td style="text-align: left;">0,3230</td>
+<td style="text-align: left;">0,4372</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Jazz]</td>
-<td style="text-align: left;">0,1004</td>
-<td style="text-align: left;">0,0247</td>
-<td style="text-align: left;">4,0605</td>
+<td style="text-align: left;">0,1173</td>
+<td style="text-align: left;">0,0273</td>
+<td style="text-align: left;">4,2999</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">0,0519</td>
-<td style="text-align: left;">0,1489</td>
+<td style="text-align: left;">0,0638</td>
+<td style="text-align: left;">0,1707</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Non-Music]</td>
-<td style="text-align: left;">-0,2312</td>
-<td style="text-align: left;">0,0351</td>
-<td style="text-align: left;">-6,5789</td>
+<td style="text-align: left;">-0,1804</td>
+<td style="text-align: left;">0,0366</td>
+<td style="text-align: left;">-4,9333</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,3001</td>
-<td style="text-align: left;">-0,1624</td>
+<td style="text-align: left;">-0,2521</td>
+<td style="text-align: left;">-0,1088</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Pop]</td>
-<td style="text-align: left;">0,1699</td>
-<td style="text-align: left;">0,0236</td>
-<td style="text-align: left;">7,1891</td>
+<td style="text-align: left;">0,1794</td>
+<td style="text-align: left;">0,0260</td>
+<td style="text-align: left;">6,9001</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">0,1236</td>
-<td style="text-align: left;">0,2162</td>
+<td style="text-align: left;">0,1284</td>
+<td style="text-align: left;">0,2304</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Rock]</td>
-<td style="text-align: left;">-0,0217</td>
-<td style="text-align: left;">0,0231</td>
-<td style="text-align: left;">-0,9404</td>
-<td style="text-align: left;">0,3470</td>
-<td style="text-align: left;">-0,0670</td>
-<td style="text-align: left;">0,0235</td>
+<td style="text-align: left;">-0,0319</td>
+<td style="text-align: left;">0,0255</td>
+<td style="text-align: left;">-1,2487</td>
+<td style="text-align: left;">0,2118</td>
+<td style="text-align: left;">-0,0820</td>
+<td style="text-align: left;">0,0182</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(genere)[T.Stage &amp; Screen]</td>
-<td style="text-align: left;">0,1933</td>
-<td style="text-align: left;">0,0330</td>
-<td style="text-align: left;">5,8504</td>
+<td style="text-align: left;">0,1865</td>
+<td style="text-align: left;">0,0345</td>
+<td style="text-align: left;">5,3991</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">0,1286</td>
-<td style="text-align: left;">0,2581</td>
+<td style="text-align: left;">0,1188</td>
+<td style="text-align: left;">0,2542</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1950]</td>
-<td style="text-align: left;">0,0518</td>
-<td style="text-align: left;">0,0251</td>
-<td style="text-align: left;">2,0658</td>
-<td style="text-align: left;">0,0388</td>
-<td style="text-align: left;">0,0027</td>
-<td style="text-align: left;">0,1009</td>
+<td style="text-align: left;">0,0563</td>
+<td style="text-align: left;">0,0249</td>
+<td style="text-align: left;">2,2643</td>
+<td style="text-align: left;">0,0236</td>
+<td style="text-align: left;">0,0076</td>
+<td style="text-align: left;">0,1051</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1960]</td>
-<td style="text-align: left;">-0,0291</td>
-<td style="text-align: left;">0,0223</td>
-<td style="text-align: left;">-1,3007</td>
-<td style="text-align: left;">0,1933</td>
-<td style="text-align: left;">-0,0728</td>
-<td style="text-align: left;">0,0147</td>
+<td style="text-align: left;">-0,0144</td>
+<td style="text-align: left;">0,0219</td>
+<td style="text-align: left;">-0,6585</td>
+<td style="text-align: left;">0,5102</td>
+<td style="text-align: left;">-0,0574</td>
+<td style="text-align: left;">0,0286</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1970]</td>
-<td style="text-align: left;">-0,2189</td>
-<td style="text-align: left;">0,0221</td>
-<td style="text-align: left;">-9,9244</td>
+<td style="text-align: left;">-0,1829</td>
+<td style="text-align: left;">0,0216</td>
+<td style="text-align: left;">-8,4552</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,2621</td>
-<td style="text-align: left;">-0,1757</td>
+<td style="text-align: left;">-0,2254</td>
+<td style="text-align: left;">-0,1405</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1980]</td>
-<td style="text-align: left;">-0,2541</td>
-<td style="text-align: left;">0,0217</td>
-<td style="text-align: left;">-11,6940</td>
+<td style="text-align: left;">-0,1984</td>
+<td style="text-align: left;">0,0213</td>
+<td style="text-align: left;">-9,3131</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,2967</td>
-<td style="text-align: left;">-0,2115</td>
+<td style="text-align: left;">-0,2401</td>
+<td style="text-align: left;">-0,1566</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.1990]</td>
-<td style="text-align: left;">-0,2618</td>
-<td style="text-align: left;">0,0217</td>
-<td style="text-align: left;">-12,0789</td>
+<td style="text-align: left;">-0,2171</td>
+<td style="text-align: left;">0,0213</td>
+<td style="text-align: left;">-10,2125</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,3042</td>
-<td style="text-align: left;">-0,2193</td>
+<td style="text-align: left;">-0,2587</td>
+<td style="text-align: left;">-0,1754</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.2000]</td>
-<td style="text-align: left;">-0,3021</td>
-<td style="text-align: left;">0,0219</td>
-<td style="text-align: left;">-13,8040</td>
+<td style="text-align: left;">-0,2610</td>
+<td style="text-align: left;">0,0215</td>
+<td style="text-align: left;">-12,1340</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,3450</td>
-<td style="text-align: left;">-0,2592</td>
+<td style="text-align: left;">-0,3031</td>
+<td style="text-align: left;">-0,2188</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.2010]</td>
-<td style="text-align: left;">-0,4047</td>
-<td style="text-align: left;">0,0225</td>
-<td style="text-align: left;">-18,0011</td>
+<td style="text-align: left;">-0,3656</td>
+<td style="text-align: left;">0,0222</td>
+<td style="text-align: left;">-16,5025</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,4488</td>
-<td style="text-align: left;">-0,3606</td>
+<td style="text-align: left;">-0,4091</td>
+<td style="text-align: left;">-0,3222</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(coorte)[T.2020]</td>
-<td style="text-align: left;">-0,4039</td>
-<td style="text-align: left;">0,0272</td>
-<td style="text-align: left;">-14,8668</td>
+<td style="text-align: left;">-0,3616</td>
+<td style="text-align: left;">0,0273</td>
+<td style="text-align: left;">-13,2565</td>
 <td style="text-align: left;">0,0000</td>
-<td style="text-align: left;">-0,4572</td>
-<td style="text-align: left;">-0,3507</td>
+<td style="text-align: left;">-0,4151</td>
+<td style="text-align: left;">-0,3082</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Blues]</td>
-<td style="text-align: left;">-0,0184</td>
-<td style="text-align: left;">0,1014</td>
-<td style="text-align: left;">-0,1812</td>
-<td style="text-align: left;">0,8562</td>
-<td style="text-align: left;">-0,2170</td>
-<td style="text-align: left;">0,1803</td>
+<td style="text-align: left;">-0,0177</td>
+<td style="text-align: left;">0,1034</td>
+<td style="text-align: left;">-0,1715</td>
+<td style="text-align: left;">0,8638</td>
+<td style="text-align: left;">-0,2204</td>
+<td style="text-align: left;">0,1850</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td
 style="text-align: left;">C(gender)[T.F]:C(genere)[T.Children’s]</td>
-<td style="text-align: left;">0,0108</td>
-<td style="text-align: left;">0,0881</td>
-<td style="text-align: left;">0,1222</td>
-<td style="text-align: left;">0,9027</td>
-<td style="text-align: left;">-0,1619</td>
-<td style="text-align: left;">0,1835</td>
+<td style="text-align: left;">-0,0037</td>
+<td style="text-align: left;">0,0927</td>
+<td style="text-align: left;">-0,0396</td>
+<td style="text-align: left;">0,9684</td>
+<td style="text-align: left;">-0,1853</td>
+<td style="text-align: left;">0,1780</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Classical]</td>
-<td style="text-align: left;">-0,0750</td>
-<td style="text-align: left;">0,0789</td>
-<td style="text-align: left;">-0,9508</td>
-<td style="text-align: left;">0,3417</td>
-<td style="text-align: left;">-0,2296</td>
-<td style="text-align: left;">0,0796</td>
+<td style="text-align: left;">-0,0692</td>
+<td style="text-align: left;">0,0840</td>
+<td style="text-align: left;">-0,8244</td>
+<td style="text-align: left;">0,4097</td>
+<td style="text-align: left;">-0,2338</td>
+<td style="text-align: left;">0,0954</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td
 style="text-align: left;">C(gender)[T.F]:C(genere)[T.Electronic]</td>
-<td style="text-align: left;">-0,0179</td>
-<td style="text-align: left;">0,0747</td>
-<td style="text-align: left;">-0,2395</td>
-<td style="text-align: left;">0,8107</td>
-<td style="text-align: left;">-0,1643</td>
-<td style="text-align: left;">0,1285</td>
+<td style="text-align: left;">-0,0092</td>
+<td style="text-align: left;">0,0801</td>
+<td style="text-align: left;">-0,1147</td>
+<td style="text-align: left;">0,9087</td>
+<td style="text-align: left;">-0,1661</td>
+<td style="text-align: left;">0,1478</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Folk, World,
 &amp; Country]</td>
-<td style="text-align: left;">-0,0641</td>
-<td style="text-align: left;">0,0783</td>
-<td style="text-align: left;">-0,8188</td>
-<td style="text-align: left;">0,4129</td>
-<td style="text-align: left;">-0,2177</td>
-<td style="text-align: left;">0,0894</td>
+<td style="text-align: left;">-0,0633</td>
+<td style="text-align: left;">0,0834</td>
+<td style="text-align: left;">-0,7589</td>
+<td style="text-align: left;">0,4479</td>
+<td style="text-align: left;">-0,2268</td>
+<td style="text-align: left;">0,1002</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 <tr>
 <td style="text-align: left;">C(gender)[T.F]:C(genere)[T.Funk /
 Soul]</td>
-<td style="text-align: left;">-0,0682</td>
-<td style="text-align: left;">0,1010</td>
-<td style="text-align: left;">-0,6745</td>
-<td style="text-align: left;">0,5000</td>
-<td style="text-align: left;">-0,2662</td>
-<td style="text-align: left;">0,1299</td>
+<td style="text-align: left;">-0,0660</td>
+<td style="text-align: left;">0,1054</td>
+<td style="text-align: left;">-0,6263</td>
+<td style="text-align: left;">0,5311</td>
+<td style="text-align: left;">-0,2725</td>
+<td style="text-align: left;">0,1405</td>
 <td style="text-align: left;">coreness</td>
 </tr>
 </tbody>
@@ -3020,21 +2979,21 @@ distinguibile da zero su nessuna delle tre misure:</p>
 <tbody>
 <tr>
 <td>eigenvector</td>
-<td>0,223</td>
-<td>-0,110 – 0,555</td>
-<td>0,189</td>
+<td>0,180</td>
+<td>-0,164 – 0,524</td>
+<td>0,305</td>
 </tr>
 <tr>
 <td>coreness</td>
-<td>0,039</td>
-<td>-0,106 – 0,184</td>
-<td>0,598</td>
+<td>0,036</td>
+<td>-0,119 – 0,191</td>
+<td>0,648</td>
 </tr>
 <tr>
 <td>betweenness</td>
-<td>-0,252</td>
-<td>-0,590 – 0,086</td>
-<td>0,144</td>
+<td>-0,293</td>
+<td>-0,625 – 0,039</td>
+<td>0,083</td>
 </tr>
 </tbody>
 </table>
@@ -3045,11 +3004,11 @@ la periferia della rete.</p>
 <p>È un risultato che va enunciato con precisione, perché si presta a
 due letture sbagliate di segno opposto.</p>
 <p><strong>Non significa che non ci sia disuguaglianza.</strong> Le
-donne sono il 13,8% della popolazione e pubblicano meno: la mediana
-delle pubblicazioni è 8 contro 10. La disuguaglianza c’è ed è grande —
-ma si manifesta <strong>nell’accesso e nel volume di attività</strong>,
-non nella posizione strutturale a parità di attività. Chi entra e riesce
-a lavorare, lavora in posizioni comparabili.</p>
+donne sono il 14,8% della popolazione e pubblicano meno: la mediana
+delle pubblicazioni è 8 contro 9. La disuguaglianza c’è ed è grande — ma
+si manifesta <strong>nell’accesso e nel volume di attività</strong>, non
+nella posizione strutturale a parità di attività. Chi entra e riesce a
+lavorare, lavora in posizioni comparabili.</p>
 <p><strong>Non significa nemmeno che il controllo per l’attività sia
 neutro.</strong> Il numero di pubblicazioni non è una variabile esogena:
 è esso stesso un esito di processi di accesso che possono essere
@@ -3058,8 +3017,8 @@ carriera, la posizione differisce?” e non alla domanda “le carriere
 differiscono?”. La prima ha risposta negativa, la seconda — sezione 4 —
 ha risposta ampiamente positiva.</p>
 <p>Il dato più interessante è la divergenza fra mediana e media
-dell’eigenvector: la mediana è più alta per le donne (7,3 ×
-10<sup>-9</sup> contro 3,4 × 10<sup>-9</sup>) mentre la media è più
+dell’eigenvector: la mediana è più alta per le donne (7,7 ×
+10<sup>-9</sup> contro 3,9 × 10<sup>-9</sup>) mentre la media è più
 bassa. Significa che la donna tipica della rete è connessa quanto e più
 dell’uomo tipico, ma che gli <strong>hub estremi</strong> — i pochissimi
 nodi con centralità di ordini di grandezza superiore — sono quasi tutti
@@ -3079,7 +3038,7 @@ punto è decisivo: senza un termine di chiusura triadica
 (<code>gwesp</code>), qualunque tendenza a fare gruppo viene
 erroneamente attribuita all’attributo su cui si sta guardando.</p>
 <p><strong>Sulla rete intera l’ERGM non è stimabile</strong>, e va detto
-chiaramente invece di far finta. Con 82.595 nodi lo spazio dei grafi
+chiaramente invece di far finta. Con 70.712 nodi lo spazio dei grafi
 possibili rende il campionamento MCMC impraticabile. Si è quindi
 proceduto come previsto dal disegno, per sottoreti: i cinque generi
 musicali più popolosi, le due epoche, e un campione a palla di neve
@@ -3782,7 +3741,7 @@ tendenza della rete a chiudere i triangoli.</p>
 <p>Il confronto fra <code>nodematch.gender.F</code> e
 <code>nodematch.gender.M</code> è il risultato che la sezione 5.4 non
 poteva dare. Lì i rapporti osservato/atteso non erano confrontabili,
-perché con una quota femminile del 13,8% il valore atteso per un legame
+perché con una quota femminile del 14,8% il valore atteso per un legame
 donna-donna è così basso che qualunque addensamento reale produce un
 rapporto grande. Qui il problema non si pone: i due coefficienti
 misurano la stessa quantità sulla stessa scala. <strong>E il risultato
@@ -4143,7 +4102,7 @@ sessuale</h2>
 <img src="figures/f10_montecarlo_genere.png" alt="f10_montecarlo_genere" style="width:100%" />
 <figcaption>
 <p><strong>La distribuzione Monte Carlo dell’assortatività di genere al
-variare dell’imputazione degli 28.830 artisti senza genere
+variare dell’imputazione degli 22.136 artisti senza genere
 determinato.</strong> L’istogramma è la distribuzione su 200 estrazioni
 dalla marginale osservata. Le due linee tratteggiate laterali non sono
 stime ma <strong>limiti costruiti apposta</strong>: assegnando a ogni
@@ -4182,42 +4141,42 @@ sua grandezza esatta no.</p>
 <tr>
 <td style="text-align: left;">migliore_omofilia_min</td>
 <td style="text-align: left;">1</td>
-<td style="text-align: left;">0,0509</td>
+<td style="text-align: left;">0,0499</td>
 <td style="text-align: left;">n.d.</td>
-<td style="text-align: left;">0,0509</td>
-<td style="text-align: left;">0,0509</td>
+<td style="text-align: left;">0,0499</td>
+<td style="text-align: left;">0,0499</td>
 <td style="text-align: left;">n.d.</td>
 <td style="text-align: left;">n.d.</td>
 </tr>
 <tr>
 <td style="text-align: left;">peggiore_omofilia_max</td>
 <td style="text-align: left;">1</td>
-<td style="text-align: left;">0,0686</td>
+<td style="text-align: left;">0,0623</td>
 <td style="text-align: left;">n.d.</td>
-<td style="text-align: left;">0,0686</td>
-<td style="text-align: left;">0,0686</td>
+<td style="text-align: left;">0,0623</td>
+<td style="text-align: left;">0,0623</td>
 <td style="text-align: left;">n.d.</td>
 <td style="text-align: left;">n.d.</td>
 </tr>
 <tr>
 <td style="text-align: left;">solo_noti</td>
 <td style="text-align: left;">1</td>
-<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,0432</td>
 <td style="text-align: left;">n.d.</td>
-<td style="text-align: left;">0,0511</td>
-<td style="text-align: left;">0,0511</td>
+<td style="text-align: left;">0,0432</td>
+<td style="text-align: left;">0,0432</td>
 <td style="text-align: left;">n.d.</td>
 <td style="text-align: left;">n.d.</td>
 </tr>
 <tr>
 <td style="text-align: left;">status_quo</td>
 <td style="text-align: left;">200</td>
-<td style="text-align: left;">0,0347</td>
-<td style="text-align: left;">0,0009</td>
-<td style="text-align: left;">0,0325</td>
-<td style="text-align: left;">0,0369</td>
-<td style="text-align: left;">0,0328</td>
-<td style="text-align: left;">0,0364</td>
+<td style="text-align: left;">0,0329</td>
+<td style="text-align: left;">0,0007</td>
+<td style="text-align: left;">0,0308</td>
+<td style="text-align: left;">0,0349</td>
+<td style="text-align: left;">0,0313</td>
+<td style="text-align: left;">0,0343</td>
 </tr>
 </tbody>
 </table>
@@ -4226,11 +4185,11 @@ imputazione</strong></p>
 <p><em>Dati completi in <code>tables/t5_montecarlo_genere.csv</code> e
 <code>tables/t5_montecarlo_genere.tex</code>.</em></p>
 <p>I quattro numeri vanno letti insieme. Sui soli artisti con genere
-determinato l’assortatività vale 0,0511. Imputando gli ignoti per
-estrazione casuale dalla marginale osservata scende a 0,0347:
+determinato l’assortatività vale 0,0432. Imputando gli ignoti per
+estrazione casuale dalla marginale osservata scende a 0,0329:
 l’imputazione casuale non può che diluire la struttura, ed è la ragione
 per cui la misura di riferimento di questo studio è la prima e non la
-seconda. I due limiti costruiti sul vicinato — 0,0509 e 0,0686 —
+seconda. I due limiti costruiti sul vicinato — 0,0499 e 0,0623 —
 delimitano quanto l’omofilia potrebbe valere se gli artisti ignoti
 somigliassero sistematicamente ai loro collaboratori o sistematicamente
 no. <strong>Nessuno dei quattro scenari porta l’omofilia a zero o sotto
@@ -4284,102 +4243,102 @@ che dice quanto il livello traccia stia effettivamente aggiungendo.</p>
 <tbody>
 <tr>
 <td style="text-align: left;">default</td>
-<td style="text-align: left;">82.595</td>
-<td style="text-align: left;">702.613</td>
-<td style="text-align: left;">0,9566</td>
-<td style="text-align: left;">0,0511</td>
-<td style="text-align: left;">0,1133</td>
-<td style="text-align: left;">0,5186</td>
+<td style="text-align: left;">70.712</td>
+<td style="text-align: left;">586.040</td>
+<td style="text-align: left;">0,9538</td>
+<td style="text-align: left;">0,0432</td>
+<td style="text-align: left;">0,1254</td>
+<td style="text-align: left;">0,4970</td>
 </tr>
 <tr>
 <td style="text-align: left;">max_credits=4</td>
-<td style="text-align: left;">59.325</td>
-<td style="text-align: left;">242.868</td>
-<td style="text-align: left;">0,9080</td>
-<td style="text-align: left;">0,0397</td>
-<td style="text-align: left;">0,1099</td>
-<td style="text-align: left;">0,5443</td>
+<td style="text-align: left;">50.042</td>
+<td style="text-align: left;">204.330</td>
+<td style="text-align: left;">0,9012</td>
+<td style="text-align: left;">0,0327</td>
+<td style="text-align: left;">0,1226</td>
+<td style="text-align: left;">0,5278</td>
 </tr>
 <tr>
 <td style="text-align: left;">max_credits=20</td>
-<td style="text-align: left;">93.574</td>
-<td style="text-align: left;">1.788.440</td>
-<td style="text-align: left;">0,9751</td>
-<td style="text-align: left;">0,0556</td>
-<td style="text-align: left;">0,1324</td>
-<td style="text-align: left;">0,4799</td>
+<td style="text-align: left;">80.864</td>
+<td style="text-align: left;">1.445.126</td>
+<td style="text-align: left;">0,9702</td>
+<td style="text-align: left;">0,0500</td>
+<td style="text-align: left;">0,1368</td>
+<td style="text-align: left;">0,4512</td>
 </tr>
 <tr>
 <td style="text-align: left;">peso_min_arco=1.0</td>
-<td style="text-align: left;">54.697</td>
-<td style="text-align: left;">383.680</td>
-<td style="text-align: left;">0,9231</td>
-<td style="text-align: left;">0,0739</td>
-<td style="text-align: left;">0,1200</td>
-<td style="text-align: left;">0,5786</td>
+<td style="text-align: left;">44.938</td>
+<td style="text-align: left;">314.348</td>
+<td style="text-align: left;">0,9133</td>
+<td style="text-align: left;">0,0675</td>
+<td style="text-align: left;">0,1329</td>
+<td style="text-align: left;">0,5529</td>
 </tr>
 <tr>
 <td style="text-align: left;">peso_min_arco=2.0</td>
-<td style="text-align: left;">40.391</td>
-<td style="text-align: left;">191.346</td>
-<td style="text-align: left;">0,8671</td>
-<td style="text-align: left;">0,0652</td>
-<td style="text-align: left;">0,1143</td>
-<td style="text-align: left;">0,6188</td>
+<td style="text-align: left;">33.840</td>
+<td style="text-align: left;">159.715</td>
+<td style="text-align: left;">0,8569</td>
+<td style="text-align: left;">0,0631</td>
+<td style="text-align: left;">0,1260</td>
+<td style="text-align: left;">0,5966</td>
 </tr>
 <tr>
 <td style="text-align: left;">raccolte_escluse=True</td>
-<td style="text-align: left;">76.911</td>
-<td style="text-align: left;">611.095</td>
-<td style="text-align: left;">0,9529</td>
-<td style="text-align: left;">0,0543</td>
-<td style="text-align: left;">0,1152</td>
-<td style="text-align: left;">0,5269</td>
+<td style="text-align: left;">65.549</td>
+<td style="text-align: left;">508.524</td>
+<td style="text-align: left;">0,9503</td>
+<td style="text-align: left;">0,0459</td>
+<td style="text-align: left;">0,1303</td>
+<td style="text-align: left;">0,5037</td>
 </tr>
 <tr>
 <td style="text-align: left;">crediti_traccia=False</td>
-<td style="text-align: left;">81.527</td>
-<td style="text-align: left;">655.967</td>
-<td style="text-align: left;">0,9548</td>
-<td style="text-align: left;">0,0525</td>
-<td style="text-align: left;">0,0853</td>
-<td style="text-align: left;">0,5225</td>
+<td style="text-align: left;">69.806</td>
+<td style="text-align: left;">546.310</td>
+<td style="text-align: left;">0,9518</td>
+<td style="text-align: left;">0,0442</td>
+<td style="text-align: left;">0,0892</td>
+<td style="text-align: left;">0,5006</td>
 </tr>
 <tr>
 <td style="text-align: left;">pesi_specificita=1.0/1.0/1.0</td>
-<td style="text-align: left;">82.595</td>
-<td style="text-align: left;">702.613</td>
-<td style="text-align: left;">0,9566</td>
-<td style="text-align: left;">0,0511</td>
-<td style="text-align: left;">0,0995</td>
-<td style="text-align: left;">0,5186</td>
+<td style="text-align: left;">70.712</td>
+<td style="text-align: left;">586.040</td>
+<td style="text-align: left;">0,9538</td>
+<td style="text-align: left;">0,0432</td>
+<td style="text-align: left;">0,1086</td>
+<td style="text-align: left;">0,4970</td>
 </tr>
 <tr>
 <td style="text-align: left;">pesi_specificita=1.0/0.5/0.1</td>
-<td style="text-align: left;">82.595</td>
-<td style="text-align: left;">702.613</td>
-<td style="text-align: left;">0,9566</td>
-<td style="text-align: left;">0,0511</td>
-<td style="text-align: left;">0,1211</td>
-<td style="text-align: left;">0,5186</td>
+<td style="text-align: left;">70.712</td>
+<td style="text-align: left;">586.040</td>
+<td style="text-align: left;">0,9538</td>
+<td style="text-align: left;">0,0432</td>
+<td style="text-align: left;">0,1336</td>
+<td style="text-align: left;">0,4970</td>
 </tr>
 <tr>
 <td style="text-align: left;">soglia_italianita=0.6</td>
-<td style="text-align: left;">74.071</td>
-<td style="text-align: left;">599.807</td>
-<td style="text-align: left;">0,9561</td>
-<td style="text-align: left;">0,0535</td>
-<td style="text-align: left;">0,1134</td>
-<td style="text-align: left;">0,5083</td>
+<td style="text-align: left;">63.488</td>
+<td style="text-align: left;">500.418</td>
+<td style="text-align: left;">0,9527</td>
+<td style="text-align: left;">0,0461</td>
+<td style="text-align: left;">0,1254</td>
+<td style="text-align: left;">0,4875</td>
 </tr>
 <tr>
 <td style="text-align: left;">soglia_italianita=0.7</td>
-<td style="text-align: left;">62.981</td>
-<td style="text-align: left;">470.571</td>
-<td style="text-align: left;">0,9541</td>
-<td style="text-align: left;">0,0556</td>
-<td style="text-align: left;">0,1219</td>
-<td style="text-align: left;">0,5005</td>
+<td style="text-align: left;">53.916</td>
+<td style="text-align: left;">390.999</td>
+<td style="text-align: left;">0,9507</td>
+<td style="text-align: left;">0,0450</td>
+<td style="text-align: left;">0,1331</td>
+<td style="text-align: left;">0,4795</td>
 </tr>
 </tbody>
 </table>
@@ -4388,9 +4347,9 @@ costruzione della rete</strong></p>
 <p><em>Dati completi in <code>tables/t5_sensibilita.csv</code> e
 <code>tables/t5_sensibilita.tex</code>.</em></p>
 <p>Sulle 10 varianti provate, l’assortatività di genere sui soli nodi
-determinati resta compresa fra <strong>0,0397 e 0,0739</strong>, sempre
+determinati resta compresa fra <strong>0,0327 e 0,0675</strong>, sempre
 positiva e sempre dello stesso ordine di grandezza del valore di
-riferimento (0,0511). Nessuna scelta di costruzione della rete, fra
+riferimento (0,0432). Nessuna scelta di costruzione della rete, fra
 quelle difendibili, ribalta la conclusione.</p>
 <h3 id="che-cosa-aggiungono-davvero-i-crediti-a-livello-traccia">Che
 cosa aggiungono davvero i crediti a livello traccia</h3>
@@ -4400,14 +4359,14 @@ cambiare i pesi non cambia quali coppie di artisti siano collegate:
 cambia quanto contano. Il confronto è istruttivo.</p>
 <ul>
 <li>con i crediti di traccia e la gerarchia di default:
-<strong>0,1133</strong></li>
+<strong>0,1254</strong></li>
 <li>senza crediti di traccia, cioè tornando alle sole co-presenze di
-copertina: <strong>0,0853</strong></li>
-<li>con tutti i crediti allo stesso peso: 0,0995</li>
-<li>con una gerarchia più ripida (1 / 0,5 / 0,1): 0,1211</li>
+copertina: <strong>0,0892</strong></li>
+<li>con tutti i crediti allo stesso peso: 0,1086</li>
+<li>con una gerarchia più ripida (1 / 0,5 / 0,1): 0,1336</li>
 </ul>
 <p>Disattivare il livello traccia abbassa l’omofilia misurata di circa
-25%, e appiattire i pesi la abbassa quasi altrettanto. La lettura è che
+29%, e appiattire i pesi la abbassa quasi altrettanto. La lettura è che
 <strong>le collaborazioni documentate in modo più specifico sono anche
 le più omofile</strong>: quando due nomi compaiono insieme sulla stessa
 traccia — non genericamente sullo stesso disco — la probabilità che
@@ -4454,47 +4413,47 @@ musicale debole</h2>
 <tbody>
 <tr>
 <td style="text-align: left;">genre_top1</td>
-<td style="text-align: left;">82.595</td>
-<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">70.712</td>
+<td style="text-align: left;">586.040</td>
 <td style="text-align: left;">0,0002</td>
-<td style="text-align: left;">0,9566</td>
-<td style="text-align: left;">0,0735</td>
-<td style="text-align: left;">0,0511</td>
-<td style="text-align: left;">0,1133</td>
-<td style="text-align: left;">0,5186</td>
-<td style="text-align: left;">0,1379</td>
+<td style="text-align: left;">0,9538</td>
+<td style="text-align: left;">0,0810</td>
+<td style="text-align: left;">0,0432</td>
+<td style="text-align: left;">0,1254</td>
+<td style="text-align: left;">0,4970</td>
+<td style="text-align: left;">0,1477</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">100.201</td>
+<td style="text-align: left;">87.229</td>
 <td style="text-align: left;">16</td>
 </tr>
 <tr>
 <td style="text-align: left;">genre_top2</td>
-<td style="text-align: left;">82.595</td>
-<td style="text-align: left;">702.613</td>
+<td style="text-align: left;">70.712</td>
+<td style="text-align: left;">586.040</td>
 <td style="text-align: left;">0,0002</td>
-<td style="text-align: left;">0,9566</td>
-<td style="text-align: left;">0,0735</td>
-<td style="text-align: left;">0,0511</td>
-<td style="text-align: left;">0,1133</td>
-<td style="text-align: left;">0,4762</td>
-<td style="text-align: left;">0,1379</td>
+<td style="text-align: left;">0,9538</td>
+<td style="text-align: left;">0,0810</td>
+<td style="text-align: left;">0,0432</td>
+<td style="text-align: left;">0,1254</td>
+<td style="text-align: left;">0,4538</td>
+<td style="text-align: left;">0,1477</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">100.201</td>
+<td style="text-align: left;">87.229</td>
 <td style="text-align: left;">16</td>
 </tr>
 <tr>
 <td style="text-align: left;">genre_exclude</td>
-<td style="text-align: left;">54.334</td>
-<td style="text-align: left;">433.408</td>
+<td style="text-align: left;">45.704</td>
+<td style="text-align: left;">349.998</td>
 <td style="text-align: left;">0,0003</td>
-<td style="text-align: left;">0,9542</td>
-<td style="text-align: left;">0,0736</td>
-<td style="text-align: left;">0,0598</td>
-<td style="text-align: left;">0,1119</td>
-<td style="text-align: left;">0,7231</td>
-<td style="text-align: left;">0,1380</td>
+<td style="text-align: left;">0,9505</td>
+<td style="text-align: left;">0,0822</td>
+<td style="text-align: left;">0,0486</td>
+<td style="text-align: left;">0,1234</td>
+<td style="text-align: left;">0,7045</td>
+<td style="text-align: left;">0,1489</td>
 <td style="text-align: left;">1,0000</td>
-<td style="text-align: left;">65.773</td>
+<td style="text-align: left;">56.505</td>
 <td style="text-align: left;">15</td>
 </tr>
 </tbody>
@@ -4505,8 +4464,8 @@ debole</strong></p>
 <p><em>Dati completi in <code>tables/t5_genere_debole.csv</code> e
 <code>tables/t5_genere_debole.tex</code>.</em></p>
 <p>Gli artisti il cui tag di genere principale copre meno del 40% delle
-loro pubblicazioni sono marcati <code>genre_weak</code>: sono 34.428,
-cioè 34,4% della popolazione. La tabella confronta tre trattamenti —
+loro pubblicazioni sono marcati <code>genre_weak</code>: sono 30.724,
+cioè 35,2% della popolazione. La tabella confronta tre trattamenti —
 tenerli col tag principale, sostituirlo col secondo tag, escluderli del
 tutto — per mostrare quanto le conclusioni su RQ2 dipendano da
 un’attribuzione di genere musicale che per costruzione è incerta.</p>
@@ -4520,7 +4479,7 @@ rotazionale</li>
 <li>R per l’ERGM: installato in userspace via micromamba (conda-forge),
 env <code>opt/mamba/envs/ergm</code></li>
 <li>Seme casuale globale: <strong>20260920</strong></li>
-<li>Data di esecuzione: 21/09/2026</li>
+<li>Data di esecuzione: 25/09/2026</li>
 </ul>
 <table>
 <thead>
@@ -4619,12 +4578,65 @@ variare le soglie senza rileggere il database.</p>
 </thead>
 <tbody>
 <tr>
+<td style="text-align: left;">ERGM gwesp025_gwdeg</td>
+<td style="text-align: left;">45.780,5</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM 2020s</td>
+<td style="text-align: left;">13.466,7</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM 1950s</td>
+<td style="text-align: left;">10.928,0</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM decay_alto</td>
+<td style="text-align: left;">8.509,8</td>
+</tr>
+<tr>
+<td style="text-align: left;">logit esatto su tutte le diadi</td>
+<td style="text-align: left;">8.014,7</td>
+</tr>
+<tr>
+<td style="text-align: left;">serie temporale esatta</td>
+<td style="text-align: left;">5.449,4</td>
+</tr>
+<tr>
+<td style="text-align: left;">betweenness</td>
+<td style="text-align: left;">5.238,8</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM 1960s</td>
+<td style="text-align: left;">4.602,8</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM gwesp050_stocapp</td>
+<td style="text-align: left;">4.406,4</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM gwesp_esp0</td>
+<td style="text-align: left;">3.585,5</td>
+</tr>
+<tr>
+<td style="text-align: left;">rete intera: 20 riproiezioni
+randomizzate</td>
+<td style="text-align: left;">3.342,4</td>
+</tr>
+<tr>
 <td style="text-align: left;">ERGM genere_Rock</td>
 <td style="text-align: left;">3.183,3</td>
 </tr>
 <tr>
 <td style="text-align: left;">sensibilità</td>
-<td style="text-align: left;">2.138,1</td>
+<td style="text-align: left;">2.578,6</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM 1940s</td>
+<td style="text-align: left;">2.468,0</td>
+</tr>
+<tr>
+<td style="text-align: left;">ERGM due_scale</td>
+<td style="text-align: left;">1.687,4</td>
 </tr>
 <tr>
 <td style="text-align: left;">ERGM genere_Folk_World_&amp;_Country</td>
@@ -4643,60 +4655,8 @@ variare le soglie senza rileggere il database.</p>
 <td style="text-align: left;">1.485,7</td>
 </tr>
 <tr>
-<td style="text-align: left;">ERGM genere_Pop</td>
-<td style="text-align: left;">1.170,7</td>
-</tr>
-<tr>
-<td style="text-align: left;">ERGM genere_Classical</td>
-<td style="text-align: left;">926,5</td>
-</tr>
-<tr>
-<td style="text-align: left;">ERGM epoca_pre2000</td>
-<td style="text-align: left;">880,3</td>
-</tr>
-<tr>
-<td style="text-align: left;">assortatività solo M/F</td>
-<td style="text-align: left;">828,8</td>
-</tr>
-<tr>
-<td style="text-align: left;">assortatività per strato</td>
-<td style="text-align: left;">617,8</td>
-</tr>
-<tr>
-<td style="text-align: left;">betweenness</td>
-<td style="text-align: left;">609,9</td>
-</tr>
-<tr>
-<td style="text-align: left;">genere debole</td>
-<td style="text-align: left;">467,1</td>
-</tr>
-<tr>
-<td style="text-align: left;">esportazione dataset</td>
-<td style="text-align: left;">323,2</td>
-</tr>
-<tr>
-<td style="text-align: left;">wikidata_blocco_B_italiani</td>
-<td style="text-align: left;">214,4</td>
-</tr>
-<tr>
-<td style="text-align: left;">mixing e assortatività globale</td>
-<td style="text-align: left;">127,3</td>
-</tr>
-<tr>
-<td style="text-align: left;">COPY raw_relgenre</td>
-<td style="text-align: left;">111,8</td>
-</tr>
-<tr>
-<td style="text-align: left;">monte carlo genere</td>
-<td style="text-align: left;">105,6</td>
-</tr>
-<tr>
-<td style="text-align: left;">COPY raw_ra</td>
-<td style="text-align: left;">103,1</td>
-</tr>
-<tr>
-<td style="text-align: left;">COPY raw_reltracks</td>
-<td style="text-align: left;">102,2</td>
+<td style="text-align: left;">passata 1b (ricerca di linea)</td>
+<td style="text-align: left;">1.460,8</td>
 </tr>
 </tbody>
 </table>
@@ -4720,7 +4680,7 @@ resta non quantificato.</li>
 <li><strong>L’italianità è approssimata dal paese di
 pubblicazione</strong>, perché <code>release_label</code> è vuota.
 Confonde “artista italiano” con “artista pubblicato in Italia”.</li>
-<li><strong>26,4% della popolazione non ha genere musicale</strong>,
+<li><strong>26,9% della popolazione non ha genere musicale</strong>,
 perché <code>release_genre</code> è vuota e i master coprono solo parte
 delle pubblicazioni.</li>
 <li><strong>Nessuna verifica incrociata fra fonti</strong>: iTunes è
@@ -4729,7 +4689,7 @@ escluso per scelta.</li>
 vinile, elettronica e collezionismo.</li>
 <li><strong>L’ERGM vale sulle sottoreti stimate</strong>, non
 sull’intera rete.</li>
-<li><strong>Wikidata copre 5,2% della popolazione</strong>; il livello
+<li><strong>Wikidata copre 6,0% della popolazione</strong>; il livello
 di recupero per nome non è stato completato per indisponibilità ripetuta
 del servizio SPARQL, che ha risposto con errori 429, 502 e 504.</li>
 </ol>

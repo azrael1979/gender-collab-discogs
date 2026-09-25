@@ -2,7 +2,7 @@
 # Pattern di collaborazione fra musicisti italiani
 ## Omofilia di genere sessuale e genere musicale su Discogs
 
-*Analisi condotta il 21/09/2026 — fonte unica: dump Discogs locale (PostgreSQL)*
+*Analisi condotta il 25/09/2026 — fonte unica: dump Discogs locale (PostgreSQL)*
 
 ---
 
@@ -22,36 +22,36 @@ lo stesso effetto apparente per una ragione diversa.
 
 | | |
 |---|---|
-| Musicisti italiani identificati | **100.201** |
-| di cui con genere sessuale determinato | 70.374 (70,2%) |
-| Quota di donne fra i determinati | **13,8%** — un rapporto di **6,25 uomini per ogni donna** |
-| Crediti analizzati | 4.169.130, di cui 2.670.018 (64,0%) risolti sulla singola traccia |
-| Rete di collaborazione | 82.595 artisti collegati, 702.613 legami |
-| Componente gigante | 95,7% degli artisti collegati |
-| Assortatività di genere sessuale | **r = 0,0511** (IC 95% 0,0479–0,0543) |
-| Assortatività di genere musicale | **r = 0,5186** |
-| Omofilia di genere pre-2000 → post-2000 | 0,0494 → 0,0731 (differenza non significativa nell'ERGM) |
+| Musicisti italiani identificati | **87.229** |
+| di cui con genere sessuale determinato | 65.093 (74,6%) |
+| Quota di donne fra i determinati | **14,8%** — un rapporto di **5,77 uomini per ogni donna** |
+| Crediti analizzati | 3.682.616, di cui 2.360.057 (64,1%) risolti sulla singola traccia |
+| Rete di collaborazione | 70.712 artisti collegati, 586.040 legami |
+| Componente gigante | 95,4% degli artisti collegati |
+| Assortatività di genere sessuale | **r = 0,0432** (IC 95% 0,0399–0,0465) |
+| Assortatività di genere musicale | **r = 0,4970** |
+| Omofilia di genere pre-2000 → post-2000 | 0,0406 → 0,0693 (differenza non significativa nell'ERGM) |
 | Omofilia ERGM, donne contro uomini (mediana sulle sottoreti) | **0,679 contro 0,074** in log-odds |
 | ERGM | 8 sottoreti, 3 modelli ciascuna, **8 convergenti**, `gwesp` incluso |
 
 ### Le cinque cose da sapere
 
 1. **La musica registrata italiana è un mondo di uomini, e lo è rimasta.**
-   13,8% di donne fra gli artisti con genere determinato significa
-   6,3 uomini per ogni donna. La quota non cresce in modo
-   monotono nel tempo: parte dal 16,9% per chi debutta negli anni
-   Sessanta, scende al 12,4% negli anni Ottanta e risale al
-   20,5% per chi debutta dal 2020.
+   14,8% di donne fra gli artisti con genere determinato significa
+   5,8 uomini per ogni donna. La quota non cresce in modo
+   monotono nel tempo: parte dal 17,8% per chi debutta negli anni
+   Sessanta, scende al 13,2% negli anni Ottanta e risale al
+   21,4% per chi debutta dal 2020.
 
 2. **Il genere musicale separa molto più del genere sessuale.** L'assortatività
-   per genere musicale (0,519) è circa
-   10 volte quella per genere sessuale
-   (0,051). Chi fa jazz incide con chi fa jazz molto più
+   per genere musicale (0,497) è circa
+   12 volte quella per genere sessuale
+   (0,043). Chi fa jazz incide con chi fa jazz molto più
    sistematicamente di quanto gli uomini incidano con gli uomini.
 
-3. **L'omofilia di genere sessuale è piccola ma reale.** r = 0,0511
-   sembra poco, ma il modello nullo a gradi preservati dà 0,0000
-   e l'intervallo di confidenza (0,0479–0,0543) sta
+3. **L'omofilia di genere sessuale è piccola ma reale.** r = 0,0432
+   sembra poco, ma il modello nullo a gradi preservati dà 0,0001
+   e l'intervallo di confidenza (0,0399–0,0465) sta
    tutto sopra lo zero. Non è un effetto di composizione, è struttura.
 
 4. **Sono le donne a fare gruppo, non gli uomini.** È il risultato che
@@ -63,8 +63,8 @@ lo stesso effetto apparente per una ragione diversa.
    si addensa.
 
 5. **Dopo il 2000 non aumenta l'omofilia: aumenta la chiusura in triangoli.**
-   Descrittivamente l'assortatività sale da 0,0494 a
-   0,0731. Ma nell'ERGM la differenza fra le due epoche nei
+   Descrittivamente l'assortatività sale da 0,0406 a
+   0,0693. Ma nell'ERGM la differenza fra le due epoche nei
    termini di genere **non è significativa** (p = 0,88
    per le donne, 0,60 per gli uomini), mentre il termine
    di chiusura triadica cresce da 2,22 a
@@ -79,7 +79,7 @@ lo stesso effetto apparente per una ragione diversa.
 
 > **Nota di misura.** Tutte le assortatività di genere riportate come principali
 > sono calcolate sui soli archi in cui **entrambi** gli artisti hanno un genere
-> determinato (72,3% degli archi). Includere gli `unknown`
+> determinato (80,3% degli archi). Includere gli `unknown`
 > come quarta categoria gonfia sistematicamente l'indice, perché gli artisti
 > poco documentati collaborano fra loro più del caso per ragioni di copertura
 > dei dati. Il confronto fra le due misure è in tabella alla sezione 5.1.
@@ -87,8 +87,8 @@ lo stesso effetto apparente per una ragione diversa.
 ### Quanto fidarsi
 
 Il genere sessuale non è in nessuna fonte: è **inferito**. Su
-70,2% della popolazione si arriva a una determinazione, con
-5.245 casi ancorati a Wikidata tramite l'identificativo Discogs
+74,6% della popolazione si arriva a una determinazione, con
+5.203 casi ancorati a Wikidata tramite l'identificativo Discogs
 (join esatto, nessuna omonimia) e il resto per via onomastica. Il campione di
 validazione manuale da 200 casi e lo strumento per misurarne
 l'errore sono pronti in `data/validation_sample.csv`; finché non è compilato a
@@ -136,7 +136,7 @@ perciò al solo paese di pubblicazione.
 **`release_genre` e `release_style` sono vuote (0 righe).** Il genere musicale è
 disponibile unicamente attraverso il *master* (`master_genre`), e i master
 coprono circa il 59% delle pubblicazioni. È la ragione per cui
-26,4% della popolazione resta senza genere musicale
+26,9% della popolazione resta senza genere musicale
 assegnato.
 
 **L'entità "Various Artists" è di fatto assente.** In tutto `release_artist`
@@ -186,8 +186,8 @@ Restano due limiti strutturali, che nessuna soglia può togliere:
 
 **Effetto della soglia** (misurato): 254.286 artisti hanno almeno due
 pubblicazioni italiane; applicando quota e minimo, la popolazione scende a
-**100.201**. Alzando la quota a 0,60 e 0,70 si ottengono
-89.984 e 75.948 artisti: la sezione 8.2 mostra che le
+**87.229**. Alzando la quota a 0,60 e 0,70 si ottengono
+78.448 e 66.113 artisti: la sezione 8.2 mostra che le
 conclusioni non cambiano.
 
 
@@ -213,11 +213,11 @@ matching approssimato. Sono state raccolte tutte le entità con `P1953` e `P21`
 74 casi ambigui scartati e **zero blocchi persi** su una
 paginazione ricorsiva per prefisso dell'identificativo.
 
-Di questi, **5.245 ricadono nella nostra popolazione**
-(5,2%). È una copertura bassa in termini assoluti,
+Di questi, **5.203 ricadono nella nostra popolazione**
+(6,0%). È una copertura bassa in termini assoluti,
 e il motivo è ovvio: Wikidata descrive persone notabili, mentre la popolazione
 Discogs è fatta in larga parte di turnisti, arrangiatori, fonici e produttori
-che non hanno una voce enciclopedica. Ma sono 5.245 etichette
+che non hanno una voce enciclopedica. Ma sono 5.203 etichette
 **certe**, ed è su quelle che si regge il livello successivo.
 
 ## 2.3 Livello 2 — l'onomastica, costruita dai dati e non da una lista
@@ -258,38 +258,37 @@ Un nome di band non dice nulla sul genere delle persone. Per i gruppi si guarda
 perciò la composizione (`group_member`): se i membri di genere noto sono di
 entrambi i generi il gruppo è **`mixed`**, se sono tutti dello stesso genere il
 gruppo eredita quello, se se ne conoscono meno di due resta `unknown`. Sono
-stati risolti **6.371 gruppi su 12.972**, di cui
-997 misti.
+stati risolti **0 gruppi su 0**, di cui
+0 misti.
 
 ## 2.5 Esito della cascata
 
 | fonte                          |   artisti | quota   |
 |:-------------------------------|----------:|:--------|
-| onomastico_prior_it            |    45.785 | 45,7%   |
-| none                           |    22.271 | 22,2%   |
-| group_unresolved               |     6.559 | 6,5%    |
-| group_members                  |     6.371 | 6,4%    |
-| onomastico_prior_globale       |     6.257 | 6,2%    |
-| wikidata_p1953                 |     5.245 | 5,2%    |
-| onomastico_gg_it_male          |     3.278 | 3,3%    |
-| onomastico_gg_it_female        |     2.322 | 2,3%    |
-| onomastico_gg_globale_male     |     1.171 | 1,2%    |
-| onomastico_gg_globale_female   |   870     | 0,9%    |
-| onomastico_gg_it_mostly_male   |    44     | 0,0%    |
+| onomastico_prior_it            |    44.618 | 51,2%   |
+| none                           |    22.136 | 25,4%   |
+| onomastico_prior_globale       |     6.217 | 7,1%    |
+| wikidata_p1953                 |     5.203 | 6,0%    |
+| onomastico_gg_it_male          |     3.196 | 3,7%    |
+| onomastico_gg_it_female        |     2.262 | 2,6%    |
+| wikidata_name                  |     1.5   | 1,7%    |
+| onomastico_gg_globale_male     |     1.162 | 1,3%    |
+| onomastico_gg_globale_female   |   863     | 1,0%    |
+| onomastico_gg_it_mostly_male   |    44     | 0,1%    |
 | onomastico_gg_it_mostly_female |    28     | 0,0%    |
 
 **Tabella — Origine dell'etichetta di genere sessuale per ciascun artista.**
 La riga `onomastico_prior_it` porta da sola la maggior parte del carico: è il
-dizionario costruito sui 5.245 italiani certi, e bastano
+dizionario costruito sui 5.203 italiani certi, e bastano
 320 nomi propri per coprire quasi la metà della popolazione,
 perché l'onomastica italiana è fortemente concentrata. `none` e
 `group_unresolved` sono i due volti del non sapere: artisti il cui nome non è
 un nome di persona riconoscibile (sigle, pseudonimi, progetti) e gruppi di cui
 non si conoscono abbastanza membri.
 
-**Esito finale: 13,8% di donne fra gli artisti con genere
-determinato**, cioè 6,25 uomini per ogni donna, con
-29,8% della popolazione che resta indeterminata.
+**Esito finale: 14,8% di donne fra gli artisti con genere
+determinato**, cioè 5,77 uomini per ogni donna, con
+25,4% della popolazione che resta indeterminata.
 
 ## 2.6 Il pezzo mancante: la validazione manuale
 
@@ -312,7 +311,7 @@ raccoglie 28 artisti che portano **un solo** nome proprio (Mary), e
 `onomastico_gg_mostly_male` ne raccoglie 44 con due (Toni, Leonida). Su quei
 due livelli la validazione potrà dire se quei nomi sono classificati bene, non
 se il livello funziona in generale. Pesano insieme 72 artisti su
-100.201, quindi la cosa non tocca le conclusioni, ma il dato di
+87.229, quindi la cosa non tocca le conclusioni, ma il dato di
 accuratezza che ne uscirà non va letto come se fosse generalizzabile.
 
 Questo passo **non è stato eseguito**: richiede giudizio umano. Finché non lo
@@ -349,24 +348,24 @@ pesano molto più di due nomi che compaiono genericamente sullo stesso disco.
 
 I crediti a livello traccia vengono da due strade. La prima è
 `release_track_artist`, che porta un identificativo di traccia globale:
-**2.217.379 crediti**. La seconda è il campo `tracks` di
+**1.932.237 crediti**. La seconda è il campo `tracks` di
 `release_artist`, che indica le posizioni in forma testuale — `A1`, `1 to 3`,
 `4, 6, 12` — e va **risolto**: le posizioni si convertono in tracce reali
-passando per `release_track`. Di 467.509 crediti posizionali ne
-sono stati risolti 452.639
+passando per `release_track`. Di 442.050 crediti posizionali ne
+sono stati risolti 427.820
 (96,8%); i restanti usano formule
 libere (*"all tracks except 1, 13 and 14"*) e sono stati **degradati ad
 `umbrella`** anziché interpretati a forza.
 
-Totale: **2.670.018 crediti su 4.169.130
-(64,0%) sono risolti a livello di singola traccia.**
+Totale: **2.360.057 crediti su 3.682.616
+(64,1%) sono risolti a livello di singola traccia.**
 
 ## 3.2 Filtri e sottoreti
 
 Le pubblicazioni con più di 8 artisti accreditati vengono
 scartate: sono raccolte e cofanetti, dove la co-presenza non indica
 collaborazione e il numero di coppie esplode in modo quadratico. Il filtro
-riduce i crediti da 4.169.130 a 702.613.
+riduce i crediti da 3.682.616 a 586.040.
 
 Le sottoreti per ruolo separano due mestieri diversi: **creative**
 (produzione, scrittura, arrangiamento, composizione) e **performance**
@@ -376,9 +375,9 @@ l'artista di un disco.
 
 | rete        | nodi_totali   | nodi_con_archi   | archi   | densita   | grado_medio   | grado_mediano   | grado_max   | componenti   | componente_gigante   | quota_componente_gigante   | peso_totale      |
 |:------------|:--------------|:-----------------|:--------|:----------|:--------------|:----------------|:------------|:-------------|:---------------------|:---------------------------|:-----------------|
-| all         | 100.201       | 82.595           | 702.613 | 0,000206  | 17,013451     | 7,000000        | 2.523       | 1.288        | 79.013               | 0,956632                   | 1.752.462,970002 |
-| creative    | 100.201       | 34.443           | 217.334 | 0,000366  | 12,619923     | 4,000000        | 1.395       | 1.765        | 29.814               | 0,865604                   | 901.379,880000   |
-| performance | 100.201       | 60.231           | 281.710 | 0,000155  | 9,354319      | 5,000000        | 624         | 2.445        | 53.148               | 0,882403                   | 559.771,920000   |
+| all         | 87.229        | 70.712           | 586.040 | 0,000234  | 16,575404     | 7,000000        | 2.258       | 1.204        | 67.443               | 0,953770                   | 1.495.529,570002 |
+| creative    | 87.229        | 30.440           | 199.832 | 0,000431  | 13,129566     | 4,000000        | 1.348       | 1.530        | 26.538               | 0,871813                   | 866.621,310000   |
+| performance | 87.229        | 49.152           | 211.751 | 0,000175  | 8,616170      | 4,000000        | 598         | 2.493        | 42.013               | 0,854757                   | 430.596,670000   |
 
 **Tabella — Descrittive delle tre reti di collaborazione**
 
@@ -386,7 +385,7 @@ l'artista di un disco.
 
 
 La rete complessiva è **sparsa e molto connessa**: densità dell'ordine di
-0,000206, ma una componente gigante che assorbe 95,7%
+0,000234, ma una componente gigante che assorbe 95,4%
 degli artisti collegati. È la firma tipica di un mondo professionale in cui
 quasi nessuno lavora isolato e quasi nessuno lavora con tutti. La rete
 `creative` è più piccola e più densa di quella `performance`: produttori e
@@ -406,7 +405,7 @@ mostrano omofilie diverse.
 
 Le analisi che seguono girano sulla **componente gigante**, perché le misure di
 centralità e le distanze non sono definite fra componenti separate. La quota
-esclusa è 4,3% degli artisti collegati.
+esclusa è 4,6% degli artisti collegati.
 
 
 # 4. Quante sono le donne, e in quale musica (RQ1)
@@ -415,7 +414,7 @@ esclusa è 4,3% degli artisti collegati.
 <img src="figures/f3_quota_donne_per_decennio.png" alt="f3_quota_donne_per_decennio" style="width:100%" />
 <figcaption>
 
-**La quota di donne per decennio di debutto.** La linea non è la storia di un progresso. Parte dal 16,9% per chi debutta negli anni Sessanta, scende fino al 12,4% negli anni Ottanta — il minimo della serie — e risale solo di recente, fino al 20,5% per chi debutta dal 2020. La discesa degli anni Settanta e Ottanta merita cautela prima di leggerla come un arretramento reale: coincide con l'espansione massiccia del catalogo Discogs in quegli anni, cioè con l'ingresso in massa di crediti tecnici e di produzione — mestieri quasi interamente maschili — che diluiscono una quota calcolata su tutti i crediti e non sui soli interpreti. La risalita recente è invece coerente sia in ampiezza sia in direzione con quanto si osserva negli altri cataloghi musicali. In ogni decennio, comunque, la banda di confidenza resta lontanissima dalla parità.
+**La quota di donne per decennio di debutto.** La linea non è la storia di un progresso. Parte dal 17,8% per chi debutta negli anni Sessanta, scende fino al 13,2% negli anni Ottanta — il minimo della serie — e risale solo di recente, fino al 21,4% per chi debutta dal 2020. La discesa degli anni Settanta e Ottanta merita cautela prima di leggerla come un arretramento reale: coincide con l'espansione massiccia del catalogo Discogs in quegli anni, cioè con l'ingresso in massa di crediti tecnici e di produzione — mestieri quasi interamente maschili — che diluiscono una quota calcolata su tutti i crediti e non sui soli interpreti. La risalita recente è invece coerente sia in ampiezza sia in direzione con quanto si osserva negli altri cataloghi musicali. In ogni decennio, comunque, la banda di confidenza resta lontanissima dalla parità.
 
 </figcaption>
 </figure>
@@ -434,30 +433,30 @@ esclusa è 4,3% degli artisti collegati.
 | musical_genre    | cohort_decade   | n_artisti   | n_noti   | n_donne   | quota_donne   | ci_lo   | ci_hi   | rapporto_uomini_donne   |
 |:-----------------|:----------------|:------------|:---------|:----------|:--------------|:--------|:--------|:------------------------|
 | Blues            | 1.940           | 1           | 1,000    | 0,000     | 0,000         | 0,000   | 0,793   | n.d.                    |
-| Blues            | 1.950           | 7           | 1,000    | 0,000     | 0,000         | 0,000   | 0,793   | n.d.                    |
-| Blues            | 1.960           | 19          | 14,000   | 1,000     | 0,071         | 0,013   | 0,315   | 13,000                  |
-| Blues            | 1.970           | 65          | 58,000   | 9,000     | 0,155         | 0,084   | 0,269   | 5,444                   |
-| Blues            | 1.980           | 118         | 105,000  | 15,000    | 0,143         | 0,089   | 0,222   | 6,000                   |
-| Blues            | 1.990           | 143         | 115,000  | 15,000    | 0,130         | 0,081   | 0,204   | 6,667                   |
-| Blues            | 2.000           | 148         | 124,000  | 21,000    | 0,169         | 0,114   | 0,245   | 4,905                   |
-| Blues            | 2.010           | 157         | 118,000  | 22,000    | 0,186         | 0,126   | 0,266   | 4,364                   |
-| Blues            | 2.020           | 23          | 17,000   | 4,000     | 0,235         | 0,096   | 0,473   | 3,250                   |
-| Brass & Military | 1.940           | 24          | 13,000   | 0,000     | 0,000         | 0,000   | 0,228   | n.d.                    |
+| Blues            | 1.950           | 3           | 0,000    | 0,000     | n.d.          | n.d.    | n.d.    | n.d.                    |
+| Blues            | 1.960           | 17          | 13,000   | 1,000     | 0,077         | 0,014   | 0,333   | 12,000                  |
+| Blues            | 1.970           | 61          | 54,000   | 9,000     | 0,167         | 0,090   | 0,287   | 5,000                   |
+| Blues            | 1.980           | 105         | 98,000   | 15,000    | 0,153         | 0,095   | 0,237   | 5,533                   |
+| Blues            | 1.990           | 129         | 106,000  | 15,000    | 0,142         | 0,088   | 0,220   | 6,067                   |
+| Blues            | 2.000           | 137         | 121,000  | 21,000    | 0,174         | 0,116   | 0,251   | 4,762                   |
+| Blues            | 2.010           | 141         | 114,000  | 22,000    | 0,193         | 0,131   | 0,275   | 4,182                   |
+| Blues            | 2.020           | 22          | 17,000   | 4,000     | 0,235         | 0,096   | 0,473   | 3,250                   |
+| Brass & Military | 1.940           | 24          | 14,000   | 0,000     | 0,000         | 0,000   | 0,215   | n.d.                    |
 | Brass & Military | 1.950           | 10          | 6,000    | 0,000     | 0,000         | 0,000   | 0,390   | n.d.                    |
-| Brass & Military | 1.960           | 39          | 18,000   | 2,000     | 0,111         | 0,031   | 0,328   | 8,000                   |
-| Brass & Military | 1.970           | 15          | 6,000    | 0,000     | 0,000         | 0,000   | 0,390   | n.d.                    |
+| Brass & Military | 1.960           | 38          | 18,000   | 2,000     | 0,111         | 0,031   | 0,328   | 8,000                   |
+| Brass & Military | 1.970           | 13          | 6,000    | 0,000     | 0,000         | 0,000   | 0,390   | n.d.                    |
 | Brass & Military | 1.980           | 9           | 5,000    | 0,000     | 0,000         | 0,000   | 0,434   | n.d.                    |
 | Brass & Military | 1.990           | 12          | 9,000    | 0,000     | 0,000         | 0,000   | 0,299   | n.d.                    |
-| Brass & Military | 2.000           | 2           | 2,000    | 0,000     | 0,000         | 0,000   | 0,658   | n.d.                    |
-| Brass & Military | 2.010           | 3           | 1,000    | 0,000     | 0,000         | 0,000   | 0,793   | n.d.                    |
+| Brass & Military | 2.000           | 1           | 1,000    | 0,000     | 0,000         | 0,000   | 0,793   | n.d.                    |
+| Brass & Military | 2.010           | 1           | 0,000    | 0,000     | n.d.          | n.d.    | n.d.    | n.d.                    |
 | Children's       | 1.940           | 33          | 23,000   | 10,000    | 0,435         | 0,256   | 0,632   | 1,300                   |
-| Children's       | 1.950           | 83          | 72,000   | 24,000    | 0,333         | 0,235   | 0,448   | 2,000                   |
-| Children's       | 1.960           | 219         | 173,000  | 66,000    | 0,382         | 0,312   | 0,456   | 1,621                   |
-| Children's       | 1.970           | 185         | 137,000  | 70,000    | 0,511         | 0,428   | 0,593   | 0,957                   |
-| Children's       | 1.980           | 96          | 54,000   | 24,000    | 0,444         | 0,320   | 0,576   | 1,250                   |
+| Children's       | 1.950           | 79          | 72,000   | 24,000    | 0,333         | 0,235   | 0,448   | 2,000                   |
+| Children's       | 1.960           | 208         | 173,000  | 66,000    | 0,382         | 0,312   | 0,456   | 1,621                   |
+| Children's       | 1.970           | 170         | 131,000  | 70,000    | 0,534         | 0,449   | 0,618   | 0,871                   |
+| Children's       | 1.980           | 85          | 53,000   | 24,000    | 0,453         | 0,327   | 0,585   | 1,208                   |
 | Children's       | 1.990           | 60          | 45,000   | 16,000    | 0,356         | 0,232   | 0,502   | 1,812                   |
-| Children's       | 2.000           | 30          | 24,000   | 7,000     | 0,292         | 0,149   | 0,492   | 2,429                   |
-| Children's       | 2.010           | 16          | 9,000    | 2,000     | 0,222         | 0,063   | 0,547   | 3,500                   |
+| Children's       | 2.000           | 27          | 23,000   | 7,000     | 0,304         | 0,156   | 0,509   | 2,286                   |
+| Children's       | 2.010           | 13          | 9,000    | 2,000     | 0,222         | 0,063   | 0,547   | 3,500                   |
 
 **Tabella — Quota di donne per genere musicale e decennio di debutto, con intervalli di Wilson al 95%**
 
@@ -467,8 +466,8 @@ esclusa è 4,3% degli artisti collegati.
 ## 4.1 Il confronto con i pattern noti in letteratura
 
 Il riferimento consueto per l'hip hop è un rapporto intorno a **4 uomini per
-ogni donna**. Nei dati italiani il rapporto è **10,8 a 1**
-(8,5% di donne): sensibilmente **più squilibrato** del
+ogni donna**. Nei dati italiani il rapporto è **10,4 a 1**
+(8,8% di donne): sensibilmente **più squilibrato** del
 riferimento internazionale. Due letture non alternative: la scena hip hop
 italiana censita da Discogs è più piccola e più recente, quindi più esposta
 al fatto che i ruoli di produzione — dove le donne sono più rare — pesino
@@ -476,15 +475,15 @@ relativamente di più; e il conteggio qui include tutti i crediti, non solo gli
 interpreti principali, il che abbassa la quota rispetto alle statistiche basate
 sulle classifiche.
 
-All'estremo opposto, **Classical** (24,5%) e **Children's**
-(40,7%) sono i generi con la presenza femminile più alta —
+All'estremo opposto, **Classical** (24,7%) e **Children's**
+(41,3%) sono i generi con la presenza femminile più alta —
 il secondo sopra il 41%, l'unico dell'intero corpus in cui
 le donne si avvicinano alla metà. La distanza fra Children's e Hip Hop, a
 parità di popolazione e di metodo, è di oltre
-32 punti percentuali: il genere musicale
+33 punti percentuali: il genere musicale
 è il predittore più forte della presenza femminile in tutto questo studio.
 
-**Rock (9,4%) e Electronic (12,9%)**, che
+**Rock (10,5%) e Electronic (14,2%)**, che
 insieme fanno la parte maggiore della popolazione, stanno entrambi sotto la
 media generale. È su queste due scene, per peso numerico, che si decide la
 quota complessiva.
@@ -506,8 +505,8 @@ quota complessiva.
 
 | attributo     | r_osservato   | r_pesato   | r_null_medio   | r_null_sd   | z        |
 |:--------------|:--------------|:-----------|:---------------|:------------|:---------|
-| gender        | 0,0735        | 0,1133     | -0,0000        | 0,0009      | 78,7698  |
-| musical_genre | 0,5186        | 0,6803     | -0,0000        | 0,0005      | 972,7181 |
+| gender        | 0,0810        | 0,1254     | -0,0000        | 0,0010      | 81,4605  |
+| musical_genre | 0,4970        | 0,6675     | -0,0001        | 0,0006      | 790,6131 |
 
 **Tabella — Assortatività osservata e sotto modello nullo**
 
@@ -516,42 +515,42 @@ quota complessiva.
 
 | sottorete   | strato   | attr.         | categorie            | archi   | quota archi   | r      | ci_lo   | ci_hi   |
 |:------------|:---------|:--------------|:---------------------|:--------|:--------------|:-------|:--------|:--------|
-| all         | tutto    | gender        | determinati soltanto | 508.173 | 0,7233        | 0,0511 | 0,0479  | 0,0543  |
-| all         | tutto    | gender        | tutte le categorie   | 702.613 | 1,0000        | 0,0735 | 0,0716  | 0,0755  |
-| all         | tutto    | musical_genre | determinati soltanto | 605.856 | 0,8623        | 0,5865 | 0,5850  | 0,5880  |
-| all         | tutto    | musical_genre | tutte le categorie   | 702.613 | 1,0000        | 0,5186 | 0,5172  | 0,5200  |
-| all         | pre2000  | gender        | determinati soltanto | 355.137 | 0,7537        | 0,0494 | 0,0455  | 0,0533  |
-| all         | pre2000  | gender        | tutte le categorie   | 471.214 | 1,0000        | 0,0540 | 0,0517  | 0,0563  |
-| all         | pre2000  | musical_genre | determinati soltanto | 432.368 | 0,9176        | 0,5373 | 0,5355  | 0,5393  |
-| all         | pre2000  | musical_genre | tutte le categorie   | 471.214 | 1,0000        | 0,4950 | 0,4932  | 0,4967  |
-| all         | post2000 | gender        | determinati soltanto | 69.320  | 0,6021        | 0,0731 | 0,0643  | 0,0816  |
-| all         | post2000 | gender        | tutte le categorie   | 115.134 | 1,0000        | 0,1370 | 0,1320  | 0,1420  |
-| all         | post2000 | musical_genre | determinati soltanto | 81.408  | 0,7071        | 0,7263 | 0,7227  | 0,7300  |
-| all         | post2000 | musical_genre | tutte le categorie   | 115.134 | 1,0000        | 0,5614 | 0,5580  | 0,5649  |
-| creative    | tutto    | gender        | determinati soltanto | 188.167 | 0,8658        | 0,0235 | 0,0183  | 0,0289  |
-| creative    | tutto    | gender        | tutte le categorie   | 217.334 | 1,0000        | 0,0729 | 0,0685  | 0,0773  |
-| creative    | tutto    | musical_genre | determinati soltanto | 200.128 | 0,9208        | 0,5945 | 0,5919  | 0,5972  |
-| creative    | tutto    | musical_genre | tutte le categorie   | 217.334 | 1,0000        | 0,5506 | 0,5483  | 0,5530  |
-| creative    | pre2000  | gender        | determinati soltanto | 150.618 | 0,9046        | 0,0230 | 0,0171  | 0,0291  |
-| creative    | pre2000  | gender        | tutte le categorie   | 166.503 | 1,0000        | 0,0334 | 0,0292  | 0,0375  |
-| creative    | pre2000  | musical_genre | determinati soltanto | 158.499 | 0,9519        | 0,5373 | 0,5342  | 0,5402  |
-| creative    | pre2000  | musical_genre | tutte le categorie   | 166.503 | 1,0000        | 0,5100 | 0,5070  | 0,5133  |
-| creative    | post2000 | gender        | determinati soltanto | 15.531  | 0,6638        | 0,0474 | 0,0257  | 0,0668  |
-| creative    | post2000 | gender        | tutte le categorie   | 23.398  | 1,0000        | 0,1436 | 0,1314  | 0,1557  |
-| creative    | post2000 | musical_genre | determinati soltanto | 18.108  | 0,7739        | 0,7890 | 0,7803  | 0,7965  |
-| creative    | post2000 | musical_genre | tutte le categorie   | 23.398  | 1,0000        | 0,6298 | 0,6224  | 0,6375  |
-| performance | tutto    | gender        | determinati soltanto | 186.094 | 0,6606        | 0,1175 | 0,1122  | 0,1228  |
-| performance | tutto    | gender        | tutte le categorie   | 281.710 | 1,0000        | 0,1538 | 0,1509  | 0,1569  |
-| performance | tutto    | musical_genre | determinati soltanto | 231.696 | 0,8225        | 0,6458 | 0,6434  | 0,6481  |
-| performance | tutto    | musical_genre | tutte le categorie   | 281.710 | 1,0000        | 0,5591 | 0,5569  | 0,5614  |
-| performance | pre2000  | gender        | determinati soltanto | 109.980 | 0,6859        | 0,1234 | 0,1165  | 0,1300  |
-| performance | pre2000  | gender        | tutte le categorie   | 160.347 | 1,0000        | 0,1539 | 0,1501  | 0,1579  |
-| performance | pre2000  | musical_genre | determinati soltanto | 143.147 | 0,8927        | 0,6034 | 0,6001  | 0,6062  |
-| performance | pre2000  | musical_genre | tutte le categorie   | 160.347 | 1,0000        | 0,5516 | 0,5489  | 0,5546  |
-| performance | post2000 | gender        | determinati soltanto | 37.172  | 0,5716        | 0,1133 | 0,1003  | 0,1275  |
-| performance | post2000 | gender        | tutte le categorie   | 65.036  | 1,0000        | 0,1822 | 0,1756  | 0,1886  |
-| performance | post2000 | musical_genre | determinati soltanto | 44.797  | 0,6888        | 0,7658 | 0,7610  | 0,7703  |
-| performance | post2000 | musical_genre | tutte le categorie   | 65.036  | 1,0000        | 0,5932 | 0,5889  | 0,5977  |
+| all         | tutto    | gender        | determinati soltanto | 470.690 | 0,8032        | 0,0432 | 0,0399  | 0,0465  |
+| all         | tutto    | gender        | tutte le categorie   | 586.040 | 1,0000        | 0,0810 | 0,0788  | 0,0834  |
+| all         | tutto    | musical_genre | determinati soltanto | 503.971 | 0,8600        | 0,5622 | 0,5606  | 0,5638  |
+| all         | tutto    | musical_genre | tutte le categorie   | 586.040 | 1,0000        | 0,4970 | 0,4955  | 0,4984  |
+| all         | pre2000  | gender        | determinati soltanto | 333.067 | 0,8444        | 0,0406 | 0,0367  | 0,0443  |
+| all         | pre2000  | gender        | tutte le categorie   | 394.423 | 1,0000        | 0,0576 | 0,0548  | 0,0605  |
+| all         | pre2000  | musical_genre | determinati soltanto | 362.127 | 0,9181        | 0,5103 | 0,5082  | 0,5124  |
+| all         | pre2000  | musical_genre | tutte le categorie   | 394.423 | 1,0000        | 0,4704 | 0,4685  | 0,4721  |
+| all         | post2000 | gender        | determinati soltanto | 61.015  | 0,6563        | 0,0693 | 0,0598  | 0,0788  |
+| all         | post2000 | gender        | tutte le categorie   | 92.968  | 1,0000        | 0,1479 | 0,1416  | 0,1533  |
+| all         | post2000 | musical_genre | determinati soltanto | 64.388  | 0,6926        | 0,7101 | 0,7062  | 0,7141  |
+| all         | post2000 | musical_genre | tutte le categorie   | 92.968  | 1,0000        | 0,5445 | 0,5407  | 0,5482  |
+| creative    | tutto    | gender        | determinati soltanto | 179.908 | 0,9003        | 0,0224 | 0,0172  | 0,0279  |
+| creative    | tutto    | gender        | tutte le categorie   | 199.832 | 1,0000        | 0,0703 | 0,0658  | 0,0750  |
+| creative    | tutto    | musical_genre | determinati soltanto | 184.147 | 0,9215        | 0,5770 | 0,5743  | 0,5799  |
+| creative    | tutto    | musical_genre | tutte le categorie   | 199.832 | 1,0000        | 0,5351 | 0,5323  | 0,5377  |
+| creative    | pre2000  | gender        | determinati soltanto | 146.391 | 0,9325        | 0,0224 | 0,0165  | 0,0282  |
+| creative    | pre2000  | gender        | tutte le categorie   | 156.982 | 1,0000        | 0,0269 | 0,0224  | 0,0316  |
+| creative    | pre2000  | musical_genre | determinati soltanto | 149.499 | 0,9523        | 0,5209 | 0,5177  | 0,5243  |
+| creative    | pre2000  | musical_genre | tutte le categorie   | 156.982 | 1,0000        | 0,4945 | 0,4914  | 0,4977  |
+| creative    | post2000 | gender        | determinati soltanto | 13.668  | 0,7079        | 0,0444 | 0,0227  | 0,0655  |
+| creative    | post2000 | gender        | tutte le categorie   | 19.308  | 1,0000        | 0,1616 | 0,1478  | 0,1753  |
+| creative    | post2000 | musical_genre | determinati soltanto | 14.659  | 0,7592        | 0,7868 | 0,7788  | 0,7953  |
+| creative    | post2000 | musical_genre | tutte le categorie   | 19.308  | 1,0000        | 0,6235 | 0,6145  | 0,6320  |
+| performance | tutto    | gender        | determinati soltanto | 160.881 | 0,7598        | 0,1054 | 0,0996  | 0,1115  |
+| performance | tutto    | gender        | tutte le categorie   | 211.751 | 1,0000        | 0,1704 | 0,1667  | 0,1741  |
+| performance | tutto    | musical_genre | determinati soltanto | 171.934 | 0,8120        | 0,6153 | 0,6125  | 0,6177  |
+| performance | tutto    | musical_genre | tutte le categorie   | 211.751 | 1,0000        | 0,5305 | 0,5279  | 0,5327  |
+| performance | pre2000  | gender        | determinati soltanto | 95.250  | 0,8164        | 0,1106 | 0,1028  | 0,1180  |
+| performance | pre2000  | gender        | tutte le categorie   | 116.673 | 1,0000        | 0,1733 | 0,1679  | 0,1785  |
+| performance | pre2000  | musical_genre | determinati soltanto | 103.792 | 0,8896        | 0,5612 | 0,5582  | 0,5647  |
+| performance | pre2000  | musical_genre | tutte le categorie   | 116.673 | 1,0000        | 0,5132 | 0,5101  | 0,5164  |
+| performance | post2000 | gender        | determinati soltanto | 31.344  | 0,6306        | 0,1050 | 0,0913  | 0,1180  |
+| performance | post2000 | gender        | tutte le categorie   | 49.702  | 1,0000        | 0,1985 | 0,1909  | 0,2066  |
+| performance | post2000 | musical_genre | determinati soltanto | 33.316  | 0,6703        | 0,7482 | 0,7428  | 0,7533  |
+| performance | post2000 | musical_genre | tutte le categorie   | 49.702  | 1,0000        | 0,5737 | 0,5685  | 0,5787  |
 
 **Tabella — Assortatività calcolata sui soli nodi con attributo determinato contro il calcolo che tratta 'indeterminato' come una categoria, per il genere sessuale e per quello musicale**
 
@@ -570,14 +569,14 @@ epoche marginali, pseudonimi — e sono le stesse che rendono difficile inferirn
 il genere. È copertura dei dati che si traveste da struttura sociale.
 
 La misura di riferimento restringe perciò il calcolo agli archi in cui entrambi
-gli estremi hanno genere determinato: **72,3% degli archi**.
-La differenza non è cosmetica: **r passa da 0,0735 a
-0,0511**, cioè un terzo dell'omofilia apparente era artefatto.
+gli estremi hanno genere determinato: **80,3% degli archi**.
+La differenza non è cosmetica: **r passa da 0,0810 a
+0,0432**, cioè un terzo dell'omofilia apparente era artefatto.
 
 Lo stesso controllo è stato fatto sul **genere musicale**, dove
 'Unknown' è altrettanto presente, e dà il risultato **opposto**: togliendo gli
-indeterminati l'assortatività sale da 0,5186 a
-0,5865. Il motivo è che gli artisti senza genere musicale
+indeterminati l'assortatività sale da 0,4970 a
+0,5622. Il motivo è che gli artisti senza genere musicale
 assegnato non si aggregano fra loro per genere — non ne hanno uno — e quindi
 diluiscono la diagonale invece di gonfiarla. Riportare entrambi i confronti
 serve a chiarire che l'esclusione degli indeterminati è una scelta di metodo
@@ -586,15 +585,15 @@ genere sessuale abbassa il risultato, sul genere musicale lo alza.
 
 ### Il risultato centrale
 
-L'assortatività per **genere musicale** vale 0,519. È un valore
+L'assortatività per **genere musicale** vale 0,497. È un valore
 molto alto: le carriere si svolgono dentro un genere e le collaborazioni seguono
 i confini del genere quasi come se fossero confini di settore.
 
-L'assortatività per **genere sessuale** vale 0,0511, circa
-10 volte meno, con intervallo di confidenza
-0,0479–0,0543 e modello nullo a 0,0000.
+L'assortatività per **genere sessuale** vale 0,0432, circa
+12 volte meno, con intervallo di confidenza
+0,0399–0,0465 e modello nullo a 0,0001.
 Preso da solo il numero sembra trascurabile; non lo è, perché su
-702.613 archi anche un effetto piccolo è misurato con precisione
+586.040 archi anche un effetto piccolo è misurato con precisione
 elevata e l'intervallo sta interamente sopra lo zero.
 
 La lettura sostanziale è che **il genere sessuale struttura le collaborazioni,
@@ -620,34 +619,34 @@ prevalentemente opera, come mostra il paragrafo seguente.
 <img src="figures/f6_assortativita_per_strato.png" alt="f6_assortativita_per_strato" style="width:100%" />
 <figcaption>
 
-**Omofilia di genere per sottorete di ruolo ed epoca.** Il punto è il valore osservato, la barra l'intervallo di confidenza bootstrap al 95%, il trattino verticale il valore del modello nullo. L'attesa, dalla letteratura, era un **allentamento** dopo il 2000. Sui soli nodi con genere determinato i dati dicono l'opposto, ma con ampiezza molto più contenuta di quanto suggerisca la misura a quattro categorie mostrata in figura: 0,0494 contro 0,0731.
+**Omofilia di genere per sottorete di ruolo ed epoca.** Il punto è il valore osservato, la barra l'intervallo di confidenza bootstrap al 95%, il trattino verticale il valore del modello nullo. L'attesa, dalla letteratura, era un **allentamento** dopo il 2000. Sui soli nodi con genere determinato i dati dicono l'opposto, ma con ampiezza molto più contenuta di quanto suggerisca la misura a quattro categorie mostrata in figura: 0,0406 contro 0,0693.
 
 </figcaption>
 </figure>
 
 
 Prima di interpretarlo va ripulito. Sulla misura ingenua a quattro categorie il
-salto è spettacolare, da 0,0540 a 0,1370: più che
+salto è spettacolare, da 0,0576 a 0,1479: più che
 raddoppiato. Sui soli nodi con genere determinato si riduce a
-0,0494 → 0,0731. La ragione è che la quota di
+0,0406 → 0,0693. La ragione è che la quota di
 archi utilizzabili crolla fra le due epoche — dal
-75,4%
+84,4%
 al
-60,2%
+65,6%
 — perché gli artisti recenti sono mediamente meno documentati: più `unknown`,
 quindi più apparente omofilia spuria.
 
 **Quel che resta dopo la correzione è comunque un aumento**, con intervalli
-(0,0455–0,0533 contro
-0,0643–0,0816) che non si sovrappongono. Il
+(0,0367–0,0443 contro
+0,0598–0,0788) che non si sovrappongono. Il
 risultato regge, ma va raccontato per quello che è: un aumento moderato, non un
 raddoppio.
 
 **E l'aumento non è diffuso: viene tutto da una parte sola della rete.**
 Scomponendo per ruolo, l'omofilia dei ruoli di esecuzione è sostanzialmente
-piatta nel tempo (0,1234 prima del 2000,
-0,1133 dopo), mentre quella dei ruoli creativi **raddoppia**,
-da 0,0230 a 0,0474. Qualunque
+piatta nel tempo (0,1106 prima del 2000,
+0,1050 dopo), mentre quella dei ruoli creativi **raddoppia**,
+da 0,0224 a 0,0444. Qualunque
 spiegazione dell'aumento deve perciò riguardare il modo in cui si produce e si
 scrive musica, non il modo in cui la si suona.
 
@@ -684,7 +683,7 @@ coefficiente `gwesp` passa da 2,217 a
 dopo il 2000 non è diventata più omofila per genere: è diventata più
 **chiusa in triangoli**. Si lavora sempre di più dentro gruppi fitti di
 persone che si conoscono già tutte fra loro. In un ambiente dove le donne sono
-il 13,8%, una struttura più triangolare produce
+il 14,8%, una struttura più triangolare produce
 meccanicamente più legami donna-donna osservati, e quindi un'assortatività
 misurata più alta — senza che nessuno abbia cambiato criterio nello scegliere
 con chi lavorare.
@@ -700,12 +699,12 @@ sezione 7.3.
 La distinzione fra ruoli creativi (produzione, scrittura, arrangiamento) e ruoli
 di esecuzione (voce, strumenti, direzione) è la domanda RQ5, e la risposta è
 netta: sui soli nodi con genere determinato l'omofilia vale
-**0,0235 nella rete creativa** contro
-**0,1175 in quella di esecuzione**.
+**0,0224 nella rete creativa** contro
+**0,1054 in quella di esecuzione**.
 
 La collaborazione creativa è quindi *meno* segregata per genere di quella
 esecutiva, di un fattore
-5,0. È un risultato che va letto insieme al dato di composizione: i ruoli
+4,7. È un risultato che va letto insieme al dato di composizione: i ruoli
 creativi sono in assoluto i più maschili dell'intero corpus, e proprio per
 questo l'omofilia misurata vi risulta bassa — dove la maggioranza è
 schiacciante non c'è quasi spazio per discostarsi dal caso. La segregazione dei
@@ -729,18 +728,16 @@ aperto del sistema, che è l'opposto di quanto dicono i conteggi.
 
 | genere_musicale        | archi   | r_gender   | ci_lo   | ci_hi   | r_null   | oe_MM   | oe_FF   | n_artisti   | quota_donne   |
 |:-----------------------|:--------|:-----------|:--------|:--------|:---------|:--------|:--------|:------------|:--------------|
-| Electronic             | 169.727 | 0,0632     | 0,0591  | 0,0670  | -0,0000  | 1,0272  | 1,6852  | 23.907      | 0,0854        |
-| Pop                    | 128.436 | 0,0160     | 0,0120  | 0,0200  | 0,0000   | 1,0026  | 1,3167  | 10.332      | 0,1502        |
-| Rock                   | 56.014  | 0,1674     | 0,1597  | 0,1752  | -0,0004  | 1,0496  | 1,9893  | 20.042      | 0,0670        |
-| Hip Hop                | 18.577  | 0,1173     | 0,1027  | 0,1310  | 0,0001   | 1,0410  | 1,8739  | 1.974       | 0,0527        |
-| Folk, World, & Country | 15.806  | 0,0735     | 0,0608  | 0,0870  | -0,0003  | 1,0226  | 1,5376  | 5.338       | 0,1045        |
-| Jazz                   | 13.118  | 0,0682     | 0,0525  | 0,0849  | -0,0001  | 1,0104  | 1,6074  | 3.607       | 0,1017        |
-| Classical              | 5.796   | 0,0475     | 0,0273  | 0,0675  | 0,0000   | 1,0191  | 1,2731  | 3.825       | 0,2047        |
-| Stage & Screen         | 2.796   | 0,0297     | 0,0003  | 0,0587  | 0,0003   | 1,0074  | 1,1576  | 682         | 0,1598        |
-| Children's             | 1.309   | 0,0226     | -0,0124 | 0,0585  | 0,0008   | 1,0004  | 1,0286  | 723         | 0,3029        |
-| Non-Music              | 1.126   | 0,0828     | 0,0278  | 0,1363  | 0,0012   | 1,0189  | 1,3068  | 488         | 0,1639        |
-| Reggae                 | 643     | 0,1302     | 0,0641  | 0,2030  | -0,0017  | 1,0809  | 0,0000  | 388         | 0,0515        |
-| Funk / Soul            | 582     | 0,1843     | 0,1166  | 0,2477  | -0,0021  | 1,1312  | 1,7908  | 1.197       | 0,1019        |
+| Electronic             | 128.659 | 0,0692     | 0,0643  | 0,0739  | 0,0000   | 1,0241  | 1,3588  | 19.969      | 0,0985        |
+| Pop                    | 109.924 | 0,0233     | 0,0183  | 0,0284  | 0,0001   | 1,0028  | 1,3115  | 9.446       | 0,1637        |
+| Rock                   | 41.007  | 0,1608     | 0,1515  | 0,1708  | 0,0001   | 1,0353  | 1,7579  | 16.617      | 0,0806        |
+| Hip Hop                | 17.507  | 0,1429     | 0,1277  | 0,1567  | -0,0001  | 1,0445  | 2,1820  | 1.822       | 0,0565        |
+| Folk, World, & Country | 13.639  | 0,0769     | 0,0625  | 0,0919  | -0,0005  | 1,0175  | 1,5411  | 4.863       | 0,1143        |
+| Jazz                   | 11.762  | 0,0333     | 0,0171  | 0,0497  | 0,0001   | 1,0044  | 1,5144  | 3.124       | 0,1172        |
+| Classical              | 5.264   | 0,0512     | 0,0292  | 0,0739  | -0,0002  | 1,0166  | 1,2704  | 3.674       | 0,2131        |
+| Stage & Screen         | 2.693   | 0,0186     | -0,0141 | 0,0548  | -0,0019  | 1,0035  | 1,1863  | 641         | 0,1700        |
+| Non-Music              | 1.106   | 0,0762     | 0,0171  | 0,1351  | -0,0002  | 1,0151  | 1,3163  | 477         | 0,1698        |
+| Children's             | 1.075   | 0,0340     | -0,0101 | 0,0780  | -0,0005  | 1,0120  | 1,0144  | 676         | 0,3240        |
 
 **Tabella — Omofilia di genere sessuale entro ciascun genere musicale (RQ2)**
 
@@ -751,7 +748,7 @@ Questo è il punto su cui il dato italiano **contraddice l'aspettativa
 corrente**. La letteratura riporta di norma un'omofilia più forte *fra gli
 uomini*. Qui il rapporto osservato/atteso donna-donna è sistematicamente
 **maggiore** di quello uomo-uomo. La spiegazione non è che le donne siano più
-chiuse: è che con una quota femminile del 13,8% il valore atteso
+chiuse: è che con una quota femminile del 14,8% il valore atteso
 per un legame donna-donna sotto casualità è bassissimo, e basta un modesto
 addensamento reale per produrre un rapporto elevato. L'indice uomo-uomo, al
 contrario, è schiacciato verso 1 perché la maggioranza non può discostarsi
@@ -768,9 +765,8 @@ mai al centro.
 
 | gender   | n      | eigenvector_mediana   | eigenvector_media   | betweenness_mediana   | coreness_mediana   | coreness_media   | grado_mediano   | forza_mediana   | n_release_mediana   |
 |:---------|:-------|:----------------------|:--------------------|:----------------------|:-------------------|:-----------------|:----------------|:----------------|:--------------------|
-| F        | 7.072  | 0,000000              | 0,000054            | 0,000000              | 6,000000           | 9,396069         | 7,000000        | 5,740000        | 8,000000            |
-| M        | 49.901 | 0,000000              | 0,000158            | 0,000001              | 7,000000           | 10,239474        | 8,000000        | 7,200000        | 10,000000           |
-| mixed    | 883    | 0,000000              | 0,000112            | 0,000001              | 7,000000           | 10,216308        | 9,000000        | 10,820000       | 14,000000           |
+| F        | 6.961  | 0,000000              | 0,000055            | 0,000000              | 6,000000           | 9,011062         | 7,000000        | 5,190000        | 8,000000            |
+| M        | 44.869 | 0,000000              | 0,000174            | 0,000002              | 6,000000           | 10,028327        | 8,000000        | 6,490000        | 9,000000            |
 
 **Tabella — Posizione nella componente gigante per genere sessuale**
 
@@ -789,49 +785,49 @@ mai al centro.
 
 | musical_genre          | gender   | n      | coreness_mediana   | eigenvector_mediana   |
 |:-----------------------|:---------|:-------|:-------------------|:----------------------|
-| Blues                  | F        | 52     | 6,000000           | 0,000000              |
-| Blues                  | M        | 326    | 6,000000           | 0,000000              |
-| Blues                  | mixed    | 3      | 8,000000           | 0,000000              |
-| Brass & Military       | F        | 2      | 8,000000           | 0,000003              |
-| Brass & Military       | M        | 47     | 8,000000           | 0,000000              |
+| Blues                  | F        | 53     | 5,000000           | 0,000000              |
+| Blues                  | M        | 305    | 6,000000           | 0,000000              |
+| Brass & Military       | F        | 2      | 7,500000           | 0,000000              |
+| Brass & Military       | M        | 46     | 8,500000           | 0,000000              |
 | Children's             | F        | 154    | 8,000000           | 0,000001              |
-| Children's             | M        | 253    | 8,000000           | 0,000001              |
-| Children's             | mixed    | 9      | 6,000000           | 0,000008              |
-| Classical              | F        | 439    | 5,000000           | 0,000000              |
-| Classical              | M        | 1.678  | 5,000000           | 0,000000              |
-| Classical              | mixed    | 37     | 6,000000           | 0,000000              |
-| Electronic             | F        | 1.805  | 8,000000           | 0,000000              |
-| Electronic             | M        | 12.829 | 9,000000           | 0,000000              |
-| Electronic             | mixed    | 272    | 10,000000          | 0,000000              |
-| Folk, World, & Country | F        | 415    | 7,000000           | 0,000000              |
-| Folk, World, & Country | M        | 2.890  | 8,000000           | 0,000000              |
-| Folk, World, & Country | mixed    | 55     | 7,000000           | 0,000000              |
+| Children's             | M        | 245    | 7,000000           | 0,000001              |
+| Classical              | F        | 436    | 4,000000           | 0,000000              |
+| Classical              | M        | 1.642  | 5,000000           | 0,000000              |
+| Electronic             | F        | 1.722  | 7,000000           | 0,000000              |
+| Electronic             | M        | 10.938 | 8,000000           | 0,000000              |
+| Folk, World, & Country | F        | 413    | 7,000000           | 0,000000              |
+| Folk, World, & Country | M        | 2.760  | 7,000000           | 0,000000              |
 | Funk / Soul            | F        | 77     | 6,000000           | 0,000000              |
-| Funk / Soul            | M        | 503    | 7,000000           | 0,000000              |
-| Funk / Soul            | mixed    | 11     | 6,000000           | 0,000000              |
-| Hip Hop                | F        | 75     | 9,000000           | 0,000000              |
-| Hip Hop                | M        | 1.007  | 15,000000          | 0,000000              |
-| Hip Hop                | mixed    | 7      | 13,000000          | 0,000000              |
-| Jazz                   | F        | 244    | 7,500000           | 0,000000              |
-| Jazz                   | M        | 2.125  | 9,000000           | 0,000000              |
-| Jazz                   | mixed    | 26     | 6,000000           | 0,000000              |
+| Funk / Soul            | M        | 473    | 7,000000           | 0,000000              |
+| Hip Hop                | F        | 72     | 10,000000          | 0,000000              |
+| Hip Hop                | M        | 966    | 15,000000          | 0,000000              |
+| Jazz                   | F        | 245    | 7,000000           | 0,000000              |
+| Jazz                   | M        | 1.919  | 9,000000           | 0,000000              |
 | Latin                  | F        | 29     | 7,000000           | 0,000000              |
-| Latin                  | M        | 162    | 8,000000           | 0,000000              |
-| Latin                  | mixed    | 2      | 2,500000           | 0,000000              |
-| Non-Music              | F        | 61     | 5,000000           | 0,000000              |
+| Latin                  | M        | 150    | 7,500000           | 0,000000              |
+| Non-Music              | F        | 62     | 5,500000           | 0,000000              |
+| Non-Music              | M        | 298    | 7,000000           | 0,000000              |
+| Pop                    | F        | 1.150  | 11,000000          | 0,000004              |
+| Pop                    | M        | 5.608  | 13,000000          | 0,000003              |
+| Reggae                 | F        | 14     | 4,500000           | 0,000000              |
+| Reggae                 | M        | 166    | 6,000000           | 0,000000              |
+| Rock                   | F        | 774    | 5,000000           | 0,000000              |
+| Rock                   | M        | 8.587  | 6,000000           | 0,000000              |
+| Stage & Screen         | F        | 88     | 9,000000           | 0,000002              |
+| Stage & Screen         | M        | 394    | 11,000000          | 0,000002              |
 
 **Tabella — Posizione nella rete per genere sessuale entro genere musicale**
 
-*Mostrate le prime 30 righe di 44; la tabella completa è in `tables/t3_posizione_per_genere_musicale.csv` e `tables/t3_posizione_per_genere_musicale.tex`.*
+*Dati completi in `tables/t3_posizione_per_genere_musicale.csv` e `tables/t3_posizione_per_genere_musicale.tex`.*
 
 
 ## 6.1 Il confronto a parità di attività e coorte
 
 Le mediane grezze non bastano. Chi pubblica di più è più centrale, e le donne
 della popolazione pubblicano meno: la mediana delle pubblicazioni è
-8 per le donne contro 10 per gli
+8 per le donne contro 9 per gli
 uomini, e la coreness mediana segue (6 contro
-7). Senza controllare per l'attività si misurerebbe la
+6). Senza controllare per l'attività si misurerebbe la
 differenza di quanto si pubblica e la si chiamerebbe differenza di posizione.
 
 La regressione confronta perciò persone con la stessa attività, la stessa
@@ -839,34 +835,34 @@ coorte di debutto e lo stesso genere musicale.
 
 | termine                                            | coef    | se     | z        | p      | ci_lo   | ci_hi   | esito       |
 |:---------------------------------------------------|:--------|:-------|:---------|:-------|:--------|:--------|:------------|
-| Intercept                                          | 0,9271  | 0,0943 | 9,8347   | 0,0000 | 0,7423  | 1,1119  | eigenvector |
-| C(gender)[T.F]                                     | 0,2229  | 0,1697 | 1,3133   | 0,1891 | -0,1097 | 0,5555  | eigenvector |
-| C(genere)[T.Blues]                                 | 0,0075  | 0,0715 | 0,1052   | 0,9162 | -0,1327 | 0,1477  | eigenvector |
-| C(genere)[T.Children's]                            | -0,1072 | 0,1193 | -0,8987  | 0,3688 | -0,3409 | 0,1266  | eigenvector |
-| C(genere)[T.Classical]                             | -0,6304 | 0,0644 | -9,7882  | 0,0000 | -0,7566 | -0,5042 | eigenvector |
-| C(genere)[T.Electronic]                            | -0,1921 | 0,0586 | -3,2784  | 0,0010 | -0,3069 | -0,0773 | eigenvector |
-| C(genere)[T.Folk, World, & Country]                | -0,2454 | 0,0623 | -3,9371  | 0,0001 | -0,3676 | -0,1233 | eigenvector |
-| C(genere)[T.Funk / Soul]                           | 0,1027  | 0,0723 | 1,4208   | 0,1554 | -0,0390 | 0,2444  | eigenvector |
-| C(genere)[T.Hip Hop]                               | -0,3131 | 0,0637 | -4,9175  | 0,0000 | -0,4378 | -0,1883 | eigenvector |
-| C(genere)[T.Jazz]                                  | -0,1615 | 0,0631 | -2,5606  | 0,0105 | -0,2852 | -0,0379 | eigenvector |
-| C(genere)[T.Non-Music]                             | -1,3941 | 0,0954 | -14,6063 | 0,0000 | -1,5811 | -1,2070 | eigenvector |
-| C(genere)[T.Pop]                                   | 1,0665  | 0,0624 | 17,0971  | 0,0000 | 0,9442  | 1,1888  | eigenvector |
-| C(genere)[T.Rock]                                  | 0,0001  | 0,0589 | 0,0014   | 0,9989 | -0,1153 | 0,1154  | eigenvector |
-| C(genere)[T.Stage & Screen]                        | 0,5028  | 0,0895 | 5,6207   | 0,0000 | 0,3275  | 0,6782  | eigenvector |
-| C(coorte)[T.1950]                                  | 0,2438  | 0,0908 | 2,6843   | 0,0073 | 0,0658  | 0,4219  | eigenvector |
-| C(coorte)[T.1960]                                  | -0,1471 | 0,0798 | -1,8435  | 0,0653 | -0,3036 | 0,0093  | eigenvector |
-| C(coorte)[T.1970]                                  | -1,2692 | 0,0763 | -16,6353 | 0,0000 | -1,4187 | -1,1197 | eigenvector |
-| C(coorte)[T.1980]                                  | -1,8764 | 0,0746 | -25,1590 | 0,0000 | -2,0226 | -1,7302 | eigenvector |
-| C(coorte)[T.1990]                                  | -2,1149 | 0,0741 | -28,5283 | 0,0000 | -2,2602 | -1,9696 | eigenvector |
-| C(coorte)[T.2000]                                  | -2,1433 | 0,0742 | -28,8960 | 0,0000 | -2,2887 | -1,9980 | eigenvector |
-| C(coorte)[T.2010]                                  | -2,0558 | 0,0743 | -27,6784 | 0,0000 | -2,2013 | -1,9102 | eigenvector |
-| C(coorte)[T.2020]                                  | -1,8212 | 0,0765 | -23,8095 | 0,0000 | -1,9711 | -1,6713 | eigenvector |
-| C(gender)[T.F]:C(genere)[T.Blues]                  | -0,0040 | 0,2086 | -0,0191  | 0,9847 | -0,4128 | 0,4048  | eigenvector |
-| C(gender)[T.F]:C(genere)[T.Children's]             | -0,2469 | 0,2358 | -1,0472  | 0,2950 | -0,7091 | 0,2152  | eigenvector |
-| C(gender)[T.F]:C(genere)[T.Classical]              | -0,0057 | 0,1792 | -0,0318  | 0,9746 | -0,3570 | 0,3456  | eigenvector |
-| C(gender)[T.F]:C(genere)[T.Electronic]             | -0,0861 | 0,1710 | -0,5036  | 0,6146 | -0,4213 | 0,2491  | eigenvector |
-| C(gender)[T.F]:C(genere)[T.Folk, World, & Country] | -0,1754 | 0,1809 | -0,9695  | 0,3323 | -0,5299 | 0,1792  | eigenvector |
-| C(gender)[T.F]:C(genere)[T.Funk / Soul]            | 0,2287  | 0,2258 | 1,0132   | 0,3110 | -0,2138 | 0,6712  | eigenvector |
+| Intercept                                          | 0,8390  | 0,0966 | 8,6891   | 0,0000 | 0,6497  | 1,0282  | eigenvector |
+| C(gender)[T.F]                                     | 0,1801  | 0,1754 | 1,0265   | 0,3047 | -0,1638 | 0,5239  | eigenvector |
+| C(genere)[T.Blues]                                 | -0,0114 | 0,0764 | -0,1498  | 0,8809 | -0,1612 | 0,1383  | eigenvector |
+| C(genere)[T.Children's]                            | -0,1781 | 0,1203 | -1,4802  | 0,1388 | -0,4140 | 0,0577  | eigenvector |
+| C(genere)[T.Classical]                             | -0,6635 | 0,0683 | -9,7184  | 0,0000 | -0,7974 | -0,5297 | eigenvector |
+| C(genere)[T.Electronic]                            | -0,1863 | 0,0627 | -2,9721  | 0,0030 | -0,3092 | -0,0634 | eigenvector |
+| C(genere)[T.Folk, World, & Country]                | -0,2480 | 0,0663 | -3,7436  | 0,0002 | -0,3779 | -0,1182 | eigenvector |
+| C(genere)[T.Funk / Soul]                           | 0,0681  | 0,0760 | 0,8962   | 0,3702 | -0,0808 | 0,2171  | eigenvector |
+| C(genere)[T.Hip Hop]                               | -0,3351 | 0,0680 | -4,9293  | 0,0000 | -0,4683 | -0,2018 | eigenvector |
+| C(genere)[T.Jazz]                                  | -0,1980 | 0,0674 | -2,9391  | 0,0033 | -0,3300 | -0,0660 | eigenvector |
+| C(genere)[T.Non-Music]                             | -1,4207 | 0,0969 | -14,6663 | 0,0000 | -1,6105 | -1,2308 | eigenvector |
+| C(genere)[T.Pop]                                   | 1,0434  | 0,0662 | 15,7589  | 0,0000 | 0,9137  | 1,1732  | eigenvector |
+| C(genere)[T.Rock]                                  | 0,0077  | 0,0629 | 0,1223   | 0,9027 | -0,1156 | 0,1310  | eigenvector |
+| C(genere)[T.Stage & Screen]                        | 0,3258  | 0,0914 | 3,5651   | 0,0004 | 0,1467  | 0,5049  | eigenvector |
+| C(coorte)[T.1950]                                  | 0,2381  | 0,0906 | 2,6284   | 0,0086 | 0,0605  | 0,4156  | eigenvector |
+| C(coorte)[T.1960]                                  | -0,1393 | 0,0793 | -1,7560  | 0,0791 | -0,2947 | 0,0162  | eigenvector |
+| C(coorte)[T.1970]                                  | -1,2591 | 0,0757 | -16,6331 | 0,0000 | -1,4075 | -1,1108 | eigenvector |
+| C(coorte)[T.1980]                                  | -1,8311 | 0,0739 | -24,7652 | 0,0000 | -1,9760 | -1,6862 | eigenvector |
+| C(coorte)[T.1990]                                  | -2,0707 | 0,0735 | -28,1849 | 0,0000 | -2,2147 | -1,9267 | eigenvector |
+| C(coorte)[T.2000]                                  | -2,1104 | 0,0735 | -28,6968 | 0,0000 | -2,2546 | -1,9663 | eigenvector |
+| C(coorte)[T.2010]                                  | -2,0327 | 0,0737 | -27,5984 | 0,0000 | -2,1770 | -1,8883 | eigenvector |
+| C(coorte)[T.2020]                                  | -1,7953 | 0,0763 | -23,5242 | 0,0000 | -1,9449 | -1,6457 | eigenvector |
+| C(gender)[T.F]:C(genere)[T.Blues]                  | 0,0528  | 0,2128 | 0,2483   | 0,8039 | -0,3643 | 0,4700  | eigenvector |
+| C(gender)[T.F]:C(genere)[T.Children's]             | -0,1451 | 0,2392 | -0,6068  | 0,5440 | -0,6138 | 0,3236  | eigenvector |
+| C(gender)[T.F]:C(genere)[T.Classical]              | 0,0347  | 0,1850 | 0,1875   | 0,8513 | -0,3279 | 0,3973  | eigenvector |
+| C(gender)[T.F]:C(genere)[T.Electronic]             | -0,0192 | 0,1768 | -0,1085  | 0,9136 | -0,3657 | 0,3274  | eigenvector |
+| C(gender)[T.F]:C(genere)[T.Folk, World, & Country] | -0,1365 | 0,1863 | -0,7323  | 0,4640 | -0,5016 | 0,2287  | eigenvector |
+| C(gender)[T.F]:C(genere)[T.Funk / Soul]            | 0,2858  | 0,2295 | 1,2451   | 0,2131 | -0,1641 | 0,7357  | eigenvector |
 
 **Tabella — Posizione nella rete (eigenvector) per genere sessuale e genere musicale, a parità di attività e coorte**
 
@@ -875,34 +871,34 @@ coorte di debutto e lo stesso genere musicale.
 
 | termine                                            | coef    | se     | z        | p      | ci_lo   | ci_hi   | esito    |
 |:---------------------------------------------------|:--------|:-------|:---------|:-------|:--------|:--------|:---------|
-| Intercept                                          | 1,2696  | 0,0314 | 40,4273  | 0,0000 | 1,2080  | 1,3311  | coreness |
-| C(gender)[T.F]                                     | 0,0390  | 0,0739 | 0,5279   | 0,5976 | -0,1058 | 0,1838  | coreness |
-| C(genere)[T.Blues]                                 | 0,0072  | 0,0336 | 0,2133   | 0,8311 | -0,0586 | 0,0729  | coreness |
-| C(genere)[T.Children's]                            | -0,0462 | 0,0387 | -1,1922  | 0,2332 | -0,1221 | 0,0297  | coreness |
-| C(genere)[T.Classical]                             | -0,3042 | 0,0256 | -11,8993 | 0,0000 | -0,3543 | -0,2541 | coreness |
-| C(genere)[T.Electronic]                            | 0,0568  | 0,0231 | 2,4598   | 0,0139 | 0,0115  | 0,1021  | coreness |
-| C(genere)[T.Folk, World, & Country]                | 0,0310  | 0,0244 | 1,2708   | 0,2038 | -0,0168 | 0,0789  | coreness |
-| C(genere)[T.Funk / Soul]                           | 0,0324  | 0,0308 | 1,0498   | 0,2938 | -0,0281 | 0,0928  | coreness |
-| C(genere)[T.Hip Hop]                               | 0,3463  | 0,0266 | 13,0396  | 0,0000 | 0,2942  | 0,3983  | coreness |
-| C(genere)[T.Jazz]                                  | 0,1004  | 0,0247 | 4,0605   | 0,0000 | 0,0519  | 0,1489  | coreness |
-| C(genere)[T.Non-Music]                             | -0,2312 | 0,0351 | -6,5789  | 0,0000 | -0,3001 | -0,1624 | coreness |
-| C(genere)[T.Pop]                                   | 0,1699  | 0,0236 | 7,1891   | 0,0000 | 0,1236  | 0,2162  | coreness |
-| C(genere)[T.Rock]                                  | -0,0217 | 0,0231 | -0,9404  | 0,3470 | -0,0670 | 0,0235  | coreness |
-| C(genere)[T.Stage & Screen]                        | 0,1933  | 0,0330 | 5,8504   | 0,0000 | 0,1286  | 0,2581  | coreness |
-| C(coorte)[T.1950]                                  | 0,0518  | 0,0251 | 2,0658   | 0,0388 | 0,0027  | 0,1009  | coreness |
-| C(coorte)[T.1960]                                  | -0,0291 | 0,0223 | -1,3007  | 0,1933 | -0,0728 | 0,0147  | coreness |
-| C(coorte)[T.1970]                                  | -0,2189 | 0,0221 | -9,9244  | 0,0000 | -0,2621 | -0,1757 | coreness |
-| C(coorte)[T.1980]                                  | -0,2541 | 0,0217 | -11,6940 | 0,0000 | -0,2967 | -0,2115 | coreness |
-| C(coorte)[T.1990]                                  | -0,2618 | 0,0217 | -12,0789 | 0,0000 | -0,3042 | -0,2193 | coreness |
-| C(coorte)[T.2000]                                  | -0,3021 | 0,0219 | -13,8040 | 0,0000 | -0,3450 | -0,2592 | coreness |
-| C(coorte)[T.2010]                                  | -0,4047 | 0,0225 | -18,0011 | 0,0000 | -0,4488 | -0,3606 | coreness |
-| C(coorte)[T.2020]                                  | -0,4039 | 0,0272 | -14,8668 | 0,0000 | -0,4572 | -0,3507 | coreness |
-| C(gender)[T.F]:C(genere)[T.Blues]                  | -0,0184 | 0,1014 | -0,1812  | 0,8562 | -0,2170 | 0,1803  | coreness |
-| C(gender)[T.F]:C(genere)[T.Children's]             | 0,0108  | 0,0881 | 0,1222   | 0,9027 | -0,1619 | 0,1835  | coreness |
-| C(gender)[T.F]:C(genere)[T.Classical]              | -0,0750 | 0,0789 | -0,9508  | 0,3417 | -0,2296 | 0,0796  | coreness |
-| C(gender)[T.F]:C(genere)[T.Electronic]             | -0,0179 | 0,0747 | -0,2395  | 0,8107 | -0,1643 | 0,1285  | coreness |
-| C(gender)[T.F]:C(genere)[T.Folk, World, & Country] | -0,0641 | 0,0783 | -0,8188  | 0,4129 | -0,2177 | 0,0894  | coreness |
-| C(gender)[T.F]:C(genere)[T.Funk / Soul]            | -0,0682 | 0,1010 | -0,6745  | 0,5000 | -0,2662 | 0,1299  | coreness |
+| Intercept                                          | 1,1580  | 0,0329 | 35,2227  | 0,0000 | 1,0936  | 1,2224  | coreness |
+| C(gender)[T.F]                                     | 0,0362  | 0,0792 | 0,4572   | 0,6475 | -0,1190 | 0,1915  | coreness |
+| C(genere)[T.Blues]                                 | 0,0051  | 0,0360 | 0,1416   | 0,8874 | -0,0654 | 0,0756  | coreness |
+| C(genere)[T.Children's]                            | -0,0135 | 0,0396 | -0,3415  | 0,7328 | -0,0912 | 0,0642  | coreness |
+| C(genere)[T.Classical]                             | -0,2867 | 0,0278 | -10,3191 | 0,0000 | -0,3411 | -0,2322 | coreness |
+| C(genere)[T.Electronic]                            | 0,0474  | 0,0256 | 1,8549   | 0,0636 | -0,0027 | 0,0976  | coreness |
+| C(genere)[T.Folk, World, & Country]                | 0,0516  | 0,0268 | 1,9281   | 0,0538 | -0,0009 | 0,1041  | coreness |
+| C(genere)[T.Funk / Soul]                           | 0,0480  | 0,0333 | 1,4400   | 0,1499 | -0,0173 | 0,1134  | coreness |
+| C(genere)[T.Hip Hop]                               | 0,3801  | 0,0291 | 13,0492  | 0,0000 | 0,3230  | 0,4372  | coreness |
+| C(genere)[T.Jazz]                                  | 0,1173  | 0,0273 | 4,2999   | 0,0000 | 0,0638  | 0,1707  | coreness |
+| C(genere)[T.Non-Music]                             | -0,1804 | 0,0366 | -4,9333  | 0,0000 | -0,2521 | -0,1088 | coreness |
+| C(genere)[T.Pop]                                   | 0,1794  | 0,0260 | 6,9001   | 0,0000 | 0,1284  | 0,2304  | coreness |
+| C(genere)[T.Rock]                                  | -0,0319 | 0,0255 | -1,2487  | 0,2118 | -0,0820 | 0,0182  | coreness |
+| C(genere)[T.Stage & Screen]                        | 0,1865  | 0,0345 | 5,3991   | 0,0000 | 0,1188  | 0,2542  | coreness |
+| C(coorte)[T.1950]                                  | 0,0563  | 0,0249 | 2,2643   | 0,0236 | 0,0076  | 0,1051  | coreness |
+| C(coorte)[T.1960]                                  | -0,0144 | 0,0219 | -0,6585  | 0,5102 | -0,0574 | 0,0286  | coreness |
+| C(coorte)[T.1970]                                  | -0,1829 | 0,0216 | -8,4552  | 0,0000 | -0,2254 | -0,1405 | coreness |
+| C(coorte)[T.1980]                                  | -0,1984 | 0,0213 | -9,3131  | 0,0000 | -0,2401 | -0,1566 | coreness |
+| C(coorte)[T.1990]                                  | -0,2171 | 0,0213 | -10,2125 | 0,0000 | -0,2587 | -0,1754 | coreness |
+| C(coorte)[T.2000]                                  | -0,2610 | 0,0215 | -12,1340 | 0,0000 | -0,3031 | -0,2188 | coreness |
+| C(coorte)[T.2010]                                  | -0,3656 | 0,0222 | -16,5025 | 0,0000 | -0,4091 | -0,3222 | coreness |
+| C(coorte)[T.2020]                                  | -0,3616 | 0,0273 | -13,2565 | 0,0000 | -0,4151 | -0,3082 | coreness |
+| C(gender)[T.F]:C(genere)[T.Blues]                  | -0,0177 | 0,1034 | -0,1715  | 0,8638 | -0,2204 | 0,1850  | coreness |
+| C(gender)[T.F]:C(genere)[T.Children's]             | -0,0037 | 0,0927 | -0,0396  | 0,9684 | -0,1853 | 0,1780  | coreness |
+| C(gender)[T.F]:C(genere)[T.Classical]              | -0,0692 | 0,0840 | -0,8244  | 0,4097 | -0,2338 | 0,0954  | coreness |
+| C(gender)[T.F]:C(genere)[T.Electronic]             | -0,0092 | 0,0801 | -0,1147  | 0,9087 | -0,1661 | 0,1478  | coreness |
+| C(gender)[T.F]:C(genere)[T.Folk, World, & Country] | -0,0633 | 0,0834 | -0,7589  | 0,4479 | -0,2268 | 0,1002  | coreness |
+| C(gender)[T.F]:C(genere)[T.Funk / Soul]            | -0,0660 | 0,1054 | -0,6263  | 0,5311 | -0,2725 | 0,1405  | coreness |
 
 **Tabella — Appartenenza al nucleo (coreness) per genere sessuale e genere musicale, a parità di attività e coorte**
 
@@ -918,9 +914,9 @@ misure:
 
 | misura | coefficiente | IC 95% | p |
 |---|---|---|---|
-| eigenvector | 0,223 | -0,110 – 0,555 | 0,189 |
-| coreness | 0,039 | -0,106 – 0,184 | 0,598 |
-| betweenness | -0,252 | -0,590 – 0,086 | 0,144 |
+| eigenvector | 0,180 | -0,164 – 0,524 | 0,305 |
+| coreness | 0,036 | -0,119 – 0,191 | 0,648 |
+| betweenness | -0,293 | -0,625 – 0,039 | 0,083 |
 
 Nemmeno le interazioni con il genere musicale aiutano: su
 12 termini di interazione stimati,
@@ -932,8 +928,8 @@ periferia della rete.
 sbagliate di segno opposto.
 
 **Non significa che non ci sia disuguaglianza.** Le donne sono il
-13,8% della popolazione e pubblicano meno: la mediana delle
-pubblicazioni è 8 contro 10.
+14,8% della popolazione e pubblicano meno: la mediana delle
+pubblicazioni è 8 contro 9.
 La disuguaglianza c'è ed è grande — ma si manifesta **nell'accesso e nel
 volume di attività**, non nella posizione strutturale a parità di attività.
 Chi entra e riesce a lavorare, lavora in posizioni comparabili.
@@ -947,7 +943,7 @@ seconda — sezione 4 — ha risposta ampiamente positiva.
 
 Il dato più interessante è la divergenza fra mediana e media
 dell'eigenvector: la mediana è più alta per le donne
-(7,3 × 10<sup>-9</sup> contro 3,4 × 10<sup>-9</sup>) mentre la media è
+(7,7 × 10<sup>-9</sup> contro 3,9 × 10<sup>-9</sup>) mentre la media è
 più bassa. Significa che la donna tipica della rete è connessa quanto e più
 dell'uomo tipico, ma che gli **hub estremi** — i pochissimi nodi con centralità
 di ordini di grandezza superiore — sono quasi tutti uomini. La disuguaglianza
@@ -969,7 +965,7 @@ Quest'ultimo punto è decisivo: senza un termine di chiusura triadica
 all'attributo su cui si sta guardando.
 
 **Sulla rete intera l'ERGM non è stimabile**, e va detto chiaramente invece di
-far finta. Con 82.595 nodi lo spazio dei grafi possibili rende il
+far finta. Con 70.712 nodi lo spazio dei grafi possibili rende il
 campionamento MCMC impraticabile. Si è quindi proceduto come previsto dal
 disegno, per sottoreti: i cinque generi musicali più popolosi, le due epoche, e
 un campione a palla di neve della rete complessiva come riferimento. **Le stime
@@ -1091,7 +1087,7 @@ decisiva — tendenza della rete a chiudere i triangoli.
 
 Il confronto fra `nodematch.gender.F` e `nodematch.gender.M` è il risultato
 che la sezione 5.4 non poteva dare. Lì i rapporti osservato/atteso non erano
-confrontabili, perché con una quota femminile del 13,8% il valore
+confrontabili, perché con una quota femminile del 14,8% il valore
 atteso per un legame donna-donna è così basso che qualunque addensamento
 reale produce un rapporto grande. Qui il problema non si pone: i due
 coefficienti misurano la stessa quantità sulla stessa scala. **E il risultato
@@ -1199,7 +1195,7 @@ previsto nel disegno.
 <img src="figures/f10_montecarlo_genere.png" alt="f10_montecarlo_genere" style="width:100%" />
 <figcaption>
 
-**La distribuzione Monte Carlo dell'assortatività di genere al variare dell'imputazione degli 28.830 artisti senza genere determinato.** L'istogramma è la distribuzione su 200 estrazioni dalla marginale osservata. Le due linee tratteggiate laterali non sono stime ma **limiti costruiti apposta**: assegnando a ogni artista ignoto il genere prevalente fra i suoi collaboratori si ottiene la massima omofilia compatibile con i dati; assegnando il genere opposto si ottiene la minima. Il fatto rilevante è che **anche il limite inferiore resta positivo**: non esiste assegnazione degli ignoti che faccia sparire l'omofilia. La conclusione qualitativa è robusta; la sua grandezza esatta no.
+**La distribuzione Monte Carlo dell'assortatività di genere al variare dell'imputazione degli 22.136 artisti senza genere determinato.** L'istogramma è la distribuzione su 200 estrazioni dalla marginale osservata. Le due linee tratteggiate laterali non sono stime ma **limiti costruiti apposta**: assegnando a ogni artista ignoto il genere prevalente fra i suoi collaboratori si ottiene la massima omofilia compatibile con i dati; assegnando il genere opposto si ottiene la minima. Il fatto rilevante è che **anche il limite inferiore resta positivo**: non esiste assegnazione degli ignoti che faccia sparire l'omofilia. La conclusione qualitativa è robusta; la sua grandezza esatta no.
 
 </figcaption>
 </figure>
@@ -1207,10 +1203,10 @@ previsto nel disegno.
 
 | scenario              | count   | mean   | std    | min    | max    | ci_lo   | ci_hi   |
 |:----------------------|:--------|:-------|:-------|:-------|:-------|:--------|:--------|
-| migliore_omofilia_min | 1       | 0,0509 | n.d.   | 0,0509 | 0,0509 | n.d.    | n.d.    |
-| peggiore_omofilia_max | 1       | 0,0686 | n.d.   | 0,0686 | 0,0686 | n.d.    | n.d.    |
-| solo_noti             | 1       | 0,0511 | n.d.   | 0,0511 | 0,0511 | n.d.    | n.d.    |
-| status_quo            | 200     | 0,0347 | 0,0009 | 0,0325 | 0,0369 | 0,0328  | 0,0364  |
+| migliore_omofilia_min | 1       | 0,0499 | n.d.   | 0,0499 | 0,0499 | n.d.    | n.d.    |
+| peggiore_omofilia_max | 1       | 0,0623 | n.d.   | 0,0623 | 0,0623 | n.d.    | n.d.    |
+| solo_noti             | 1       | 0,0432 | n.d.   | 0,0432 | 0,0432 | n.d.    | n.d.    |
+| status_quo            | 200     | 0,0329 | 0,0007 | 0,0308 | 0,0349 | 0,0313  | 0,0343  |
 
 **Tabella — Assortatività di genere sotto diversi scenari di imputazione**
 
@@ -1218,11 +1214,11 @@ previsto nel disegno.
 
 
 I quattro numeri vanno letti insieme. Sui soli artisti con genere determinato
-l'assortatività vale 0,0511. Imputando gli ignoti per estrazione
-casuale dalla marginale osservata scende a 0,0347: l'imputazione
+l'assortatività vale 0,0432. Imputando gli ignoti per estrazione
+casuale dalla marginale osservata scende a 0,0329: l'imputazione
 casuale non può che diluire la struttura, ed è la ragione per cui la misura
 di riferimento di questo studio è la prima e non la seconda. I due limiti
-costruiti sul vicinato — 0,0509 e 0,0686 — delimitano
+costruiti sul vicinato — 0,0499 e 0,0623 — delimitano
 quanto l'omofilia potrebbe valere se gli artisti ignoti somigliassero
 sistematicamente ai loro collaboratori o sistematicamente no. **Nessuno dei
 quattro scenari porta l'omofilia a zero o sotto zero.**
@@ -1249,17 +1245,17 @@ delimitarli.
 
 | variante                     | nodi   | archi     | gigante   | r genere M/F   | r pesata   | r gen. musicale   |
 |:-----------------------------|:-------|:----------|:----------|:---------------|:-----------|:------------------|
-| default                      | 82.595 | 702.613   | 0,9566    | 0,0511         | 0,1133     | 0,5186            |
-| max_credits=4                | 59.325 | 242.868   | 0,9080    | 0,0397         | 0,1099     | 0,5443            |
-| max_credits=20               | 93.574 | 1.788.440 | 0,9751    | 0,0556         | 0,1324     | 0,4799            |
-| peso_min_arco=1.0            | 54.697 | 383.680   | 0,9231    | 0,0739         | 0,1200     | 0,5786            |
-| peso_min_arco=2.0            | 40.391 | 191.346   | 0,8671    | 0,0652         | 0,1143     | 0,6188            |
-| raccolte_escluse=True        | 76.911 | 611.095   | 0,9529    | 0,0543         | 0,1152     | 0,5269            |
-| crediti_traccia=False        | 81.527 | 655.967   | 0,9548    | 0,0525         | 0,0853     | 0,5225            |
-| pesi_specificita=1.0/1.0/1.0 | 82.595 | 702.613   | 0,9566    | 0,0511         | 0,0995     | 0,5186            |
-| pesi_specificita=1.0/0.5/0.1 | 82.595 | 702.613   | 0,9566    | 0,0511         | 0,1211     | 0,5186            |
-| soglia_italianita=0.6        | 74.071 | 599.807   | 0,9561    | 0,0535         | 0,1134     | 0,5083            |
-| soglia_italianita=0.7        | 62.981 | 470.571   | 0,9541    | 0,0556         | 0,1219     | 0,5005            |
+| default                      | 70.712 | 586.040   | 0,9538    | 0,0432         | 0,1254     | 0,4970            |
+| max_credits=4                | 50.042 | 204.330   | 0,9012    | 0,0327         | 0,1226     | 0,5278            |
+| max_credits=20               | 80.864 | 1.445.126 | 0,9702    | 0,0500         | 0,1368     | 0,4512            |
+| peso_min_arco=1.0            | 44.938 | 314.348   | 0,9133    | 0,0675         | 0,1329     | 0,5529            |
+| peso_min_arco=2.0            | 33.840 | 159.715   | 0,8569    | 0,0631         | 0,1260     | 0,5966            |
+| raccolte_escluse=True        | 65.549 | 508.524   | 0,9503    | 0,0459         | 0,1303     | 0,5037            |
+| crediti_traccia=False        | 69.806 | 546.310   | 0,9518    | 0,0442         | 0,0892     | 0,5006            |
+| pesi_specificita=1.0/1.0/1.0 | 70.712 | 586.040   | 0,9538    | 0,0432         | 0,1086     | 0,4970            |
+| pesi_specificita=1.0/0.5/0.1 | 70.712 | 586.040   | 0,9538    | 0,0432         | 0,1336     | 0,4970            |
+| soglia_italianita=0.6        | 63.488 | 500.418   | 0,9527    | 0,0461         | 0,1254     | 0,4875            |
+| soglia_italianita=0.7        | 53.916 | 390.999   | 0,9507    | 0,0450         | 0,1331     | 0,4795            |
 
 **Tabella — Sensibilità delle metriche chiave ai parametri di costruzione della rete**
 
@@ -1267,9 +1263,9 @@ delimitarli.
 
 
 Sulle 10 varianti provate, l'assortatività di genere sui soli
-nodi determinati resta compresa fra **0,0397 e
-0,0739**, sempre positiva e sempre dello stesso ordine di
-grandezza del valore di riferimento (0,0511). Nessuna scelta di
+nodi determinati resta compresa fra **0,0327 e
+0,0675**, sempre positiva e sempre dello stesso ordine di
+grandezza del valore di riferimento (0,0432). Nessuna scelta di
 costruzione della rete, fra quelle difendibili, ribalta la conclusione.
 
 ### Che cosa aggiungono davvero i crediti a livello traccia
@@ -1279,14 +1275,14 @@ specificità dei crediti può manifestarsi, perché cambiare i pesi non cambia
 quali coppie di artisti siano collegate: cambia quanto contano. Il confronto è
 istruttivo.
 
-* con i crediti di traccia e la gerarchia di default: **0,1133**
+* con i crediti di traccia e la gerarchia di default: **0,1254**
 * senza crediti di traccia, cioè tornando alle sole co-presenze di copertina:
-  **0,0853**
-* con tutti i crediti allo stesso peso: 0,0995
-* con una gerarchia più ripida (1 / 0,5 / 0,1): 0,1211
+  **0,0892**
+* con tutti i crediti allo stesso peso: 0,1086
+* con una gerarchia più ripida (1 / 0,5 / 0,1): 0,1336
 
 Disattivare il livello traccia abbassa l'omofilia misurata di circa
-25%, e appiattire i pesi la
+29%, e appiattire i pesi la
 abbassa quasi altrettanto. La lettura è che **le collaborazioni documentate in
 modo più specifico sono anche le più omofile**: quando due nomi compaiono
 insieme sulla stessa traccia — non genericamente sullo stesso disco — la
@@ -1299,9 +1295,9 @@ giustificazione empirica della scelta di disegno descritta alla sezione 3.1.
 
 | variante      | nodi   | archi   | densita   | quota_gigante   | r_gender   | r_gender_MF   | r_gender_pesato   | r_genere_musicale   | quota_donne   | peso_mediano   | n_artisti   | n_generi   |
 |:--------------|:-------|:--------|:----------|:----------------|:-----------|:--------------|:------------------|:--------------------|:--------------|:---------------|:------------|:-----------|
-| genre_top1    | 82.595 | 702.613 | 0,0002    | 0,9566          | 0,0735     | 0,0511        | 0,1133            | 0,5186              | 0,1379        | 1,0000         | 100.201     | 16         |
-| genre_top2    | 82.595 | 702.613 | 0,0002    | 0,9566          | 0,0735     | 0,0511        | 0,1133            | 0,4762              | 0,1379        | 1,0000         | 100.201     | 16         |
-| genre_exclude | 54.334 | 433.408 | 0,0003    | 0,9542          | 0,0736     | 0,0598        | 0,1119            | 0,7231              | 0,1380        | 1,0000         | 65.773      | 15         |
+| genre_top1    | 70.712 | 586.040 | 0,0002    | 0,9538          | 0,0810     | 0,0432        | 0,1254            | 0,4970              | 0,1477        | 1,0000         | 87.229      | 16         |
+| genre_top2    | 70.712 | 586.040 | 0,0002    | 0,9538          | 0,0810     | 0,0432        | 0,1254            | 0,4538              | 0,1477        | 1,0000         | 87.229      | 16         |
+| genre_exclude | 45.704 | 349.998 | 0,0003    | 0,9505          | 0,0822     | 0,0486        | 0,1234            | 0,7045              | 0,1489        | 1,0000         | 56.505      | 15         |
 
 **Tabella — Metriche chiave usando il tag principale, il secondo tag, o escludendo gli artisti con attribuzione debole**
 
@@ -1310,7 +1306,7 @@ giustificazione empirica della scelta di disegno descritta alla sezione 3.1.
 
 Gli artisti il cui tag di genere principale copre meno del
 40% delle loro pubblicazioni sono marcati `genre_weak`:
-sono 34.428, cioè 34,4% della popolazione. La
+sono 30.724, cioè 35,2% della popolazione. La
 tabella confronta tre trattamenti — tenerli col tag principale, sostituirlo col
 secondo tag, escluderli del tutto — per mostrare quanto le conclusioni su RQ2
 dipendano da un'attribuzione di genere musicale che per costruzione è
@@ -1327,7 +1323,7 @@ incerta.
 * R per l'ERGM: installato in userspace via micromamba (conda-forge), env
   `opt/mamba/envs/ergm`
 * Seme casuale globale: **20260920**
-* Data di esecuzione: 21/09/2026
+* Data di esecuzione: 25/09/2026
 
 | pacchetto      | versione                     |
 |:---------------|:-----------------------------|
@@ -1382,28 +1378,28 @@ senza rileggere il database.
 
 ## A.4 Tempi di esecuzione
 
-| step                             | seconds   |
-|:---------------------------------|:----------|
-| ERGM genere_Rock                 | 3.183,3   |
-| sensibilità                     | 2.138,1   |
-| ERGM genere_Folk_World_&_Country | 1.643,7   |
-| ERGM epoca_post2000              | 1.612,0   |
-| ERGM complessiva                 | 1.573,4   |
-| ERGM genere_Electronic           | 1.485,7   |
-| ERGM genere_Pop                  | 1.170,7   |
-| ERGM genere_Classical            | 926,5     |
-| ERGM epoca_pre2000               | 880,3     |
-| assortatività solo M/F          | 828,8     |
-| assortatività per strato        | 617,8     |
-| betweenness                      | 609,9     |
-| genere debole                    | 467,1     |
-| esportazione dataset             | 323,2     |
-| wikidata_blocco_B_italiani       | 214,4     |
-| mixing e assortatività globale  | 127,3     |
-| COPY raw_relgenre                | 111,8     |
-| monte carlo genere               | 105,6     |
-| COPY raw_ra                      | 103,1     |
-| COPY raw_reltracks               | 102,2     |
+| step                                      | seconds   |
+|:------------------------------------------|:----------|
+| ERGM gwesp025_gwdeg                       | 45.780,5  |
+| ERGM 2020s                                | 13.466,7  |
+| ERGM 1950s                                | 10.928,0  |
+| ERGM decay_alto                           | 8.509,8   |
+| logit esatto su tutte le diadi            | 8.014,7   |
+| serie temporale esatta                    | 5.449,4   |
+| betweenness                               | 5.238,8   |
+| ERGM 1960s                                | 4.602,8   |
+| ERGM gwesp050_stocapp                     | 4.406,4   |
+| ERGM gwesp_esp0                           | 3.585,5   |
+| rete intera: 20 riproiezioni randomizzate | 3.342,4   |
+| ERGM genere_Rock                          | 3.183,3   |
+| sensibilità                              | 2.578,6   |
+| ERGM 1940s                                | 2.468,0   |
+| ERGM due_scale                            | 1.687,4   |
+| ERGM genere_Folk_World_&_Country          | 1.643,7   |
+| ERGM epoca_post2000                       | 1.612,0   |
+| ERGM complessiva                          | 1.573,4   |
+| ERGM genere_Electronic                    | 1.485,7   |
+| passata 1b (ricerca di linea)             | 1.460,8   |
 
 ## A.5 Riproducibilità
 
@@ -1426,12 +1422,12 @@ checkpoint esiste. I dati grezzi estratti stanno in `data/raw/`, le figure in
 2. **L'italianità è approssimata dal paese di pubblicazione**, perché
    `release_label` è vuota. Confonde "artista italiano" con "artista pubblicato
    in Italia".
-3. **26,4% della popolazione non ha genere musicale**, perché
+3. **26,9% della popolazione non ha genere musicale**, perché
    `release_genre` è vuota e i master coprono solo parte delle pubblicazioni.
 4. **Nessuna verifica incrociata fra fonti**: iTunes è escluso per scelta.
 5. **Discogs non è un censimento.** Sovrarappresenta vinile, elettronica e
    collezionismo.
 6. **L'ERGM vale sulle sottoreti stimate**, non sull'intera rete.
-7. **Wikidata copre 5,2% della popolazione**; il
+7. **Wikidata copre 6,0% della popolazione**; il
    livello di recupero per nome non è stato completato per indisponibilità
    ripetuta del servizio SPARQL, che ha risposto con errori 429, 502 e 504.

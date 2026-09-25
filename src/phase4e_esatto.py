@@ -80,6 +80,17 @@ TERMINI = ["intercetta", "same_F", "same_M", "same_mixed",
            "same_genre", "same_cohort", "sum_lognrel"]
 
 
+def termini_di(attrs) -> list[str]:
+    """I termini stimabili su questa rete.
+
+    `same_mixed` esiste solo se ci sono nodi 'mixed', cioe' gruppi misti. Con i
+    gruppi esclusi dalla popolazione (D16) la colonna e' identicamente zero e
+    renderebbe singolare l'informazione osservata: il termine esce.
+    """
+    return [t for t in TERMINI
+            if t != "same_mixed" or bool((attrs["gender"] == "mixed").any())]
+
+
 def carica(cfg, log):
     pop = common.load("population_gender.parquet")
     edges = common.load("edges_all.parquet")
@@ -121,7 +132,7 @@ def _blocco(r0, r1, n, attrs, A):
             continue
         uno = np.ones(len(j))
         gi = g[i]
-        righe.append(np.column_stack([
+        M = np.column_stack([
             uno,
             ((gi == "F") & (g[j] == "F")).astype(np.float64),
             ((gi == "M") & (g[j] == "M")).astype(np.float64),
@@ -129,7 +140,9 @@ def _blocco(r0, r1, n, attrs, A):
             (gen[i] == gen[j]).astype(np.float64),
             (coh[i] == coh[j]).astype(np.float64),
             lnr[i] + lnr[j],
-        ]))
+        ])
+        sel = attrs.get("_sel")
+        righe.append(M if sel is None else M[:, sel])
         riga = np.zeros(n, dtype=np.int8)
         s, e = A.indptr[i], A.indptr[i + 1]
         riga[A.indices[s:e]] = 1
@@ -182,13 +195,15 @@ def logit_esatto(n, attrs, A, log, avvio=None) -> pd.DataFrame:
     adottare — e vicino all'ottimo il passo intero vince sempre, cosi' la
     convergenza resta quadratica.
     """
-    k = len(TERMINI)
+    termini = termini_di(attrs)
+    attrs = {**attrs, "_sel": [TERMINI.index(t) for t in termini]}
+    k = len(termini)
     m = int(A.nnz // 2)
     dens = m / (n * (n - 1) / 2)
     if avvio is not None:
         b = np.asarray(avvio, dtype=float).copy()
         log.info(f"avvio dai coefficienti gia' disponibili: "
-                 + " ".join(f"{t}={v:+.3f}" for t, v in zip(TERMINI, b)))
+                 + " ".join(f"{t}={v:+.3f}" for t, v in zip(termini, b)))
     else:
         b = np.zeros(k)
         b[0] = np.log(dens / (1 - dens))
@@ -220,11 +235,11 @@ def logit_esatto(n, attrs, A, log, avvio=None) -> pd.DataFrame:
         adottato = float(np.max(np.abs(f * passo)))
         log.info(f"    adottato x{f:g}: logL {ll:,.2f} -> {ll_c[j]:,.2f}, "
                  f"max|passo| {adottato:.3e}")
-        log.info("    " + "  ".join(f"{t}={v:+.4f}" for t, v in zip(TERMINI, b)))
+        log.info("    " + "  ".join(f"{t}={v:+.4f}" for t, v in zip(termini, b)))
         # Checkpoint a ogni iterazione: una passata costa quattordici minuti e
         # una stima interrotta non deve ricominciare dall'inizio.
         try:
-            common.save(pd.DataFrame({"termine": TERMINI, "coef": b}),
+            common.save(pd.DataFrame({"termine": termini, "coef": b}),
                         "logit_esatto_parziale.parquet")
         except Exception as e:
             log.warning(f"  checkpoint non salvato: {e!r}")
@@ -239,7 +254,7 @@ def logit_esatto(n, attrs, A, log, avvio=None) -> pd.DataFrame:
     ll = float(lls[0])
     se = np.sqrt(np.diag(np.linalg.inv(XtWX)))
     out = pd.DataFrame({
-        "termine": TERMINI, "coef": b, "se": se,
+        "termine": termini, "coef": b, "se": se,
         "z": b / se, "ci_lo": b - 1.96 * se, "ci_hi": b + 1.96 * se,
         "or": np.exp(b),
     })
@@ -388,18 +403,19 @@ def main(force: bool = False):
     # sbagliato di tredici unita' costa passate inutili. L'intercetta parte
     # dalla densita' osservata, che e' sempre nel giusto ordine di grandezza.
     avvio = None
+    termini = termini_di(attrs)
     # un checkpoint di una stima interrotta ha la precedenza: e' gia' vicino
     if common.exists("logit_esatto_parziale.parquet"):
         c = common.load("logit_esatto_parziale.parquet").set_index("termine")
-        if all(t in c.index for t in TERMINI):
-            avvio = c.loc[TERMINI, "coef"].values
+        if list(c.index) == termini:
+            avvio = c.loc[termini, "coef"].values
             log.info("ripresa da checkpoint")
     if avvio is None and common.exists("dyadic_logit.parquet"):
         d = common.load("dyadic_logit.parquet").set_index("termine")
-        if all(c in d.index for c in TERMINI[1:]):
+        if all(c in d.index for c in termini[1:]):
             dens = A.nnz / 2 / (n * (n - 1) / 2)
             avvio = np.concatenate([[np.log(dens / (1 - dens))],
-                                    d.loc[TERMINI[1:], "coef"].values])
+                                    d.loc[termini[1:], "coef"].values])
     with Timer("logit esatto su tutte le diadi", log):
         out = logit_esatto(n, attrs, A, log, avvio=avvio)
     log.info("\n" + out.round(4).to_string(index=False))

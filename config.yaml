@@ -35,6 +35,11 @@ population:
     - '^no artist'
     - '^traditional$'
   strip_disambiguation: true   # "Mina (3)" -> "Mina"
+  # I gruppi escono dalla popolazione dopo l'inferenza del genere (decisione
+  # D16). L'unita' d'analisi e' la persona: un gruppo e i suoi membri
+  # compaiono sulle stesse release, e contarli entrambi duplica i legami e ne
+  # crea di gruppo-membro che non sono scelte di collaborazione.
+  exclude_groups: true
 
 cohort:
   min_year: 1900

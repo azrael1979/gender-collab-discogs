@@ -250,6 +250,12 @@ def main(force: bool = False):
         return
     pop = common.load("population_gender.parquet")
     credits = common.load("credits.parquet")
+    # Solo gli artisti della popolazione: se la Fase 1d ha escluso i gruppi, i
+    # loro crediti escono qui, e con loro da tutte le fasi che rileggono
+    # credits.parquet (4d, 4g, 4i, 5, 7).
+    n0 = len(credits)
+    credits = credits[credits.artist_id.isin(pop.artist_id)].reset_index(drop=True)
+    log.info(f"crediti ristretti alla popolazione: {n0:,} -> {len(credits):,}")
     classify = role_classifier(cfg)
     with Timer("classificazione ruoli", log):
         credits["role_class"] = [classify(r, s) for r, s in

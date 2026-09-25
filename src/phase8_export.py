@@ -117,6 +117,11 @@ DESCRIZIONI = {
     "position": ("3", "Centralita' di ogni nodo della componente gigante: "
         "eigenvector, betweenness (esatta, su tutte le sorgenti), coreness, grado, forza, "
         "clustering; piu' tutti gli attributi dell'artista."),
+    "betweenness_campionata": ("3", "La regressione della posizione con la betweenness "
+        "APPROSSIMATA su 400 sorgenti, sulla stessa rete: il termine di confronto con "
+        "quella esatta (Fase 3d)."),
+    "population_gender_con_gruppi": ("1", "La popolazione con genere inferito PRIMA "
+        "dell'esclusione dei gruppi (D16): 100.201 voci, di cui 12.972 gruppi."),
     "position_regressions": ("3", "Coefficienti delle regressioni OLS sulla posizione "
         "nella rete, con errori standard robusti HC3."),
 

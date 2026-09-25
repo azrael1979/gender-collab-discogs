@@ -1,46 +1,46 @@
 \begin{table}
 \centering
-\caption{OLS su coreness: posizione nella rete per genere sessuale e genere musicale, a parità di attività e coorte (errori standard robusti HC3, n=43,993, R2=0.651)}
+\caption{OLS su coreness: posizione nella rete per genere sessuale e genere musicale, a parità di attività e coorte (errori standard robusti HC3, n=39,788, R2=0.658)}
 \label{tab:t3_regressione_coreness}
 \begin{tabular}{lrrrrrrl}
 \toprule
                                            termine &   coef &    se &       z &     p &  ci\_lo &  ci\_hi &    esito \\
 \midrule
-                                         Intercept &  1.270 & 0.031 &  40.427 & 0.000 &  1.208 &  1.331 & coreness \\
-                                    C(gender)[T.F] &  0.039 & 0.074 &   0.528 & 0.598 & -0.106 &  0.184 & coreness \\
-                                C(genere)[T.Blues] &  0.007 & 0.034 &   0.213 & 0.831 & -0.059 &  0.073 & coreness \\
-                           C(genere)[T.Children's] & -0.046 & 0.039 &  -1.192 & 0.233 & -0.122 &  0.030 & coreness \\
-                            C(genere)[T.Classical] & -0.304 & 0.026 & -11.899 & 0.000 & -0.354 & -0.254 & coreness \\
-                           C(genere)[T.Electronic] &  0.057 & 0.023 &   2.460 & 0.014 &  0.012 &  0.102 & coreness \\
-               C(genere)[T.Folk, World, \& Country] &  0.031 & 0.024 &   1.271 & 0.204 & -0.017 &  0.079 & coreness \\
-                          C(genere)[T.Funk / Soul] &  0.032 & 0.031 &   1.050 & 0.294 & -0.028 &  0.093 & coreness \\
-                              C(genere)[T.Hip Hop] &  0.346 & 0.027 &  13.040 & 0.000 &  0.294 &  0.398 & coreness \\
-                                 C(genere)[T.Jazz] &  0.100 & 0.025 &   4.061 & 0.000 &  0.052 &  0.149 & coreness \\
-                            C(genere)[T.Non-Music] & -0.231 & 0.035 &  -6.579 & 0.000 & -0.300 & -0.162 & coreness \\
-                                  C(genere)[T.Pop] &  0.170 & 0.024 &   7.189 & 0.000 &  0.124 &  0.216 & coreness \\
-                                 C(genere)[T.Rock] & -0.022 & 0.023 &  -0.940 & 0.347 & -0.067 &  0.024 & coreness \\
-                       C(genere)[T.Stage \& Screen] &  0.193 & 0.033 &   5.850 & 0.000 &  0.129 &  0.258 & coreness \\
-                                 C(coorte)[T.1950] &  0.052 & 0.025 &   2.066 & 0.039 &  0.003 &  0.101 & coreness \\
-                                 C(coorte)[T.1960] & -0.029 & 0.022 &  -1.301 & 0.193 & -0.073 &  0.015 & coreness \\
-                                 C(coorte)[T.1970] & -0.219 & 0.022 &  -9.924 & 0.000 & -0.262 & -0.176 & coreness \\
-                                 C(coorte)[T.1980] & -0.254 & 0.022 & -11.694 & 0.000 & -0.297 & -0.212 & coreness \\
-                                 C(coorte)[T.1990] & -0.262 & 0.022 & -12.079 & 0.000 & -0.304 & -0.219 & coreness \\
-                                 C(coorte)[T.2000] & -0.302 & 0.022 & -13.804 & 0.000 & -0.345 & -0.259 & coreness \\
-                                 C(coorte)[T.2010] & -0.405 & 0.022 & -18.001 & 0.000 & -0.449 & -0.361 & coreness \\
-                                 C(coorte)[T.2020] & -0.404 & 0.027 & -14.867 & 0.000 & -0.457 & -0.351 & coreness \\
-                 C(gender)[T.F]:C(genere)[T.Blues] & -0.018 & 0.101 &  -0.181 & 0.856 & -0.217 &  0.180 & coreness \\
-            C(gender)[T.F]:C(genere)[T.Children's] &  0.011 & 0.088 &   0.122 & 0.903 & -0.162 &  0.183 & coreness \\
-             C(gender)[T.F]:C(genere)[T.Classical] & -0.075 & 0.079 &  -0.951 & 0.342 & -0.230 &  0.080 & coreness \\
-            C(gender)[T.F]:C(genere)[T.Electronic] & -0.018 & 0.075 &  -0.240 & 0.811 & -0.164 &  0.128 & coreness \\
-C(gender)[T.F]:C(genere)[T.Folk, World, \& Country] & -0.064 & 0.078 &  -0.819 & 0.413 & -0.218 &  0.089 & coreness \\
-           C(gender)[T.F]:C(genere)[T.Funk / Soul] & -0.068 & 0.101 &  -0.675 & 0.500 & -0.266 &  0.130 & coreness \\
-               C(gender)[T.F]:C(genere)[T.Hip Hop] & -0.222 & 0.097 &  -2.280 & 0.023 & -0.412 & -0.031 & coreness \\
-                  C(gender)[T.F]:C(genere)[T.Jazz] & -0.041 & 0.080 &  -0.514 & 0.607 & -0.199 &  0.116 & coreness \\
-             C(gender)[T.F]:C(genere)[T.Non-Music] & -0.069 & 0.094 &  -0.732 & 0.464 & -0.253 &  0.115 & coreness \\
-                   C(gender)[T.F]:C(genere)[T.Pop] & -0.050 & 0.075 &  -0.661 & 0.509 & -0.198 &  0.098 & coreness \\
-                  C(gender)[T.F]:C(genere)[T.Rock] & -0.001 & 0.076 &  -0.011 & 0.991 & -0.149 &  0.148 & coreness \\
-        C(gender)[T.F]:C(genere)[T.Stage \& Screen] & -0.103 & 0.094 &  -1.092 & 0.275 & -0.288 &  0.082 & coreness \\
-                                          log\_nrel &  0.428 & 0.002 & 245.223 & 0.000 &  0.425 &  0.431 & coreness \\
+                                         Intercept &  1.158 & 0.033 &  35.223 & 0.000 &  1.094 &  1.222 & coreness \\
+                                    C(gender)[T.F] &  0.036 & 0.079 &   0.457 & 0.648 & -0.119 &  0.191 & coreness \\
+                                C(genere)[T.Blues] &  0.005 & 0.036 &   0.142 & 0.887 & -0.065 &  0.076 & coreness \\
+                           C(genere)[T.Children's] & -0.014 & 0.040 &  -0.341 & 0.733 & -0.091 &  0.064 & coreness \\
+                            C(genere)[T.Classical] & -0.287 & 0.028 & -10.319 & 0.000 & -0.341 & -0.232 & coreness \\
+                           C(genere)[T.Electronic] &  0.047 & 0.026 &   1.855 & 0.064 & -0.003 &  0.098 & coreness \\
+               C(genere)[T.Folk, World, \& Country] &  0.052 & 0.027 &   1.928 & 0.054 & -0.001 &  0.104 & coreness \\
+                          C(genere)[T.Funk / Soul] &  0.048 & 0.033 &   1.440 & 0.150 & -0.017 &  0.113 & coreness \\
+                              C(genere)[T.Hip Hop] &  0.380 & 0.029 &  13.049 & 0.000 &  0.323 &  0.437 & coreness \\
+                                 C(genere)[T.Jazz] &  0.117 & 0.027 &   4.300 & 0.000 &  0.064 &  0.171 & coreness \\
+                            C(genere)[T.Non-Music] & -0.180 & 0.037 &  -4.933 & 0.000 & -0.252 & -0.109 & coreness \\
+                                  C(genere)[T.Pop] &  0.179 & 0.026 &   6.900 & 0.000 &  0.128 &  0.230 & coreness \\
+                                 C(genere)[T.Rock] & -0.032 & 0.026 &  -1.249 & 0.212 & -0.082 &  0.018 & coreness \\
+                       C(genere)[T.Stage \& Screen] &  0.187 & 0.035 &   5.399 & 0.000 &  0.119 &  0.254 & coreness \\
+                                 C(coorte)[T.1950] &  0.056 & 0.025 &   2.264 & 0.024 &  0.008 &  0.105 & coreness \\
+                                 C(coorte)[T.1960] & -0.014 & 0.022 &  -0.659 & 0.510 & -0.057 &  0.029 & coreness \\
+                                 C(coorte)[T.1970] & -0.183 & 0.022 &  -8.455 & 0.000 & -0.225 & -0.141 & coreness \\
+                                 C(coorte)[T.1980] & -0.198 & 0.021 &  -9.313 & 0.000 & -0.240 & -0.157 & coreness \\
+                                 C(coorte)[T.1990] & -0.217 & 0.021 & -10.213 & 0.000 & -0.259 & -0.175 & coreness \\
+                                 C(coorte)[T.2000] & -0.261 & 0.022 & -12.134 & 0.000 & -0.303 & -0.219 & coreness \\
+                                 C(coorte)[T.2010] & -0.366 & 0.022 & -16.503 & 0.000 & -0.409 & -0.322 & coreness \\
+                                 C(coorte)[T.2020] & -0.362 & 0.027 & -13.256 & 0.000 & -0.415 & -0.308 & coreness \\
+                 C(gender)[T.F]:C(genere)[T.Blues] & -0.018 & 0.103 &  -0.171 & 0.864 & -0.220 &  0.185 & coreness \\
+            C(gender)[T.F]:C(genere)[T.Children's] & -0.004 & 0.093 &  -0.040 & 0.968 & -0.185 &  0.178 & coreness \\
+             C(gender)[T.F]:C(genere)[T.Classical] & -0.069 & 0.084 &  -0.824 & 0.410 & -0.234 &  0.095 & coreness \\
+            C(gender)[T.F]:C(genere)[T.Electronic] & -0.009 & 0.080 &  -0.115 & 0.909 & -0.166 &  0.148 & coreness \\
+C(gender)[T.F]:C(genere)[T.Folk, World, \& Country] & -0.063 & 0.083 &  -0.759 & 0.448 & -0.227 &  0.100 & coreness \\
+           C(gender)[T.F]:C(genere)[T.Funk / Soul] & -0.066 & 0.105 &  -0.626 & 0.531 & -0.273 &  0.141 & coreness \\
+               C(gender)[T.F]:C(genere)[T.Hip Hop] & -0.171 & 0.099 &  -1.716 & 0.086 & -0.366 &  0.024 & coreness \\
+                  C(gender)[T.F]:C(genere)[T.Jazz] & -0.045 & 0.085 &  -0.530 & 0.596 & -0.213 &  0.122 & coreness \\
+             C(gender)[T.F]:C(genere)[T.Non-Music] & -0.056 & 0.098 &  -0.572 & 0.567 & -0.247 &  0.135 & coreness \\
+                   C(gender)[T.F]:C(genere)[T.Pop] & -0.058 & 0.081 &  -0.714 & 0.476 & -0.216 &  0.101 & coreness \\
+                  C(gender)[T.F]:C(genere)[T.Rock] & -0.014 & 0.081 &  -0.168 & 0.867 & -0.172 &  0.145 & coreness \\
+        C(gender)[T.F]:C(genere)[T.Stage \& Screen] & -0.119 & 0.099 &  -1.199 & 0.230 & -0.312 &  0.075 & coreness \\
+                                          log\_nrel &  0.442 & 0.002 & 235.732 & 0.000 &  0.439 &  0.446 & coreness \\
 \bottomrule
 \end{tabular}
 \end{table}

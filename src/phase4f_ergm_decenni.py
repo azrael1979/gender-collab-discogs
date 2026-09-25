@@ -62,6 +62,12 @@ B.ORE_MASSIME = 6
 B.SILENZIO_MASSIMO_ORE = 2
 MODELS = ROOT / "data" / "ergm_decenni"
 
+# I decenni si stimano per dimensione crescente: dopo due fallimenti ogni
+# decennio rimasto e' piu' grande di entrambi, e stimarlo costa ore per
+# confermare un esito gia' determinato. Nella prima esecuzione (23 settembre)
+# la coda fu interrotta a mano per questa ragione; ora e' una regola.
+MAX_FALLIMENTI = 2
+
 # Sotto questa soglia un ERGM non ha abbastanza legami per stimare sei termini.
 MIN_ARCHI = 300
 MIN_NODI = 100
@@ -111,6 +117,10 @@ def main(force: bool = False):
     reti, pop = reti_per_decennio(cfg, log)
     esiti = []
     for dec, G in reti:
+        if sum(not e["riuscita"] for e in esiti) >= MAX_FALLIMENTI:
+            log.info(f"  {dec}s e successivi: saltati dopo {MAX_FALLIMENTI} "
+                     "fallimenti su reti piu' piccole")
+            break
         nome = f"dec{dec}"
         n, m = G.number_of_nodes(), G.number_of_edges()
         log.info(f"=== {dec}s: {n:,} nodi, {m:,} archi ===")

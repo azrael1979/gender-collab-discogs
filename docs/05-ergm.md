@@ -377,9 +377,50 @@ esaurisce i dati, e il testo deve dirlo.
 
 ---
 
+## Dopo l'esclusione dei gruppi (25 settembre)
+
+La Fase 4f è stata rieseguita sulla rete di soli individui (D16), con una regola
+nuova: dopo due fallimenti su reti di dimensione crescente la coda si ferma,
+perché ogni decennio rimasto è più grande di entrambi. Nella prima esecuzione la
+coda era stata interrotta a mano per la stessa ragione.
+
+| decennio | nodi | archi | esito |
+|---|---|---|---|
+| 1930 | 139 | 463 | ✅ 19 min |
+| 1940 | 303 | 1.650 | ✅ 41 min |
+| **1950** | 1.326 | **13.919** | ✅ **2,9 ore** — prima falliva |
+| 2020 | 10.778 | 30.629 | ❌ passo sotto 0,02 per tre iterazioni |
+| 1960 | 4.330 | 41.413 | ❌ idem; coda chiusa |
+
+**La soglia di stimabilità sale** da «fra 1.932 e 15.177 archi» a «fra 13.919 e
+30.629». È coerente con la diagnosi: un gruppo e i suoi membri formano una
+cricca per costruzione, cioè triangoli meccanici, e toglierli rende la rete meno
+ostile a `gwesp`.
+
+**Tre cose che il decennio 1950 aggiunge.**
+
+1. **Nessuna omofilia di genere controllando la chiusura:** `gender.F` +0,058
+   (*p* 0,56), `gender.M` +0,032 (*p* 0,13). Conferma per una via indipendente
+   dalla permutazione l'assenza di omofilia all'inizio della serie.
+2. **La U si ripete in un terzo decennio:** esp 0 osservato/simulato 8,9;
+   centro 0,26-0,38; coda sopra 1,6 da 11 partner condivisi.
+3. **Il confronto con la proiezione randomizzata è meno netto:** scarto 1,015
+   per l'ERGM contro 0,720 per la proiezione, 1,4 volte meglio; negli anni
+   Quaranta, sulla rete senza gruppi, 12 volte (2,779 contro 0,236). La
+   proiezione vince in entrambi i casi, ma con margini diversissimi: il paper
+   riporta l'intervallo, non il caso migliore.
+
+**Non rieseguiti:** i quattro tentativi sulla rete integrale (Fase 4b) e il
+controllo della bimodalità (Fase 4h). Sono esiti negativi, e senza gruppi fallisce
+già il decennio da 41.413 archi: la rete intera (586.040) non può che fallire. Il
+paper lo dichiara in Appendice A.
+
+---
+
 ## Conclusione
 
-L'ERGM **non è stimabile su questa rete** oltre i ~2.000 archi. Nove stime
+L'ERGM **non è stimabile su questa rete** oltre i ~2.000 archi (con i gruppi;
+senza gruppi la soglia sale a 13.919-30.629, vedi sopra). Nove stime
 fallite: quattro parametrizzazioni sulla rete integrale (tre MCMLE e una ad
 approssimazione stocastica, con convergenza falsa), due decenni (1950, 2020) e
 tre varianti sul decennio 1940 (due a due componenti e il controllo negativo).

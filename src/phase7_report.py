@@ -1246,6 +1246,12 @@ def collect(cfg, log) -> dict:
     groups = pd.read_parquet(ROOT / "data" / "raw" / "raw_groups.parquet")
     various = pd.read_parquet(ROOT / "data" / "raw" / "raw_various.parquet")
     cts = counts.assign(share=counts.n_it / counts.n_all)
+    # con i gruppi esclusi (D16) anche le popolazioni alternative si contano
+    # sui soli individui, altrimenti non sono confrontabili con n_pop
+    if cfg["population"].get("exclude_groups", False) and \
+            common.exists("population_gender_con_gruppi.parquet"):
+        pg = common.load("population_gender_con_gruppi.parquet")
+        cts = cts[~cts.artist_id.isin(pg[pg.is_group].artist_id)]
 
     C = {
         "data": datetime.date.today().strftime("%d/%m/%Y"),

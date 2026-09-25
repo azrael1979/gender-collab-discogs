@@ -27,6 +27,7 @@ riesplorato.
 | [`04-calcolo-esatto.md`](04-calcolo-esatto.md) | che cosa significa «esatto» qui, la matematica, e come è stata verificata |
 | [`05-ergm.md`](05-ergm.md) | il verbale completo dei tentativi ERGM: ogni specifica, ogni fallimento, la diagnosi e il tentativo fallito di confermarla |
 | [`06-risultati.md`](06-risultati.md) | lo stato dei risultati, con l'indicazione di quanto ciascuno sia solido |
+| [`07-confronto-internazionale.md`](07-confronto-internazionale.md) | fattibilità del confronto con altri paesi: dimensioni, precisione del criterio di nazionalità, proposta |
 
 ## Convenzione
 

@@ -127,6 +127,47 @@ testo corretto nel documento e nel paper.
 
 ---
 
+## E17 — Un termine del modello che presupponeva i gruppi
+
+**Gravità: bassa.** Un'interruzione, nessun risultato sbagliato.
+
+**Che cos'era.** Dopo l'esclusione dei gruppi (D16) la Fase 4c è fallita con
+`Singular matrix`: il termine `same_mixed` (due gruppi misti) era una colonna
+di soli zeri. Lo stesso termine era nel logit esatto della Fase 4e, che
+sarebbe fallita subito dopo, o avrebbe girato a vuoto.
+
+**Correzione.** Il termine entra solo se nella rete esistono nodi `mixed`
+(`termini_di()` in 4e, colonne costanti tolte in 4c). Verificato con il test
+esistente, che ha nodi misti, e su dati simulati senza, contro `statsmodels`
+(scarto 10⁻⁵ errori standard). Il ciclo della pipeline è stato fermato per PID
+prima che la 4e partisse.
+
+**Lezione.** Un cambio nella definizione della popolazione va seguito fino ai
+termini dei modelli, non solo fino ai dati.
+
+---
+
+## E18 — Un livello della cascata tornato in vita senza che nessuno lo decidesse
+
+**Gravità: bassa.** 145 etichette su 87.229.
+
+**Che cos'era.** Il livello 2 della cascata (Wikidata per nome) era vuoto nella
+prima esecuzione, perché il servizio di Wikidata non rispondeva: il README lo
+dichiarava come limite. Il file dei nomi è stato scaricato il 21 settembre, ma
+la Fase 1d non era stata rieseguita. Rieseguendola per D16, il livello ha
+etichettato 1.500 artisti: quasi sempre come avrebbe fatto l'onomastica, ma 135
+indeterminati hanno ricevuto un'etichetta e 10 sono passati da M a F o
+viceversa.
+
+**Perché va detto.** Due cambiamenti nella stessa riesecuzione confondono il
+confronto prima/dopo. L'effetto di questo è trascurabile rispetto a quello dei
+gruppi, ma il paper descriveva tre livelli, e il README un limite che non c'è
+più. Il livello si tiene: era nel disegno, con le sue protezioni contro gli
+omonimi (nome univoco sia in Wikidata sia in Discogs, nomi con generi discordi
+scartati).
+
+---
+
 ## E1 — Correzione caso-controllo con il segno invertito
 
 **Gravità: alta.** Un coefficiente pubblicato era sbagliato.

@@ -5,6 +5,12 @@ cade solo se i dati sono sbagliati), **stimato** (dipende da un modello e dalle
 sue assunzioni), **interpretato** (una spiegazione proposta per un fatto, può
 essere sbagliata anche se il fatto è giusto).
 
+> **Valori aggiornati al 25 settembre 2026, dopo l'esclusione dei gruppi**
+> (D16 in [`02-decisioni.md`](02-decisioni.md)): l'unità d'analisi è la persona.
+> I valori precedenti, con i gruppi come nodi, sono conservati in
+> `data/con_gruppi_2026-09-24/` e nella storia git di questo file. Le
+> conclusioni non cambiano; le grandezze sono più piccole.
+
 ---
 
 ## Il risultato centrale — l'emersione
@@ -17,85 +23,66 @@ all'attività, è riportata accanto perché era la lettura precedente.
 
 | decennio | quota donne | F–F oss/attesi, per grado | *z* | F–F, uniforme | M–M, per grado | logit `same_F` | logit `same_M` |
 |---|---|---|---|---|---|---|---|
-| 1950 | 12,9% | 1,125 | 1,3 | 0,479 | 1,003 | +0,054 | −0,013 |
-| 1960 | 15,5% | 1,074 | 1,7 | 0,499 | 1,000 | +0,047 | +0,003 |
-| 1970 | 13,1% | **1,178** | **3,7** | 0,606 | 1,006 | +0,071 | +0,144 |
-| 1980 | 11,0% | **1,289** | **5,9** | 0,901 | 1,007 | +0,209 | +0,155 |
-| 1990 | 10,4% | **1,561** | **13,3** | 1,236 | 1,011 | +0,352 | +0,123 |
-| 2000 | 9,6% | **1,710** | **19,3** | 1,224 | 1,007 | +0,482 | +0,230 |
-| 2010 | 10,0% | **1,669** | **17,9** | 1,168 | 1,009 | +0,519 | +0,215 |
-| 2020 | 10,8% | **1,703** | **15,0** | 1,664 | 1,010 | **+0,739** | +0,069 |
+| 1950 | 13,4% | 1,075 | 0,8 | 0,460 | 1,002 | +0,082 | +0,032 |
+| 1960 | 16,5% | 1,033 | 0,7 | 0,480 | 1,004 | +0,053 | +0,039 |
+| 1970 | 14,1% | **1,201** | **4,3** | 0,574 | 1,003 | +0,086 | +0,174 |
+| 1980 | 11,9% | **1,284** | **5,6** | 0,884 | 1,004 | +0,194 | +0,115 |
+| 1990 | 11,5% | **1,457** | **9,7** | 1,182 | 1,009 | +0,368 | +0,120 |
+| 2000 | 10,7% | **1,583** | **16,8** | 1,212 | 1,005 | +0,413 | +0,141 |
+| 2010 | 10,9% | **1,555** | **15,0** | 1,075 | 1,006 | +0,398 | +0,161 |
+| 2020 | 11,4% | **1,519** | **10,6** | 1,362 | 1,006 | **+0,508** | −0,006 |
 
 Tre fatti distinti, che insieme fanno il risultato:
 
 1. **È un'emersione, non un'inversione.** Fra artisti ugualmente attivi, negli
    anni Cinquanta e Sessanta le donne non si legavano fra loro né più né meno
    del caso. L'eccesso diventa significativo negli anni Settanta, cresce fino
-   ai Duemila e da lì resta attorno a 1,7. Il logit, che controlla genere
-   musicale, coorte e attività, dice lo stesso: `same_F` non significativo fino
-   agli anni Settanta, poi in salita fino a +0,739.
-2. **È asimmetrica.** Il rapporto maschile sta fra 1,000 e 1,011 in ogni
-   decennio; `same_M` non supera 0,23 e non ha tendenza.
-3. **Non è composizione.** La quota femminile **scende** dal 15,5% al 9,6% e
-   risale appena. Con *meno* donne in proporzione, quelle che ci sono
+   ai Duemila e da lì resta attorno a 1,55. Il logit, che controlla genere
+   musicale, coorte e attività, dice lo stesso con un decennio di ritardo:
+   `same_F` non significativo fino agli anni Settanta, poi da +0,19 a +0,51.
+   **Un ERGM sugli anni Cinquanta**, che controlla anche la chiusura
+   triadica, conferma l'assenza iniziale: `gender.F` +0,058 (*p* 0,56),
+   `gender.M` +0,032 (*p* 0,13).
+2. **È asimmetrica.** Il rapporto maschile sta fra 1,002 e 1,009 in ogni
+   decennio; `same_M` fra −0,01 e 0,17, senza tendenza.
+3. **Non è composizione.** La quota femminile **scende** dal 16,5% al 10,7% e
+   risale appena all'11,4%. Con *meno* donne in proporzione, quelle che ci sono
    collaborano fra loro sempre di più.
 
 > Le musiciste italiane non hanno guadagnato terreno in numero.
 > Si sono trovate fra loro.
 
-**Che cosa è caduto.** La versione precedente, costruita sul nullo uniforme,
-parlava di un'inversione di segno: legami fra donne *sotto* il caso fino agli
-anni Settanta (0,48-0,61, *z* fino a −3,6) e un balzo negli anni Venti (1,66).
-Il deficit era un effetto di attività — le donne di quei decenni avevano
-0,65-0,70 volte il grado medio — e il balzo in parte lo stesso effetto al
-contrario, perché negli anni Venti il loro grado raggiunge quello degli uomini.
-Vedi E13 in [`03-errori.md`](03-errori.md) e la sezione D di
-[`04-calcolo-esatto.md`](04-calcolo-esatto.md).
-
-Figura: `paper/figures/fig3_emergence.png` (serie per grado, con quella
-uniforme tratteggiata).
+**Che cosa è caduto, in due tempi.** Con il nullo uniforme la serie sembrava
+un'inversione di segno (deficit fino agli anni Settanta, 0,46-0,57): era un
+effetto dell'attività minore delle donne (E13). Con i gruppi come nodi
+l'eccesso recente sembrava attorno a 1,7: i legami gruppo–membro lo gonfiavano
+di circa un decimo (D16).
 
 ---
 
 ## Per tipo di coppia, decennio e genere musicale (Fase 4k)
 
-**Statuto: misurato** (le densità); **stimato** l'intervallo di Poisson dei
-rapporti, che assume indipendenza fra legami ed è ottimistico. Tabella completa
-in `data/densita_genere.parquet` e `report/tables/t6_densita_genere.csv`.
+**Statuto: misurato** (le densità); gli intervalli di Poisson dei rapporti
+assumono indipendenza fra legami e sono ottimistici.
 
-La probabilità che una coppia sia legata, per tipo di coppia, su tutti i
-generi:
-
-| decennio | donna–donna / mista | uomo–uomo / mista | donna–donna / uomo–uomo | FF oss/att per grado | MF oss/att per grado |
+| decennio | donna–donna / mista | uomo–uomo / mista | donna–donna / uomo–uomo | FF per grado | MF per grado |
 |---|---|---|---|---|---|
-| 1950 | 0,71 | 1,62 | 0,44 | 1,06 | 0,96 |
-| 1970 | 0,85 | 1,55 | 0,55 | 1,22 | 0,98 |
-| 1990 | 1,50 | 1,24 | 1,22 | 1,60 | 0,93 |
-| 2020 | 1,83 | 1,12 | 1,63 | 1,73 | 0,92 |
+| 1950 | 0,68 | 1,64 | 0,41 | 1,08 | 0,98 |
+| 1980 | 1,08 | 1,29 | 0,84 | 1,28 | 0,97 |
+| 2000 | 1,45 | 1,24 | 1,17 | 1,58 | 0,95 |
+| 2020 | 1,51 | 1,13 | 1,34 | 1,52 | 0,94 |
 
-Le densità grezze non tengono conto dell'attività: negli anni Cinquanta due
-uomini hanno 2,3 volte la probabilità di due donne di collaborare, ma a parità
-di numero di legami la differenza sparisce.
+Le coppie miste sotto il caso **non sono una prova in più**: il nullo tiene
+fisso il numero di legami di ogni artista, quindi ogni legame donna–donna oltre
+l'atteso è un legame donna–uomo sotto l'atteso. Dice però che i legami fra
+donne hanno **sostituito** quelli con gli uomini.
 
-Le coppie miste scendono sotto il caso (0,92 negli anni Venti, *z* fino a −19
-nei Duemiladieci), ma **non è una prova in più**: il nullo tiene fisso il
-numero di legami di ogni artista, quindi ogni legame donna–donna oltre l'atteso
-è un legame donna–uomo sotto l'atteso. È lo stesso fatto visto dall'altro lato.
-Dice però una cosa che le altre colonne non dicono: i legami fra donne hanno
-**sostituito** quelli con gli uomini, non si sono aggiunti. Una prima lettura lo
-aveva presentato come un secondo risultato; è stata corretta prima di entrare
-nell'articolo.
-
-**L'emersione non è uniforme fra i generi.** Pop, rock ed elettronica la
-portano: il pop passa da circa 1,0 (non significativo) fino agli anni Settanta
-a 1,3-1,8 dagli Ottanta, il rock sta a 2,0-2,7 dagli Ottanta, l'elettronica
-sale con regolarità da 1,05 a 2,0. La classica resta a 1,1-1,5 in ogni
-decennio, quasi mai significativa: nessuna emersione. Jazz e folk hanno picchi
-(2,7 negli anni Novanta per il jazz) senza tendenza netta. Hip hop e teatro
-hanno troppe poche donne per dire qualcosa: 23 celle su 59 sono marcate come
-poco affidabili (meno di 30 donne o 10 legami donna–donna).
-
-Nell'articolo: sezione 4.4, Tabella 5, Figura 4, più un paragrafo in 5.1.
+**L'emersione non è uniforme fra i generi.** Pop: a caso fino agli anni
+Settanta (0,93-1,03), 1,35-1,72 dagli Ottanta. Rock: 1,34-2,08 dagli Ottanta.
+Elettronica: da 1,02 negli anni Ottanta a 1,56 nei Duemiladieci. Folk e jazz:
+picchi significativi senza tendenza. **Classica: 1,14-1,52, mai
+significativa** — nessuna emersione. Molte celle hanno troppe poche donne per
+dire qualcosa. Nell'articolo: sezione 4.4, Tabella 5, Figura 4.
 
 ---
 
@@ -105,34 +92,30 @@ Nell'articolo: sezione 4.4, Tabella 5, Figura 4, più un paragrafo in 5.1.
 
 | | assortatività |
 |---|---|
-| genere musicale | **0,5865** |
-| genere sessuale | **0,0511** |
+| genere musicale | **0,562** |
+| genere sessuale | **0,0432** |
 
-Un ordine di grandezza. Chi fa musica in Italia si raggruppa per genere
-musicale, non per sesso. È il risultato che sopravvive a ogni variante di
-robustezza provata.
+Un ordine di grandezza. È il risultato che sopravvive a ogni variante di
+robustezza provata, e all'esclusione dei gruppi.
 
 ---
 
 ## L'omofilia condizionale, sulla rete intera
 
-**Statuto: stimato.** Le stime puntuali sono il massimo di verosimiglianza
-esatto su tutte e 1.619.630.155 le diadi, senza errore di campionamento. Gli
-**errori standard** però vengono da un modello che assume indipendenza fra
-diadi, e quell'assunzione è falsa in modo strutturale: sono ottimistici.
+**Statuto: stimato.** Stime puntuali esatte su tutte le 1.306.346.055 diadi;
+errori standard ottimistici perché assumono indipendenza fra diadi.
 
 | termine | coefficiente | IC 95% | odds ratio |
 |---|---|---|---|
-| `same_F` | **+0,348** | [0,322 – 0,374] | **1,416** |
-| `same_M` | **+0,209** | [0,202 – 0,216] | 1,233 |
-| `same_genre` | +1,667 | [1,661 – 1,673] | 5,296 |
-| `same_cohort` | +1,192 | [1,186 – 1,198] | 3,294 |
+| `same_F` | **+0,242** | [0,216 – 0,268] | **1,274** |
+| `same_M` | **+0,167** | [0,159 – 0,174] | 1,181 |
+| `same_genre` | +1,644 | [1,638 – 1,650] | 5,176 |
+| `same_cohort` | +1,195 | [1,189 – 1,201] | 3,304 |
 
-Gli intervalli di `same_F` e `same_M` non si sovrappongono: a parità di genere
-musicale, coorte e attività, un legame fra due donne è più probabile di uno fra
-due uomini. La permutazione per strati di grado concorda sulla rete intera
-(F 1,436, *z* 26,9; M 1,008); quella uniforme dà F 0,819, per la ragione detta
-sopra.
+Gli intervalli non si sovrappongono: a parità di genere musicale, coorte e
+attività, un legame fra due donne è più probabile di uno fra due uomini. La
+permutazione per strati di grado concorda sulla rete intera; quella uniforme
+dà F 0,735, per la ragione detta sopra.
 
 ---
 
@@ -142,30 +125,43 @@ sopra.
 
 | sottorete | assortatività di genere |
 |---|---|
-| creativo (compositori, arrangiatori, produttori) | **0,0235** |
-| esecutivo (voci, strumenti) | **0,1175** |
+| creativo (compositori, arrangiatori, produttori) | **0,0224** |
+| esecutivo (voci, strumenti) | **0,1054** |
 
-Un fattore cinque. L'omofilia di genere è concentrata nei ruoli esecutivi e
-quasi assente in quelli creativi.
+Un fattore 4,7. L'omofilia di genere è concentrata nei ruoli esecutivi e
+quasi assente in quelli creativi (H4 respinta).
 
 ---
 
-## La domanda Smurfette — risposta negativa
+## La domanda Smurfette — risposta negativa, con una cautela
 
-**Statuto: stimato**, ma con la betweenness ora **esatta** su tutte le 79.013
-sorgenti.
+**Statuto: stimato**, con la betweenness **esatta** su tutte le sorgenti.
 
 | asse | effetto principale F | p |
 |---|---|---|
-| eigenvector | +0,223 | 0,19 |
-| coreness | +0,039 | 0,60 |
-| betweenness | −0,236 | 0,21 |
+| eigenvector | +0,180 | 0,31 |
+| coreness | +0,036 | 0,65 |
+| betweenness | −0,293 | **0,083** |
 
-Nessun effetto significativo su nessun asse. Delle 36 interazioni con il genere
-musicale sulle tre misure, una (coreness) è significativa al 5%: meno di quante
-ne produrrebbe il caso. Non c'è evidenza che le donne, dove ci sono, occupino
-posizioni marginali. La disuguaglianza sta nella coda: fra i 100 artisti con
-autovettore più alto le donne sono 2.
+Nessun effetto significativo al 5%, nessuna delle 36 interazioni con il genere
+musicale. La betweenness è la più vicina alla soglia. **Con la betweenness
+campionata su 400 sorgenti (Fase 3d) lo stesso effetto sarebbe −0,323 con
+*p* 0,040**: l'approssimazione usuale avrebbe prodotto un effetto Smurfette
+significativo che il calcolo esatto non conferma. La disuguaglianza sta nella
+coda: fra i 100 artisti con autovettore più alto le donne sono 2.
+
+---
+
+## Che cosa costava approssimare, su questa rete
+
+| | campionato | esatto |
+|---|---|---|
+| logit caso-controllo, `same_F` / `same_M` | 0,201 / 0,194 | **0,242 / 0,167** |
+| betweenness, effetto F | −0,323 (*p* 0,040) | **−0,293 (*p* 0,083)** |
+| permutazione, 1.000 repliche | rapporti uguali alla quarta cifra | forma chiusa |
+
+Il caso-controllo comprime il divario donne/uomini del 91%: con il
+campionamento H2 non sarebbe risultata confermata.
 
 ---
 
@@ -173,62 +169,31 @@ autovettore più alto le donne sono 2.
 
 **Statuto: dimostrato.**
 
-**Misurato:** su tutti i 702.613 archi, dove una singola release può spiegare i
-partner condivisi di un arco li spiega al **98,8%**; dove non può, al **27,6%**.
-Il 33,9% di tutti i partner condivisi è imposto meccanicamente dalla proiezione
-bipartita.
+**Misurato:** su tutti i 586.040 archi, dove una singola release può spiegare i
+partner condivisi di un arco li spiega al **98,5%**; dove non può, al **26,5%**.
 
-**Osservato:** la bontà di adattamento degli ERGM sbaglia con una forma a U —
-centro sovrastimato, code sottostimate — identica in due decenni indipendenti.
+**Osservato:** la bontà di adattamento degli ERGM sbaglia con una forma a U in
+**tre** decenni indipendenti (1930, 1940, 1950).
 
-**Dimostrato:** randomizzando la struttura bipartita a distribuzioni di grado
-invariate e riproiettandola, si ottiene la forma osservata **sei volte meglio**
-che dall'ERGM stimato, e senza alcuna U:
+**Dimostrato:** la proiezione randomizzata, senza parametri, riproduce la forma
+della distribuzione dei partner condivisi meglio dell'ERGM stimato in entrambi
+i decenni confrontabili — **12 volte** negli anni Quaranta (scarto 0,236 contro
+2,779), **1,4 volte** negli anni Cinquanta (0,720 contro 1,015). Il margine è
+molto diverso: va riportato l'intervallo, non il caso migliore.
 
-| | scarto medio \|log₂\| |
-|---|---|
-| ERGM stimato, sei parametri | **1,799** |
-| proiezione randomizzata, **zero parametri** | **0,297** |
-
-Replicato su tre insiemi indipendenti (1940s 0,297; 1950s 0,768; rete intera
-0,322). Nessuna stima, nessuna assunzione inferenziale: si è fatto girare un
-processo noto e si è guardato che forma produce.
-
-> La U è una proprietà del modello, non dei dati.
-
-**Il tentativo fallito resta documentato.** La prima strada — riestimare con
-termini di dipendenza a due componenti — è fallita per intero, controllo
-negativo compreso, perché nessuna di quelle specifiche converge. Cercare la
-conferma dentro lo strumento che si stava criticando era l'errore di
-impostazione.
-
-**Che cosa resta non spiegato:** a esp = 0 la proiezione randomizzata dà 0,49,
-cioè sottoproduce della metà gli archi isolati. Molto meglio dell'ERGM (0,13),
-ma il meccanismo non esaurisce i dati.
-
-Figura: `report/figures/f_proiezione_bipartita.png`.
+**ERGM:** stimabile fino a 13.919 legami (anni Cinquanta), non oltre 30.629
+(anni Venti); gli anni Sessanta falliscono. Con i gruppi la soglia era fra 1.932
+e 15.177: le cricche gruppo–membri aggiungevano triangoli meccanici.
 
 ---
 
 ## Le collaborazioni si ripetono
 
-**Statuto: misurato.** Risultato non previsto, emerso dal test precedente.
-
-La proiezione randomizzata produce **sistematicamente più archi** dell'osservato:
-
-| insieme | archi osservati | randomizzati | rapporto |
-|---|---|---|---|
-| 1940s | 3.016 | 4.465 | 0,68 |
-| 1950s | 21.990 | 43.690 | 0,50 |
-| **rete intera** | 898.475 | 2.189.834 | **0,41** |
-
-Sulla rete intera la collaborazione reale è **2,4 volte più concentrata** di
-quanto il caso produrrebbe: le stesse coppie ricorrono su release diverse,
-quindi generano meno archi *distinti*. La randomizzazione le disperde.
-
-Questo separa due cose che il termine «chiusura triadica» confonde: il
-**meccanismo** di proiezione spiega la *forma* della distribuzione dei partner
-condivisi, il **processo sociale** ne spiega la *concentrazione*.
+**Statuto: misurato.** Sulla rete intera la proiezione randomizzata produce
+1.875.273 archi contro 765.363 osservati: la collaborazione reale è **2,45 volte
+più concentrata** del caso. Il meccanismo di proiezione spiega la *forma* della
+distribuzione dei partner condivisi, il processo sociale la sua
+*concentrazione*.
 
 ---
 
@@ -236,24 +201,22 @@ condivisi, il **processo sociale** ne spiega la *concentrazione*.
 
 | | |
 |---|---|
-| artisti italiani | 100.201 |
-| genere determinato | 71,2% (60.671 M, 9.703 F, 997 misti) |
-| quota femminile fra i determinati | **13,8%** (6,25 : 1) |
-| crediti | 4.169.130, di cui **64,0%** risolti a livello di traccia |
-| rete | 82.595 nodi con archi, 702.613 archi |
-| componente gigante | 95,7% |
-| validazione dell'italianità | **94,5%** su 4.663 verificabili con `P27` |
+| voci italiane in Discogs | 100.201, di cui 12.972 gruppi |
+| **artisti individuali** | **87.229** |
+| genere determinato | 74,6% (55.480 M, 9.613 F) |
+| quota femminile fra i determinati | **14,8%** |
+| crediti | 3.682.616, di cui 64,1% risolti a livello di traccia |
+| rete | 70.712 nodi con archi, 586.040 archi, componente gigante 95,4% |
+| validazione dell'italianità | **94,5%** su 4.634 verificabili con `P27` |
 
 ---
 
 ## Che cosa resta aperto
 
-* **Validazione manuale** del campione in `data/validation_sample.csv`: richiede
-  giudizio umano, non è stata eseguita. È il limite principale del paper.
-* **Citazioni**: verificate il 24 settembre contro Crossref e le fonti
-  editoriali; esito e correzioni in `paper/NOTE_PER_AUTORE.md`.
-* **Elementi editoriali** del paper (autori, dichiarazioni): vedi
-  `paper/NOTE_PER_AUTORE.md`.
-* **Report italiano** (`report/report.md`, Fase 7): fermo al 21 settembre,
-  racconta ancora la tesi ritirata. Va riscritto o dichiarato superato.
-* **Deposito Zenodo** del pacchetto dati per i reviewer, opzionale.
+* **Validazione manuale** del nuovo campione (`data/validation_sample_DA_ANNOTARE.csv`,
+  solo individui). È il limite principale del paper.
+* **Report italiano** (Fase 7): fermo alla tesi ritirata; va riscritto o
+  dichiarato superato.
+* **Confronto internazionale** (Spagna, Francia, Germania Ovest ed Est, Svezia):
+  proposto il 25 settembre, da pre-registrare prima di toccare i dati.
+* **Deposito Zenodo** del pacchetto dati, senza il manoscritto (D15).

@@ -671,3 +671,249 @@ esportazione dataset,76.76
 "copia di tabelle, figure, log e codice",0.04
 checksum,1.36
 archivio tar.gz,28.27
+gender_cascade,6.81
+classificazione ruoli,12.69
+"coppie a livello traccia (914,334 tracce)",1.01
+"coppie a livello release (607,086 release)",1.98
+"coppie a livello traccia (605,270 tracce)",0.64
+"coppie a livello release (328,487 release)",0.87
+"coppie a livello traccia (370,887 tracce)",0.25
+"coppie a livello release (407,965 release)",0.67
+null model gender (500 repliche),13.39
+null model musical_genre (500 repliche),13.27
+mixing e assortativita' globale,27.04
+quota donne,0.11
+assortativita' per strato,148.83
+omofilia per genere musicale,12.74
+assortativita' solo M/F,279.89
+eigenvector,3.5
+betweenness,1358.58
+coreness e grado,64.92
+OLS eigenvector,0.64
+OLS coreness,0.68
+OLS betweenness,0.67
+datazione degli archi,3.29
+"periodo 1950s (14,030 archi)",2.08
+"periodo 1960s (41,633 archi)",4.42
+"periodo 1970s (43,648 archi)",4.7
+"periodo 1980s (50,599 archi)",5.45
+"periodo 1990s (77,829 archi)",8.33
+"periodo 2000s (85,820 archi)",9.23
+"periodo 2010s (77,818 archi)",8.53
+"periodo 2020s (32,746 archi)",3.77
+logit diadico,2.65
+bootstrap sui nodi (B=200),137.66
+logit diadico completo,148.04
+permutazioni QAP (n=1000),53.34
+QAP,54.01
+permutazione esatta,0.01
+passata 1a (derivate),219.45
+passata 1b (ricerca di linea),359.32
+passata 2a (derivate),218.34
+passata 2b (ricerca di linea),354.04
+passata 3a (derivate),222.88
+passata 3b (ricerca di linea),356.06
+passata 4a (derivate),218.5
+passata 4b (ricerca di linea),352.54
+passata 5a (derivate),218.66
+passata 5b (ricerca di linea),362.49
+passata 6a (derivate),235.84
+passata 6b (ricerca di linea),391.82
+passata 7a (derivate),238.7
+passata 7b (ricerca di linea),395.52
+passata 8a (derivate),236.72
+passata 8b (ricerca di linea),393.01
+passata 9a (derivate),235.42
+passata 9b (ricerca di linea),392.56
+passata 10a (derivate),235.69
+passata 10b (ricerca di linea),398.3
+passata 11a (derivate),235.78
+passata finale (errori standard),236.21
+logit esatto su tutte le diadi,6507.89
+passata 1a (derivate),0.01
+passata 1b (ricerca di linea),0.02
+passata finale (errori standard),0.02
+"periodo 1930s (152 nodi, 11,476 diadi)",0.06
+passata 1a (derivate),0.06
+"periodo 1940s (337 nodi, 56,616 diadi)",0.06
+passata 1a (derivate),0.44
+passata 1b (ricerca di linea),0.62
+passata 2a (derivate),0.46
+passata 2b (ricerca di linea),0.61
+passata 3a (derivate),0.46
+passata 3b (ricerca di linea),0.62
+passata 4a (derivate),0.46
+passata 4b (ricerca di linea),0.62
+passata 5a (derivate),0.46
+passata 5b (ricerca di linea),0.62
+passata 6a (derivate),0.46
+passata 6b (ricerca di linea),0.62
+passata finale (errori standard),0.47
+"periodo 1950s (1,437 nodi, 1,031,766 diadi)",6.98
+passata 1a (derivate),2.66
+passata 1b (ricerca di linea),3.96
+passata 2a (derivate),2.62
+passata 2b (ricerca di linea),4.2
+passata 3a (derivate),2.64
+passata 3b (ricerca di linea),4.03
+passata 4a (derivate),2.63
+passata 4b (ricerca di linea),4.09
+passata 5a (derivate),2.72
+passata 5b (ricerca di linea),4.12
+passata 6a (derivate),2.7
+passata 6b (ricerca di linea),4.1
+passata finale (errori standard),2.62
+"periodo 1960s (4,547 nodi, 10,335,331 diadi)",43.11
+passata 1a (derivate),5.29
+passata 1b (ricerca di linea),8.41
+passata 2a (derivate),5.3
+passata 2b (ricerca di linea),8.34
+passata 3a (derivate),5.33
+passata 3b (ricerca di linea),8.31
+passata 4a (derivate),5.3
+passata 4b (ricerca di linea),8.42
+passata 5a (derivate),5.27
+passata 5b (ricerca di linea),8.39
+passata 6a (derivate),5.24
+passata 6b (ricerca di linea),8.37
+passata finale (errori standard),5.25
+"periodo 1970s (6,774 nodi, 22,940,151 diadi)",87.27
+passata 1a (derivate),12.09
+passata 1b (ricerca di linea),20.21
+passata 2a (derivate),12.05
+passata 2b (ricerca di linea),19.84
+passata 3a (derivate),12.14
+passata 3b (ricerca di linea),19.74
+passata 4a (derivate),12.15
+passata 4b (ricerca di linea),19.91
+passata 5a (derivate),12.3
+passata 5b (ricerca di linea),19.85
+passata finale (errori standard),12.09
+"periodo 1980s (10,810 nodi, 58,422,645 diadi)",172.38
+passata 1a (derivate),24.74
+passata 1b (ricerca di linea),42.62
+passata 2a (derivate),25.01
+passata 2b (ricerca di linea),42.48
+passata 3a (derivate),25.0
+passata 3b (ricerca di linea),42.84
+passata 4a (derivate),25.05
+passata 4b (ricerca di linea),42.96
+passata 5a (derivate),24.95
+passata 5b (ricerca di linea),42.47
+passata 6a (derivate),24.91
+passata 6b (ricerca di linea),42.85
+passata finale (errori standard),25.3
+"periodo 1990s (16,205 nodi, 131,292,910 diadi)",431.19
+passata 1a (derivate),36.74
+passata 1b (ricerca di linea),63.4
+passata 2a (derivate),36.26
+passata 2b (ricerca di linea),63.79
+passata 3a (derivate),37.03
+passata 3b (ricerca di linea),64.0
+passata 4a (derivate),36.53
+passata 4b (ricerca di linea),63.22
+passata 5a (derivate),36.92
+passata 5b (ricerca di linea),63.8
+passata 6a (derivate),36.8
+passata finale (errori standard),36.77
+"periodo 2000s (19,872 nodi, 197,438,256 diadi)",575.29
+passata 1a (derivate),47.21
+passata 1b (ricerca di linea),81.99
+passata 2a (derivate),48.46
+passata 2b (ricerca di linea),83.36
+passata 3a (derivate),47.59
+passata 3b (ricerca di linea),82.04
+passata 4a (derivate),47.91
+passata 4b (ricerca di linea),82.15
+passata 5a (derivate),47.98
+passata 5b (ricerca di linea),82.89
+passata finale (errori standard),48.0
+"periodo 2010s (22,689 nodi, 257,384,016 diadi)",699.62
+passata 1a (derivate),17.07
+passata 1b (ricerca di linea),28.38
+passata 2a (derivate),16.88
+passata 2b (ricerca di linea),27.92
+passata 3a (derivate),16.9
+passata 3b (ricerca di linea),28.49
+passata 4a (derivate),16.77
+passata 4b (ricerca di linea),28.22
+passata 5a (derivate),16.98
+passata 5b (ricerca di linea),28.4
+passata finale (errori standard),16.9
+"periodo 2020s (13,011 nodi, 84,636,555 diadi)",242.93
+serie temporale esatta,2260.5
+ERGM 1930s,1140.93
+ERGM 1940s,2467.97
+ERGM 1950s,10928.02
+ERGM 2020s,13466.66
+ERGM 1960s,4602.84
+indici artista-release,9.86
+adiacenza,1.11
+"partner condivisi, arco per arco",7.68
+1940s: proiezione osservata,0.01
+1940s: 100 riproiezioni randomizzate,7.01
+1950s: proiezione osservata,0.09
+1950s: 100 riproiezioni randomizzate,96.35
+rete intera: proiezione osservata,6.09
+rete intera: 20 riproiezioni randomizzate,1547.54
+Monte Carlo status quo (B=200),22.11
+monte carlo genere,24.69
+"coppie a livello traccia (685,753 tracce)",0.67
+"coppie a livello release (482,731 release)",0.93
+"coppie a livello traccia (1,221,010 tracce)",1.5
+"coppie a livello release (711,975 release)",3.76
+"coppie a livello traccia (914,334 tracce)",0.97
+"coppie a livello release (607,086 release)",1.9
+"coppie a livello traccia (914,334 tracce)",1.01
+"coppie a livello release (607,086 release)",1.97
+"coppie a livello traccia (783,557 tracce)",0.83
+"coppie a livello release (513,846 release)",1.56
+coppie a livello traccia (0 tracce),0.0
+"coppie a livello release (607,086 release)",1.93
+"coppie a livello traccia (914,334 tracce)",0.97
+"coppie a livello release (607,086 release)",1.9
+"coppie a livello traccia (914,334 tracce)",1.0
+"coppie a livello release (607,086 release)",1.93
+"coppie a livello traccia (796,182 tracce)",0.79
+"coppie a livello release (534,251 release)",1.6
+"coppie a livello traccia (627,225 tracce)",0.57
+"coppie a livello release (444,106 release)",1.22
+sensibilita',440.5
+genere debole,93.43
+figura f1_mixing_gender_oss_att,0.04
+figura f2_mixing_genere_musicale_oss_att,0.07
+figura f3_quota_donne_per_decennio,0.09
+figura f4_quota_donne_genere_x_decennio,0.14
+figura f5_distribuzione_gradi,0.15
+figura f6_assortativita_per_strato,0.05
+figura f7_omofilia_per_genere_musicale,0.06
+figura f8_posizione_per_genere,0.16
+figura f9_ergm_forest_gender,0.04
+figura f10_montecarlo_genere,0.05
+figura f11_sensibilita,0.04
+figura f12_ergm_gof,0.3
+composizione report,3.54
+compilazione HTML/PDF,7.92
+composizione report,3.69
+compilazione HTML/PDF,7.96
+figura fig1_composition,0.17
+figura fig2_mixing,0.04
+figura fig3_emergence,0.08
+figura fig4_genre,0.07
+figura fig5_projection,0.2
+figura fig6_role_era,0.04
+figura figA1_gof,0.2
+composizione paper,1.13
+compilazione PDF/DOCX,4.51
+composizione paper,1.15
+compilazione PDF/DOCX,4.53
+composizione paper,1.15
+compilazione PDF/DOCX,4.48
+composizione paper,1.15
+compilazione PDF/DOCX,4.5
+composizione paper,1.14
+compilazione PDF/DOCX,4.48
+esportazione dataset,75.54
+"copia di tabelle, figure, log e codice",0.05
+checksum,1.41
+archivio tar.gz,29.48

@@ -1,5 +1,10 @@
 # Il calcolo esatto
 
+> Le cifre di questo documento si riferiscono alla rete con i gruppi come nodi,
+> su cui i metodi sono stati sviluppati e verificati. I valori attuali, senza
+> gruppi (D16), sono in [`06-risultati.md`](06-risultati.md); i metodi e le
+> verifiche non cambiano.
+
 ## Che cosa significa «esatto», e che cosa no
 
 La parola qualifica il **calcolo**, non l'inferenza. La distinzione è

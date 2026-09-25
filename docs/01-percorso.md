@@ -153,13 +153,29 @@ l'inversione di segno: resta un'**emersione**, da nessuna omofilia negli anni
 Cinquanta e Sessanta a circa il 70% in più del caso dal 2000. Vedi E13 in
 [`03-errori.md`](03-errori.md) e D12 in [`02-decisioni.md`](02-decisioni.md).
 
+### Quinto: «contare i gruppi e i loro membri non è un doppio conteggio?»
+
+Sì. Un gruppo e i suoi membri stanno sulle stesse release: contarli entrambi
+duplicava legami e ne creava di gruppo–membro, che non sono scelte di
+collaborazione, e i gruppi — quasi tutti maschili — abbassavano la quota
+femminile. Dal 24 settembre l'unità d'analisi è la persona (D16): 87.229
+artisti individuali su 100.201 voci. La pipeline è stata rieseguita per intero.
+
+L'emersione regge; le grandezze calano (il plateau recente passa da circa 1,7 a
+circa 1,55 volte il caso). Due effetti non previsti: gli anni Cinquanta
+diventano stimabili con un ERGM, che conferma l'assenza iniziale di omofilia
+controllando anche la chiusura; e il costo delle approssimazioni si fa più
+serio — la betweenness campionata avrebbe prodotto un effetto Smurfette
+significativo, il logit caso-controllo avrebbe quasi cancellato il divario fra
+donne e uomini.
+
 ## Dove siamo
 
 La tesi è cambiata due volte. Non più «omofilia di minoranza» come stato
 stabile; e non più un'inversione di segno, che era prodotta dal nullo. Resta
 un'**emersione datata**: fra artisti ugualmente attivi, fino agli anni Sessanta
 le musiciste italiane non si legavano fra loro più del caso; dagli anni Settanta
-sì, e dal 2000 circa 1,7 volte il caso — mentre la loro quota **non cresce**,
+sì, e dal 2000 circa 1,55 volte il caso — mentre la loro quota **non cresce**,
 anzi scende dal 15,5% al 9,6% prima di risalire appena. Gli uomini restano al
 caso in ogni decennio.
 

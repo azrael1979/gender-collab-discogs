@@ -128,6 +128,9 @@ def campiona_diadi(G, attrs, seed, log):
         "same_cohort": (coh[u] == coh[v]).astype(float),
         "sum_lognrel": lnr[u] + lnr[v],
     })
+    # Senza gruppi (D16) non ci sono nodi 'mixed' e same_mixed e' sempre zero:
+    # una colonna costante rende singolare la matrice, e il termine esce.
+    X = X.loc[:, X.nunique() > 1]
     return X, y, tutte, nodi, len(casi), len(ctrl)
 
 

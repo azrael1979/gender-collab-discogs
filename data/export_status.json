@@ -1,8 +1,8 @@
 {
   "percorso": "/media/disk2/datascience/analysis/gender_collab/export",
-  "byte": 505990963,
+  "byte": 511030645,
   "archivio": "/media/disk2/datascience/analysis/gender_collab/gender_collab_export.tar.gz",
-  "byte_archivio": 279952780,
-  "dataset": 61,
-  "righe_totali": 15677055
+  "byte_archivio": 279301832,
+  "dataset": 63,
+  "righe_totali": 14884611
 }

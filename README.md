@@ -16,7 +16,7 @@ italiani, a partire da un dump Discogs locale in PostgreSQL.
 | **H3** | l'omofilia varia fra i decenni di formazione del legame (senza direzione) | confermata: emerge dagli anni Settanta |
 | **H4** | l'omofilia è più forte nei ruoli creativi e tecnici che in quelli esecutivi | respinta: il contrario, di un fattore 5 |
 | **H5** | a parità di attività le donne occupano posizioni più periferiche | respinta |
-| **H6** | su una rete proiettata, la riproiezione casuale senza parametri riproduce i partner condivisi almeno quanto un ERGM | confermata, 6 volte meglio |
+| **H6** | su una rete proiettata, la riproiezione casuale senza parametri riproduce i partner condivisi almeno quanto un ERGM | confermata, da 1,4 a 12 volte meglio secondo il decennio |
 
 Esplorative: le differenze fra generi musicali e la sensibilità al nullo che
 tiene conto dell'attività. Le domande del mandato iniziale (quota di donne,
@@ -123,6 +123,7 @@ src/
   phase3_homophily.py      mixing matrix, assortativita', modello nullo
   phase3b_position.py      centralita', coreness, regressioni
   phase3c_mf_only.py       assortativita' sui soli nodi con genere determinato
+  phase3d_betweenness_campionata.py  la betweenness approssimata, per il confronto
   phase4_ergm.py           driver ERGM su sottoreti campionate (stime ritirate)
   phase4b_ergm_full.py     ERGM sulla rete integrale: quattro tentativi falliti
   phase4c_dyadic.py        logit diadico caso-controllo e QAP (superati dalla 4e)

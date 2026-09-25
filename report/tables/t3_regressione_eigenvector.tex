@@ -1,46 +1,46 @@
 \begin{table}
 \centering
-\caption{OLS su eigenvector: posizione nella rete per genere sessuale e genere musicale, a parità di attività e coorte (errori standard robusti HC3, n=43,993, R2=0.572)}
+\caption{OLS su eigenvector: posizione nella rete per genere sessuale e genere musicale, a parità di attività e coorte (errori standard robusti HC3, n=39,788, R2=0.576)}
 \label{tab:t3_regressione_eigenvector}
 \begin{tabular}{lrrrrrrl}
 \toprule
                                            termine &   coef &    se &       z &     p &  ci\_lo &  ci\_hi &       esito \\
 \midrule
-                                         Intercept &  0.927 & 0.094 &   9.835 & 0.000 &  0.742 &  1.112 & eigenvector \\
-                                    C(gender)[T.F] &  0.223 & 0.170 &   1.313 & 0.189 & -0.110 &  0.555 & eigenvector \\
-                                C(genere)[T.Blues] &  0.008 & 0.072 &   0.105 & 0.916 & -0.133 &  0.148 & eigenvector \\
-                           C(genere)[T.Children's] & -0.107 & 0.119 &  -0.899 & 0.369 & -0.341 &  0.127 & eigenvector \\
-                            C(genere)[T.Classical] & -0.630 & 0.064 &  -9.788 & 0.000 & -0.757 & -0.504 & eigenvector \\
-                           C(genere)[T.Electronic] & -0.192 & 0.059 &  -3.278 & 0.001 & -0.307 & -0.077 & eigenvector \\
-               C(genere)[T.Folk, World, \& Country] & -0.245 & 0.062 &  -3.937 & 0.000 & -0.368 & -0.123 & eigenvector \\
-                          C(genere)[T.Funk / Soul] &  0.103 & 0.072 &   1.421 & 0.155 & -0.039 &  0.244 & eigenvector \\
-                              C(genere)[T.Hip Hop] & -0.313 & 0.064 &  -4.918 & 0.000 & -0.438 & -0.188 & eigenvector \\
-                                 C(genere)[T.Jazz] & -0.162 & 0.063 &  -2.561 & 0.010 & -0.285 & -0.038 & eigenvector \\
-                            C(genere)[T.Non-Music] & -1.394 & 0.095 & -14.606 & 0.000 & -1.581 & -1.207 & eigenvector \\
-                                  C(genere)[T.Pop] &  1.067 & 0.062 &  17.097 & 0.000 &  0.944 &  1.189 & eigenvector \\
-                                 C(genere)[T.Rock] &  0.000 & 0.059 &   0.001 & 0.999 & -0.115 &  0.115 & eigenvector \\
-                       C(genere)[T.Stage \& Screen] &  0.503 & 0.089 &   5.621 & 0.000 &  0.327 &  0.678 & eigenvector \\
-                                 C(coorte)[T.1950] &  0.244 & 0.091 &   2.684 & 0.007 &  0.066 &  0.422 & eigenvector \\
-                                 C(coorte)[T.1960] & -0.147 & 0.080 &  -1.844 & 0.065 & -0.304 &  0.009 & eigenvector \\
-                                 C(coorte)[T.1970] & -1.269 & 0.076 & -16.635 & 0.000 & -1.419 & -1.120 & eigenvector \\
-                                 C(coorte)[T.1980] & -1.876 & 0.075 & -25.159 & 0.000 & -2.023 & -1.730 & eigenvector \\
-                                 C(coorte)[T.1990] & -2.115 & 0.074 & -28.528 & 0.000 & -2.260 & -1.970 & eigenvector \\
-                                 C(coorte)[T.2000] & -2.143 & 0.074 & -28.896 & 0.000 & -2.289 & -1.998 & eigenvector \\
-                                 C(coorte)[T.2010] & -2.056 & 0.074 & -27.678 & 0.000 & -2.201 & -1.910 & eigenvector \\
-                                 C(coorte)[T.2020] & -1.821 & 0.076 & -23.809 & 0.000 & -1.971 & -1.671 & eigenvector \\
-                 C(gender)[T.F]:C(genere)[T.Blues] & -0.004 & 0.209 &  -0.019 & 0.985 & -0.413 &  0.405 & eigenvector \\
-            C(gender)[T.F]:C(genere)[T.Children's] & -0.247 & 0.236 &  -1.047 & 0.295 & -0.709 &  0.215 & eigenvector \\
-             C(gender)[T.F]:C(genere)[T.Classical] & -0.006 & 0.179 &  -0.032 & 0.975 & -0.357 &  0.346 & eigenvector \\
-            C(gender)[T.F]:C(genere)[T.Electronic] & -0.086 & 0.171 &  -0.504 & 0.615 & -0.421 &  0.249 & eigenvector \\
-C(gender)[T.F]:C(genere)[T.Folk, World, \& Country] & -0.175 & 0.181 &  -0.970 & 0.332 & -0.530 &  0.179 & eigenvector \\
-           C(gender)[T.F]:C(genere)[T.Funk / Soul] &  0.229 & 0.226 &   1.013 & 0.311 & -0.214 &  0.671 & eigenvector \\
-               C(gender)[T.F]:C(genere)[T.Hip Hop] & -0.175 & 0.188 &  -0.927 & 0.354 & -0.544 &  0.195 & eigenvector \\
-                  C(gender)[T.F]:C(genere)[T.Jazz] &  0.006 & 0.184 &   0.034 & 0.973 & -0.354 &  0.366 & eigenvector \\
-             C(gender)[T.F]:C(genere)[T.Non-Music] & -0.296 & 0.227 &  -1.304 & 0.192 & -0.740 &  0.149 & eigenvector \\
-                   C(gender)[T.F]:C(genere)[T.Pop] & -0.202 & 0.177 &  -1.140 & 0.254 & -0.550 &  0.145 & eigenvector \\
-                  C(gender)[T.F]:C(genere)[T.Rock] & -0.115 & 0.172 &  -0.667 & 0.505 & -0.451 &  0.222 & eigenvector \\
-        C(gender)[T.F]:C(genere)[T.Stage \& Screen] &  0.271 & 0.239 &   1.134 & 0.257 & -0.197 &  0.739 & eigenvector \\
-                                          log\_nrel &  0.543 & 0.007 &  81.997 & 0.000 &  0.530 &  0.556 & eigenvector \\
+                                         Intercept &  0.839 & 0.097 &   8.689 & 0.000 &  0.650 &  1.028 & eigenvector \\
+                                    C(gender)[T.F] &  0.180 & 0.175 &   1.026 & 0.305 & -0.164 &  0.524 & eigenvector \\
+                                C(genere)[T.Blues] & -0.011 & 0.076 &  -0.150 & 0.881 & -0.161 &  0.138 & eigenvector \\
+                           C(genere)[T.Children's] & -0.178 & 0.120 &  -1.480 & 0.139 & -0.414 &  0.058 & eigenvector \\
+                            C(genere)[T.Classical] & -0.664 & 0.068 &  -9.718 & 0.000 & -0.797 & -0.530 & eigenvector \\
+                           C(genere)[T.Electronic] & -0.186 & 0.063 &  -2.972 & 0.003 & -0.309 & -0.063 & eigenvector \\
+               C(genere)[T.Folk, World, \& Country] & -0.248 & 0.066 &  -3.744 & 0.000 & -0.378 & -0.118 & eigenvector \\
+                          C(genere)[T.Funk / Soul] &  0.068 & 0.076 &   0.896 & 0.370 & -0.081 &  0.217 & eigenvector \\
+                              C(genere)[T.Hip Hop] & -0.335 & 0.068 &  -4.929 & 0.000 & -0.468 & -0.202 & eigenvector \\
+                                 C(genere)[T.Jazz] & -0.198 & 0.067 &  -2.939 & 0.003 & -0.330 & -0.066 & eigenvector \\
+                            C(genere)[T.Non-Music] & -1.421 & 0.097 & -14.666 & 0.000 & -1.611 & -1.231 & eigenvector \\
+                                  C(genere)[T.Pop] &  1.043 & 0.066 &  15.759 & 0.000 &  0.914 &  1.173 & eigenvector \\
+                                 C(genere)[T.Rock] &  0.008 & 0.063 &   0.122 & 0.903 & -0.116 &  0.131 & eigenvector \\
+                       C(genere)[T.Stage \& Screen] &  0.326 & 0.091 &   3.565 & 0.000 &  0.147 &  0.505 & eigenvector \\
+                                 C(coorte)[T.1950] &  0.238 & 0.091 &   2.628 & 0.009 &  0.061 &  0.416 & eigenvector \\
+                                 C(coorte)[T.1960] & -0.139 & 0.079 &  -1.756 & 0.079 & -0.295 &  0.016 & eigenvector \\
+                                 C(coorte)[T.1970] & -1.259 & 0.076 & -16.633 & 0.000 & -1.407 & -1.111 & eigenvector \\
+                                 C(coorte)[T.1980] & -1.831 & 0.074 & -24.765 & 0.000 & -1.976 & -1.686 & eigenvector \\
+                                 C(coorte)[T.1990] & -2.071 & 0.073 & -28.185 & 0.000 & -2.215 & -1.927 & eigenvector \\
+                                 C(coorte)[T.2000] & -2.110 & 0.074 & -28.697 & 0.000 & -2.255 & -1.966 & eigenvector \\
+                                 C(coorte)[T.2010] & -2.033 & 0.074 & -27.598 & 0.000 & -2.177 & -1.888 & eigenvector \\
+                                 C(coorte)[T.2020] & -1.795 & 0.076 & -23.524 & 0.000 & -1.945 & -1.646 & eigenvector \\
+                 C(gender)[T.F]:C(genere)[T.Blues] &  0.053 & 0.213 &   0.248 & 0.804 & -0.364 &  0.470 & eigenvector \\
+            C(gender)[T.F]:C(genere)[T.Children's] & -0.145 & 0.239 &  -0.607 & 0.544 & -0.614 &  0.324 & eigenvector \\
+             C(gender)[T.F]:C(genere)[T.Classical] &  0.035 & 0.185 &   0.188 & 0.851 & -0.328 &  0.397 & eigenvector \\
+            C(gender)[T.F]:C(genere)[T.Electronic] & -0.019 & 0.177 &  -0.109 & 0.914 & -0.366 &  0.327 & eigenvector \\
+C(gender)[T.F]:C(genere)[T.Folk, World, \& Country] & -0.136 & 0.186 &  -0.732 & 0.464 & -0.502 &  0.229 & eigenvector \\
+           C(gender)[T.F]:C(genere)[T.Funk / Soul] &  0.286 & 0.230 &   1.245 & 0.213 & -0.164 &  0.736 & eigenvector \\
+               C(gender)[T.F]:C(genere)[T.Hip Hop] & -0.128 & 0.197 &  -0.652 & 0.514 & -0.514 &  0.258 & eigenvector \\
+                  C(gender)[T.F]:C(genere)[T.Jazz] &  0.054 & 0.189 &   0.288 & 0.774 & -0.316 &  0.425 & eigenvector \\
+             C(gender)[T.F]:C(genere)[T.Non-Music] & -0.224 & 0.226 &  -0.991 & 0.322 & -0.668 &  0.219 & eigenvector \\
+                   C(gender)[T.F]:C(genere)[T.Pop] & -0.176 & 0.183 &  -0.963 & 0.335 & -0.535 &  0.182 & eigenvector \\
+                  C(gender)[T.F]:C(genere)[T.Rock] & -0.090 & 0.177 &  -0.508 & 0.612 & -0.438 &  0.258 & eigenvector \\
+        C(gender)[T.F]:C(genere)[T.Stage \& Screen] &  0.275 & 0.244 &   1.127 & 0.260 & -0.203 &  0.753 & eigenvector \\
+                                          log\_nrel &  0.575 & 0.007 &  82.197 & 0.000 &  0.561 &  0.588 & eigenvector \\
 \bottomrule
 \end{tabular}
 \end{table}

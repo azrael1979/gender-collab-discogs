@@ -263,3 +263,38 @@ presenti. Tutto il resto — dati, analisi, test, documentazione — resta
 verificabile da terzi. Gli hash dei commit anteriori al 24 settembre sono
 cambiati, e il tag `paper-v2-12811` non esiste più.
 
+---
+
+## D16 — La persona come unità d'analisi: i gruppi escono
+
+**Scelta.** I gruppi (artisti con membri registrati in Discogs) escono dalla
+popolazione dopo l'inferenza del genere (`population.exclude_groups` in
+`config.yaml`), e i loro crediti escono dalla rete (Fase 2). Restano 87.229
+artisti individuali su 100.201. La popolazione completa è conservata in
+`population_gender_con_gruppi.parquet`.
+
+**Alternative.**
+1. Tenere i gruppi come nodi, come fino al 24 settembre.
+2. Sostituire ogni gruppo con i suoi membri, trasferendo loro i crediti.
+
+**Perché scartate.**
+1. Un gruppo e i suoi membri stanno sulle stesse release: contarli entrambi
+   duplica i legami e ne crea di **gruppo–membro** (15.074, il 3% del totale)
+   che non sono scelte di collaborazione. Il 76% dei membri registrati è anche
+   nella popolazione come individuo, e 5.411 dei 5.958 gruppi presenti nella
+   rete sono legati ad almeno un proprio membro. In più i gruppi sono quasi
+   tutti maschili (5.288 contro 128 femminili), e contarli come «artisti»
+   abbassava la quota femminile dal 14,8% al 13,8%.
+2. Il dump non ha date di appartenenza: un disco del 1972 verrebbe attribuito
+   a chi è entrato nel gruppo nel 1990.
+
+**Perché non è opportunistica.** Indebolisce il risultato centrale: su una
+verifica preliminare, per decennio e a parità di attività, l'eccesso di legami
+donna–donna scende da circa 1,7 a circa 1,55 volte il caso. L'emersione resta
+intera: nessuna omofilia negli anni Cinquanta e Sessanta, significativa dai
+Settanta, uomini sempre a 1,00-1,01. La categoria `mixed`, che esisteva solo
+per i gruppi, scompare, e con lei il termine `same_mixed` dei logit.
+
+**Richiesta** dell'autore il 24 settembre, dopo aver notato il rischio di
+doppio conteggio.
+

@@ -370,7 +370,18 @@ def main(force: bool = False):
         return
     with Timer("gender_cascade", log):
         df = build(cfg, log)
-        common.save(df, "population_gender.parquet")
+    # La cascata gira su tutti, gruppi compresi: l'etichetta di un gruppo viene
+    # dai suoi membri, mai il contrario, quindi toglierli dopo non cambia il
+    # genere di alcun individuo. La versione completa resta per documentazione.
+    common.save(df, "population_gender_con_gruppi.parquet")
+    if cfg["population"].get("exclude_groups", False):
+        n0 = len(df)
+        df = df[~df.is_group].reset_index(drop=True)
+        log.info(f"gruppi esclusi dalla popolazione: {n0:,} -> {len(df):,} "
+                 f"artisti individuali")
+        log.info("distribuzione del genere fra gli individui:\n" +
+                 df.gender.value_counts().to_string())
+    common.save(df, "population_gender.parquet")
     validation_sample(df, cfg, log)
     Timer.dump(ROOT / "logs" / "timings.csv")
 
