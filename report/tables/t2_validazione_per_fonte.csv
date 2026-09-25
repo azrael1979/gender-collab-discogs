@@ -1,0 +1,12 @@
+label_source,n,accuratezza,confidenza_media
+onomastico_prior_it,63.0,0.9841269841269841,0.9299999999999999
+none,32.0,0.59375,0.0
+onomastico_prior_globale,21.0,0.9523809523809523,0.8000000000000002
+wikidata_p1953,20.0,0.95,0.9800000000000001
+wikidata_name,15.0,0.9333333333333333,0.8499999999999999
+onomastico_gg_it_male,10.0,1.0,0.9
+onomastico_gg_it_female,9.0,0.8888888888888888,0.8999999999999999
+onomastico_gg_globale_female,8.0,0.5,0.8
+onomastico_gg_globale_male,8.0,1.0,0.8
+onomastico_gg_it_mostly_female,7.0,1.0,0.7199999999999999
+onomastico_gg_it_mostly_male,7.0,1.0,0.7199999999999999

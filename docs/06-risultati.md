@@ -211,12 +211,41 @@ distribuzione dei partner condivisi, il processo sociale la sua
 
 ---
 
+## La validazione del genere — fatta
+
+**Statuto: misurato**, su 200 artisti estratti per strati e codificati a mano
+dall'autore alla cieca rispetto alle etichette (25 settembre 2026; una prima
+consegna è stata corretta dall'autore prima del calcolo definitivo).
+
+| | |
+|---|---|
+| etichettati M o F dalla cascata | 168 |
+| concordi con l'annotatore | **94,6%** |
+| concordi, fra quelli che l'annotatore ha determinato | 97,5% (163), 4 inversioni M↔F |
+| dizionario italiano / Wikidata | 98% / 95% |
+| punto debole | dizionario globale, etichette femminili (4 su 8) |
+| indeterminati risolti dall'annotatore | 13 su 32: 10 M, 3 F |
+
+Gli indeterminati risolti non sono più maschili dei determinati (23% di donne
+contro 14,8%): nessun segno che escluderli gonfi la quota femminile, ma su 13
+casi. Un'annotazione automatica alla cieca, fatta da agenti IA sul campione
+precedente (con i gruppi), è conservata in `data/validazione_ia/` e non è stata
+usata.
+
+---
+
+## Le voci che non sono persone (Fase 4l, sensibilità)
+
+La codifica ha mostrato band senza membri registrati, orchestre, cori,
+etichette, studi grafici e varianti di «Various» fra gli «individui». Quelle con
+un marcatore esplicito nel nome sono 3.173 (3,6%), 147 con un genere assegnato;
+toccano il 3,5% dei legami. Toglierle lascia l'assortatività di genere a 0,0432
+e non sposta alcun rapporto per decennio di più di 0,03. Vedi D17.
+
+---
+
 ## Che cosa resta aperto
 
-* **Validazione manuale** del nuovo campione (`data/validation_sample_DA_ANNOTARE.csv`,
-  solo individui). È il limite principale del paper.
 * **Report italiano** (Fase 7): fermo alla tesi ritirata; va riscritto o
   dichiarato superato.
-* **Confronto internazionale** (Spagna, Francia, Germania Ovest ed Est, Svezia):
-  proposto il 25 settembre, da pre-registrare prima di toccare i dati.
 * **Deposito Zenodo** del pacchetto dati, senza il manoscritto (D15).

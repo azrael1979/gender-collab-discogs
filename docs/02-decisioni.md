@@ -298,3 +298,23 @@ per i gruppi, scompare, e con lei il termine `same_mixed` dei logit.
 **Richiesta** dell'autore il 24 settembre, dopo aver notato il rischio di
 doppio conteggio.
 
+---
+
+## D17 — Le voci che non sono persone: una sensibilità, non una nuova definizione
+
+**Scelta.** La popolazione resta quella di D16. Una fase di sensibilità (4l)
+toglie le voci il cui nome segnala una non-persona — band, orchestre, cori,
+etichette, edizioni, studi, «e la sua orchestra», nomi che iniziano con un
+articolo plurale, varianti locali di «Various» — e ricalcola assortatività e
+serie per decennio.
+
+**Alternativa.** Cambiare la definizione primaria della popolazione.
+
+**Perché scartata.** L'effetto è trascurabile (assortatività invariata, serie
+entro 0,03), quasi tutte quelle voci sono già indeterminate, e nel confronto
+internazionale la definizione è registrata su OSF: cambiarla nei due lavori
+avrebbe creato una divergenza, o una deviazione, per nulla. Il filtro è
+un'approssimazione dichiarata: non vede le voci senza marcatori (pseudonimi).
+
+**Origine.** La codifica manuale del campione di validazione, 25 settembre 2026.
+

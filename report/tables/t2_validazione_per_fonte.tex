@@ -1,0 +1,22 @@
+\begin{table}
+\centering
+\caption{Accuratezza dell'inferenza per livello della cascata: dice quali livelli meritano la confidenza che il config assegna loro}
+\label{tab:t2_validazione_per_fonte}
+\begin{tabular}{lrrr}
+\toprule
+                  label\_source &      n &  accuratezza &  confidenza\_media \\
+\midrule
+           onomastico\_prior\_it & 63.000 &        0.984 &             0.930 \\
+                          none & 32.000 &        0.594 &             0.000 \\
+      onomastico\_prior\_globale & 21.000 &        0.952 &             0.800 \\
+                wikidata\_p1953 & 20.000 &        0.950 &             0.980 \\
+                 wikidata\_name & 15.000 &        0.933 &             0.850 \\
+         onomastico\_gg\_it\_male & 10.000 &        1.000 &             0.900 \\
+       onomastico\_gg\_it\_female &  9.000 &        0.889 &             0.900 \\
+  onomastico\_gg\_globale\_female &  8.000 &        0.500 &             0.800 \\
+    onomastico\_gg\_globale\_male &  8.000 &        1.000 &             0.800 \\
+onomastico\_gg\_it\_mostly\_female &  7.000 &        1.000 &             0.720 \\
+  onomastico\_gg\_it\_mostly\_male &  7.000 &        1.000 &             0.720 \\
+\bottomrule
+\end{tabular}
+\end{table}

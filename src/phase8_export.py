@@ -175,6 +175,12 @@ DESCRIZIONI = {
         "legami entro-genere osservati su attesi permutando le etichette fra artisti "
         "con lo stesso numero di legami (2.000 permutazioni per decennio), accanto al "
         "nullo uniforme e al rapporto sul modello di configurazione."),
+    "non_persone": ("4", "Voci della popolazione il cui nome segnala una non-persona "
+        "(band, orchestre, etichette, studi, varianti di Various), con il motivo (Fase 4l)."),
+    "sensibilita_nonpersone": ("4", "Serie per decennio sotto il nullo per strati di grado, "
+        "con e senza le voci che non sono persone (Fase 4l)."),
+    "sensibilita_nonpersone_assortativita": ("4", "Assortativita' di genere e legami, con e "
+        "senza le voci che non sono persone (Fase 4l)."),
     "densita_genere": ("4", "Per decennio e genere musicale (legami fra artisti dello "
         "stesso genere): probabilita' che una coppia donna-donna, uomo-uomo o mista "
         "sia legata, rapporti fra queste probabilita' con intervalli di Poisson "

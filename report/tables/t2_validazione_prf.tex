@@ -1,0 +1,16 @@
+\begin{table}
+\centering
+\caption{Precisione, richiamo e F1 dell'inferenza di genere sul campione annotato (n=200, accuratezza 89.0%)}
+\label{tab:t2_validazione_prf}
+\begin{tabular}{lrrrrrrr}
+\toprule
+         classe &  supporto &  veri\_positivi &  falsi\_positivi &  falsi\_negativi &  precisione &  richiamo &    f1 \\
+\midrule
+              M &       119 &            106 &               3 &              13 &       0.972 &     0.891 & 0.930 \\
+              F &        57 &             53 &               6 &               4 &       0.898 &     0.930 & 0.914 \\
+          mixed &         0 &              0 &               0 &               0 &         NaN &       NaN &   NaN \\
+        unknown &        24 &             19 &              13 &               5 &       0.594 &     0.792 & 0.679 \\
+media ponderata &       200 &            178 &              22 &              22 &       0.906 &     0.890 & 0.895 \\
+\bottomrule
+\end{tabular}
+\end{table}

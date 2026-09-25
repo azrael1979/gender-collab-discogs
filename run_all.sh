@@ -71,6 +71,7 @@ run 4 "controllo bimodalita' (fallisce: atteso)"    src/phase4h_bimodale.py
 run 4 "proiezione randomizzata: la conferma"        src/phase4i_proiezione_nulla.py
 run 4 "nullo per strati di grado (serie temporale)" src/phase4j_nullo_grado.py
 run 4 "probabilita' di legame per coppia, decennio, genere" src/phase4k_densita_genere.py
+run 4 "sensibilita: voci che non sono persone"      src/phase4l_nonpersone.py
 run 5 "robustezza"                                src/phase5_robustness.py
 run 6 "figure"                                    src/phase6_figures.py
 run 7 "report Markdown, HTML, PDF"                src/phase7_report.py

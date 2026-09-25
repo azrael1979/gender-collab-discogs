@@ -135,6 +135,7 @@ src/
   phase4i_proiezione_nulla.py  proiezione bipartita randomizzata contro ERGM
   phase4j_nullo_grado.py   permutazione entro strati di grado: il nullo di riferimento
   phase4k_densita_genere.py  probabilita' di legame FF, MM, MF per decennio e genere
+  phase4l_nonpersone.py    sensibilita': senza le voci che non sono persone
   wikidata_enrich.py       genere, cittadinanza e occupazione per lotti di QID
   wikidata_dump.py         alternativa: passata sul dump Wikidata completo
   phase5_robustness.py     Monte Carlo e analisi di sensibilita'
@@ -181,9 +182,8 @@ dati. Entrambe le misure sono riportate.
 
 ## Limiti dichiarati
 
-1. La validazione manuale dell'inferenza di genere non e' stata eseguita:
-   `data/validation_sample.csv` e' pronto ma la colonna `human_gender` e' vuota.
-2. `release_label` e' vuota nel dump: l'italianita' si appoggia al solo paese di
+1. L'inferenza del genere e' validata su 200 casi codificati a mano: 94,6%
+   di concordanza sulle etichette M/F (`docs/06-risultati.md`).
    pubblicazione, quindi confonde "artista italiano" e "artista pubblicato in
    Italia".
 3. `release_genre` e' vuota: il genere musicale passa solo dai master, e circa
