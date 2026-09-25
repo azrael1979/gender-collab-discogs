@@ -17,6 +17,10 @@ chiuse. Le strade chiuse sono documentate quanto quelle aperte, ed è il motivo
 per cui questa cartella esiste: un vicolo cieco non documentato viene
 riesplorato.
 
+## Per riprendere il lavoro
+
+**Leggere prima [`STATO.md`](STATO.md)**: dove siamo, che cosa resta, dove stanno le cose.
+
 ## Ordine di lettura
 
 | file | che cosa contiene |
