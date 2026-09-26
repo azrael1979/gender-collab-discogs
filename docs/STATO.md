@@ -1,6 +1,6 @@
 # Project status: Italian study (paper for *Poetics*)
 
-Updated: 25 September 2026, evening. Status of the project, for anyone
+Updated: 26 September 2026. Status of the project, for anyone
 resuming the work. The full history of the work is in `01-percorso.md`,
 decisions in `02-decisioni.md` (D1–D17), errors in `03-errori.md` (E1–E18),
 results in `06-risultati.md`.
@@ -56,13 +56,14 @@ From `paper/NOTE_PER_AUTORE.md` (local only), in order:
    to be checked by hand: the NYT page for Pollitt and the wording of Blau's
    formulation; the reference style must be compared with the Guide for
    Authors.
-4. Italian report (`report/`, Phase 7): still reflects the withdrawn thesis.
-   It must be rewritten or declared superseded; the README currently flags
-   this.
-5. Reviewer package (`export/`, Phase 8): not regenerated after the validation
-   and Phase 4l. Rerun `python3 src/phase8_export.py --force` before any
-   deposit. The package contains the manuscript, so it must not be uploaded
-   to Zenodo as it stands until the article is published.
+4. Automatic report (`report/`, Phase 7): translated into English on 26
+   September and declared superseded by a notice at the top; its text still
+   reflects the withdrawn thesis and is not being revised further.
+5. Reviewer package (`export/`, Phase 8): regenerated in English on 26
+   September, after the validation and Phase 4l. Rerun
+   `python3 src/phase8_export.py --force` after any further change. The
+   package contains the manuscript, so it must not be uploaded to Zenodo as
+   it stands until the article is published.
 6. Old commits on GitHub: the history was cleaned and force-pushed (D15), but
    GitHub still serves the removed commits to anyone who knows the hash. This
    can be resolved by a request to GitHub support or by recreating the
