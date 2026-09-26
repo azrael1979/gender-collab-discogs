@@ -1,320 +1,324 @@
-# Registro delle decisioni
+# Decision log
 
-Ogni riga è una scelta che avrebbe potuto essere fatta diversamente. Le
-alternative sono indicate perché un referee le proporrà, e conviene che la
-risposta sia già scritta.
-
----
-
-## D1 — Estrazione senza oggetti lato server
-
-**Scelta.** Nessuna tabella temporanea, nessuna vista, nessuna funzione: gli
-elenchi di identificativi tornano al database come letterali `int[]`.
-
-**Alternativa.** Tabelle temporanee, che è il modo naturale.
-
-**Perché scartata.** Il vincolo di sola lettura le vieta. `CREATE TEMP TABLE`
-fallisce sotto `default_transaction_read_only = on`, perché una tabella
-temporanea è comunque una scrittura nel catalogo.
-
-**Conseguenza.** Query più lunghe e meno leggibili, in cambio della garanzia
-che i database sorgente non siano stati toccati. Verificabile: non esiste
-alcun `INSERT`, `CREATE` o `UPDATE` in `src/`.
+Each entry is a choice that could have been made differently. The alternatives
+are listed because a referee will propose them, and it is better for the
+answer to be already written.
 
 ---
 
-## D2 — L'italianità come euristica dichiarata, non come dato
+## D1. Extraction without server-side objects
 
-**Scelta.** Un artista è italiano se almeno metà delle sue pubblicazioni ha
-`country = 'Italy'`, con soglia di almeno due pubblicazioni italiane.
+*Choice.* No temporary tables, no views, no functions: lists of identifiers are
+sent back to the database as `int[]` literals.
 
-**Alternativa.** Usare `P27` di Wikidata come criterio.
+*Alternative.* Temporary tables, which are the natural approach.
 
-**Perché scartata.** `P27` copre solo la frazione di artisti presenti in
-Wikidata — 4.663 su 100.201, cioè il 4,7%. Usarlo come criterio avrebbe
-ristretto la popolazione a chi è abbastanza noto da avere una voce, che è
-esattamente il *bias* che si vuole evitare studiando una minoranza.
+*Why rejected.* The read-only constraint forbids them. `CREATE TEMP TABLE`
+fails under `default_transaction_read_only = on`, because a temporary table is
+still a write to the catalog.
 
-**Perché è difendibile comunque.** `P27` è stato usato non come criterio ma
-come **validazione**: sui 4.663 verificabili l'euristica ha una precisione del
-**94,5%**, che sale monotonamente con la soglia. La monotonia conta più del
-livello: dice che la misura ordina correttamente, non solo che indovina spesso.
+*Consequence.* Longer and less readable queries, in exchange for the guarantee
+that the source databases were not touched. This can be checked: there is no
+`INSERT`, `CREATE` or `UPDATE` anywhere in `src/`.
 
 ---
 
-## D3 — L'ordine dei dizionari onomastici: italiano prima del globale
+## D2. Italian nationality as a declared heuristic, not as data
 
-**Scelta.** Il prior italiano viene consultato per primo; quello globale solo
-in mancanza.
+*Choice.* An artist is Italian if at least half of their releases have
+`country = 'Italy'`, with a minimum of two Italian releases.
 
-**Alternativa.** Un dizionario globale, più ampio e apparentemente più neutro.
+*Alternative.* Use Wikidata `P27` as the criterion.
 
-**Perché scartata.** Andrea, Simone, Nicola, Daniele, Michele, Gabriele sono
-maschili in italiano e femminili nei dizionari a dominanza anglofona. Su una
-popolazione italiana l'ordine inverso avrebbe classificato come donne migliaia
-di uomini — e l'errore sarebbe stato **sistematico e orientato**, cioè avrebbe
-gonfiato la quota femminile proprio nella direzione che rende l'articolo più
-interessante. È il tipo di errore che non si vede nei totali.
+*Why rejected.* `P27` covers only the fraction of artists present in Wikidata:
+4,663 of 100,201, or 4.7%. Using it as the criterion would have restricted the
+population to those well known enough to have an entry, which is exactly the
+bias to avoid when studying a minority.
 
----
-
-## D4 — `unknown` escluso dal calcolo dell'assortatività
-
-**Scelta.** L'assortatività si calcola sui soli casi determinati; la versione
-con `unknown` come quarta categoria è riportata a parte.
-
-**Alternativa.** Tenere `unknown` come categoria, che usa tutti gli archi.
-
-**Perché scartata.** Il genere non determinato non è un genere: è assenza di
-informazione. Trattarlo come categoria misura in parte la co-occorrenza di
-artisti oscuri, non l'omofilia.
-
-**Perché la scelta non è opportunistica.** Sul genere **sessuale** l'esclusione
-*abbassa* il coefficiente (da 0,0735 a 0,0511), cioè indebolisce il risultato.
-Sul genere **musicale** lo *alza* (da 0,5186 a 0,5865). Segni opposti, stessa
-regola applicata: la regola non è stata scelta guardando l'esito.
+*Why it is defensible nonetheless.* `P27` was used not as a criterion but as a
+validation: on the 4,663 verifiable artists the heuristic has a precision of
+94.5%, which rises monotonically with the threshold. The monotonicity matters
+more than the level: it shows that the measure ranks correctly, not only that
+it is often right.
 
 ---
 
-## D5 — Tre livelli di specificità dei crediti
+## D3. Order of the name dictionaries: Italian before global
 
-**Scelta.** Peso di un legame `w(u,v) = w_t·|tracce condivise| + w_r·Σ s_u·s_v`
-con specificità traccia 1,0, release principale 0,7, ombrello 0,3.
+*Choice.* The Italian prior is consulted first; the global one only when the
+Italian one has no answer.
 
-**Alternativa.** Contare ogni co-presenza allo stesso modo.
+*Alternative.* A global dictionary, larger and apparently more neutral.
 
-**Perché scartata.** Due musicisti accreditati sulla stessa traccia hanno
-collaborato; due nominati in fondo a una compilation possono non essersi mai
-incontrati. Pesarli uguale confonde le due cose. Il campo `tracks` di Discogs è
-testo libero e ciò che non si riesce a risolvere viene **degradato a ombrello,
-non forzato** a una traccia: in caso di dubbio il legame pesa meno, mai di più.
-
----
-
-## D6 — Datare i legami, non le persone
-
-**Scelta.** Ogni arco è datato con l'anno della **prima pubblicazione
-condivisa** dai due artisti.
-
-**Alternativa.** Definire un arco «pre-2000» se entrambi gli estremi hanno
-debuttato prima del 2000.
-
-**Perché scartata.** Un legame nato nel 1975 fra un esordiente e un veterano è
-un legame del 1975, non di due epoche. E la regola dell'accordo scarta proprio
-le collaborazioni intergenerazionali, che sono fra le più interessanti.
-
-**Conseguenza.** È la decisione che ha reso visibile il risultato centrale.
-Con la definizione per coorti l'inversione non si vedeva.
+*Why rejected.* Andrea, Simone, Nicola, Daniele, Michele and Gabriele are male
+in Italian and female in dictionaries dominated by English-language data. On an
+Italian population the reverse order would have classified thousands of men as
+women, and the error would have been systematic and directional: it would have
+inflated the female share in exactly the direction that makes the article more
+interesting. This kind of error does not show up in the totals.
 
 ---
 
-## D7 — Sottoreti a valanga abbandonate
+## D4. `unknown` excluded from the assortativity calculation
 
-**Scelta.** Nessuna stima su sottorete campionata compare nei risultati finali.
+*Choice.* Assortativity is computed on determined cases only; the version with
+`unknown` as a fourth category is reported separately.
 
-**Alternativa.** Tenerle come approssimazione, dichiarandone i limiti.
+*Alternative.* Keep `unknown` as a category, which uses all edges.
 
-**Perché scartata.** Di una stima su campione a valanga non si può dire di che
-cosa sia stima: il campione non è rappresentativo di alcuna popolazione
-definibile. Dichiarare il limite non lo rimuove.
+*Why rejected.* Undetermined gender is not a gender; it is an absence of
+information. Treating it as a category partly measures the co-occurrence of
+obscure artists, not homophily.
 
-**Sostituito da.** Il decennio come unità, che è una **popolazione completa**, e
-il calcolo esatto sull'intera rete.
-
----
-
-## D8 — Calcolare invece di stimare, ovunque sia possibile
-
-**Scelta.** Logit diadico su tutte e 1.619.630.155 le diadi; momenti della
-permutazione in forma chiusa; betweenness esatta su tutte le 79.013 sorgenti.
-
-**Alternativa.** Campionamento caso-controllo, mille permutazioni, 400 sorgenti
-— cioè quello che c'era prima.
-
-**Perché scartata.** Non c'era una buona ragione per approssimare ciò che si
-può calcolare, e due delle quattro approssimazioni **distorcevano i risultati**
-(vedi [`03-errori.md`](03-errori.md)).
-
-**Costo.** Circa tre ore di macchina per il logit esatto, un'ora per la
-betweenness. Il resto è più veloce della versione campionata, perché una
-formula chiusa costa meno di mille permutazioni.
+*Why the choice is not opportunistic.* On gender the exclusion *lowers* the
+coefficient (from 0.0735 to 0.0511), that is, it weakens the result. On musical
+genre it *raises* it (from 0.5186 to 0.5865). The signs are opposite and the
+same rule is applied: the rule was not chosen by looking at the outcome.
 
 ---
 
-## D9 — Un decennio come unità di analisi ERGM
+## D5. Three levels of credit specificity
 
-**Scelta.** Dove l'ERGM si stima, lo si stima per decennio.
+*Choice.* Tie weight `w(u,v) = w_t·|shared tracks| + w_r·Σ s_u·s_v`, with
+specificity 1.0 for track, 0.7 for main release and 0.3 for umbrella credits.
 
-**Alternativa.** Sottoreti campionate della dimensione voluta.
+*Alternative.* Count every co-occurrence in the same way.
 
-**Perché scartata.** Vedi D7. Un decennio ha un difetto — non è indipendente
-dagli altri — ma è un difetto dichiarabile, mentre l'assenza di riferimento di
-un campione a valanga non lo è.
-
----
-
-## D10 — La proiezione NON data al modello come covariata
-
-**Scelta.** Non si è aggiunto un `edgecov` con la dimensione del cast condiviso.
-
-**Alternativa.** Darla al modello, così che `gwesp` debba spiegare solo il
-residuo.
-
-**Perché scartata.** Se due artisti condividono una release hanno un arco **per
-costruzione**: la covariata sarebbe non nulla esattamente sugli archi e nulla
-altrove, cioè separerebbe perfettamente i dati. È un vicolo cieco, ed è
-documentato perché sembra la strada ovvia.
+*Why rejected.* Two musicians credited on the same track have collaborated; two
+named at the end of a compilation may never have met. Weighting them equally
+conflates the two. The Discogs `tracks` field is free text, and whatever cannot
+be resolved is downgraded to umbrella rather than forced onto a track: when in
+doubt, the tie weighs less, never more.
 
 ---
 
-## D11 — La bontà di adattamento attiva sui decenni, disattivata sulla rete intera
+## D6. Dating ties, not people
 
-**Scelta.** GOF con 100 reti simulate per i decenni; nessuna GOF sulla rete
-integrale.
+*Choice.* Each edge is dated by the year of the first release shared by the two
+artists.
 
-**Perché.** Simulare una rete da 57.000 nodi costa quanto un'iterazione della
-stima; cento simulazioni costerebbero più della stima stessa. Sui decenni costa
-poco.
+*Alternative.* Define an edge as "pre-2000" if both endpoints debuted before
+2000.
 
-**Perché conta.** È la GOF ad aver smascherato una **convergenza apparente**
-sulla rete integrale — una stima che dichiarava successo producendo reti con il
-40% degli archi osservati e il 4% dei legami fra donne. Senza, quel risultato
-sarebbe finito nell'articolo.
+*Why rejected.* A tie formed in 1975 between a newcomer and a veteran is a 1975
+tie, not a tie belonging to two eras. Moreover, the agreement rule discards
+precisely the intergenerational collaborations, which are among the most
+interesting.
 
----
-
-## D12 — Il nullo di riferimento condiziona sull'attività
-
-**Scelta.** I rapporti osservato/atteso della serie temporale si calcolano
-permutando le etichette **entro strati di grado** (Fase 4j). La permutazione
-uniforme in forma chiusa resta riportata, come confronto.
-
-**Alternativa.** La permutazione uniforme, che era il riferimento fino al 24
-settembre ed è esatta.
-
-**Perché scartata.** È esatta come calcolo ma risponde a un'altra domanda:
-«le donne si legano fra loro più di quanto farebbero etichette assegnate a caso
-a *qualunque* artista?». Le donne hanno meno legami, e quel nullo le confronta
-con artisti più attivi di loro. La domanda dell'articolo è se le donne si
-leghino fra loro più di quanto farebbero artisti *con la stessa attività*. Vedi
-E13 in [`03-errori.md`](03-errori.md).
-
-**Perché la scelta non è opportunistica.** Indebolisce il risultato più
-spettacolare — l'inversione di segno scompare — e ne rafforza un altro: il
-livello recente passa da 1,17-1,66 a un plateau stabile attorno a 1,7. E
-concorda con i due strumenti già presenti che condizionavano sull'attività, il
-mixing a grado preservato e il logit con `sum_lognrel`.
+*Consequence.* This is the decision that made the central result visible. With
+the cohort-based definition the reversal could not be seen.
 
 ---
 
-## D13 — Il paper sta in 8.000 parole di testo principale
+## D7. Snowball subnetworks abandoned
 
-**Scelta.** Dall'abstract alla conclusione, tabelle e didascalie comprese,
-bibliografia e appendici escluse — la convenzione delle riviste Elsevier. Il
-conteggio è in `paper.py` e finisce in `data/paper_status.json`; i separatori
-delle tabelle Markdown e i percorsi delle immagini non contano come parole.
+*Choice.* No estimate on a sampled subnetwork appears in the final results.
 
-**Alternativa.** Il conteggio grezzo di tutto il file, che era quello riportato
-prima (12.811) e che contava anche i `|` delle tabelle.
+*Alternative.* Keep them as an approximation, stating their limitations.
 
-**Conseguenza.** La versione lunga è conservata in locale in
+*Why rejected.* For an estimate based on a snowball sample, one cannot say what
+it is an estimate of: the sample is not representative of any definable
+population. Stating the limitation does not remove it.
+
+*Replaced by.* The decade as the unit, which is a complete population, and
+exact computation on the whole network.
+
+---
+
+## D8. Compute rather than estimate, wherever possible
+
+*Choice.* Dyadic logit on all 1,619,630,155 dyads; closed-form permutation
+moments; exact betweenness from all 79,013 sources.
+
+*Alternative.* Case-control sampling, a thousand permutations, 400 sources,
+that is, what was there before.
+
+*Why rejected.* There was no good reason to approximate what can be computed,
+and two of the four approximations biased the results (see
+[`03-errori.md`](03-errori.md)).
+
+*Cost.* About three hours of machine time for the exact logit and one hour for
+betweenness. Everything else is faster than the sampled version, because a
+closed-form expression costs less than a thousand permutations.
+
+---
+
+## D9. The decade as the unit of ERGM analysis
+
+*Choice.* Where the ERGM can be estimated, it is estimated by decade.
+
+*Alternative.* Sampled subnetworks of the desired size.
+
+*Why rejected.* See D7. A decade has a flaw (it is not independent of the
+others), but it is a flaw that can be declared, whereas the lack of a
+reference population for a snowball sample cannot.
+
+---
+
+## D10. The projection not given to the model as a covariate
+
+*Choice.* No `edgecov` term with the size of the shared cast was added.
+
+*Alternative.* Give it to the model, so that `gwesp` has to explain only the
+residual.
+
+*Why rejected.* If two artists share a release they have an edge by
+construction: the covariate would be non-zero exactly on the edges and zero
+elsewhere, so it would separate the data perfectly. This is a dead end, and it
+is documented because it looks like the obvious route.
+
+---
+
+## D11. Goodness of fit enabled for the decades, disabled for the full network
+
+*Choice.* GOF with 100 simulated networks for the decades; no GOF on the full
+network.
+
+*Reason.* Simulating a network of 57,000 nodes costs as much as one iteration
+of the estimation; a hundred simulations would cost more than the estimation
+itself. On the decades it is cheap.
+
+*Relevance.* It was the GOF that exposed an apparent convergence on the full
+network: an estimate that reported success while producing networks with 40%
+of the observed edges and 4% of the ties between women. Without it, that
+result would have ended up in the article.
+
+---
+
+## D12. The reference null model conditions on activity
+
+*Choice.* The observed/expected ratios of the time series are computed by
+permuting labels within degree strata (Phase 4j). The closed-form uniform
+permutation is still reported, for comparison.
+
+*Alternative.* The uniform permutation, which was the reference until 24
+September and is exact.
+
+*Why rejected.* It is exact as a computation but answers a different question:
+"do women form ties with one another more than labels assigned at random to
+*any* artist would?". Women have fewer ties, and that null compares them with
+artists more active than they are. The question of the article is whether
+women form ties with one another more than artists *with the same activity*
+would. See E13 in [`03-errori.md`](03-errori.md).
+
+*Why the choice is not opportunistic.* It weakens the most striking result (the
+sign reversal disappears) and strengthens another: the recent level goes from
+1.17–1.66 to a stable plateau around 1.7. It also agrees with the two tools
+already in place that conditioned on activity, the degree-preserving mixing
+matrix and the logit with `sum_lognrel`.
+
+---
+
+## D13. The paper is limited to 8,000 words of main text
+
+*Choice.* From the abstract to the conclusion, including tables and captions,
+excluding references and appendices, following the convention of Elsevier
+journals. The count is done in `paper.py` and written to
+`data/paper_status.json`; Markdown table separators and image paths do not
+count as words.
+
+*Alternative.* The raw count of the whole file, which was the figure reported
+earlier (12,811) and which also counted the `|` characters of the tables.
+
+*Consequence.* The long version is kept locally in
 `paper/versioni/2026-09-24_v2_12811-parole/`.
 
 ---
 
-## D14 — Ipotesi dichiarate, e che cosa resta esplorativo
+## D14. Stated hypotheses, and what remains exploratory
 
-**Scelta.** Il paper formula una domanda di ricerca e sei ipotesi (H1-H6, con
-un'ipotesi concorrente H2′). Le differenze fra generi musicali e la
-sensibilità al nullo che tiene conto dell'attività sono dichiarate
-**esplorative**.
+*Choice.* The paper poses one research question and six hypotheses (H1–H6,
+with a competing hypothesis H2′). The differences between musical genres and
+the sensitivity to the null model that accounts for activity are declared
+exploratory.
 
-**Alternativa.** Trasformare in ipotesi anche questi due risultati, che
-rafforzerebbero l'articolo.
+*Alternative.* Turn these two results into hypotheses as well, which would
+strengthen the article.
 
-**Perché scartata.** Sono nati dall'analisi (Fasi 4j e 4k, 24 settembre), non
-dalla teoria: presentarli come ipotesi sarebbe HARKing (formulare le ipotesi dopo
-aver visto i risultati), e questa documentazione, che è pubblica, lo
-mostrerebbe. Per lo stesso motivo **H3 non ha direzione**: nel mandato si
-chiedeva *se* l'omofilia cambiasse nel tempo, non che salisse.
+*Why rejected.* They arose from the analysis (Phases 4j and 4k, 24 September),
+not from theory: presenting them as hypotheses would be HARKing (formulating
+hypotheses after seeing the results), and this documentation, which is public,
+would show it. For the same reason H3 has no direction: the brief asked
+*whether* homophily changed over time, not that it increased.
 
-**Cautela sulle altre.** Il paper dice che le ipotesi derivano dalla
-letteratura, non che furono registrate prima dell'analisi. Il mandato poneva le
-domande di H1, H4 e H5 (genere musicale, ruoli, posizione), ma non la direzione
-di H4, e H2 è stata messa per iscritto dopo le prime stime. Le formulazioni
-seguono la letteratura citata, e H4 e H5 sono respinte: non sono state
-aggiustate sui risultati. Ma nessuna è pre-registrata, e non va detto che lo
-sia.
-
----
-
-## D15 — Il manoscritto fuori dal repository pubblico
-
-**Scelta.** `paper/` e i due script che generano l'articolo (`src/paper.py`,
-che ne contiene l'intero testo, e `src/paper_figures.py`) non sono versionati,
-e sono stati rimossi da **tutta la storia** del repository il 24 settembre, con
-riscrittura e force push. Restano in locale.
-
-**Perché.** Il repository è pubblico, e un manoscritto in sottomissione non
-deve circolare prima della pubblicazione.
-
-**Conseguenza.** La fase 9 di `run_all.sh` gira solo dove quei file sono
-presenti. Tutto il resto — dati, analisi, test, documentazione — resta
-verificabile da terzi. Gli hash dei commit anteriori al 24 settembre sono
-cambiati, e il tag `paper-v2-12811` non esiste più.
+*Caution about the others.* The paper says that the hypotheses derive from the
+literature, not that they were registered before the analysis. The brief posed
+the questions behind H1, H4 and H5 (musical genre, roles, position), but not
+the direction of H4, and H2 was written down after the first estimates. The
+formulations follow the cited literature, and H4 and H5 are rejected: they were
+not adjusted to fit the results. But none of them is preregistered, and it must
+not be claimed that any is.
 
 ---
 
-## D16 — La persona come unità d'analisi: i gruppi escono
+## D15. The manuscript kept out of the public repository
 
-**Scelta.** I gruppi (artisti con membri registrati in Discogs) escono dalla
-popolazione dopo l'inferenza del genere (`population.exclude_groups` in
-`config.yaml`), e i loro crediti escono dalla rete (Fase 2). Restano 87.229
-artisti individuali su 100.201. La popolazione completa è conservata in
+*Choice.* `paper/` and the two scripts that generate the article
+(`src/paper.py`, which contains its full text, and `src/paper_figures.py`) are
+not under version control, and were removed from the entire history of the
+repository on 24 September, with a history rewrite and a force push. They
+remain local.
+
+*Reason.* The repository is public, and a manuscript under submission should
+not circulate before publication.
+
+*Consequence.* Phase 9 of `run_all.sh` runs only where those files are
+present. Everything else (data, analysis, tests, documentation) remains
+verifiable by third parties. The hashes of commits made before 24 September
+have changed, and the tag `paper-v2-12811` no longer exists.
+
+---
+
+## D16. The person as the unit of analysis: groups are removed
+
+*Choice.* Groups (artists with members registered in Discogs) are removed from
+the population after gender inference (`population.exclude_groups` in
+`config.yaml`), and their credits are removed from the network (Phase 2). This
+leaves 87,229 individual artists out of 100,201. The full population is kept in
 `population_gender_con_gruppi.parquet`.
 
-**Alternative.**
-1. Tenere i gruppi come nodi, come fino al 24 settembre.
-2. Sostituire ogni gruppo con i suoi membri, trasferendo loro i crediti.
+*Alternatives.*
+1. Keep groups as nodes, as was done until 24 September.
+2. Replace each group with its members, transferring the credits to them.
 
-**Perché scartate.**
-1. Un gruppo e i suoi membri stanno sulle stesse release: contarli entrambi
-   duplica i legami e ne crea di **gruppo–membro** (15.074, il 3% del totale)
-   che non sono scelte di collaborazione. Il 76% dei membri registrati è anche
-   nella popolazione come individuo, e 5.411 dei 5.958 gruppi presenti nella
-   rete sono legati ad almeno un proprio membro. In più i gruppi sono quasi
-   tutti maschili (5.288 contro 128 femminili), e contarli come «artisti»
-   abbassava la quota femminile dal 14,8% al 13,8%.
-2. Il dump non ha date di appartenenza: un disco del 1972 verrebbe attribuito
-   a chi è entrato nel gruppo nel 1990.
+*Why rejected.*
+1. A group and its members appear on the same releases: counting both
+   duplicates ties and creates group–member ties (15,074, 3% of the total)
+   that are not collaboration choices. Of the registered members, 76% are also
+   in the population as individuals, and 5,411 of the 5,958 groups present in
+   the network are tied to at least one of their own members. In addition,
+   groups are almost all male (5,288 against 128 female), and counting them as
+   "artists" lowered the female share from 14.8% to 13.8%.
+2. The dump has no membership dates: a 1972 record would be attributed to
+   someone who joined the group in 1990.
 
-**Perché non è opportunistica.** Indebolisce il risultato centrale: su una
-verifica preliminare, per decennio e a parità di attività, l'eccesso di legami
-donna–donna scende da circa 1,7 a circa 1,55 volte il caso. L'emersione resta
-intera: nessuna omofilia negli anni Cinquanta e Sessanta, significativa dai
-Settanta, uomini sempre a 1,00-1,01. La categoria `mixed`, che esisteva solo
-per i gruppi, scompare, e con lei il termine `same_mixed` dei logit.
+*Why it is not opportunistic.* It weakens the central result: in a preliminary
+check, by decade and at equal activity, the excess of woman–woman ties falls
+from about 1.7 to about 1.55 times chance. The emergence remains intact: no
+homophily in the 1950s and 1960s, significant from the 1970s, men always at
+1.00–1.01. The `mixed` category, which existed only for groups, disappears, and
+with it the `same_mixed` term of the logits.
 
-**Richiesta** dell'autore il 24 settembre, dopo aver notato il rischio di
-doppio conteggio.
+*Requested* by the author on 24 September, after noticing the risk of double
+counting.
 
 ---
 
-## D17 — Le voci che non sono persone: una sensibilità, non una nuova definizione
+## D17. Entries that are not persons: a sensitivity analysis, not a new definition
 
-**Scelta.** La popolazione resta quella di D16. Una fase di sensibilità (4l)
-toglie le voci il cui nome segnala una non-persona — band, orchestre, cori,
-etichette, edizioni, studi, «e la sua orchestra», nomi che iniziano con un
-articolo plurale, varianti locali di «Various» — e ricalcola assortatività e
-serie per decennio.
+*Choice.* The population remains the one defined in D16. A sensitivity phase
+(4l) removes the entries whose name signals a non-person (bands, orchestras,
+choirs, labels, music publishers, studios, "e la sua orchestra", names that
+begin with a plural article, local variants of "Various") and recomputes
+assortativity and the series by decade.
 
-**Alternativa.** Cambiare la definizione primaria della popolazione.
+*Alternative.* Change the primary definition of the population.
 
-**Perché scartata.** L'effetto è trascurabile (assortatività invariata, serie
-entro 0,03), quasi tutte quelle voci sono già indeterminate, e nel confronto
-internazionale la definizione è registrata su OSF: cambiarla nei due lavori
-avrebbe creato una divergenza, o una deviazione, per nulla. Il filtro è
-un'approssimazione dichiarata: non vede le voci senza marcatori (pseudonimi).
+*Why rejected.* The effect is negligible (assortativity unchanged, series
+within 0.03), almost all of those entries are already undetermined, and in the
+international comparison the definition is registered on OSF: changing it
+across the two studies would have created a divergence, or a deviation, for
+nothing. The filter is a declared approximation: it does not catch entries
+without markers (pseudonyms).
 
-**Origine.** La codifica manuale del campione di validazione, 25 settembre 2026.
-
+*Origin.* The manual coding of the validation sample, 25 September 2026.

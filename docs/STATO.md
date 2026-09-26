@@ -1,87 +1,89 @@
-# Stato del progetto — studio italiano (paper per *Poetics*)
+# Project status: Italian study (paper for *Poetics*)
 
-**Aggiornato:** 25 settembre 2026, sera. Documento di passaggio di consegne per
-chi riprende il lavoro senza memoria della conversazione. Il percorso completo
-è in `01-percorso.md`, le decisioni in `02-decisioni.md` (D1–D17), gli errori in
-`03-errori.md` (E1–E18), i risultati in `06-risultati.md`.
+Updated: 25 September 2026, evening. Status of the project, for anyone
+resuming the work. The full history of the work is in `01-percorso.md`,
+decisions in `02-decisioni.md` (D1–D17), errors in `03-errori.md` (E1–E18),
+results in `06-risultati.md`.
 
 ---
 
-## 1. Il paper
+## 1. The paper
 
-- **Titolo:** *Finding each other: the emergence of gender homophily in Italian
+- Title: *Finding each other: the emergence of gender homophily in Italian
   recorded music, 1950–2026.*
-- **Tesi:** un'**emersione**. Fra artisti ugualmente attivi, le donne non si
-  legavano fra loro più del caso negli anni Cinquanta e Sessanta; l'eccesso
-  compare negli anni Settanta e dal 2000 si stabilizza attorno a 1,55 volte il
-  caso. Gli uomini restano al caso, la quota femminile non cresce, e
-  l'emersione riguarda pop, rock ed elettronica, non la classica. Ipotesi H1–H6
-  in §2.7; le differenze per genere musicale e la scelta del nullo sono
-  dichiarate esplorative (D14).
-- **Lunghezza: 7.989 parole** di testo principale (limite 8.000, richiesta
-  dell'autore). Conteggio in `data/paper_status.json` e nel log di
-  `src/paper.py`; ogni aggiunta va compensata.
-- **Il manoscritto NON è nel repository** (D15): `paper/`, `src/paper.py`
-  (contiene il testo) e `src/paper_figures.py` sono in `.gitignore` e sono
-  stati tolti da tutta la storia git. Restano in locale. La versione lunga
-  precedente è in `paper/versioni/`.
-- **Rigenerare:** `python3 src/paper_figures.py && python3 src/paper.py`. Nessuna
-  cifra è scritta a mano: tutto viene letto dai file di risultato (eccezione
-  dichiarata: i dati esterni USC/Goodreau).
+- Thesis: emergence. Among equally active artists, women did not form ties
+  with each other more than chance in the 1950s and 1960s; the excess appears
+  in the 1970s and from 2000 onward stabilizes at around 1.55 times chance.
+  Men remain at chance, the female share does not grow, and the emergence
+  concerns pop, rock and electronic music, not classical. Hypotheses H1–H6 in
+  §2.7; the differences by musical genre and the choice of null are declared
+  exploratory (D14).
+- Length: 7,989 words of main text (limit 8,000, set by the author). The count
+  is in `data/paper_status.json` and in the log of `src/paper.py`; every
+  addition must be offset by a cut.
+- The manuscript is not in the repository (D15): `paper/`, `src/paper.py`
+  (which contains the text) and `src/paper_figures.py` are in `.gitignore` and
+  have been removed from the entire git history. They remain local only. The
+  earlier long version is in `paper/versioni/`.
+- To regenerate: `python3 src/paper_figures.py && python3 src/paper.py`. No
+  number is typed by hand: everything is read from the result files (declared
+  exception: the external USC/Goodreau data).
 
-## 2. Scelte recenti da conoscere
+## 2. Recent decisions
 
-- **I gruppi sono esclusi** (D16): unità d'analisi = persona; 87.229 artisti
-  individuali su 100.201 voci. Pipeline rieseguita il 24–25/9.
-- **Nullo di riferimento per strati di grado** (D12, Fase 4j): quello
-  uniforme produceva una falsa inversione di segno (E13).
-- **Validazione del genere fatta** (25/9): 200 casi codificati dall'autore alla
-  cieca, **94,6%** di concordanza sulle etichette M/F, 97,5% sui casi
-  determinabili, 4 inversioni. È in §3.2 e nei limiti. File annotato unico
-  (anche per il confronto): `data/validation_ITALIA_unico_ANNOTATO.csv`.
-- **Voci che non sono persone** (D17, Fase 4l): sensibilità, non una nuova
-  definizione. Toglierle (3,6% delle voci) non cambia nulla.
-- **Livello «Wikidata per nome»** della cascata tornato attivo alla
-  riesecuzione (E18): 145 etichette cambiate su 87.229.
+- Groups are excluded (D16): unit of analysis = person; 87,229 individual
+  artists out of 100,201 entries. Pipeline rerun on 24–25 September.
+- Reference null by degree strata (D12, Phase 4j): the uniform null produced
+  a false sign reversal (E13).
+- Gender validation completed (25 September): 200 cases coded blind by the
+  author, 94.6% agreement on the M/F labels, 97.5% on determinable cases, 4
+  reversals. Reported in §3.2 and in the limitations. Single annotated file
+  (also used for the comparison): `data/validation_ITALIA_unico_ANNOTATO.csv`.
+- Entries that are not persons (D17, Phase 4l): a sensitivity analysis, not a
+  new definition. Removing them (3.6% of entries) changes nothing.
+- The "Wikidata by name" level of the cascade became active again in the
+  rerun (E18): 145 labels changed out of 87,229.
 
-## 3. Che cosa resta prima della sottomissione
+## 3. Remaining items before submission
 
-Da `paper/NOTE_PER_AUTORE.md` (in locale), in ordine:
+From `paper/NOTE_PER_AUTORE.md` (local only), in order:
 
-1. **Data del dump Discogs:** non registrata nel database né nei log; serve
-   anche per il modulo OSF del confronto.
-2. **Autori, affiliazioni, dichiarazioni** (conflitti, finanziamenti, CRediT,
-   **uso dell'IA**, disponibilità dei dati).
-3. **Citazioni:** verificate il 24/9 (`paper/VERIFICA_CITAZIONI.md`). Restano
-   da controllare a mano la pagina NYT di Pollitt e la formulazione di Blau;
-   lo stile bibliografico va confrontato con la Guide for Authors.
-4. **Report italiano** (`report/`, Fase 7): fermo alla tesi ritirata. Va
-   riscritto o dichiarato superato; oggi il README lo segnala.
-5. **Pacchetto per i reviewer** (`export/`, Fase 8): non rigenerato dopo la
-   validazione e la Fase 4l. Rilanciare `python3 src/phase8_export.py --force`
-   prima di qualunque deposito. Il pacchetto contiene il manoscritto: **non**
-   va caricato su Zenodo così com'è finché l'articolo non è pubblicato.
-6. **Commit vecchi su GitHub:** la storia è stata ripulita e forzata (D15), ma
-   GitHub serve ancora i commit rimossi a chi conosce l'hash. Si risolve con
-   una richiesta al supporto GitHub o ricreando il repository. L'autore non ha
-   ancora detto quale strada vuole.
+1. Date of the Discogs dump: not recorded in the database or in the logs; it
+   is also needed for the OSF form of the comparison study.
+2. Authors, affiliations, declarations (conflicts of interest, funding,
+   CRediT, use of AI, data availability).
+3. Citations: checked on 24 September (`paper/VERIFICA_CITAZIONI.md`). Still
+   to be checked by hand: the NYT page for Pollitt and the wording of Blau's
+   formulation; the reference style must be compared with the Guide for
+   Authors.
+4. Italian report (`report/`, Phase 7): still reflects the withdrawn thesis.
+   It must be rewritten or declared superseded; the README currently flags
+   this.
+5. Reviewer package (`export/`, Phase 8): not regenerated after the validation
+   and Phase 4l. Rerun `python3 src/phase8_export.py --force` before any
+   deposit. The package contains the manuscript, so it must not be uploaded
+   to Zenodo as it stands until the article is published.
+6. Old commits on GitHub: the history was cleaned and force-pushed (D15), but
+   GitHub still serves the removed commits to anyone who knows the hash. This
+   can be resolved by a request to GitHub support or by recreating the
+   repository. The author has not yet said which option to take.
 
-## 4. Dove stanno le cose
+## 4. Where things are
 
 | | |
 |---|---|
-| `run_all.sh` | pipeline completa; la fase 9 (paper) gira solo se i file del paper sono presenti |
-| `data/con_gruppi_2026-09-24/` | istantanea dei risultati prima di D16, per il confronto |
-| `data/validation_sample.csv` | campione di validazione (senza gruppi), con `human_gender` compilata |
-| `data/validation_sample_con_gruppi_2026-09-20.csv` | campione precedente, mai annotato |
-| `data/validazione_ia/` | annotazione IA alla cieca del campione **precedente** (con gruppi): non usata |
-| `docs/07-confronto-internazionale.md` | fattibilità del confronto con altri paesi, da cui è nato il secondo progetto |
-| `tests/` | 5 test di verifica, tutti verdi al 25/9 |
+| `run_all.sh` | full pipeline; phase 9 (paper) runs only if the paper files are present |
+| `data/con_gruppi_2026-09-24/` | snapshot of the results before D16, for comparison |
+| `data/validation_sample.csv` | validation sample (without groups), with `human_gender` filled in |
+| `data/validation_sample_con_gruppi_2026-09-20.csv` | earlier sample, never annotated |
+| `data/validazione_ia/` | blind AI annotation of the **earlier** sample (with groups): not used |
+| `docs/07-confronto-internazionale.md` | feasibility of the comparison with other countries, from which the second project originated |
+| `tests/` | 5 verification tests, all passing as of 25 September |
 
-## 5. Il progetto collegato
+## 5. Related project
 
-Il confronto internazionale è in `../gender_collab_comparativo/`
-(repository privato), pre-registrato su OSF. Il suo stato è in
-`../gender_collab_comparativo/docs/STATO.md`. L'Italia vi compare come caso di
-riferimento, con lo stesso codice ma senza il livello «Wikidata per nome»: il
-collaudo riproduce questo studio alla terza cifra.
+The international comparison is in `../gender_collab_comparativo/` (private
+repository), pre-registered on OSF. Its status is in
+`../gender_collab_comparativo/docs/STATO.md`. Italy appears there as the
+reference case, with the same code but without the "Wikidata by name" level;
+the acceptance test reproduces this study to the third digit.

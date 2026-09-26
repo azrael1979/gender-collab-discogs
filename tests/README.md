@@ -1,18 +1,18 @@
-# Verifiche
+# Tests
 
-Le affermazioni di esattezza delle Fasi 4e, 4i e 4j non sono argomentative: sono
-verificate contro un riferimento indipendente, su casi abbastanza piccoli da
-rendere il riferimento calcolabile.
+The exactness claims of Phases 4e, 4i and 4j do not rest on argument: they are
+checked against an independent reference, on cases small enough for the
+reference to be computable.
 
-| file | che cosa verifica | contro che cosa |
+| file | what it checks | against what |
 |---|---|---|
-| `test_logit_esatto.py` | il Newton a blocchi su tutte le diadi | `statsmodels` sull'insieme completo delle diadi di una rete da 900 nodi — coefficienti ed errori standard devono coincidere entro un millesimo di errore standard, la log-verosimiglianza entro 1e-3 |
-| `test_permutazione_esatta.py` | media e varianza in forma chiusa della permutazione | 200.000 permutazioni Monte Carlo su una rete con gradi pareto (il caso in cui la varianza dipende davvero dalla struttura) |
-| `test_correzione_casocontrollo.py` | il segno della correzione di Prentice-Pyke | una popolazione simulata a verita' nota |
-| `test_scambio_bipartito.py` | il doppio scambio della Fase 4i | conserva esattamente entrambe le distribuzioni di grado, non crea doppioni, riappaia davvero i crediti |
-| `test_permutazione_per_grado.py` | la permutazione entro strati di grado della Fase 4j | non esce dagli strati; su una rete **senza omofilia** con la minoranza a basso grado il nullo uniforme vede un deficit spurio (~0,4) e quello per strati no (~0,94) |
+| `test_logit_esatto.py` | the block Newton method over all dyads | `statsmodels` on the complete set of dyads of a 900-node network; coefficients and standard errors must agree to within one thousandth of a standard error, the log-likelihood to within 1e-3 |
+| `test_permutazione_esatta.py` | closed-form mean and variance of the permutation | 200,000 Monte Carlo permutations on a network with Pareto-distributed degrees (the case in which the variance really depends on the structure) |
+| `test_correzione_casocontrollo.py` | the sign of the Prentice-Pyke correction | a simulated population with known ground truth |
+| `test_scambio_bipartito.py` | the double swap of Phase 4i | preserves both degree distributions exactly, creates no duplicates, actually re-pairs the credits |
+| `test_permutazione_per_grado.py` | the permutation within degree strata of Phase 4j | never leaves the strata; on a network with no homophily and a low-degree minority, the uniform null shows a spurious deficit (~0.4) and the stratified null does not (~0.94) |
 
-Si eseguono senza argomenti:
+They run without arguments:
 
 ```bash
 python3 tests/test_logit_esatto.py
@@ -22,4 +22,4 @@ python3 tests/test_scambio_bipartito.py
 python3 tests/test_permutazione_per_grado.py
 ```
 
-Il primo richiede che `src/` sia raggiungibile dalla radice del progetto.
+The first requires `src/` to be reachable from the project root.

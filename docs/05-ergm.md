@@ -1,21 +1,22 @@
-# Il verbale ERGM
+# ERGM record
 
-Documento più lungo degli altri perché l'ERGM ha assorbito la maggior parte del
-tempo e ha prodotto, alla fine, un risultato **negativo** — che è però
-diventato il contributo metodologico del lavoro. Il percorso conta quanto
-l'esito.
+This document is longer than the others because the ERGM took up most of the
+time and in the end produced a negative result, which nonetheless became the
+methodological contribution of the study. The sequence of attempts is
+therefore as relevant as the outcome.
 
 ---
 
-## Perché un ERGM
+## Rationale for an ERGM
 
-Le misure di omofilia — assortatività, matrici di mixing, test di permutazione
-— dicono se chi si somiglia collabori più del caso. Non dicono **perché**. Due
-donne possono trovarsi collegate perché si cercano, oppure perché condividono
-un conoscente e la chiusura triadica fa il resto. L'ERGM con un termine di
-chiusura (`gwesp`) è il modo standard di separare le due cose.
+Homophily measures (assortativity, mixing matrices, permutation tests)
+indicate whether similar artists collaborate more than chance would predict.
+They do not indicate why. Two women may be connected because they seek each
+other out, or because they share an acquaintance and triadic closure does the
+rest. An ERGM with a closure term (`gwesp`) is the standard way to separate
+the two.
 
-La specifica di riferimento:
+The reference specification:
 
     net ~ edges
         + nodematch('gender', diff = TRUE)
@@ -26,414 +27,423 @@ La specifica di riferimento:
 
 ---
 
-## Fase 1 — Sottoreti campionate: funziona, ma non significa nulla
+## Phase 1: sampled subnetworks (convergent but uninterpretable)
 
-Con un tetto di 1.500 nodi e 5.000 archi, estratti a valanga, l'ERGM converge.
-Risultato: omofilia femminile mediana **0,679** contro **0,074** maschile.
+With snowball-sampled subnetworks capped at 1,500 nodes and 5,000 edges, the
+ERGM converges. Median female homophily is 0.679, against 0.074 for men.
 
-**Il problema non era la convergenza ma il riferimento.** Di una stima su
-campione a valanga non si può dire di che cosa sia stima: il campione non è
-rappresentativo di alcuna popolazione definibile. È il limite che un referee
-avrebbe aperto per primo, e la ragione per cui queste stime **non compaiono nei
-risultati finali**.
+The problem was not convergence but the target of inference. For an estimate
+from a snowball sample, one cannot say what it is an estimate of: the sample
+does not represent any definable population. A referee would have raised this
+limitation first, and it is the reason these estimates do not appear in the
+final results.
 
-Una nota tecnica utile: `nodematch("musical_genre")` è collineare con `edges`
-dentro una sottorete a genere musicale unico. Il termine viene incluso solo
-quando l'attributo varia davvero.
+A technical note: `nodematch("musical_genre")` is collinear with `edges`
+within a subnetwork that has a single musical genre. The term is included only
+when the attribute actually varies.
 
 ---
 
-## Fase 2 — La rete integrale: quattro fallimenti
+## Phase 2: the full network, four failures
 
-Quattro parametrizzazioni, tutte fallite. Vale la pena distinguere le firme,
-perché sono diagnosticamente diverse.
+Four parametrizations were tried, and all failed. Their failure signatures are
+worth distinguishing, because they have different diagnostic meanings.
 
-| # | specifica | metodo | come è finita |
+| # | specification | method | outcome |
 |---|---|---|---|
-| 1 | `gwesp(0.25)` | MCMLE | passo dell'ottimizzatore crollato da ~0,46 a ~0,005 |
-| 2 | `gwesp(0.5)` | MCMLE | iterazioni raddoppiate: 29 min, 62, 125, oltre 243 |
-| 3 | `gwesp(0.25) + gwdegree` | MCMLE | idem |
-| 4 | `gwesp(0.5)` | Stoch. Approx. | **convergenza dichiarata, e falsa** |
+| 1 | `gwesp(0.25)` | MCMLE | optimizer step size collapsed from ~0.46 to ~0.005 |
+| 2 | `gwesp(0.5)` | MCMLE | iterations doubled in length: 29 min, 62, 125, over 243 |
+| 3 | `gwesp(0.25) + gwdegree` | MCMLE | same |
+| 4 | `gwesp(0.5)` | Stoch. Approx. | convergence reported, and false |
 
-### Le due firme
+### The two signatures
 
-**Passo che crolla** (#1): l'ottimizzatore riduce di due ordini di grandezza la
-lunghezza del passo per non uscire dalla regione ammissibile. È la
-quasi-degenerazione classica.
+Collapsing step size (#1). The optimizer reduces the step length by two orders
+of magnitude to stay inside the feasible region. This is classic
+near-degeneracy.
 
-**Iterazioni che si allungano** (#2, #3): 29 minuti, poi 62, poi 125, poi oltre
-243. Proiettando, la settima sarebbe durata trentadue ore. Una stima che si
-allunga così non sta convergendo lentamente: sta divergendo lentamente.
+Lengthening iterations (#2, #3). The iterations took 29 minutes, then 62, then
+125, then over 243. Extrapolating, the seventh would have taken thirty-two
+hours. An estimation whose iterations lengthen in this way is not converging
+slowly; it is diverging slowly.
 
-### Il quarto caso, che è il più istruttivo
+### The fourth case: false convergence
 
-L'approssimazione stocastica ha **dichiarato successo**. La bontà di
-adattamento l'ha smentita:
+Stochastic approximation reported success. The goodness-of-fit diagnostics
+contradicted it:
 
-* dimensione efficace del campione ≈ **3** (dovrebbe essere centinaia);
-* reti simulate con il **40%** degli archi osservati;
-* il **4%** dei legami fra donne;
-* coefficienti di genere musicale e coorte **negativi**, cioè il modello
-  prediceva che chi condivide il genere musicale collabori *meno*.
+* effective sample size ≈ 3 (it should be in the hundreds);
+* simulated networks with 40% of the observed edges;
+* 4% of the ties between women;
+* negative coefficients for musical genre and cohort, i.e. the model predicted
+  that artists sharing a musical genre collaborate *less*.
 
-Era un collasso verso il grafo vuoto travestito da convergenza. Senza la GOF
-sarebbe finito nell'articolo.
+It was a collapse toward the empty graph that looked like convergence.
+Without the GOF check it would have ended up in the article.
 
-**Da qui la regola D11:** la bontà di adattamento non è un accessorio, è il
-solo controllo che distingua una convergenza vera da una apparente.
+This led to rule D11: goodness of fit is not optional; it is the only check
+that distinguishes real convergence from apparent convergence.
 
 ---
 
-## Fase 3 — Per decennio: l'idea giusta, per la ragione giusta
+## Phase 3: estimation by decade
 
-L'obiezione ricevuta — *e se lo facessimo per decadi? ridurrebbe la
-complessità?* — è corretta, ma non per il motivo apparente.
+The suggestion we received, to run the model by decade in order to reduce
+complexity, was correct, though not for the obvious reason.
 
-**Che cosa risolve.** La taglia. I decenni fino agli anni Cinquanta sono 163,
-364, 1.515 nodi, cioè l'ordine di grandezza in cui la stima funzionava.
+What it solves: size. The decades up to the 1950s have 163, 364 and 1,515
+gender-determined nodes (150, 338 and 1,398 in the giant component on which the
+ERGM is fitted, as in the table below), the order of magnitude at which
+estimation had worked.
 
-**Che cosa risolve davvero.** Un decennio è una **popolazione completa**, non un
-campione. È la correzione del difetto della Fase 1.
+What it really solves: a decade is a complete population, not a sample. This
+corrects the defect of Phase 1.
 
-**Che cosa NON risolve.** Il clustering, misurato decennio per decennio, resta
-fra **0,43 e 0,56 in tutti i periodi**. Non scende spezzando la rete, e non può
-scendere: è un artefatto di proiezione.
+What it does not solve: clustering. Measured decade by decade, it stays
+between 0.43 and 0.56 in every period. Splitting the network does not lower
+it, and cannot: it is a projection artifact.
 
-### Esito
+### Outcome
 
-| decennio | nodi | archi | clustering | esito | firma |
+With groups as nodes (before D16); the rerun without groups is reported at
+the end of this document.
+
+| decade | nodes | edges | clustering | outcome | signature |
 |---|---|---|---|---|---|
-| 1930 | 150 | 514 | 0,466 | ✅ 21 min | — |
-| 1940 | 338 | 1.932 | 0,466 | ✅ 52 min | — |
-| 1950 | 1.398 | 15.177 | 0,526 | ❌ | iterazioni divergenti (2h di silenzio) |
-| 2020 | 11.772 | 33.548 | 0,426 | ❌ | passo < 0,02 per 3 iterazioni |
+| 1930 | 150 | 514 | 0.466 | converged, 21 min | — |
+| 1940 | 338 | 1,932 | 0.466 | converged, 52 min | — |
+| 1950 | 1,398 | 15,177 | 0.526 | failed | diverging iterations (no output for 2 h) |
+| 2020 | 11,772 | 33,548 | 0.426 | failed | step < 0.02 for 3 iterations |
 
-**La previsione dichiarata prima di lanciare era sbagliata.** Nel docstring del
-modulo stava scritto «converge fino agli anni Sessanta o Settanta». Si rompe
-già a 15.177 archi. La previsione era stata scritta *prima* proprio perché
-fosse falsificabile, e lo è stata.
+The prediction stated before the runs was wrong. The module docstring said
+"converges up to the 1960s or 1970s". Estimation already breaks down at
+15,177 edges. The prediction had been written in advance precisely so that it
+could be falsified, and it was.
 
-**Il test sugli anni Venti era mal disegnato.** Erano stati messi in coda come
-prova per separare taglia da clustering: sono la decade meno clusterizzata ma
-**anche più grande** dei Cinquanta. Fallendo, il loro esito è confuso fra le
-due cause e non decide nulla — non dimostra che il vincolo sia la taglia, e non
-salva l'ipotesi del clustering.
+The test on the 2020s was poorly designed. That decade had been queued as a
+test to separate size from clustering: it is the least clustered decade, but
+also larger than the 1950s. Because the run failed, its outcome confounds the
+two causes and decides nothing. It does not show that size is the
+constraint, and it does not rescue the clustering hypothesis.
 
-Resta stabilito il meno: la soglia di stimabilità sta **fra 1.932 e 15.177
-archi**.
+What remains established is the weaker claim: the estimability threshold lies
+between 1,932 and 15,177 edges.
 
-**La coda è stata interrotta.** Restavano 1960, 1970, 1980, 2010, 1990, 2000:
-tutti più grandi di *entrambi* i fallimenti, cioè circa 36 ore per confermare un
-esito già determinato.
+The queue was stopped. The remaining decades were 1960, 1970, 1980, 2010, 1990
+and 2000, all larger than *both* failed cases; running them would have taken
+about 36 hours to confirm an outcome already determined.
 
-### Che cosa dicono i due decenni convergiti
+### Estimates for the two converged decades
 
 | | `gwesp` | `gender.F` | `gender.M` | `genere_musicale` |
 |---|---|---|---|---|
-| 1930 | +2,391 | −0,262 (p 0,79) | +0,011 (p 0,89) | +0,275 |
-| 1940 | +3,582 | −0,246 (p 0,36) | **−0,173** (p<10⁻⁴) | +0,361 |
+| 1930 | +2.391 | −0.262 (p 0.79) | +0.011 (p 0.89) | +0.275 |
+| 1940 | +3.582 | −0.246 (p 0.36) | **−0.173** (p<10⁻⁴) | +0.361 |
 
-Nessuna omofilia femminile. **Concorda con la permutazione**: per quei decenni
-il nullo per strati di grado dà rapporti F di 0,70 e 0,74, con *z* −0,4 e −1,1,
-cioè indistinguibili dal caso. (Il nullo uniforme dava 0,24 e 0,50, e una prima
-lettura li aveva presi per una conferma di omofilia *negativa*: era l'effetto
-dell'attività minore delle donne, vedi E13.)
+There is no female homophily. This agrees with the permutation test: for those
+decades the degree-stratified null gives F ratios of 0.70 and 0.74, with *z*
+of −0.4 and −1.1, indistinguishable from chance. (The uniform null gave 0.24
+and 0.50, and an earlier reading had taken these as confirmation of *negative*
+homophily; it was an effect of women's lower activity, see E13.)
 
-Due metodi con assunzioni opposte — l'ERGM controlla per la chiusura triadica e
-per l'attività, la permutazione tiene la struttura fissa per costruzione —
-dicono la stessa cosa sul periodo in cui entrambi funzionano: in quei decenni
-non c'è omofilia di genere. Il che rafforza l'estremo opposto: l'eccesso degli
-anni Novanta-Venti è un cambiamento reale, non un artefatto di misura che
-varrebbe per tutta la serie.
+Two methods with opposite assumptions agree on the period in which both work:
+the ERGM controls for triadic closure and for activity, while the permutation
+test holds the structure fixed by construction, and both find no gender
+homophily in those decades. This strengthens the other end of the series: the
+excess in the 1990s to 2020s is a real change, not a measurement artifact
+that would apply to the whole series.
 
 ---
 
-## La diagnosi
+## Diagnosis
 
-La bontà di adattamento dei due decenni convergiti sbaglia in un punto preciso
-e **con la stessa forma**:
+The goodness of fit of the two converged decades fails at a specific point,
+and with the same shape:
 
-| partner condivisi | 1930 oss/sim | 1940 oss/sim |
+| shared partners | 1930 obs/sim | 1940 obs/sim |
 |---|---|---|
-| 0 | **2,36** | **8,69** |
-| 1 | 0,46 | 0,43 |
-| 2 | 0,42 | 0,41 |
-| 4 | 1,55 | 1,31 |
-| 6 | 5,78 | 4,38 |
-| 8 | **20,55** | **6,54** |
+| 0 | **2.36** | **8.69** |
+| 1 | 0.46 | 0.43 |
+| 2 | 0.42 | 0.41 |
+| 4 | 1.55 | 1.31 |
+| 6 | 5.78 | 4.38 |
+| 8 | **20.55** | **6.54** |
 
-È una **U**: centro sovrastimato, entrambe le code sottostimate. È ciò che si
-ottiene adattando una distribuzione **unimodale** — l'unica che `gwesp` può
-produrre, avendo un parametro solo — a una **bimodale**.
+The pattern is U-shaped: the center is overestimated and both tails are
+underestimated. This is what one obtains by fitting a unimodal distribution
+(the only kind `gwesp` can produce, since it has a single parameter) to a
+bimodal one.
 
-### L'ipotesi, e la sua verifica diretta
+### The hypothesis and a direct check
 
-L'ipotesi: la bimodalità non è un fenomeno sociale ma un artefatto di
-costruzione. Questa rete è la **proiezione di un grafo bipartito
-artisti-release**, e ogni pubblicazione con *k* artisti accreditati genera una
-clique di *k* in cui ogni arco ha *k−2* partner condivisi **per costruzione** —
-senza che nessuno abbia chiuso alcun triangolo in senso sociale.
+The hypothesis is that the bimodality is not a social phenomenon but an
+artifact of construction. This network is the projection of a bipartite
+artist–release graph, and every release with *k* credited artists generates a
+clique of size *k* in which each edge has *k−2* shared partners by
+construction, without anyone having closed a triangle in a social sense.
 
-È verificabile **esattamente**, arco per arco, senza stimare nulla. Per ogni
-arco si distinguono i partner condivisi *totali* — ciò che `gwesp` modella — da
-quelli *imposti dalla proiezione*, cioè chi compare in una release condivisa dai
-due estremi.
+This can be checked exactly, edge by edge, without estimating anything. For
+each edge we separate the *total* shared partners (what `gwesp` models) from
+those *imposed by the projection*, that is, artists who appear on a release
+shared by the edge's two endpoints.
 
-**Su tutti i 702.613 archi:**
+Across all 702,613 edges:
 
 ```
- 9.460.875  partner condivisi totali
- 3.208.170  imposti dalla proiezione            (33,9%)
-   259.458  archi interamente spiegati          (36,9%)
-    17.353  archi senza alcun partner condiviso  (2,5%)
+ 9,460,875  total shared partners
+ 3,208,170  imposed by the projection         (33.9%)
+   259,458  edges fully explained             (36.9%)
+    17,353  edges with no shared partner      (2.5%)
 ```
 
-Il 33,9% globale **non è alto**: presa così, l'ipotesi era sbagliata, e va
-detto. Ma la disaggregazione mostra la struttura. Con `max_credits = 8` una
-release può imporre al massimo 8−2 = **6** partner condivisi:
+The overall 33.9% is not high: taken at face value, the hypothesis was wrong,
+and this should be stated. The breakdown, however, shows the structure. With
+`max_credits = 8`, a release can impose at most 8−2 = 6 shared partners:
 
-| partner condivisi | quota spiegata |
+| shared partners | share explained |
 |---|---|
-| 1 | 0,823 |
-| 3 | 0,824 |
-| 5 | 0,810 |
-| 6 | 0,792 |
-| **7** | **0,659** |
-| 12 | 0,445 |
-| 19 | 0,319 |
+| 1 | 0.823 |
+| 3 | 0.824 |
+| 5 | 0.810 |
+| 6 | 0.792 |
+| **7** | **0.659** |
+| 12 | 0.445 |
+| 19 | 0.319 |
 
-Piatta all'80% fino a 6, poi crolla. Il **test del tetto** rende la coincidenza
-una dimostrazione — per ogni arco si calcola *k−2* dalla release condivisa più
-grande:
+The share is flat at about 80% up to 6, then drops. The cap test turns this
+coincidence into a demonstration. For each edge, *k−2* is computed from the
+largest shared release:
 
-| | archi | quota spiegata |
+| | edges | share explained |
 |---|---|---|
-| **entro** il tetto | 232.783 (33,1%) | **0,988** |
-| **oltre** il tetto | 452.477 (64,4%) | **0,276** |
+| within the cap | 232,783 (33.1%) | **0.988** |
+| beyond the cap | 452,477 (64.4%) | **0.276** |
 
-Dove una singola release *può* spiegare i triangoli, li spiega al **98,8%**.
-Dove non può, la quota crolla. Non è una correlazione: è la firma aritmetica del
-meccanismo.
+Where a single release *can* explain the triangles, it explains 98.8% of them.
+Where it cannot, the share falls. This is not a correlation but the arithmetic
+signature of the mechanism.
 
-**Statuto: misurato.** Non dipende da alcun modello.
+Status: measured. It does not depend on any model.
 
 ---
 
-## Il tentativo di conferma causale, e il suo fallimento
+## A failed attempt at causal confirmation
 
-La diagnosi, fin qui, è **correlazionale**: si osserva un difetto e se ne
-propone una causa. Un referee ha ragione a non accontentarsi.
+So far the diagnosis is correlational: a defect is observed and a cause is
+proposed. A referee would be right not to be satisfied with that.
 
-### Il disegno
+### Design
 
-Riestimare il decennio 1940 — quello che converge in meno di un'ora — con
-termini di dipendenza a **due** componenti, capaci per costruzione di una forma
-bimodale, e misurare se la U si appiattisce. Con un **controllo negativo** che
-rende il test un test.
+Re-estimate the 1940 decade (the one that converges in under an hour) with
+two-component dependence terms, which can produce a bimodal shape by
+construction, and measure whether the U flattens. A negative control is
+included so that the test can discriminate between explanations.
 
-| specifica | componenti | previsione se l'ipotesi è giusta |
+| specification | components | prediction if the hypothesis is correct |
 |---|---|---|
-| `gwesp(0.25)` — riferimento | 1 | U marcata |
-| `gwesp(0.25) + gwesp(1.5)` | 2 | U appiattita |
-| `gwesp(0.25) + esp(0)` | 2 | U appiattita |
-| `gwesp(0.75)` — controllo negativo | 1 | U ancora marcata |
+| `gwesp(0.25)` (reference) | 1 | marked U |
+| `gwesp(0.25) + gwesp(1.5)` | 2 | flattened U |
+| `gwesp(0.25) + esp(0)` | 2 | flattened U |
+| `gwesp(0.75)` (negative control) | 1 | U still marked |
 
-Il controllo negativo serve a separare «due componenti» da «decay sbagliato»,
-che è l'alternativa ovvia.
+The negative control separates "two components" from "wrong decay", which is
+the obvious alternative explanation.
 
-Il confronto **non è sull'AIC** ma sulla forma dello scarto: la domanda non è
-quale modello si adatti meglio in media, ma se il difetto abbia ancora quella
-forma. Misurata come rapporto fra la media degli estremi (esp 0 e coda 6-9) e il
-centro (esp 1-2); **1 significa piatta**.
+The comparison is not based on AIC but on the shape of the misfit: the
+question is not which model fits better on average, but whether the defect
+still has that shape. The shape is measured as the ratio between the mean of
+the extremes (esp 0 and the 6–9 tail) and the center (esp 1–2); a value of 1
+means flat.
 
-### L'esito
+### Result
 
-| specifica | esito |
+| specification | outcome |
 |---|---|
-| `gwesp(0.25)` — riferimento | ✅ converge, **U = 16,90** (esp0 8,69; centro 0,42; coda 5,51) |
-| `gwesp(0.25) + gwesp(1.5)` | ❌ non converge (28 min) |
-| `gwesp(0.25) + esp(0)` | ❌ non converge (60 min) |
-| `gwesp(0.75)` — controllo negativo | ❌ non converge (2,4 ore; passo sotto 0,02 per tre iterazioni) |
+| `gwesp(0.25)` (reference) | converges, U = 16.90 (esp0 8.69; center 0.42; tail 5.51) |
+| `gwesp(0.25) + gwesp(1.5)` | does not converge (28 min) |
+| `gwesp(0.25) + esp(0)` | does not converge (60 min) |
+| `gwesp(0.75)` (negative control) | does not converge (2.4 hours; step below 0.02 for three iterations) |
 
-**Tutte e tre le varianti falliscono su un decennio dove quella di riferimento
-converge in 52 minuti — controllo negativo compreso.** È il controllo negativo
-a decidere come leggere l'esito: `gwesp(0.75)` ha una sola componente, come il
-riferimento, e cambia soltanto il decay. Se fallisce anche lui, il fallimento
-delle specifiche a due componenti non dice nulla sulla bimodalità: dice che la
-stima, su questo decennio, non regge **alcuna** modifica della specifica.
-Il test non ha deciso nulla, in nessuna direzione.
+All three variants, including the negative control, fail on a decade where
+the reference specification converges in 52 minutes. The negative control
+determines how to read this outcome: `gwesp(0.75)` has a single component,
+like the reference, and changes only the decay. Because it fails as well, the
+failure of the two-component specifications says nothing about bimodality; it
+says that estimation on this decade does not withstand any change to the
+specification. The test was inconclusive in either direction.
 
-### Che cosa cade e che cosa no
+### What stands and what does not
 
-**Resta in piedi:** il dato della proiezione — 98,8% contro 27,6% — perché è una
-*misura* sui dati, non un'affermazione su un modello. E resta lo scarto a U,
-osservato in due decenni indipendenti con la stessa forma.
+What stands: the projection result (98.8% against 27.6%), because it is a
+*measurement* on the data, not a claim about a model. The U-shaped misfit also
+stands, observed with the same shape in two independent decades.
 
-**Cade:** la dimostrazione causale *per questa via*. Non si può dire «un
-modello che ammette la bimodalità si adatta», perché quel modello non è
-stimabile. Il tentativo fallito resta scritto.
+What falls: causal demonstration *by this route*. We cannot say "a model that
+allows bimodality fits", because that model cannot be estimated. The failed
+attempt remains on record.
 
-La conferma è poi arrivata da un'altra strada — vedi
-[La conferma, fuori dall'ERGM](#la-conferma-fuori-dallergm) — che non passa da
-alcuna stima.
+Confirmation later came by another route that involves no estimation; see
+[Confirmation outside the ERGM](#confirmation-outside-the-ergm).
 
-### La strada che non funziona, e perché
+### An approach that does not work
 
-Sembra ovvio dare al modello la dimensione del cast come covariata di arco
-(`edgecov`), così che `gwesp` debba spiegare solo il residuo. **Non funziona:**
-se due artisti condividono una release hanno un arco per costruzione, quindi
-quella covariata sarebbe non nulla esattamente sugli archi e nulla altrove —
-separerebbe perfettamente i dati.
+An apparently obvious option is to give the model cast size as an edge
+covariate (`edgecov`), so that `gwesp` only has to explain the residual. This
+does not work: if two artists share a release they have an edge by
+construction, so the covariate would be non-zero exactly on the edges and zero
+elsewhere, and would separate the data perfectly.
 
 ---
 
-## La conferma, fuori dall'ERGM
+## Confirmation outside the ERGM
 
-Cercare la conferma **dentro** l'ERGM era l'errore di impostazione. Se l'ERGM
-non sa descrivere questa rete, non può nemmeno servire a dimostrare *perché*
-non sa descriverla. L'affermazione da verificare non riguarda un modello:
-riguarda il **meccanismo** che genera la rete, e un meccanismo si verifica
-facendolo girare.
+Looking for confirmation within the ERGM was a design error. If the ERGM
+cannot describe this network, it cannot serve to show why it cannot describe
+it. The claim to be tested is not about a model but about the mechanism that
+generates the network, and a mechanism is tested by running it.
 
-### Il disegno
+### Design
 
-Si prende la struttura bipartita artisti-release, la si randomizza conservando
-**esattamente** entrambe le distribuzioni di grado — quante release per artista,
-quanti artisti per release — e la si riproietta, cento volte. Nessuna
-preferenza sociale vi entra: gli artisti sono assegnati alle release a caso.
-Contiene **solo il meccanismo**.
+The bipartite artist–release structure is randomized while preserving both
+degree distributions exactly (releases per artist and artists per release),
+then projected again; this is repeated one hundred times. No social preference
+enters: artists are assigned to releases at random. The procedure contains
+only the mechanism.
 
-Il confronto è di **forma**, ciascun modello contro il *proprio* osservato e
-normalizzato a quote. Gli insiemi differiscono per costruzione — l'ERGM gira
-sui 338 nodi a genere determinato della componente gigante, la proiezione su
-tutti i 515 artisti del decennio — e confrontarli direttamente sarebbe
-scorretto. Una prima lettura lo faceva ed è stata rifatta.
+The comparison is one of shape: each model is compared with its *own*
+observed distribution, normalized to shares. The sets differ by construction
+(the ERGM runs on the 338 gender-determined nodes of the giant component, the
+projection on all 515 artists of the decade), so comparing them directly would
+be incorrect. An earlier reading did so and was redone.
 
-Prima di lanciare è stato verificato che il doppio scambio bipartito conservi
-esattamente entrambe le distribuzioni di grado, non crei doppioni e randomizzi
-davvero l'appaiamento (99,6% dei crediti riappaiati). Se lo scambio sbagliasse
-i gradi il confronto non varrebbe nulla. Test in
-`tests/test_scambio_bipartito.py`.
+Before the runs, we verified that the bipartite double swap preserves both
+degree distributions exactly, creates no duplicates and actually randomizes
+the pairing (99.6% of credits re-paired). If the swap altered the degrees, the
+comparison would be worthless. Tests are in `tests/test_scambio_bipartito.py`.
 
-### L'esito
+### Result
 
-Rapporto fra quota simulata e quota osservata, anni Quaranta:
+Ratio of simulated to observed share, 1940s:
 
-| partner condivisi | ERGM stimato | proiezione randomizzata |
+| shared partners | estimated ERGM | randomized projection |
 |---|---|---|
-| 0 | **0,13** | 0,49 |
-| 1 | **2,59** | 0,72 |
-| 2 | **2,67** | 0,74 |
-| 4 | 0,85 | 0,86 |
-| 6 | **0,25** | 0,83 |
-| 8 | **0,17** | 0,97 |
-| 12 | **0,27** | 0,98 |
+| 0 | **0.13** | 0.49 |
+| 1 | **2.59** | 0.72 |
+| 2 | **2.67** | 0.74 |
+| 4 | 0.85 | 0.86 |
+| 6 | **0.25** | 0.83 |
+| 8 | **0.17** | 0.97 |
+| 12 | **0.27** | 0.98 |
 
-Scarto medio in log₂, replicato su tre insiemi indipendenti:
+Mean log₂ deviation, replicated on three independent sets:
 
-| insieme | archi osservati | archi randomizzati | scarto \|log₂\| |
+| set | observed edges | randomized edges | \|log₂\| deviation |
 |---|---|---|---|
-| 1940s — ERGM | 1.932 | 1.749 | **1,799** |
-| 1940s — proiezione | 3.016 | 4.465 | **0,297** |
-| 1950s — proiezione | 21.990 | 43.690 | **0,768** |
-| rete intera — proiezione | 898.475 | 2.189.834 | **0,322** |
+| 1940s, ERGM | 1,932 | 1,749 | 1.799 |
+| 1940s, projection | 3,016 | 4,465 | 0.297 |
+| 1950s, projection | 21,990 | 43,690 | 0.768 |
+| full network, projection | 898,475 | 2,189,834 | 0.322 |
 
-Conta la **forma**, non il livello. L'ERGM oscilla di un fattore venti fra 0,13
-e 2,67 — è la U. La proiezione randomizzata è monotona e piatta in tutti e tre
-gli insiemi: `0,49 → 0,72 → 0,80 → 0,86 → 0,96` negli anni Quaranta, senza
-alcuna inversione.
+What matters is the shape, not the level. The ERGM swings by a factor of
+twenty, between 0.13 and 2.67; this is the U. The randomized projection is
+monotone and flat in all three sets: `0.49 → 0.72 → 0.80 → 0.86 → 0.96` in
+the 1940s, with no reversal.
 
-E lo fa un modello **senza alcun parametro stimato**, che batte di sei volte un
-ERGM con sei parametri adattati sui dati.
+This is achieved by a model with no estimated parameters, which outperforms by
+a factor of six an ERGM with six parameters fitted to the data.
 
-> La forma bimodale della distribuzione dei partner condivisi è prodotta dal
-> meccanismo di proiezione bipartita, non da un processo di chiusura triadica.
-> La U è una proprietà del modello, non dei dati.
+The bimodal shape of the shared-partner distribution is therefore produced by
+the bipartite projection mechanism, not by a process of triadic closure. The U
+is a property of the model, not of the data.
 
-**Statuto: dimostrato.** Nessun parametro stimato, nessuna assunzione
-inferenziale: si è fatto girare un processo noto e si è guardato che forma
-produce.
+Status: demonstrated. There are no estimated parameters and no inferential
+assumptions: a known process was run and the shape it produces was examined.
 
-### Un secondo risultato, non previsto
+### A second, unanticipated result
 
-La randomizzazione produce **sistematicamente più archi dell'osservato**: 1,5
-volte negli anni Quaranta, 2,0 nei Cinquanta, **2,4 sulla rete intera**.
+The randomization systematically produces more edges than observed: 1.5 times
+as many in the 1940s, 2.0 in the 1950s and 2.4 on the full network.
 
-Significa che i musicisti italiani **ricollaborano con le stesse persone** molto
-più di quanto il caso produrrebbe: le stesse coppie ricorrono su release
-diverse, quindi generano meno archi *distinti*. La randomizzazione le disperde.
+This means that Italian musicians collaborate repeatedly with the same people
+far more than chance would produce: the same pairs recur across different
+releases and therefore generate fewer *distinct* edges. Randomization
+disperses them.
 
-È sostantivo, non metodologico, e scompone il fenomeno in due parti che vanno
-tenute separate:
+This is a substantive result, not a methodological one, and it splits the
+phenomenon into two parts that should be kept separate:
 
-* il **meccanismo** spiega la *forma* della distribuzione dei partner condivisi;
-* il **processo sociale** spiega la sua *concentrazione*.
+* the mechanism explains the *shape* of the shared-partner distribution;
+* the social process explains its *concentration*.
 
-### Che cosa resta non spiegato
+### What remains unexplained
 
-A esp = 0 la proiezione randomizzata dà 0,49: sottoproduce della metà gli archi
-isolati. Molto meglio dell'ERGM (0,13), ma non perfetta. Il meccanismo non
-esaurisce i dati, e il testo deve dirlo.
+At esp = 0 the randomized projection gives 0.49: it produces only half the
+observed share of isolated edges. This is much better than the ERGM (0.13),
+but not perfect. The mechanism does not account for all of the data, and the
+text must say so.
 
 ---
 
-## Dopo l'esclusione dei gruppi (25 settembre)
+## After the exclusion of groups (25 September)
 
-La Fase 4f è stata rieseguita sulla rete di soli individui (D16), con una regola
-nuova: dopo due fallimenti su reti di dimensione crescente la coda si ferma,
-perché ogni decennio rimasto è più grande di entrambi. Nella prima esecuzione la
-coda era stata interrotta a mano per la stessa ragione.
+Phase 4f was rerun on the individuals-only network (D16), with a new rule:
+after two failures on networks of increasing size the queue stops, because
+every remaining decade is larger than both. In the first run the queue had
+been stopped by hand for the same reason.
 
-| decennio | nodi | archi | esito |
+| decade | nodes | edges | outcome |
 |---|---|---|---|
-| 1930 | 139 | 463 | ✅ 19 min |
-| 1940 | 303 | 1.650 | ✅ 41 min |
-| **1950** | 1.326 | **13.919** | ✅ **2,9 ore** — prima falliva |
-| 2020 | 10.778 | 30.629 | ❌ passo sotto 0,02 per tre iterazioni |
-| 1960 | 4.330 | 41.413 | ❌ idem; coda chiusa |
+| 1930 | 139 | 463 | converged, 19 min |
+| 1940 | 303 | 1,650 | converged, 41 min |
+| **1950** | 1,326 | **13,919** | converged, **2.9 hours** (previously failed) |
+| 2020 | 10,778 | 30,629 | failed: step below 0.02 for three iterations |
+| 1960 | 4,330 | 41,413 | failed: same; queue closed |
 
-**La soglia di stimabilità sale** da «fra 1.932 e 15.177 archi» a «fra 13.919 e
-30.629». È coerente con la diagnosi: un gruppo e i suoi membri formano una
-cricca per costruzione, cioè triangoli meccanici, e toglierli rende la rete meno
-ostile a `gwesp`.
+The estimability threshold rises from "between 1,932 and 15,177 edges" to
+"between 13,919 and 30,629". This is consistent with the diagnosis: a group
+and its members form a clique by construction, that is, mechanical triangles,
+and removing groups makes the network less hostile to `gwesp`.
 
-**Tre cose che il decennio 1950 aggiunge.**
+The 1950 decade adds three findings.
 
-1. **Nessuna omofilia di genere controllando la chiusura:** `gender.F` +0,058
-   (*p* 0,56), `gender.M` +0,032 (*p* 0,13). Conferma per una via indipendente
-   dalla permutazione l'assenza di omofilia all'inizio della serie.
-2. **La U si ripete in un terzo decennio:** esp 0 osservato/simulato 8,9;
-   centro 0,26-0,38; coda sopra 1,6 da 11 partner condivisi.
-3. **Il confronto con la proiezione randomizzata è meno netto:** scarto 1,015
-   per l'ERGM contro 0,720 per la proiezione, 1,4 volte meglio; negli anni
-   Quaranta, sulla rete senza gruppi, 12 volte (2,779 contro 0,236). La
-   proiezione vince in entrambi i casi, ma con margini diversissimi: il paper
-   riporta l'intervallo, non il caso migliore.
+1. No gender homophily when controlling for closure: `gender.F` +0.058
+   (*p* 0.56), `gender.M` +0.032 (*p* 0.13). This confirms, by a route
+   independent of the permutation test, the absence of homophily at the start
+   of the series.
+2. The U recurs in a third decade: observed/simulated at esp 0 is 8.9; the
+   center is 0.26–0.38; the tail is above 1.6 from 11 shared partners upward.
+3. The comparison with the randomized projection is less clear-cut: a
+   deviation of 1.015 for the ERGM against 0.720 for the projection, 1.4
+   times better; in the 1940s, on the network without groups, 12 times better
+   (2.779 against 0.236). The projection wins in both cases, but by very
+   different margins; the paper reports the range, not the best case.
 
-**Non rieseguiti:** i quattro tentativi sulla rete integrale (Fase 4b) e il
-controllo della bimodalità (Fase 4h). Sono esiti negativi, e senza gruppi fallisce
-già il decennio da 41.413 archi: la rete intera (586.040) non può che fallire. Il
-paper lo dichiara in Appendice A.
+Not rerun: the four attempts on the full network (Phase 4b) and the
+bimodality check (Phase 4h). These are negative results, and without groups
+the decade with 41,413 edges already fails, so the full network (586,040
+edges) will necessarily fail. The paper states this in Appendix A.
 
 ---
 
-## Conclusione
+## Conclusion
 
-L'ERGM **non è stimabile su questa rete** oltre i ~2.000 archi (con i gruppi;
-senza gruppi la soglia sale a 13.919-30.629, vedi sopra). Nove stime
-fallite: quattro parametrizzazioni sulla rete integrale (tre MCMLE e una ad
-approssimazione stocastica, con convergenza falsa), due decenni (1950, 2020) e
-tre varianti sul decennio 1940 (due a due componenti e il controllo negativo).
+The ERGM cannot be estimated on this network beyond ~2,000 edges (with
+groups; without groups the threshold rises to 13,919–30,629, see above). Nine
+estimations failed: four parametrizations on the full network (three MCMLE and
+one stochastic approximation, with false convergence), two decades (1950,
+2020) and three variants on the 1940 decade (two two-component specifications
+and the negative control).
 
-Ma la ragione non è la taglia in sé, ed è questo il risultato: su una rete
-ottenuta per proiezione bipartita, un termine di chiusura triadica misura in
-buona parte la **dimensione dei cast** e non un processo sociale. Non è più
-un'interpretazione: un modello nullo senza parametri riproduce la forma della
-distribuzione dei partner condivisi **sei volte meglio** dell'ERGM stimato, e
-senza produrre la U. Vale per qualunque rete di co-autorialità, che è metà
-della letteratura su collaborazione e omofilia.
+The reason, however, is not size as such, and this is the result: on a
+network obtained by bipartite projection, a triadic closure term largely
+measures cast size rather than a social process. This is no longer an
+interpretation: a null model with no parameters reproduces the shape of the
+shared-partner distribution six times better than the estimated ERGM, and
+without producing the U. This applies to any co-authorship network, which
+accounts for half of the literature on collaboration and homophily.
 
-E giustifica a posteriori la scelta di calcolare invece di stimare: se la
-dipendenza che l'ERGM doveva assorbire è in buona parte meccanica, allora il
-logit esatto e il test di permutazione — che tengono la struttura fissa per
-costruzione invece di modellarla — non sono un ripiego. Sono la scelta corretta.
+It also justifies, after the fact, the choice to compute rather than
+estimate. If the dependence the ERGM was meant to absorb is largely
+mechanical, then the exact logit and the permutation test, which hold the
+structure fixed by construction instead of modeling it, are not a fallback;
+they are the correct choice.

@@ -1,73 +1,76 @@
-# Fattibilità del confronto internazionale
+# Feasibility of the international comparison
 
-Studio del 25 settembre 2026, per scegliere sui numeri i paesi da confrontare
-con l'Italia in un secondo lavoro. Script: `src/fattibilita_paesi.py`; dati in
-`data/fattibilita/`. Due passate sequenziali in sola lettura sul database, il
-resto in locale.
+Study of 25 September 2026, to choose on the basis of the numbers which
+countries to compare with Italy in a second paper. Script:
+`src/fattibilita_paesi.py`; data in `data/fattibilita/`. Two sequential
+read-only passes over the database; everything else runs locally.
 
-**Controllo di validità dello script:** sull'Italia riproduce la pipeline —
-100.202 voci contro 100.201, precisione del criterio di nazionalità 94,5%.
+Validity check of the script: on Italy it reproduces the pipeline, with
+100,202 entries against 100,201 and a precision of 94.5% for the nationality
+criterion.
 
-## I numeri
+## Figures
 
-Stesso criterio di nazionalità dell'Italia (≥ 2 release nel paese, ≥ 3 in
-totale, quota ≥ 0,50), gruppi esclusi come in D16.
+Same nationality criterion as for Italy (≥ 2 releases in the country, ≥ 3 in
+total, share ≥ 0.50), with groups excluded as in D16.
 
-| paese | artisti individuali | debutti anni '50 | precisione nazionalità (P27) | genere Wikidata | nome anagrafico |
+| country | individual artists | 1950s debuts | nationality precision (P27) | Wikidata gender | real name |
 |---|---|---|---|---|---|
-| Italia | 87.230 | 1.553 | 94,5% | 6,0% | 16,7% |
-| Spagna | 51.879 | 848 | 91,4% | 4,7% | 22,1% |
-| Francia | 123.884 | 3.877 | 86,4% | 6,8% | 13,0% |
-| Germania | 190.347 | 2.753 | **79,0%** | 6,8% | 17,4% |
-| DDR | 3.382 | 339 | 94,2% | 17,9% | 12,0% |
-| Svezia | 43.328 | 916 | 96,2% | 7,5% | 21,3% |
-| Norvegia | 26.414 | 249 | 97,4% | 11,1% | 13,9% |
-| Danimarca | 20.950 | 451 | 95,3% | 9,4% | 14,0% |
-| Finlandia | 35.642 | 317 | 98,0% | 9,4% | 19,3% |
-| Paesi Bassi | 58.080 | 755 | 89,5% | 6,0% | 20,9% |
-| Portogallo | 12.419 | 182 | 88,6% | 5,2% | 16,4% |
-| Grecia | 23.127 | 350 | 95,2% | 5,4% | 18,0% |
-| Giappone | 98.661 | 725 | 95,0% | 6,0% | 20,1% |
-| Brasile | 40.114 | 614 | 97,8% | 3,9% | 16,6% |
-| Regno Unito | 184.552 | 2.347 | **81,6%** | 4,3% | 18,9% |
-| Stati Uniti | 640.197 | 20.638 | 90,5% | 4,3% | 13,5% |
+| Italy | 87,230 | 1,553 | 94.5% | 6.0% | 16.7% |
+| Spain | 51,879 | 848 | 91.4% | 4.7% | 22.1% |
+| France | 123,884 | 3,877 | 86.4% | 6.8% | 13.0% |
+| Germany | 190,347 | 2,753 | **79.0%** | 6.8% | 17.4% |
+| GDR | 3,382 | 339 | 94.2% | 17.9% | 12.0% |
+| Sweden | 43,328 | 916 | 96.2% | 7.5% | 21.3% |
+| Norway | 26,414 | 249 | 97.4% | 11.1% | 13.9% |
+| Denmark | 20,950 | 451 | 95.3% | 9.4% | 14.0% |
+| Finland | 35,642 | 317 | 98.0% | 9.4% | 19.3% |
+| Netherlands | 58,080 | 755 | 89.5% | 6.0% | 20.9% |
+| Portugal | 12,419 | 182 | 88.6% | 5.2% | 16.4% |
+| Greece | 23,127 | 350 | 95.2% | 5.4% | 18.0% |
+| Japan | 98,661 | 725 | 95.0% | 6.0% | 20.1% |
+| Brazil | 40,114 | 614 | 97.8% | 3.9% | 16.6% |
+| United Kingdom | 184,552 | 2,347 | **81.6%** | 4.3% | 18.9% |
+| United States | 640,197 | 20,638 | 90.5% | 4.3% | 13.5% |
 
-Debutti per decennio: `data/fattibilita/fattibilita_paesi_decenni.csv`.
+Debuts by decade: `data/fattibilita/fattibilita_paesi_decenni.csv`.
 
-## Che cosa dicono
+## Interpretation
 
-**Il criterio di nazionalità regge dove il mercato coincide con il paese e
-cede dove il mercato è linguistico.** In Germania gli errori sono soprattutto
-austriaci (469) e svizzeri (241); in Francia belgi e svizzeri; nel Regno Unito
-statunitensi, australiani e irlandesi. È un limite di sostanza, non di dati: in
-quei casi l'unità naturale è forse il **campo linguistico** (Germania + Austria
-+ Svizzera tedesca), non lo stato. Va deciso prima di pre-registrare.
+The nationality criterion holds where the market coincides with the country
+and weakens where the market is defined by language. In Germany the errors
+are mostly Austrian (469) and Swiss (241) artists; in France, Belgian and
+Swiss; in the United Kingdom, American, Australian and Irish. This is a
+substantive limitation, not a data limitation: in those cases the natural unit
+may be the linguistic field (Germany + Austria + German-speaking Switzerland)
+rather than the state. This must be decided before pre-registration.
 
-**Due trappole di codifica trovate e corrette** (da ricordare): Wikidata
-registra la cittadinanza come «Regno di Danimarca» (Q756617), «Regno dei Paesi
-Bassi» (Q29999) e, per il passato, «Regno Unito di Gran Bretagna e Irlanda»
-(Q174193); con i soli codici dei paesi costitutivi la precisione risultava zero.
+Two coding pitfalls were found and corrected (to keep in mind for future
+work): Wikidata records citizenship as "Kingdom of Denmark" (Q756617),
+"Kingdom of the Netherlands" (Q29999) and, for the past, "United Kingdom of
+Great Britain and Ireland" (Q174193). With only the codes of the constituent
+countries, precision came out as zero.
 
-**La DDR è piccola.** 3.382 artisti, quasi tutti con debutto fra il 1950 e il
-1989. Basta per la permutazione per decennio, ma i legami donna–donna per
-decennio saranno poche centinaia: il confronto con la Germania Ovest avrà poca
-potenza, e va detto nel disegno.
+The GDR is small: 3,382 artists, almost all debuting between 1950 and 1989.
+This is enough for the permutation test by decade, but woman–woman ties per
+decade will number only a few hundred. The comparison with West Germany will
+therefore have low power, and the design must state this.
 
-**L'inferenza del genere è il collo di bottiglia ovunque.** Il genere Wikidata
-copre il 4-11% degli artisti (18% nella DDR), come in Italia: la cascata
-onomastica farà il grosso del lavoro, e ogni paese richiede il proprio
-dizionario dei nomi e il proprio campione di validazione. Il Giappone resta il
-caso più difficile per i nomi romanizzati.
+Gender inference is the bottleneck everywhere. Wikidata gender covers 4–11% of
+artists (18% in the GDR), as in Italy. The name-based cascade will do most of
+the work, and each country requires its own name dictionary and its own
+validation sample. Japan remains the hardest case because of romanized names.
 
-**Calcolo.** Il logit esatto cresce con il quadrato degli artisti attivi: la
-Germania richiederebbe circa dieci volte il tempo dell'Italia (un giorno di
-macchina), gli Stati Uniti circa cento volte di più — fuori portata senza
-campionare, cioè senza rinunciare a ciò che distingue questo metodo.
+Computation. The exact logit grows with the square of the number of active
+artists: Germany would require about ten times Italy's computing time (one
+machine-day), the United States about a hundred times more. The latter is out
+of reach without sampling, that is, without giving up what distinguishes this
+method.
 
-## Proposta
+## Proposal
 
-Primo confronto: **Italia, Spagna, Francia, Svezia** (o i paesi nordici
-insieme, tutti sopra il 95% di precisione), più **Germania e DDR** se si
-risolve l'unità d'analisi per i campi linguistici. Esclusi per ora Stati Uniti
-(calcolo) e Regno Unito (criterio di nazionalità all'82%); Giappone solo con
-una validazione del genere dedicata.
+First comparison: Italy, Spain, France and Sweden (or the Nordic countries
+together, all above 95% precision), plus Germany and the GDR if the
+unit-of-analysis question for linguistic fields is resolved. The United
+States (computation) and the United Kingdom (nationality criterion at 82%)
+are excluded for now; Japan only with a dedicated gender validation.

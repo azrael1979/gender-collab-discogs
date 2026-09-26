@@ -1,47 +1,48 @@
-# Documentazione di processo
+# Process documentation
 
-Questa cartella non documenta *che cosa fa* il codice — per quello ci sono i
-docstring, che in questo progetto sono la documentazione primaria. Documenta
-**come si è arrivati qui**: le decisioni prese, quelle rovesciate, gli errori
-trovati e che cosa hanno cambiato, i test che non hanno deciso nulla.
+This folder does not document what the code does; that is the job of the
+docstrings, which in this project are the primary documentation. It documents
+how the work reached its present state: the decisions taken, those reversed,
+the errors found and what they changed, and the tests that decided nothing.
 
-Serve a due lettori diversi.
+It is written for two different readers.
 
-Al **referee**, per verificare che i risultati non siano il prodotto di scelte
-convenienti fatte a posteriori. Ogni decisione metodologica ha un'alternativa
-che è stata scartata, e la ragione dello scarto è scritta prima dei risultati
-che ne dipendono.
+For referees, it makes it possible to check that the results are not the
+product of convenient choices made after the fact. Every methodological
+decision has an alternative that was rejected, and the reason for rejecting it
+is written down before the results that depend on it.
 
-A **chi riprende il lavoro fra sei mesi**, per non ripercorrere strade già
-chiuse. Le strade chiuse sono documentate quanto quelle aperte, ed è il motivo
-per cui questa cartella esiste: un vicolo cieco non documentato viene
-riesplorato.
+For anyone resuming the work six months from now, it avoids retracing paths
+already closed. Dead ends are documented as fully as the paths that were
+pursued, and that is the reason this folder exists: an undocumented dead end
+gets explored again.
 
-## Per riprendere il lavoro
+## Resuming the work
 
-**Leggere prima [`STATO.md`](STATO.md)**: dove siamo, che cosa resta, dove stanno le cose.
+Read [`STATO.md`](STATO.md) first: where the project stands, what remains to
+be done and where things are kept.
 
-## Ordine di lettura
+## Reading order
 
-| file | che cosa contiene |
+| file | contents |
 |---|---|
-| [`01-percorso.md`](01-percorso.md) | la narrazione cronologica: dal mandato iniziale a oggi, con i punti in cui l'impostazione è cambiata e perché |
-| [`02-decisioni.md`](02-decisioni.md) | registro delle decisioni metodologiche: alternativa scartata, ragione, conseguenza sui risultati |
-| [`03-errori.md`](03-errori.md) | errori trovati e corretti, come sono emersi, quali numeri hanno cambiato |
-| [`04-calcolo-esatto.md`](04-calcolo-esatto.md) | che cosa significa «esatto» qui, la matematica, e come è stata verificata |
-| [`05-ergm.md`](05-ergm.md) | il verbale completo dei tentativi ERGM: ogni specifica, ogni fallimento, la diagnosi e il tentativo fallito di confermarla |
-| [`06-risultati.md`](06-risultati.md) | lo stato dei risultati, con l'indicazione di quanto ciascuno sia solido |
-| [`07-confronto-internazionale.md`](07-confronto-internazionale.md) | fattibilità del confronto con altri paesi: dimensioni, precisione del criterio di nazionalità, proposta |
+| [`01-percorso.md`](01-percorso.md) | the chronological narrative, from the initial brief to the present, with the points where the approach changed and why |
+| [`02-decisioni.md`](02-decisioni.md) | log of methodological decisions: rejected alternative, reason, consequence for the results |
+| [`03-errori.md`](03-errori.md) | errors found and corrected, how they came to light, which numbers they changed |
+| [`04-calcolo-esatto.md`](04-calcolo-esatto.md) | what "exact" means here, the mathematics, and how it was verified |
+| [`05-ergm.md`](05-ergm.md) | the full record of the ERGM attempts: every specification, every failure, the diagnosis and the failed attempt to confirm it |
+| [`06-risultati.md`](06-risultati.md) | the status of the results, with an indication of how solid each one is |
+| [`07-confronto-internazionale.md`](07-confronto-internazionale.md) | feasibility of the comparison with other countries: sizes, precision of the nationality criterion, proposal |
 
-## Convenzione
+## Convention
 
-Le affermazioni sono etichettate per solidità, perché non hanno tutte lo stesso
-statuto e mescolarle è il modo più rapido per perdere la fiducia di un lettore
-attento:
+Claims are labeled by how solid they are, because they do not all have the
+same status, and mixing them is the quickest way to lose the trust of a careful
+reader:
 
-* **misurato** — calcolato sui dati, senza modello. Cade solo se i dati sono
-  sbagliati.
-* **stimato** — dipende da un modello e dalle sue assunzioni. Cade se le
-  assunzioni cadono.
-* **interpretato** — una spiegazione proposta per un fatto osservato. Può
-  essere sbagliata anche se il fatto è giusto.
+* **measured**: computed on the data, without a model. It fails only if the
+  data are wrong.
+* **estimated**: depends on a model and its assumptions. It fails if the
+  assumptions fail.
+* **interpreted**: a proposed explanation for an observed fact. It can be
+  wrong even if the fact is right.
