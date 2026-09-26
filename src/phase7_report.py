@@ -3,6 +3,10 @@
 Ogni cifra citata nel testo e' letta dai file di risultato: il report non
 contiene numeri scritti a mano, e ricompilarlo dopo una nuova esecuzione lo
 aggiorna da solo.
+
+Il testo del report e' in inglese. `report_lib` formatta i numeri
+all'italiana e produce didascalie in italiano, quindi qui si ridefiniscono
+localmente n, pct, sci, img e table con la formattazione inglese.
 """
 from __future__ import annotations
 import sys, subprocess, platform, datetime, json
@@ -14,111 +18,240 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common
 import report_lib as R
 from common import ROOT, Timer
-from report_lib import n, pct, img, table, get, val, sci
+from report_lib import get, val, FIGDIR, TABDIR
 
 REPORT = ROOT / "report"
+
+_MESI_EN = ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"]
+
+
+def _oggi_en() -> str:
+    d = datetime.date.today()
+    return f"{d.day} {_MESI_EN[d.month - 1]} {d.year}"
+
+
+# ==========================================================================
+# formattazione all'inglese: virgola per le migliaia, punto per i decimali
+def _missing(x) -> bool:
+    return x is None or (isinstance(x, float) and not np.isfinite(x))
+
+
+def n(x, dec: int = 0) -> str:
+    if _missing(x):
+        return "n/a"
+    return f"{x:,.{dec}f}"
+
+
+def pct(x, dec: int = 1) -> str:
+    if _missing(x):
+        return "n/a"
+    return n(x * 100, dec) + "%"
+
+
+def sci(x, dec: int = 1) -> str:
+    """Notazione scientifica leggibile: 7.3 x 10^-9 invece di 0.000000007."""
+    if _missing(x) or x == 0:
+        return "n/a"
+    import math
+    e = int(math.floor(math.log10(abs(x))))
+    m = x / (10 ** e)
+    return f"{n(m, dec)} × 10<sup>{e}</sup>"
+
+
+def img(stem: str, caption: str, width: str = "100%") -> str:
+    p = FIGDIR / f"{stem}.png"
+    if not p.exists():
+        return (f"> *Figure `{stem}` not available: the data it requires were "
+                f"not produced in this run.*\n")
+    return (f'<figure>\n<img src="figures/{stem}.png" alt="{stem}" '
+            f'style="width:{width}" />\n<figcaption>\n\n{caption}\n\n'
+            f"</figcaption>\n</figure>\n")
+
+
+# intestazioni delle tabelle di risultato, solo per la visualizzazione:
+# i CSV su disco restano con i nomi di colonna originali
+_COL_EN = {
+    "rete": "network", "nodi_totali": "total nodes",
+    "nodi_con_archi": "nodes with edges", "archi": "edges",
+    "densita": "density", "grado_medio": "mean degree",
+    "grado_mediano": "median degree", "grado_max": "max degree",
+    "componenti": "components", "componente_gigante": "giant component",
+    "quota_componente_gigante": "giant component share",
+    "peso_totale": "total weight",
+    "musical_genre": "musical genre", "genere_musicale": "musical genre",
+    "cohort_decade": "debut decade", "n_artisti": "artists",
+    "n_noti": "gender known", "n_donne": "women", "quota_donne": "share of women",
+    "rapporto_uomini_donne": "men per woman",
+    "attributo": "attribute", "r_osservato": "r observed",
+    "r_pesato": "r weighted", "r_null_medio": "r null (mean)",
+    "r_null_sd": "r null (SD)",
+    "sottorete": "subnetwork", "strato": "stratum", "categorie": "categories",
+    "n_categorie": "n categories", "archi_totali": "total edges",
+    "r_gender": "r gender", "oe_MM": "O/E M–M", "oe_FF": "O/E F–F",
+    "eigenvector_mediana": "eigenvector (median)",
+    "eigenvector_media": "eigenvector (mean)",
+    "betweenness_mediana": "betweenness (median)",
+    "coreness_mediana": "coreness (median)", "coreness_media": "coreness (mean)",
+    "forza_mediana": "strength (median)", "n_release_mediana": "releases (median)",
+    "termine": "term", "esito": "outcome",
+    "nodi_originali": "original nodes", "nodi_stimati": "estimated nodes",
+    "campionata": "sampled", "convergenza": "converged",
+    "modelli_convergenti": "converged models",
+    "gwesp_converge": "gwesp converged", "parziale": "partial",
+    "solo_mple": "MPLE only", "differenza": "difference",
+    "variante": "variant", "quota_gigante": "giant share",
+    "r_gender_MF": "r gender M/F", "r_gender_pesato": "r gender weighted",
+    "r_genere_musicale": "r musical genre", "peso_mediano": "median weight",
+    "n_generi": "musical genres",
+}
+_ANNI = {"cohort_decade", "decennio", "anno", "year"}
+# valori di categoria in italiano semplice (non identificativi)
+_VAL_EN = {"tutto": "all", "determinati soltanto": "determined only",
+           "tutte le categorie": "all categories"}
+
+
+def table(stem: str, caption: str, max_rows: int = 30,
+          cols: list[str] | None = None, float_dec: int = 3,
+          rename: dict | None = None) -> str:
+    p = TABDIR / f"{stem}.csv"
+    if not p.exists():
+        return f"> *Table `{stem}` not available.*\n"
+    df = pd.read_csv(p)
+    if cols:
+        df = df[[c for c in cols if c in df.columns]]
+    if rename:
+        df = df.rename(columns=rename)
+    truncated = len(df) > max_rows
+    d = df.head(max_rows).copy()
+    for c in d.columns:
+        if c in _ANNI:
+            # anni e decenni senza separatore delle migliaia (1980, non 1,980)
+            d[c] = d[c].map(lambda v: "n/a" if pd.isna(v) else str(int(v)))
+        elif pd.api.types.is_float_dtype(d[c]):
+            d[c] = d[c].map(lambda v: n(v, float_dec))
+        elif pd.api.types.is_integer_dtype(d[c]):
+            d[c] = d[c].map(lambda v: n(v, 0))
+        elif d[c].dtype == object:
+            d[c] = d[c].map(lambda v: _VAL_EN.get(v, v) if isinstance(v, str) else v)
+    d = d.rename(columns=lambda c: _COL_EN.get(c, c))
+    # `disable_numparse`: senza, tabulate ri-parsa le stringhe gia' formattate
+    out = d.to_markdown(index=False, disable_numparse=True)
+    note = (f"\n\n*First {max_rows} of {n(len(df))} rows shown; the full table "
+            f"is in `tables/{stem}.csv` and `tables/{stem}.tex`.*"
+            if truncated else
+            f"\n\n*Full data in `tables/{stem}.csv` and `tables/{stem}.tex`.*")
+    return f"{out}\n\n**Table: {caption}**{note}\n"
 
 
 # ==========================================================================
 def executive_summary(C) -> str:
     return f"""
-# Pattern di collaborazione fra musicisti italiani
-## Omofilia di genere sessuale e genere musicale su Discogs
+# Collaboration patterns among Italian musicians
+## Gender homophily and musical genre on Discogs
 
-*Analisi condotta il {C['data']} — fonte unica: dump Discogs locale (PostgreSQL)*
+This report was generated automatically at an earlier stage of the analysis
+and has not been revised since. Its interpretation of the time series (a
+reversal of sign) was later withdrawn; the current results are in
+`docs/06-risultati.md` and in the manuscript. The figures below are recomputed
+from the current data files, but the surrounding text may no longer match
+them.
+
+*Analysis run on {C['data']}. Single source: a local Discogs dump (PostgreSQL).*
 
 ---
 
-## Sintesi per il lettore frettoloso
+## Summary for the busy reader
 
-Questo studio ricostruisce **chi ha inciso con chi** fra i musicisti italiani
-presenti in Discogs e chiede se il genere sessuale delle persone strutturi
-quelle collaborazioni. La risposta breve e' che si', ma non nel modo che ci si
-aspetterebbe. L'omofilia esiste ed e' statisticamente solidissima, ma e' molto
-piu' debole della separazione per genere musicale; e' **asimmetrica** — sono le
-donne a fare gruppo fra loro, non gli uomini, all'opposto di quanto riporta la
-letteratura corrente; e non si e' rafforzata dopo il 2000: quello che si e'
-rafforzato e' la tendenza della rete a **chiudersi in triangoli**, che produce
-lo stesso effetto apparente per una ragione diversa.
+This study reconstructs **who recorded with whom** among the Italian musicians
+listed on Discogs and asks whether people's gender structures those
+collaborations. The short answer is yes, but not in the way one would expect.
+Homophily exists and is statistically very solid, but it is much weaker than
+the separation by musical genre; it is **asymmetric** (it is women who cluster
+together, not men, the opposite of what the current literature reports); and
+it did not strengthen after 2000: what strengthened is the network's tendency
+to **close into triangles**, which produces the same apparent effect for a
+different reason.
 
-### I numeri
+### The numbers
 
 | | |
 |---|---|
-| Musicisti italiani identificati | **{n(C['n_pop'])}** |
-| di cui con genere sessuale determinato | {n(C['n_gender_known'])} ({pct(C['share_known'])}) |
-| Quota di donne fra i determinati | **{pct(C['share_f'])}** — un rapporto di **{n(C['ratio_mf'],2)} uomini per ogni donna** |
-| Crediti analizzati | {n(C['n_credits'])}, di cui {n(C['n_track_credits'])} ({pct(C['share_track'])}) risolti sulla singola traccia |
-| Rete di collaborazione | {n(C['n_nodes'])} artisti collegati, {n(C['n_edges'])} legami |
-| Componente gigante | {pct(C['giant'])} degli artisti collegati |
-| Assortativita' di genere sessuale | **r = {n(C['r_mf'],4)}** (IC 95% {n(C['r_mf_lo'],4)}–{n(C['r_mf_hi'],4)}) |
-| Assortativita' di genere musicale | **r = {n(C['r_genre'],4)}** |
-| Omofilia di genere pre-2000 → post-2000 | {n(C['r_pre_mf'],4)} → {n(C['r_post_mf'],4)} (differenza non significativa nell'ERGM) |
-| Omofilia ERGM, donne contro uomini (mediana sulle sottoreti) | **{n(C.get('ergm_F_med'),3)} contro {n(C.get('ergm_M_med'),3)}** in log-odds |
-| ERGM | {n(C.get('ergm_n_reti'))} sottoreti, 3 modelli ciascuna, **{n(C.get('ergm_n_conv'))} convergenti**, `gwesp` incluso |
+| Italian musicians identified | **{n(C['n_pop'])}** |
+| of whom with determined gender | {n(C['n_gender_known'])} ({pct(C['share_known'])}) |
+| Share of women among those with determined gender | **{pct(C['share_f'])}** (a ratio of **{n(C['ratio_mf'],2)} men for every woman**) |
+| Credits analyzed | {n(C['n_credits'])}, of which {n(C['n_track_credits'])} ({pct(C['share_track'])}) resolved to the individual track |
+| Collaboration network | {n(C['n_nodes'])} connected artists, {n(C['n_edges'])} ties |
+| Giant component | {pct(C['giant'])} of connected artists |
+| Gender assortativity | **r = {n(C['r_mf'],4)}** (95% CI {n(C['r_mf_lo'],4)}–{n(C['r_mf_hi'],4)}) |
+| Musical-genre assortativity | **r = {n(C['r_genre'],4)}** |
+| Gender homophily pre-2000 → post-2000 | {n(C['r_pre_mf'],4)} → {n(C['r_post_mf'],4)} (difference not significant in the ERGM) |
+| ERGM homophily, women vs. men (median across subnetworks) | **{n(C.get('ergm_F_med'),3)} vs. {n(C.get('ergm_M_med'),3)}** in log-odds |
+| ERGM | {n(C.get('ergm_n_reti'))} subnetworks, 3 models each, **{n(C.get('ergm_n_conv'))} converged**, `gwesp` included |
 
-### Le cinque cose da sapere
+### The five things to know
 
-1. **La musica registrata italiana e' un mondo di uomini, e lo e' rimasta.**
-   {pct(C['share_f'])} di donne fra gli artisti con genere determinato significa
-   {n(C['ratio_mf'],1)} uomini per ogni donna. La quota non cresce in modo
-   monotono nel tempo: parte dal {pct(C['q_1960'])} per chi debutta negli anni
-   Sessanta, scende al {pct(C['q_1980'])} negli anni Ottanta e risale al
-   {pct(C['q_2020'])} per chi debutta dal 2020.
+1. **Italian recorded music is a men's world, and it has remained one.**
+   A share of {pct(C['share_f'])} women among artists with determined gender
+   means {n(C['ratio_mf'],1)} men for every woman. The share does not grow
+   monotonically over time: it starts at {pct(C['q_1960'])} for those who
+   debuted in the 1960s, falls to {pct(C['q_1980'])} in the 1980s and rises
+   again to {pct(C['q_2020'])} for those who debuted from 2020 onward.
 
-2. **Il genere musicale separa molto piu' del genere sessuale.** L'assortativita'
-   per genere musicale ({n(C['r_genre'],3)}) e' circa
-   {n(C['r_genre']/max(C['r_mf'],1e-9),0)} volte quella per genere sessuale
-   ({n(C['r_mf'],3)}). Chi fa jazz incide con chi fa jazz molto piu'
-   sistematicamente di quanto gli uomini incidano con gli uomini.
+2. **Musical genre separates far more than gender does.** Assortativity by
+   musical genre ({n(C['r_genre'],3)}) is about
+   {n(C['r_genre']/max(C['r_mf'],1e-9),0)} times that by gender
+   ({n(C['r_mf'],3)}). Jazz musicians record with jazz musicians far more
+   systematically than men record with men.
 
-3. **L'omofilia di genere sessuale e' piccola ma reale.** r = {n(C['r_mf'],4)}
-   sembra poco, ma il modello nullo a gradi preservati da' {n(C['r_mf_null'],4)}
-   e l'intervallo di confidenza ({n(C['r_mf_lo'],4)}–{n(C['r_mf_hi'],4)}) sta
-   tutto sopra lo zero. Non e' un effetto di composizione, e' struttura.
+3. **Gender homophily is small but real.** r = {n(C['r_mf'],4)} looks small,
+   but the degree-preserving null model gives {n(C['r_mf_null'],4)} and the
+   confidence interval ({n(C['r_mf_lo'],4)}–{n(C['r_mf_hi'],4)}) lies entirely
+   above zero. It is not a composition effect; it is structure.
 
-4. **Sono le donne a fare gruppo, non gli uomini.** E' il risultato che
-   contraddice piu' nettamente l'attesa. Nell'ERGM, che tiene ferme attivita',
-   coorte, genere musicale e chiusura triadica, il coefficiente di omofilia
-   femminile e' positivo e grande in **tutte e otto** le sottoreti stimate;
-   quello maschile e' vicino a zero, e in Rock e' perfino negativo. Dove un
-   gruppo e' schiacciante maggioranza non ha bisogno di cercarsi; dove e' raro,
-   si addensa.
+4. **It is women who cluster together, not men.** This is the result that
+   most clearly contradicts expectations. In the ERGM, which holds activity,
+   cohort, musical genre and triadic closure constant, the female homophily
+   coefficient is positive and large in **all eight** estimated subnetworks;
+   the male coefficient is close to zero, and in Rock it is even negative.
+   Where a group is an overwhelming majority it has no need to seek itself
+   out; where it is rare, it clusters.
 
-5. **Dopo il 2000 non aumenta l'omofilia: aumenta la chiusura in triangoli.**
-   Descrittivamente l'assortativita' sale da {n(C['r_pre_mf'],4)} a
-   {n(C['r_post_mf'],4)}. Ma nell'ERGM la differenza fra le due epoche nei
-   termini di genere **non e' significativa** (p = {n(C.get('epoca_F_p'),2)}
-   per le donne, {n(C.get('epoca_M_p'),2)} per gli uomini), mentre il termine
-   di chiusura triadica cresce da {n(C.get('epoca_gwesp_pre'),2)} a
-   {n(C.get('epoca_gwesp_post'),2)} con p < 0,0001. Non e' cambiato il criterio
-   con cui si sceglie un collaboratore: e' cambiata la forma della rete.
+5. **After 2000 it is not homophily that increases, but closure into
+   triangles.** Descriptively, assortativity rises from {n(C['r_pre_mf'],4)}
+   to {n(C['r_post_mf'],4)}. But in the ERGM the difference between the two
+   periods in the gender terms is **not significant** (p =
+   {n(C.get('epoca_F_p'),2)} for women, {n(C.get('epoca_M_p'),2)} for men),
+   while the triadic closure term grows from {n(C.get('epoca_gwesp_pre'),2)}
+   to {n(C.get('epoca_gwesp_post'),2)} with p < 0.0001. The criterion by which
+   a collaborator is chosen has not changed: the shape of the network has.
 
-6. **Il pattern "Smurfette" non si osserva.** A parita' di pubblicazioni,
-   coorte e genere musicale, l'essere donna non sposta la posizione nella rete
-   su nessuna delle tre misure di centralita' usate (sezione 6.2). La
-   disuguaglianza e' grande, ma sta nell'**accesso** e nel volume di attivita',
-   non nella posizione di chi e' riuscito a entrare.
+6. **The "Smurfette" pattern is not observed.** Holding releases, cohort and
+   musical genre constant, being a woman does not shift network position on
+   any of the three centrality measures used (section 6.2). The inequality is
+   large, but it lies in **access** and in the volume of activity, not in the
+   position of those who managed to get in.
 
-> **Nota di misura.** Tutte le assortativita' di genere riportate come principali
-> sono calcolate sui soli archi in cui **entrambi** gli artisti hanno un genere
-> determinato ({pct(C['quota_archi_mf'])} degli archi). Includere gli `unknown`
-> come quarta categoria gonfia sistematicamente l'indice, perche' gli artisti
-> poco documentati collaborano fra loro piu' del caso per ragioni di copertura
-> dei dati. Il confronto fra le due misure e' in tabella alla sezione 5.1.
+> **Measurement note.** All gender assortativities reported as main results
+> are computed only on edges where **both** artists have a determined gender
+> ({pct(C['quota_archi_mf'])} of edges). Including `unknown` as a fourth
+> category systematically inflates the index, because poorly documented
+> artists collaborate with each other more than chance would predict, for
+> reasons of data coverage. The two measures are compared in a table in
+> section 5.1.
 
-### Quanto fidarsi
+### How far to trust these results
 
-Il genere sessuale non e' in nessuna fonte: e' **inferito**. Su
-{pct(C['share_known'])} della popolazione si arriva a una determinazione, con
-{n(C['n_wikidata'])} casi ancorati a Wikidata tramite l'identificativo Discogs
-(join esatto, nessuna omonimia) e il resto per via onomastica. Il campione di
-validazione manuale da {n(C['n_validation'])} casi e lo strumento per misurarne
-l'errore sono pronti in `data/validation_sample.csv`; finche' non e' compilato a
-mano, le cifre qui sopra vanno lette come stime con un errore non ancora
-quantificato. Il Monte Carlo della sezione 8.1 mostra comunque che l'omofilia
-resta positiva **in ogni scenario di imputazione**, compreso quello costruito
-apposta per minimizzarla.
+Gender does not appear in any source: it is **inferred**. A determination is
+reached for {pct(C['share_known'])} of the population, with
+{n(C['n_wikidata'])} cases anchored to Wikidata through the Discogs identifier
+(exact join, no homonymy) and the rest inferred from first names. The manual
+validation sample of {n(C['n_validation'])} cases and the tool for measuring
+the error are ready in `data/validation_sample.csv`; until the sample is
+coded by hand, the figures above should be read as estimates with an error
+that has not yet been quantified. The Monte Carlo analysis in section 8.1
+nonetheless shows that homophily remains positive **in every imputation
+scenario**, including the one built specifically to minimize it.
 
 ---
 """
@@ -127,672 +260,671 @@ apposta per minimizzarla.
 # ==========================================================================
 def sezione_dati(C) -> str:
     return f"""
-# 1. Sorgenti dati: cosa c'e', cosa manca, cosa si e' dovuto costruire
+# 1. Data sources: what is there, what is missing, what had to be built
 
-## 1.1 La fonte
+## 1.1 The source
 
-L'analisi usa **una sola fonte**: una copia locale del dump Discogs in
-PostgreSQL (database `discogs`, {n(C['db_rows'])} righe nelle tabelle
-utilizzate). Il disegno iniziale prevedeva anche un secondo database iTunes e
-una tabella-ponte fra i due; su indicazione del committente iTunes e' stato
-**escluso**. La conseguenza metodologica e' netta e va dichiarata: non esiste
-alcuna verifica incrociata indipendente dell'anagrafica degli artisti, e l'asse
-di robustezza "unione delle fonti contro sola Discogs" non ha piu' oggetto. Al
-suo posto sono stati introdotti due assi alternativi (soglia di italianita' e
-uso o meno dei crediti a livello traccia), discussi nella sezione 8.2.
+The analysis uses **a single source**: a local copy of the Discogs dump in
+PostgreSQL (database `discogs`, {n(C['db_rows'])} rows in the tables used).
+The initial design also included a second database, iTunes, and a bridge
+table between the two; at the client's request iTunes was **excluded**. The
+methodological consequence is clear-cut and must be stated: there is no
+independent cross-check of the artist records, and the robustness axis "union
+of sources vs. Discogs only" no longer applies. In its place, two alternative
+axes were introduced (the Italian-share threshold and the use or non-use of
+track-level credits), discussed in section 8.2.
 
-Tutte le sessioni verso il database hanno girato con
-`default_transaction_read_only = on`. In PostgreSQL questa impostazione vieta
-anche le tabelle temporanee, quindi l'estrazione e' stata riscritta per non
-creare **alcun** oggetto sul server: le liste di identificativi calcolate lato
-Python tornano al database come letterali `int[]`. Nessuna scrittura, di nessun
-tipo, ha toccato la fonte.
+All database sessions ran with `default_transaction_read_only = on`. In
+PostgreSQL this setting also forbids temporary tables, so the extraction was
+rewritten to create **no** objects on the server: lists of identifiers
+computed in Python are sent back to the database as `int[]` literals. No write
+of any kind touched the source.
 
-## 1.2 Tre assenze che hanno cambiato il disegno
+## 1.2 Three gaps that changed the design
 
-L'esplorazione ha trovato tre vuoti nel dump che hanno imposto deviazioni dal
-piano originale. Vanno messi in chiaro perche' limitano cio' che si puo'
-concludere.
+Exploration found three gaps in the dump that forced deviations from the
+original plan. They need to be stated clearly because they limit what can be
+concluded.
 
-**`release_label` e' vuota (0 righe).** Non esiste alcun legame fra pubblicazione
-ed etichetta discografica. L'euristica prevista per identificare i musicisti
-italiani a partire dalle *etichette italiane* e' quindi inapplicabile, e con
-essa cade anche ogni analisi per casa discografica. L'italianita' si appoggia
-percio' al solo paese di pubblicazione.
+**`release_label` is empty (0 rows).** There is no link between releases and
+record labels. The planned heuristic for identifying Italian musicians through
+*Italian labels* therefore cannot be applied, and with it goes any analysis by
+record company. Italian identity therefore rests on the country of release
+alone.
 
-**`release_genre` e `release_style` sono vuote (0 righe).** Il genere musicale e'
-disponibile unicamente attraverso il *master* (`master_genre`), e i master
-coprono circa il 59% delle pubblicazioni. E' la ragione per cui
-{pct(1-C['share_genre'])} della popolazione resta senza genere musicale
-assegnato.
+**`release_genre` and `release_style` are empty (0 rows).** Musical genre is
+available only through the *master* (`master_genre`), and masters cover about
+59% of releases. This is why {pct(1-C['share_genre'])} of the population has
+no musical genre assigned.
 
-**L'entita' "Various Artists" e' di fatto assente.** In tutto `release_artist`
-(oltre 92 milioni di righe) i crediti principali attribuiti a un artista di nome
-"Various*" sono **328**. In questo dump le raccolte non usano il segnaposto
-consueto: elencano direttamente gli artisti. Il filtro `exclude_various` e'
-quindi quasi inerte ({n(C['n_various'])} pubblicazioni intercettate) e le
-raccolte vanno riconosciute da un criterio diverso — la presenza di piu' artisti
-principali distinti — che e' il filtro `exclude_compilations` usato come asse di
-robustezza.
+**The "Various Artists" entity is effectively absent.** In the whole of
+`release_artist` (over 92 million rows) there are **328** main credits
+attributed to an artist named "Various*". In this dump compilations do not use
+the usual placeholder: they list the artists directly. The `exclude_various`
+filter is therefore almost inert ({n(C['n_various'])} releases caught), and
+compilations have to be recognized by a different criterion, the presence of
+several distinct main artists, which is the `exclude_compilations` filter used
+as a robustness axis.
 
-## 1.3 Chi e' "musicista italiano"
+## 1.3 Who counts as an "Italian musician"
 
-Senza dati di etichetta e senza un campo di nazionalita', l'italianita' e' stata
-definita sulla **quota di pubblicazioni italiane** nella carriera di ciascun
-artista:
+Without label data and without a nationality field, Italian identity was
+defined by the **share of Italian releases** in each artist's career:
 
-> Un artista entra nella popolazione se ha almeno {C['min_it']} pubblicazioni con
-> `country = 'Italy'`, almeno {C['min_all']} pubblicazioni in totale, e se le
-> italiane sono almeno il {pct(C['min_share'],0)} del totale.
+> An artist enters the population if they have at least {C['min_it']} releases
+> with `country = 'Italy'`, at least {C['min_all']} releases in total, and if
+> the Italian ones make up at least {pct(C['min_share'],0)} of the total.
 
-La regola della quota e' la parte che fa il lavoro. Il solo conteggio assoluto
-produce un elenco dominato da Beethoven, Mozart, Bach, Chopin e Karajan: il
-repertorio classico viene ristampato in Italia in grandi quantita', e chi guarda
-solo "quante pubblicazioni italiane" scambia il catalogo per la biografia. La
-quota li esclude tutti, perche' per ciascuno di loro le edizioni italiane sono
-una frazione minima di un catalogo mondiale.
+The share rule is the part that does the work. The absolute count alone
+produces a list dominated by Beethoven, Mozart, Bach, Chopin and Karajan: the
+classical repertoire is reissued in Italy in large quantities, and counting
+only "how many Italian releases" mistakes the catalog for the biography. The
+share excludes all of them, because for each of them the Italian editions are
+a tiny fraction of a worldwide catalog.
 
-Il controllo di validita' e' stato fatto guardando i primi venticinque artisti
-per volume: Mina, Lucio Battisti, Vasco Rossi, Fabrizio De Andre', Franco
-Battiato, Lucio Dalla, Mogol, Renato Zero, Francesco De Gregori, Domenico
-Modugno, Claudio Villa, piu' un gruppo di produttori e tecnici italiani
-realmente attivi (Antonio Baglio, Giovanni Versari, Vincenzo Tempera). Nessun
-falso positivo evidente.
+The validity check consisted of inspecting the top twenty-five artists by
+volume: Mina, Lucio Battisti, Vasco Rossi, Fabrizio De André, Franco Battiato,
+Lucio Dalla, Mogol, Renato Zero, Francesco De Gregori, Domenico Modugno,
+Claudio Villa, plus a group of Italian producers and engineers who are
+genuinely active (Antonio Baglio, Giovanni Versari, Vincenzo Tempera). No
+evident false positives.
 
-Restano due limiti strutturali, che nessuna soglia puo' togliere:
+Two structural limits remain that no threshold can remove:
 
-* la regola misura **dove si pubblica**, non **da dove si viene**. Un musicista
-  straniero che abbia lavorato quasi solo per il mercato italiano entra nella
-  popolazione; un italiano emigrato che pubblichi soprattutto all'estero ne
-  esce. La soglia al {pct(C['min_share'],0)} tiene basso il primo errore a costo
-  di aumentare il secondo;
-* Discogs non e' un censimento. Sovrarappresenta il vinile, il collezionismo e
-  l'elettronica, e sottorappresenta la musica che non e' mai uscita su supporto
-  fisico catalogato. La composizione per genere musicale della sezione 3.2 va
-  letta come composizione *del catalogo Discogs*, non della musica italiana.
+* the rule measures **where people release**, not **where they come from**. A
+  foreign musician who has worked almost exclusively for the Italian market
+  enters the population; an Italian emigrant who releases mostly abroad drops
+  out. The {pct(C['min_share'],0)} threshold keeps the first error low at the
+  cost of increasing the second;
+* Discogs is not a census. It overrepresents vinyl, collecting and electronic
+  music, and underrepresents music that was never released on a cataloged
+  physical format. The composition by musical genre in section 3.2 should be
+  read as the composition *of the Discogs catalog*, not of Italian music.
 
-**Effetto della soglia** (misurato): {n(C['n_cand_ge2'])} artisti hanno almeno due
-pubblicazioni italiane; applicando quota e minimo, la popolazione scende a
-**{n(C['n_pop'])}**. Alzando la quota a 0,60 e 0,70 si ottengono
-{n(C['n_pop_60'])} e {n(C['n_pop_70'])} artisti: la sezione 8.2 mostra che le
-conclusioni non cambiano.
+**Effect of the threshold** (measured): {n(C['n_cand_ge2'])} artists have at
+least two Italian releases; applying the share and the minimum, the population
+falls to **{n(C['n_pop'])}**. Raising the share to 0.60 and 0.70 gives
+{n(C['n_pop_60'])} and {n(C['n_pop_70'])} artists: section 8.2 shows that the
+conclusions do not change.
 """
 
 
 # ==========================================================================
 def sezione_gender(C) -> str:
     src = get("population_gender.parquet")
-    by_src = (src.label_source.value_counts().rename_axis("fonte")
-              .reset_index(name="artisti") if src is not None else pd.DataFrame())
-    by_src["quota"] = (by_src.artisti / by_src.artisti.sum()).map(lambda v: pct(v))
-    by_src["artisti"] = by_src.artisti.map(lambda v: n(v))
+    by_src = (src.label_source.value_counts().rename_axis("source")
+              .reset_index(name="artists") if src is not None else pd.DataFrame())
+    by_src["share"] = (by_src.artists / by_src.artists.sum()).map(lambda v: pct(v))
+    by_src["artists"] = by_src.artists.map(lambda v: n(v))
     return f"""
-# 2. Il genere sessuale: come e' stato inferito
+# 2. Gender: how it was inferred
 
-## 2.1 Il problema
+## 2.1 The problem
 
-Nessuna delle fonti disponibili contiene il genere sessuale delle persone.
-Va inferito, e l'inferenza va documentata fino in fondo, perche' e' il punto piu'
-fragile dell'intero studio: ogni conclusione sull'omofilia di genere poggia su
-un'etichetta che nessuno ha dichiarato.
+None of the available sources records people's gender. It has to be inferred,
+and the inference must be documented in full, because it is the most fragile
+point of the whole study: every conclusion about gender homophily rests on a
+label that nobody declared.
 
-La cascata usata procede dal segnale piu' solido al piu' debole, e ogni artista
-porta con se' **da quale livello** viene la sua etichetta e **con quanta
-confidenza**.
+The cascade proceeds from the strongest signal to the weakest, and each artist
+carries **which level** their label comes from and **with what confidence**.
 
-## 2.2 Livello 1 — Wikidata agganciato all'identificativo Discogs
+## 2.2 Level 1: Wikidata linked to the Discogs identifier
 
-Wikidata espone la proprieta' `P1953`, *Discogs artist ID*. Questo consente un
-**join esatto sull'identificativo**, non sul nome: nessuna omonimia, nessun
-matching approssimato. Sono state raccolte tutte le entita' con `P1953` e `P21`
-(genere): **{n(C['n_wd_total'])} identificativi Discogs distinti**, con
-{n(C['n_wd_ambiguous'])} casi ambigui scartati e **zero blocchi persi** su una
-paginazione ricorsiva per prefisso dell'identificativo.
+Wikidata exposes property `P1953`, *Discogs artist ID*. This allows an **exact
+join on the identifier**, not on the name: no homonymy, no approximate
+matching. All entities with `P1953` and `P21` (sex or gender) were collected:
+**{n(C['n_wd_total'])} distinct Discogs identifiers**, with
+{n(C['n_wd_ambiguous'])} ambiguous cases discarded and **zero blocks lost** in
+a recursive pagination by identifier prefix.
 
-Di questi, **{n(C['n_wikidata'])} ricadono nella nostra popolazione**
-({pct(C['n_wikidata']/C['n_pop'])}). E' una copertura bassa in termini assoluti,
-e il motivo e' ovvio: Wikidata descrive persone notabili, mentre la popolazione
-Discogs e' fatta in larga parte di turnisti, arrangiatori, fonici e produttori
-che non hanno una voce enciclopedica. Ma sono {n(C['n_wikidata'])} etichette
-**certe**, ed e' su quelle che si regge il livello successivo.
+Of these, **{n(C['n_wikidata'])} fall within our population**
+({pct(C['n_wikidata']/C['n_pop'])}). This is low coverage in absolute terms,
+and the reason is obvious: Wikidata describes notable people, while the
+Discogs population consists largely of session musicians, arrangers, sound
+engineers and producers who have no encyclopedia entry. But these are
+{n(C['n_wikidata'])} **certain** labels, and the next level rests on them.
 
-## 2.3 Livello 2 — l'onomastica, costruita dai dati e non da una lista
+## 2.3 Level 2: first names, learned from the data rather than taken from a list
 
-Il disegno prevedeva la lista onomastica ISTAT. In questo ambiente non e'
-risultata disponibile come dataset scaricabile; il ripiego adottato e' migliore
-per lo scopo, non peggiore.
+The design called for the ISTAT list of first names. In this environment it
+was not available as a downloadable dataset; the fallback adopted is better
+for the purpose, not worse.
 
-Gli stessi {n(C['n_wd_total'])} identificativi Discogs etichettati da Wikidata
-sono stati ricongiunti ai **nomi** nel database: ne escono
-**{n(C['n_wd_names'])} coppie nome→genere di musicisti**, un corpus onomastico
-specifico del dominio, molto piu' ampio dei soli italiani e molto piu' pertinente
-di una lista anagrafica generica.
+The same {n(C['n_wd_total'])} Discogs identifiers labeled by Wikidata were
+joined back to the **names** in the database: this yields
+**{n(C['n_wd_names'])} name→gender pairs for musicians**, a domain-specific
+corpus of first names, much larger than the Italians alone and much more
+relevant than a generic civil-registry list.
 
-Da qui si ricavano due dizionari, e l'ordine in cui vengono consultati e' la
-scelta metodologicamente piu' importante di questa sezione:
+Two dictionaries are derived from it, and the order in which they are
+consulted is the most important methodological choice in this section:
 
-1. **dizionario italiano** ({n(C['n_prior_it'])} nomi), costruito sui soli
-   artisti italiani etichettati da Wikidata;
-2. **`gender-guesser` con lookup italiano**;
-3. **dizionario globale** ({n(C['n_prior_glob'])} nomi), ma **solo per i nomi che
-   il lookup italiano non riconosce**;
-4. `gender-guesser` globale, come ultima risorsa e con confidenza ridotta.
+1. **Italian dictionary** ({n(C['n_prior_it'])} names), built only on the
+   Italian artists labeled by Wikidata;
+2. **`gender-guesser` with the Italian lookup**;
+3. **global dictionary** ({n(C['n_prior_glob'])} names), but **only for names
+   that the Italian lookup does not recognize**;
+4. global `gender-guesser`, as a last resort and with reduced confidence.
 
-Il vincolo al punto 3 non e' pedanteria. Andrea, Simone, Nicola, Daniele,
-Michele e Gabriele sono nomi maschili in Italia e femminili nei dizionari
-dominati dall'inglese: usare il dizionario globale senza quel filtro
-ribalterebbe il genere di alcune delle prime posizioni dell'onomastica maschile
-italiana, con un errore sistematico e non casuale, concentrato proprio sui nomi
-piu' frequenti. Verificato sui dati: i due dizionari concordano su tutti i
-{n(C['n_prior_common'])} nomi che hanno in comune, il che indica che il filtro
-sta effettivamente tenendo separati i due domini invece di mascherare un
-conflitto.
+The constraint in point 3 is not pedantry. Andrea, Simone, Nicola, Daniele,
+Michele and Gabriele are male names in Italy and female names in
+English-dominated dictionaries: using the global dictionary without that
+filter would flip the gender of some of the most common Italian male first
+names, a systematic rather than random error, concentrated precisely on the
+most frequent names. Checked against the data: the two dictionaries agree on
+all {n(C['n_prior_common'])} names they have in common, which indicates that
+the filter is actually keeping the two domains apart rather than masking a
+conflict.
 
-## 2.4 Livello 3 — i gruppi si leggono dai membri
+## 2.4 Level 3: groups are read from their members
 
-Un nome di band non dice nulla sul genere delle persone. Per i gruppi si guarda
-percio' la composizione (`group_member`): se i membri di genere noto sono di
-entrambi i generi il gruppo e' **`mixed`**, se sono tutti dello stesso genere il
-gruppo eredita quello, se se ne conoscono meno di due resta `unknown`. Sono
-stati risolti **{n(C['n_groups_res'])} gruppi su {n(C['n_groups'])}**, di cui
-{n(C['n_mixed'])} misti.
+A band name says nothing about the gender of its members. For groups,
+therefore, the membership is examined (`group_member`): if the members of
+known gender include both genders the group is **`mixed`**, if they are all of
+the same gender the group inherits it, and if fewer than two are known it
+remains `unknown`. **{n(C['n_groups_res'])} of {n(C['n_groups'])} groups**
+were resolved, of which {n(C['n_mixed'])} are mixed.
 
-## 2.5 Esito della cascata
+## 2.5 Outcome of the cascade
 
-{by_src.to_markdown(index=False)}
+{by_src.to_markdown(index=False, disable_numparse=True)}
 
-**Tabella — Origine dell'etichetta di genere sessuale per ciascun artista.**
-La riga `onomastico_prior_it` porta da sola la maggior parte del carico: e' il
-dizionario costruito sui {n(C['n_wikidata'])} italiani certi, e bastano
-{n(C['n_prior_it'])} nomi propri per coprire quasi la meta' della popolazione,
-perche' l'onomastica italiana e' fortemente concentrata. `none` e
-`group_unresolved` sono i due volti del non sapere: artisti il cui nome non e'
-un nome di persona riconoscibile (sigle, pseudonimi, progetti) e gruppi di cui
-non si conoscono abbastanza membri.
+**Table: Source of the gender label for each artist.** The
+`onomastico_prior_it` row carries most of the load on its own: it is the
+dictionary built on the {n(C['n_wikidata'])} certain Italians, and
+{n(C['n_prior_it'])} first names are enough to cover almost half of the
+population, because Italian first names are highly concentrated. `none` and
+`group_unresolved` are the two faces of not knowing: artists whose name is not
+a recognizable personal name (acronyms, pseudonyms, projects) and groups for
+which not enough members are known.
 
-**Esito finale: {pct(C['share_f'])} di donne fra gli artisti con genere
-determinato**, cioe' {n(C['ratio_mf'],2)} uomini per ogni donna, con
-{pct(1-C['share_known'])} della popolazione che resta indeterminata.
+**Final outcome: {pct(C['share_f'])} women among artists with determined
+gender**, that is, {n(C['ratio_mf'],2)} men for every woman, with
+{pct(1-C['share_known'])} of the population remaining undetermined.
 
-## 2.6 Il pezzo mancante: la validazione manuale
+## 2.6 The missing piece: manual validation
 
-E' stato generato `data/validation_sample.csv`: **{n(C['n_validation'])} artisti**
-estratti in modo stratificato per genere, fascia di confidenza e fonte
-dell'etichetta, con una colonna `human_gender` vuota da compilare a mano.
-Lo script `src/score_validation.py` calcola precisione, richiamo, F1 e matrice
-di confusione per livello della cascata non appena il file e' compilato.
+`data/validation_sample.csv` has been generated: **{n(C['n_validation'])}
+artists** drawn with stratification by gender, confidence band and label
+source, with an empty `human_gender` column to be filled in by hand. The
+script `src/score_validation.py` computes precision, recall, F1 and the
+confusion matrix by cascade level as soon as the file is filled in.
 
-Il campione e' costruito con **allocazione meta' proporzionale e meta'
-uniforme** fra gli strati: la parte proporzionale permette di stimare
-l'accuratezza complessiva senza riponderare, quella uniforme garantisce
-abbastanza casi anche nei livelli rari della cascata. Dentro ogni strato si
-privilegiano nomi propri diversi, perche' altrimenti gli strati piccoli si
-riempiono di omonimi e la validazione misurerebbe l'accuratezza su un nome
-invece che su un livello.
+The sample uses **half proportional and half uniform allocation** across
+strata: the proportional part makes it possible to estimate overall accuracy
+without reweighting, and the uniform part guarantees enough cases even in the
+rare levels of the cascade. Within each stratum, distinct first names are
+favored, because otherwise small strata fill up with people who share a name
+and the validation would measure accuracy on one name rather than on a level.
 
-Su due livelli quel rimedio non basta, e va detto: `onomastico_gg_mostly_female`
-raccoglie 28 artisti che portano **un solo** nome proprio (Mary), e
-`onomastico_gg_mostly_male` ne raccoglie 44 con due (Toni, Leonida). Su quei
-due livelli la validazione potra' dire se quei nomi sono classificati bene, non
-se il livello funziona in generale. Pesano insieme 72 artisti su
-{n(C['n_pop'])}, quindi la cosa non tocca le conclusioni, ma il dato di
-accuratezza che ne uscira' non va letto come se fosse generalizzabile.
+On two levels that remedy is not enough, and this should be said:
+`onomastico_gg_mostly_female` contains 28 artists who share **a single** first
+name (Mary), and `onomastico_gg_mostly_male` contains 44 with two (Toni,
+Leonida). On those two levels the validation will be able to say whether those
+names are classified correctly, not whether the level works in general.
+Together they account for 72 of {n(C['n_pop'])} artists, so this does not
+affect the conclusions, but the resulting accuracy figure should not be read
+as generalizable.
 
-Questo passo **non e' stato eseguito**: richiede giudizio umano. Finche' non lo
-si compila, l'errore dell'inferenza di genere e' delimitato solo dal Monte Carlo
-della sezione 8.1, che pero' misura l'effetto dell'*incertezza sugli unknown*,
-non quello degli *errori sui noti*. E' il limite piu' serio di questo studio.
+This step **has not been carried out**: it requires human judgment. Until it
+is completed, the error of the gender inference is bounded only by the Monte
+Carlo analysis in section 8.1, which, however, measures the effect of
+*uncertainty about the unknowns*, not that of *errors among the knowns*. This
+is the most serious limitation of the study.
 """
 
 
 # ==========================================================================
 def sezione_rete(C) -> str:
     return f"""
-# 3. La rete: come due musicisti diventano collegati
+# 3. The network: how two musicians become connected
 
-## 3.1 Il peso dell'arco e perche' non tutti i crediti valgono uguale
+## 3.1 Edge weight, and why not all credits count the same
 
-Un credito Discogs puo' dire tre cose molto diverse. Puo' dire *"questa persona
-suona il basso nel brano B2"*; puo' dire *"questa persona e' l'artista del
-disco"*; puo' dire *"questa persona compare nei crediti del disco"*, senza
-specificare dove. Trattarli come equivalenti significherebbe dare a una
-coincidenza di copertina lo stesso valore di una sessione documentata.
+A Discogs credit can say three very different things. It can say *"this
+person plays bass on track B2"*; it can say *"this person is the artist of the
+record"*; it can say *"this person appears in the credits of the record"*,
+without specifying where. Treating them as equivalent would mean giving a
+shared sleeve credit the same value as a documented session.
 
-Ogni credito riceve percio' una **specificita'**, e il peso del legame fra due
-artisti la usa:
+Each credit therefore receives a **specificity**, and the weight of the tie
+between two artists uses it:
 
-| ambito | specificita' | che cosa significa |
+| scope | specificity | what it means |
 |---|---|---|
-| `track` | {C['w_track']:.2f} | credito risolto su una traccia precisa |
-| `main` | {C['w_main']:.2f} | artista principale della pubblicazione |
-| `umbrella` | {C['w_umb']:.2f} | credito secondario, senza indicazione di tracce |
+| `track` | {C['w_track']:.2f} | credit resolved to a specific track |
+| `main` | {C['w_main']:.2f} | main artist of the release |
+| `umbrella` | {C['w_umb']:.2f} | secondary credit, with no indication of tracks |
 
-$$w(u,v) = w_t \\cdot |\\text{{tracce condivise}}| + w_r \\cdot \\sum_{{R}} s_u(R)\\, s_v(R)$$
+$$w(u,v) = w_t \\cdot |\\text{{shared tracks}}| + w_r \\cdot \\sum_{{R}} s_u(R)\\, s_v(R)$$
 
-Il primo termine premia la collaborazione **documentata sullo stesso brano**; il
-secondo tiene la co-presenza sulla stessa pubblicazione, scalata dalla
-specificita' di entrambi i crediti. Due turnisti accreditati sulla stessa traccia
-pesano molto piu' di due nomi che compaiono genericamente sullo stesso disco.
+The first term rewards collaboration **documented on the same track**; the
+second retains co-presence on the same release, scaled by the specificity of
+both credits. Two session musicians credited on the same track weigh much more
+than two names that appear generically on the same record.
 
-I crediti a livello traccia vengono da due strade. La prima e'
-`release_track_artist`, che porta un identificativo di traccia globale:
-**{n(C['n_rta'])} crediti**. La seconda e' il campo `tracks` di
-`release_artist`, che indica le posizioni in forma testuale — `A1`, `1 to 3`,
-`4, 6, 12` — e va **risolto**: le posizioni si convertono in tracce reali
-passando per `release_track`. Di {n(C['n_ra_tracks'])} crediti posizionali ne
-sono stati risolti {n(C['n_ra_resolved'])}
-({pct(C['n_ra_resolved']/max(C['n_ra_tracks'],1))}); i restanti usano formule
-libere (*"all tracks except 1, 13 and 14"*) e sono stati **degradati ad
-`umbrella`** anziche' interpretati a forza.
+Track-level credits come from two routes. The first is `release_track_artist`,
+which carries a global track identifier: **{n(C['n_rta'])} credits**. The
+second is the `tracks` field of `release_artist`, which gives positions in
+text form (`A1`, `1 to 3`, `4, 6, 12`) and has to be **resolved**: positions
+are converted into actual tracks through `release_track`. Of
+{n(C['n_ra_tracks'])} positional credits, {n(C['n_ra_resolved'])}
+({pct(C['n_ra_resolved']/max(C['n_ra_tracks'],1))}) were resolved; the rest
+use free-form expressions (*"all tracks except 1, 13 and 14"*) and were
+**downgraded to `umbrella`** rather than forced into an interpretation.
 
-Totale: **{n(C['n_track_credits'])} crediti su {n(C['n_credits'])}
-({pct(C['share_track'])}) sono risolti a livello di singola traccia.**
+Total: **{n(C['n_track_credits'])} of {n(C['n_credits'])} credits
+({pct(C['share_track'])}) are resolved at the level of the individual track.**
 
-## 3.2 Filtri e sottoreti
+## 3.2 Filters and subnetworks
 
-Le pubblicazioni con piu' di {C['max_credits']} artisti accreditati vengono
-scartate: sono raccolte e cofanetti, dove la co-presenza non indica
-collaborazione e il numero di coppie esplode in modo quadratico. Il filtro
-riduce i crediti da {n(C['n_credits'])} a {n(C['n_credits_filt'])}.
+Releases with more than {C['max_credits']} credited artists are discarded:
+they are compilations and box sets, where co-presence does not indicate
+collaboration and the number of pairs grows quadratically. The filter reduces
+the credits from {n(C['n_credits'])} to {n(C['n_credits_filt'])}.
 
-Le sottoreti per ruolo separano due mestieri diversi: **creative**
-(produzione, scrittura, arrangiamento, composizione) e **performance**
-(voce, strumenti, direzione, featuring). Un artista principale senza ruolo
-esplicito e' trattato come interprete, perche' e' cio' che significa essere
-l'artista di un disco.
+The role subnetworks separate two different trades: **creative** (production,
+writing, arrangement, composition) and **performance** (vocals, instruments,
+conducting, featuring). A main artist without an explicit role is treated as a
+performer, because that is what being the artist of a record means.
 
-{table('t2_rete_descrittive', 'Descrittive delle tre reti di collaborazione', float_dec=6)}
+{table('t2_rete_descrittive', 'Descriptive statistics of the three collaboration networks', float_dec=6)}
 
-La rete complessiva e' **sparsa e molto connessa**: densita' dell'ordine di
-{n(C['density'],6)}, ma una componente gigante che assorbe {pct(C['giant'])}
-degli artisti collegati. E' la firma tipica di un mondo professionale in cui
-quasi nessuno lavora isolato e quasi nessuno lavora con tutti. La rete
-`creative` e' piu' piccola e piu' densa di quella `performance`: produttori e
-autori formano un nucleo piu' ristretto e piu' intrecciato di quello degli
-esecutori — un dato che conta per la lettura della sezione 5.3, dove i due ruoli
-mostrano omofilie diverse.
+The overall network is **sparse and highly connected**: density on the order
+of {n(C['density'],6)}, but a giant component that absorbs {pct(C['giant'])}
+of the connected artists. This is the typical signature of a professional
+world in which almost nobody works in isolation and almost nobody works with
+everyone. The `creative` network is smaller and denser than the `performance`
+network: producers and songwriters form a tighter and more interwoven core
+than performers, which matters for the reading of section 5.3, where the two
+roles show different levels of homophily.
 
 {img('f5_distribuzione_gradi',
- "**Distribuzione di grado e forza.** Su scala doppio-logaritmica entrambe le "
- "distribuzioni scendono con una pendenza quasi rettilinea su piu' ordini di "
- "grandezza: la stragrande maggioranza degli artisti ha pochissimi "
- "collaboratori, mentre una minoranza sottile ne ha centinaia. La forza — che "
- "somma i pesi, quindi conta quante volte si e' collaborato e quanto erano "
- "specifici i crediti — ha una coda ancora piu' lunga del grado: i grandi "
- "collaboratori non hanno solo molti partner, hanno relazioni molto piu' "
- "intense. E' il substrato strutturale su cui va letta la sezione 6.1: in una "
- "rete cosi' diseguale, la domanda 'le donne stanno al centro?' va sempre posta "
- "a parita' di attivita', perche' il numero di pubblicazioni da solo spiega gia' "
- "gran parte della centralita'.")}
+ "**Degree and strength distributions.** On a log-log scale both "
+ "distributions decline along an almost straight line over several orders of "
+ "magnitude: the vast majority of artists have very few collaborators, while "
+ "a thin minority have hundreds. Strength, which sums the weights and "
+ "therefore counts how many times people collaborated and how specific the "
+ "credits were, has an even longer tail than degree: the major collaborators "
+ "do not just have many partners, they have much more intense relationships. "
+ "This is the structural background against which section 6.1 should be read: "
+ "in a network this unequal, the question 'are women at the center?' must "
+ "always be asked holding activity constant, because the number of releases "
+ "alone already explains much of centrality.")}
 
-Le analisi che seguono girano sulla **componente gigante**, perche' le misure di
-centralita' e le distanze non sono definite fra componenti separate. La quota
-esclusa e' {pct(1-C['giant'])} degli artisti collegati.
+The analyses that follow run on the **giant component**, because centrality
+measures and distances are not defined across separate components. The
+excluded share is {pct(1-C['giant'])} of the connected artists.
 """
 
 
 # ==========================================================================
 def sezione_risultati(C) -> str:
     return f"""
-# 4. Quante sono le donne, e in quale musica (RQ1)
+# 4. How many women there are, and in which music (RQ1)
 
 {img('f3_quota_donne_per_decennio',
- f"**La quota di donne per decennio di debutto.** La linea non e' la storia di "
- f"un progresso. Parte dal {pct(C['q_1960'])} per chi debutta negli anni "
- f"Sessanta, scende fino al {pct(C['q_1980'])} negli anni Ottanta — il minimo "
- f"della serie — e risale solo di recente, fino al {pct(C['q_2020'])} per chi "
- f"debutta dal 2020. La discesa degli anni Settanta e Ottanta merita cautela "
- f"prima di leggerla come un arretramento reale: coincide con l'espansione "
- f"massiccia del catalogo Discogs in quegli anni, cioe' con l'ingresso in massa "
- f"di crediti tecnici e di produzione — mestieri quasi interamente maschili — "
- f"che diluiscono una quota calcolata su tutti i crediti e non sui soli "
- f"interpreti. La risalita recente e' invece coerente sia in ampiezza sia in "
- f"direzione con quanto si osserva negli altri cataloghi musicali. In ogni "
- f"decennio, comunque, la banda di confidenza resta lontanissima dalla parita'.")}
+ f"**The share of women by decade of debut.** The line is not a story of "
+ f"progress. It starts at {pct(C['q_1960'])} for those who debuted in the "
+ f"1960s, falls to {pct(C['q_1980'])} in the 1980s (the lowest point in the "
+ f"series) and rises only recently, to {pct(C['q_2020'])} for those who "
+ f"debuted from 2020 onward. The decline of the 1970s and 1980s calls for "
+ f"caution before it is read as a real setback: it coincides with the massive "
+ f"expansion of the Discogs catalog for those years, that is, with the mass "
+ f"entry of technical and production credits (trades that are almost "
+ f"entirely male), which dilute a share computed over all credits rather than "
+ f"over performers only. The recent rise, by contrast, is consistent in both "
+ f"magnitude and direction with what is observed in other music catalogs. In "
+ f"every decade, however, the confidence band remains very far from parity.")}
 
 {img('f4_quota_donne_genere_x_decennio',
- "**Quota di donne per genere musicale e decennio.** I pannelli mostrano che "
- "non esiste una singola traiettoria di genere: esistono generi musicali con "
- "storie diverse. Il livello di partenza conta piu' della pendenza — un genere "
- "che parte basso tende a restare basso attraverso i decenni, il che e' "
- "esattamente la firma di una segregazione che si riproduce per reclutamento "
- "piuttosto che dissolversi col tempo.")}
+ "**Share of women by musical genre and decade.** The panels show that there "
+ "is no single trajectory of gender representation: there are musical genres "
+ "with different histories. The starting level matters more than the slope: a "
+ "genre that starts low tends to stay low across the decades, which is "
+ "exactly the signature of a segregation that reproduces itself through "
+ "recruitment rather than dissolving over time.")}
 
 {table('t3_quota_donne_genere_decennio',
- 'Quota di donne per genere musicale e decennio di debutto, con intervalli di Wilson al 95%',
+ 'Share of women by musical genre and decade of debut, with 95% Wilson intervals',
  max_rows=25)}
 
-## 4.1 Il confronto con i pattern noti in letteratura
+## 4.1 Comparison with the patterns reported in the literature
 
-Il riferimento consueto per l'hip hop e' un rapporto intorno a **4 uomini per
-ogni donna**. Nei dati italiani il rapporto e' **{n(C['ratio_hiphop'],1)} a 1**
-({pct(C['q_hiphop'])} di donne): sensibilmente **piu' squilibrato** del
-riferimento internazionale. Due letture non alternative: la scena hip hop
-italiana censita da Discogs e' piu' piccola e piu' recente, quindi piu' esposta
-al fatto che i ruoli di produzione — dove le donne sono piu' rare — pesino
-relativamente di piu'; e il conteggio qui include tutti i crediti, non solo gli
-interpreti principali, il che abbassa la quota rispetto alle statistiche basate
-sulle classifiche.
+The usual benchmark for hip hop is a ratio of about **4 men for every woman**.
+In the Italian data the ratio is **{n(C['ratio_hiphop'],1)} to 1**
+({pct(C['q_hiphop'])} women): markedly **more unbalanced** than the
+international benchmark. There are two readings, not mutually exclusive: the
+Italian hip hop scene recorded in Discogs is smaller and more recent, and
+therefore more exposed to the fact that production roles, where women are
+rarer, weigh relatively more; and the count here includes all credits, not
+only lead performers, which lowers the share compared with chart-based
+statistics.
 
-All'estremo opposto, **Classical** ({pct(C['q_classical'])}) e **Children's**
-({pct(C['q_children'])}) sono i generi con la presenza femminile piu' alta —
-il secondo sopra il {pct(C['q_children'],0)}, l'unico dell'intero corpus in cui
-le donne si avvicinano alla meta'. La distanza fra Children's e Hip Hop, a
-parita' di popolazione e di metodo, e' di oltre
-{n((C['q_children']-C['q_hiphop'])*100,0)} punti percentuali: il genere musicale
-e' il predittore piu' forte della presenza femminile in tutto questo studio.
+At the opposite end, **Classical** ({pct(C['q_classical'])}) and
+**Children's** ({pct(C['q_children'])}) are the genres with the highest
+female presence, the latter above {pct(C['q_children'],0)}, the only genre in
+the entire corpus in which women approach half. The gap between Children's and
+Hip Hop, with the same population and the same method, is more than
+{n((C['q_children']-C['q_hiphop'])*100,0)} percentage points: musical genre is
+the strongest predictor of female presence in this entire study.
 
-**Rock ({pct(C['q_rock'])}) e Electronic ({pct(C['q_electronic'])})**, che
-insieme fanno la parte maggiore della popolazione, stanno entrambi sotto la
-media generale. E' su queste due scene, per peso numerico, che si decide la
-quota complessiva.
+**Rock ({pct(C['q_rock'])}) and Electronic ({pct(C['q_electronic'])})**, which
+together make up the largest part of the population, are both below the
+overall average. Given their numerical weight, it is these two scenes that
+determine the overall share.
 """
 
 
 # ==========================================================================
 def sezione_omofilia(C) -> str:
     return f"""
-# 5. Omofilia: chi incide con chi (RQ2)
+# 5. Homophily: who records with whom (RQ2)
 
-## 5.1 Il quadro generale
+## 5.1 The overall picture
 
 {img('f1_mixing_gender_oss_att',
- "**Chi collabora con chi, rispetto al caso.** Ogni cella e' il rapporto fra i "
- "legami osservati e quelli attesi sotto un modello nullo che conserva "
- "esattamente il grado di ogni artista e la composizione della popolazione: "
- "l'unica cosa randomizzata e' *chi sta con chi*. Un valore di 1 significa "
- "'come il caso', sopra 1 significa piu' del previsto. La diagonale sopra 1 e "
- "le celle fuori diagonale sotto 1 sono la definizione operativa di omofilia. "
- "Vale la pena notare che anche la cella unknown-unknown si discosta da 1: non "
- "e' un fatto sociale ma un fatto di copertura dei dati — gli artisti su cui "
- "non sappiamo nulla tendono a stare insieme perche' condividono le stesse "
- "caratteristiche che li rendono poco documentati (pochi crediti, ruoli minori, "
- "epoche marginali). E' precisamente questo il motivo per cui l'ERGM della "
- "sezione 7 esclude i nodi unknown invece di trattarli come una categoria.")}
+ "**Who collaborates with whom, relative to chance.** Each cell is the ratio "
+ "between the observed ties and those expected under a null model that "
+ "preserves exactly each artist's degree and the composition of the "
+ "population: the only thing randomized is *who is with whom*. A value of 1 "
+ "means 'as by chance', above 1 means more than expected. A diagonal above 1 "
+ "and off-diagonal cells below 1 are the operational definition of homophily. "
+ "The unknown–unknown cell also departs from 1: this is not a social fact but "
+ "a matter of data coverage. Artists about whom we know nothing tend to be "
+ "together because they share the same characteristics that make them poorly "
+ "documented (few credits, minor roles, marginal periods). This is precisely "
+ "why the ERGM in section 7 excludes unknown nodes instead of treating them as "
+ "a category.")}
 
-{table('t3_assortativita_globale', "Assortativita' osservata e sotto modello nullo", float_dec=4)}
+{table('t3_assortativita_globale', "Assortativity, observed and under the null model", float_dec=4)}
 
 {table('t3_assortativita_MF_vs_tutte',
- "Assortativita' calcolata sui soli nodi con attributo determinato contro il "
- "calcolo che tratta 'indeterminato' come una categoria, per il genere "
- "sessuale e per quello musicale", float_dec=4, max_rows=40,
+ "Assortativity computed only on nodes with a determined attribute, compared "
+ "with the computation that treats 'undetermined' as a category, for gender "
+ "and for musical genre", float_dec=4, max_rows=40,
  cols=['sottorete', 'strato', 'attributo', 'categorie', 'archi_usati',
        'quota_archi_usati', 'r', 'ci_lo', 'ci_hi'],
- rename={'archi_usati': 'archi', 'quota_archi_usati': 'quota archi',
+ rename={'archi_usati': 'edges', 'quota_archi_usati': 'edge share',
          'attributo': 'attr.'})}
 
-### Una precisazione di misura che cambia i numeri
+### A measurement issue that changes the numbers
 
-Le due tabelle vanno lette insieme, perche' la seconda corregge la prima.
+The two tables should be read together, because the second corrects the
+first.
 
-Trattare `unknown` come una quarta categoria alla pari di M ed F gonfia
-l'assortativita': la cella unknown-unknown sta molto sopra l'atteso, ma non
-perche' quelle persone si cerchino fra loro. Si cercano fra loro le
-caratteristiche che le rendono poco documentate — pochi crediti, ruoli minori,
-epoche marginali, pseudonimi — e sono le stesse che rendono difficile inferirne
-il genere. E' copertura dei dati che si traveste da struttura sociale.
+Treating `unknown` as a fourth category on a par with M and F inflates
+assortativity: the unknown–unknown cell is far above expectation, but not
+because those people seek each other out. What attracts them to each other
+are the characteristics that make them poorly documented (few credits, minor
+roles, marginal periods, pseudonyms), and these are the same characteristics
+that make their gender hard to infer. It is data coverage disguised as social
+structure.
 
-La misura di riferimento restringe percio' il calcolo agli archi in cui entrambi
-gli estremi hanno genere determinato: **{pct(C['quota_archi_mf'])} degli archi**.
-La differenza non e' cosmetica: **r passa da {n(C['r_gender'],4)} a
-{n(C['r_mf'],4)}**, cioe' un terzo dell'omofilia apparente era artefatto.
+The reference measure therefore restricts the computation to edges where both
+endpoints have a determined gender: **{pct(C['quota_archi_mf'])} of edges**.
+The difference is not cosmetic: **r goes from {n(C['r_gender'],4)} to
+{n(C['r_mf'],4)}**, meaning that a third of the apparent homophily was an
+artifact.
 
-Lo stesso controllo e' stato fatto sul **genere musicale**, dove
-'Unknown' e' altrettanto presente, e da' il risultato **opposto**: togliendo gli
-indeterminati l'assortativita' sale da {n(C['r_genre_tutte'],4)} a
-{n(C['r_genre_det'],4)}. Il motivo e' che gli artisti senza genere musicale
-assegnato non si aggregano fra loro per genere — non ne hanno uno — e quindi
-diluiscono la diagonale invece di gonfiarla. Riportare entrambi i confronti
-serve a chiarire che l'esclusione degli indeterminati e' una scelta di metodo
-applicata in modo uniforme, non un accorgimento adottato dove conveniva: sul
-genere sessuale abbassa il risultato, sul genere musicale lo alza.
+The same check was carried out on **musical genre**, where 'Unknown' is just
+as common, and it gives the **opposite** result: removing the undetermined
+cases, assortativity rises from {n(C['r_genre_tutte'],4)} to
+{n(C['r_genre_det'],4)}. The reason is that artists without an assigned
+musical genre do not cluster together by genre (they have none), and so they
+dilute the diagonal instead of inflating it. Reporting both comparisons makes
+clear that excluding undetermined cases is a methodological choice applied
+uniformly, not an adjustment adopted where it was convenient: for gender it
+lowers the result, for musical genre it raises it.
 
-### Il risultato centrale
+### The central result
 
-L'assortativita' per **genere musicale** vale {n(C['r_genre'],3)}. E' un valore
-molto alto: le carriere si svolgono dentro un genere e le collaborazioni seguono
-i confini del genere quasi come se fossero confini di settore.
+Assortativity by **musical genre** is {n(C['r_genre'],3)}. This is a very high
+value: careers unfold within a genre, and collaborations follow genre
+boundaries almost as if they were industry boundaries.
 
-L'assortativita' per **genere sessuale** vale {n(C['r_mf'],4)}, circa
-{n(C['r_genre']/max(C['r_mf'],1e-9),0)} volte meno, con intervallo di confidenza
-{n(C['r_mf_lo'],4)}–{n(C['r_mf_hi'],4)} e modello nullo a {n(C['r_mf_null'],4)}.
-Preso da solo il numero sembra trascurabile; non lo e', perche' su
-{n(C['n_edges'])} archi anche un effetto piccolo e' misurato con precisione
-elevata e l'intervallo sta interamente sopra lo zero.
+Assortativity by **gender** is {n(C['r_mf'],4)}, about
+{n(C['r_genre']/max(C['r_mf'],1e-9),0)} times lower, with a confidence
+interval of {n(C['r_mf_lo'],4)}–{n(C['r_mf_hi'],4)} and a null-model value of
+{n(C['r_mf_null'],4)}. Taken alone the number looks negligible; it is not,
+because with {n(C['n_edges'])} edges even a small effect is measured with high
+precision and the interval lies entirely above zero.
 
-La lettura sostanziale e' che **il genere sessuale struttura le collaborazioni,
-ma molto meno di quanto faccia la specializzazione musicale**. Chi cerca
-un bassista lo cerca nel proprio giro musicale molto piu' sistematicamente di
-quanto lo cerchi del proprio sesso. Questo non rende l'omofilia di genere
-irrilevante — rende il genere musicale il canale attraverso cui essa
-prevalentemente opera, come mostra il paragrafo seguente.
+The substantive reading is that **gender structures collaborations, but far
+less than musical specialization does**. Someone looking for a bass player
+looks within their own musical circle far more systematically than among
+people of their own sex. This does not make gender homophily irrelevant: it
+makes musical genre the main channel through which it operates, as the next
+paragraph shows.
 
 {img('f2_mixing_genere_musicale_oss_att',
- "**Omofilia per genere musicale.** La diagonale domina l'immagine. I generi "
- "piu' chiusi non sono necessariamente i piu' grandi: la chiusura misura quanto "
- "una scena recluta al proprio interno, non quanto e' popolosa. Le celle fuori "
- "diagonale che superano 1 indicano le coppie di generi fra cui esiste un "
- "traffico reale di musicisti — i confini permeabili del sistema.")}
+ "**Homophily by musical genre.** The diagonal dominates the image. The most "
+ "closed genres are not necessarily the largest: closure measures how much a "
+ "scene recruits from within, not how populous it is. Off-diagonal cells "
+ "above 1 indicate the pairs of genres between which there is a real flow of "
+ "musicians: the permeable boundaries of the system.")}
 
-## 5.2 L'omofilia nel tempo: il risultato controintuitivo
+## 5.2 Homophily over time: the counterintuitive result
 
 {img('f6_assortativita_per_strato',
- f"**Omofilia di genere per sottorete di ruolo ed epoca.** Il punto e' il valore "
- f"osservato, la barra l'intervallo di confidenza bootstrap al 95%, il trattino "
- f"verticale il valore del modello nullo. L'attesa, dalla letteratura, era un "
- f"**allentamento** dopo il 2000. Sui soli nodi con genere determinato i dati "
- f"dicono l'opposto, ma con ampiezza molto piu' contenuta di quanto suggerisca "
- f"la misura a quattro categorie mostrata in figura: "
- f"{n(C['r_pre_mf'],4)} contro {n(C['r_post_mf'],4)}.")}
+ f"**Gender homophily by role subnetwork and period.** The dot is the "
+ f"observed value, the bar the 95% bootstrap confidence interval, the "
+ f"vertical tick the null-model value. The expectation from the literature "
+ f"was a **loosening** after 2000. On nodes with determined gender only, the "
+ f"data say the opposite, but with a much smaller magnitude than the "
+ f"four-category measure shown in the figure suggests: "
+ f"{n(C['r_pre_mf'],4)} versus {n(C['r_post_mf'],4)}.")}
 
-Prima di interpretarlo va ripulito. Sulla misura ingenua a quattro categorie il
-salto e' spettacolare, da {n(C['r_pre'],4)} a {n(C['r_post'],4)}: piu' che
-raddoppiato. Sui soli nodi con genere determinato si riduce a
-{n(C['r_pre_mf'],4)} → {n(C['r_post_mf'],4)}. La ragione e' che la quota di
-archi utilizzabili crolla fra le due epoche — dal
+Before it can be interpreted, the result needs cleaning up. On the naive
+four-category measure the jump is spectacular, from {n(C['r_pre'],4)} to
+{n(C['r_post'],4)}: more than double. On nodes with determined gender only it
+shrinks to {n(C['r_pre_mf'],4)} → {n(C['r_post_mf'],4)}. The reason is that the
+share of usable edges drops sharply between the two periods, from
 {pct(val(get('assortativity_mf.parquet'), "sottorete=='all' and strato=='pre2000' and attributo=='gender' and categorie=='determinati soltanto'", 'quota_archi_usati'))}
-al
-{pct(val(get('assortativity_mf.parquet'), "sottorete=='all' and strato=='post2000' and attributo=='gender' and categorie=='determinati soltanto'", 'quota_archi_usati'))}
-— perche' gli artisti recenti sono mediamente meno documentati: piu' `unknown`,
-quindi piu' apparente omofilia spuria.
+to
+{pct(val(get('assortativity_mf.parquet'), "sottorete=='all' and strato=='post2000' and attributo=='gender' and categorie=='determinati soltanto'", 'quota_archi_usati'))},
+because recent artists are on average less well documented: more `unknown`,
+hence more spurious apparent homophily.
 
-**Quel che resta dopo la correzione e' comunque un aumento**, con intervalli
-({n(C['r_pre_mf_lo'],4)}–{n(C['r_pre_mf_hi'],4)} contro
-{n(C['r_post_mf_lo'],4)}–{n(C['r_post_mf_hi'],4)}) che non si sovrappongono. Il
-risultato regge, ma va raccontato per quello che e': un aumento moderato, non un
-raddoppio.
+**What remains after the correction is nonetheless an increase**, with
+intervals ({n(C['r_pre_mf_lo'],4)}–{n(C['r_pre_mf_hi'],4)} versus
+{n(C['r_post_mf_lo'],4)}–{n(C['r_post_mf_hi'],4)}) that do not overlap. The
+result holds, but it should be described for what it is: a moderate increase,
+not a doubling.
 
-**E l'aumento non e' diffuso: viene tutto da una parte sola della rete.**
-Scomponendo per ruolo, l'omofilia dei ruoli di esecuzione e' sostanzialmente
-piatta nel tempo ({n(C['r_perf_pre'],4)} prima del 2000,
-{n(C['r_perf_post'],4)} dopo), mentre quella dei ruoli creativi **raddoppia**,
-da {n(C['r_creative_pre'],4)} a {n(C['r_creative_post'],4)}. Qualunque
-spiegazione dell'aumento deve percio' riguardare il modo in cui si produce e si
-scrive musica, non il modo in cui la si suona.
+**And the increase is not widespread: it comes entirely from one part of the
+network.** Broken down by role, homophily in performance roles is essentially
+flat over time ({n(C['r_perf_pre'],4)} before 2000, {n(C['r_perf_post'],4)}
+after), while homophily in creative roles **doubles**, from
+{n(C['r_creative_pre'],4)} to {n(C['r_creative_post'],4)}. Any explanation of
+the increase must therefore concern the way music is produced and written, not
+the way it is played.
 
-Restano due letture possibili, e i dati qui presenti non permettono di scegliere
-fra loro in modo definitivo.
+Two readings remain possible, and the data at hand do not allow a definitive
+choice between them.
 
-**Prima lettura — e' reale.** Dopo il 2000 cambia il modo di produrre musica: la
-registrazione si decentra, gli studi grandi con organici misti e obbligati
-lasciano spazio a progetti piccoli, costruiti su reti personali. Reti personali
-significa reti piu' omofile. In questa lettura l'aumento non e' un arretramento
-culturale ma l'effetto strutturale di una tecnologia di produzione diversa — e
-il fatto che riguardi i soli ruoli creativi, che sono precisamente quelli
-toccati dalla decentralizzazione degli studi, depone a favore di questa
-spiegazione.
+**First reading: the increase is real.** After 2000 the way music is produced
+changes: recording becomes decentralized, and large studios with mixed,
+fixed personnel give way to small projects built on personal networks.
+Personal networks mean more homophilous networks. In this reading the increase
+is not a cultural setback but the structural effect of a different production
+technology, and the fact that it concerns only creative roles, which are
+precisely those affected by the decentralization of studios, supports this
+explanation.
 
-**Seconda lettura — e' composizione.** L'indice *r* di Newman dipende dalle
-marginali. Post-2000 ci sono piu' donne, quindi piu' occasioni di legame
-donna-donna; a parita' di propensione, un gruppo minoritario piu' numeroso
-produce meccanicamente un'assortativita' misurata piu' alta. Il modello nullo a
-gradi preservati corregge per il grado, **non** per questa asimmetria di
-composizione fra epoche.
+**Second reading: the increase is compositional.** Newman's *r* depends on
+the marginals. After 2000 there are more women, hence more opportunities for
+woman–woman ties; with the same propensity, a larger minority group
+mechanically produces a higher measured assortativity. The degree-preserving
+null model corrects for degree, **not** for this difference in composition
+between the periods.
 
-E' esattamente per dirimere questo punto che serve l'ERGM, e **il verdetto e'
-arrivato**: una volta controllata la tendenza della rete a chiudere i
-triangoli, la differenza di omofilia di genere fra le due epoche **non e'
-statisticamente distinguibile da zero** (per le donne
-{n(C.get('epoca_F_pre'),3)} contro {n(C.get('epoca_F_post'),3)}, p =
-{n(C.get('epoca_F_p'),2)}; per gli uomini {n(C.get('epoca_M_pre'),3)} contro
-{n(C.get('epoca_M_post'),3)}, p = {n(C.get('epoca_M_p'),2)}).
+The ERGM is needed precisely to settle this point, and **the verdict is in**:
+once the network's tendency to close triangles is controlled for, the
+difference in gender homophily between the two periods **is not statistically
+distinguishable from zero** (for women {n(C.get('epoca_F_pre'),3)} versus
+{n(C.get('epoca_F_post'),3)}, p = {n(C.get('epoca_F_p'),2)}; for men
+{n(C.get('epoca_M_pre'),3)} versus {n(C.get('epoca_M_post'),3)}, p =
+{n(C.get('epoca_M_p'),2)}).
 
-Cio' che aumenta davvero, e in modo nettissimo, e' la **chiusura triadica**: il
-coefficiente `gwesp` passa da {n(C.get('epoca_gwesp_pre'),3)} a
-{n(C.get('epoca_gwesp_post'),3)} (p < 0,0001). La musica registrata italiana
-dopo il 2000 non e' diventata piu' omofila per genere: e' diventata piu'
-**chiusa in triangoli**. Si lavora sempre di piu' dentro gruppi fitti di
-persone che si conoscono gia' tutte fra loro. In un ambiente dove le donne sono
-il {pct(C['share_f'])}, una struttura piu' triangolare produce
-meccanicamente piu' legami donna-donna osservati, e quindi un'assortativita'
-misurata piu' alta — senza che nessuno abbia cambiato criterio nello scegliere
-con chi lavorare.
+What does increase, and very sharply, is **triadic closure**: the `gwesp`
+coefficient goes from {n(C.get('epoca_gwesp_pre'),3)} to
+{n(C.get('epoca_gwesp_post'),3)} (p < 0.0001). Italian recorded music after
+2000 has not become more homophilous by gender: it has become more **closed
+into triangles**. People increasingly work within dense groups whose members
+already all know one another. In an environment where women are
+{pct(C['share_f'])}, a more triangular structure mechanically produces more
+observed woman–woman ties, and hence a higher measured assortativity, without
+anyone having changed the criterion for choosing whom to work with.
 
-E' la risposta piu' interessante dello studio, perche' sposta l'oggetto: il
-problema non e' una preferenza di genere che si e' rafforzata, ma una
-struttura di reclutamento che si e' chiusa. Sono due cose diverse anche dal
-punto di vista di chi volesse intervenire. I dettagli del test sono nella
-sezione 7.3.
+This is the most interesting answer in the study, because it shifts the
+object: the problem is not a gender preference that has grown stronger, but a
+recruitment structure that has closed in on itself. These are two different
+things, also from the point of view of anyone wishing to intervene. The
+details of the test are in section 7.3.
 
-## 5.3 Produttori e interpreti: due mestieri, due omofilie (RQ5)
+## 5.3 Producers and performers: two trades, two homophilies (RQ5)
 
-La distinzione fra ruoli creativi (produzione, scrittura, arrangiamento) e ruoli
-di esecuzione (voce, strumenti, direzione) e' la domanda RQ5, e la risposta e'
-netta: sui soli nodi con genere determinato l'omofilia vale
-**{n(C['r_creative_mf'],4)} nella rete creativa** contro
-**{n(C['r_perf_mf'],4)} in quella di esecuzione**.
+The distinction between creative roles (production, writing, arrangement) and
+performance roles (vocals, instruments, conducting) is research question RQ5,
+and the answer is clear-cut: on nodes with determined gender only, homophily
+is **{n(C['r_creative_mf'],4)} in the creative network** versus
+**{n(C['r_perf_mf'],4)} in the performance network**.
 
-La collaborazione creativa e' quindi *meno* segregata per genere di quella
-esecutiva, di un fattore
-{n(C['r_perf_mf']/max(C['r_creative_mf'],1e-9),1)}. E' un risultato che va letto insieme al dato di composizione: i ruoli
-creativi sono in assoluto i piu' maschili dell'intero corpus, e proprio per
-questo l'omofilia misurata vi risulta bassa — dove la maggioranza e'
-schiacciante non c'e' quasi spazio per discostarsi dal caso. La segregazione dei
-ruoli creativi si manifesta nel **chi entra**, non nel **chi lavora con chi**;
-quella dei ruoli esecutivi, dove le donne sono piu' presenti, si manifesta anche
-nella struttura delle collaborazioni. Sono due forme diverse di chiusura, e
-confonderle porterebbe a concludere che la produzione musicale sia il luogo piu'
-aperto del sistema, che e' l'opposto di quanto dicono i conteggi.
+Creative collaboration is therefore *less* segregated by gender than
+performance collaboration, by a factor of
+{n(C['r_perf_mf']/max(C['r_creative_mf'],1e-9),1)}. This result has to be read
+together with the composition figures: creative roles are by far the most male
+in the entire corpus, and precisely for this reason the homophily measured
+there is low, since where the majority is overwhelming there is almost no room
+to depart from chance. The segregation of creative roles shows up in **who
+gets in**, not in **who works with whom**; that of performance roles, where
+women are more present, also shows up in the structure of collaborations.
+These are two different forms of closure, and conflating them would lead to
+the conclusion that music production is the most open part of the system,
+which is the opposite of what the counts say.
 
-## 5.4 Omofilia dentro ciascun genere musicale
+## 5.4 Homophily within each musical genre
 
 {img('f7_omofilia_per_genere_musicale',
- "**A sinistra** l'omofilia di genere sessuale calcolata separatamente dentro "
- "ciascun genere musicale, con il modello nullo come riferimento. **A destra** "
- "la scomposizione della diagonale: quanto i legami uomo-uomo e quanto i legami "
- "donna-donna superano l'atteso. La lettura congiunta dei due pannelli e' il "
- "cuore di RQ2. Un valore osservato/atteso vicino a 1 per gli uomini e molto "
- "sopra 1 per le donne descrive una situazione precisa: gli uomini non si "
- "cercano fra loro piu' del caso — non ne hanno bisogno, sono la maggioranza e "
- "il caso li mette gia' insieme — mentre le donne si aggregano fra loro molto "
- "piu' del previsto. E' la forma che l'omofilia assume quando una minoranza "
- "opera dentro una maggioranza: non segregazione simmetrica, ma addensamento "
- "del gruppo minoritario.")}
+ "**On the left**, gender homophily computed separately within each musical "
+ "genre, with the null model as reference. **On the right**, the "
+ "decomposition of the diagonal: how far man–man ties and woman–woman ties "
+ "exceed expectation. Reading the two panels together is the core of RQ2. An "
+ "observed/expected value close to 1 for men and well above 1 for women "
+ "describes a precise situation: men do not seek each other out more than "
+ "chance would predict (they have no need to: they are the majority, and "
+ "chance already puts them together), while women cluster together much more "
+ "than expected. This is the form homophily takes when a minority operates "
+ "within a majority: not symmetric segregation, but clustering of the "
+ "minority group.")}
 
 {table('t3_omofilia_per_genere_musicale',
- 'Omofilia di genere sessuale entro ciascun genere musicale (RQ2)', float_dec=4)}
+ 'Gender homophily within each musical genre (RQ2)', float_dec=4)}
 
-Questo e' il punto su cui il dato italiano **contraddice l'aspettativa
-corrente**. La letteratura riporta di norma un'omofilia piu' forte *fra gli
-uomini*. Qui il rapporto osservato/atteso donna-donna e' sistematicamente
-**maggiore** di quello uomo-uomo. La spiegazione non e' che le donne siano piu'
-chiuse: e' che con una quota femminile del {pct(C['share_f'])} il valore atteso
-per un legame donna-donna sotto casualita' e' bassissimo, e basta un modesto
-addensamento reale per produrre un rapporto elevato. L'indice uomo-uomo, al
-contrario, e' schiacciato verso 1 perche' la maggioranza non puo' discostarsi
-molto dal caso. **I due indici non sono confrontabili come se misurassero la
-stessa cosa**, ed e' l'ERGM — che stima una propensione e non un rapporto — a
-fornire il confronto corretto.
+This is the point on which the Italian data **contradict current
+expectations**. The literature usually reports stronger homophily *among
+men*. Here the woman–woman observed/expected ratio is systematically
+**higher** than the man–man ratio. The explanation is not that women are more
+closed: it is that with a female share of {pct(C['share_f'])} the expected
+value for a woman–woman tie under randomness is very low, and a modest real
+clustering is enough to produce a high ratio. The man–man index, by contrast,
+is squeezed toward 1 because the majority cannot depart much from chance.
+**The two indices are not comparable as if they measured the same thing**,
+and it is the ERGM, which estimates a propensity rather than a ratio, that
+provides the correct comparison.
 """
 
 
 # ==========================================================================
 def sezione_posizione(C) -> str:
     return f"""
-# 6. Le donne stanno al centro o ai margini? (RQ3)
+# 6. Are women at the center or at the margins? (RQ3)
 
-La domanda che la letteratura chiama *pattern Smurfette* e' se le donne, dove
-ci sono, occupino posizioni strutturalmente periferiche: presenti quanto basta,
-mai al centro.
+The question that the literature calls the *Smurfette pattern* is whether
+women, where they are present, occupy structurally peripheral positions:
+present enough to be counted, never at the center.
 
-{table('t3_posizione_per_genere', 'Posizione nella componente gigante per genere sessuale', float_dec=6)}
+{table('t3_posizione_per_genere', 'Position in the giant component by gender', float_dec=6)}
 
 {img('f8_posizione_per_genere',
- "**Coreness mediana per genere sessuale, dentro ciascun genere musicale.** La "
- "coreness dice a quale strato del nucleo denso della rete una persona "
- "appartiene: e' una misura di appartenenza al centro piu' robusta della "
- "centralita' di grado, perche' non si lascia gonfiare da chi ha molti "
- "collaboratori occasionali. Le barre affiancate permettono il confronto "
- "diretto a parita' di genere musicale, che e' il confronto giusto: paragonare "
- "una cantante pop a un turnista jazz non direbbe nulla sul genere sessuale e "
- "molto sulla struttura delle due scene.")}
+ "**Median coreness by gender, within each musical genre.** Coreness "
+ "indicates which layer of the network's dense core a person belongs to: as a "
+ "measure of belonging to the center it is more robust than degree "
+ "centrality, because it is not inflated by having many occasional "
+ "collaborators. The side-by-side bars allow a direct comparison within the "
+ "same musical genre, which is the right comparison: comparing a pop singer "
+ "with a jazz session musician would say nothing about gender and a great "
+ "deal about the structure of the two scenes.")}
 
 {table('t3_posizione_per_genere_musicale',
- 'Posizione nella rete per genere sessuale entro genere musicale', max_rows=30, float_dec=6)}
+ 'Network position by gender within musical genre', max_rows=30, float_dec=6)}
 
-## 6.1 Il confronto a parita' di attivita' e coorte
+## 6.1 The comparison holding activity and cohort constant
 
-Le mediane grezze non bastano. Chi pubblica di piu' e' piu' centrale, e le donne
-della popolazione pubblicano meno: la mediana delle pubblicazioni e'
-{n(C.get('nrel_med_F'),0)} per le donne contro {n(C.get('nrel_med_M'),0)} per gli
-uomini, e la coreness mediana segue ({n(C.get('core_med_F'),0)} contro
-{n(C.get('core_med_M'),0)}). Senza controllare per l'attivita' si misurerebbe la
-differenza di quanto si pubblica e la si chiamerebbe differenza di posizione.
+Raw medians are not enough. Those who release more are more central, and the
+women in the population release less: the median number of releases is
+{n(C.get('nrel_med_F'),0)} for women versus {n(C.get('nrel_med_M'),0)} for
+men, and median coreness follows ({n(C.get('core_med_F'),0)} versus
+{n(C.get('core_med_M'),0)}). Without controlling for activity, one would be
+measuring the difference in how much people release and calling it a
+difference in position.
 
-La regressione confronta percio' persone con la stessa attivita', la stessa
-coorte di debutto e lo stesso genere musicale.
+The regression therefore compares people with the same activity, the same
+debut cohort and the same musical genre.
 
 {table('t3_regressione_eigenvector',
- "Posizione nella rete (eigenvector) per genere sessuale e genere musicale, "
- "a parita' di attivita' e coorte", max_rows=28, float_dec=4)}
+ "Network position (eigenvector) by gender and musical genre, "
+ "holding activity and cohort constant", max_rows=28, float_dec=4)}
 
 {table('t3_regressione_coreness',
- "Appartenenza al nucleo (coreness) per genere sessuale e genere musicale, "
- "a parita' di attivita' e coorte", max_rows=28, float_dec=4)}
+ "Core membership (coreness) by gender and musical genre, "
+ "holding activity and cohort constant", max_rows=28, float_dec=4)}
 
-## 6.2 La risposta a RQ3
+## 6.2 The answer to RQ3
 
-**Il pattern "Smurfette" non si osserva in questi dati.** A parita' di
-pubblicazioni, coorte e genere musicale, l'effetto principale dell'essere donna
-sulla posizione nella rete non e' distinguibile da zero su nessuna delle tre
-misure:
+**The "Smurfette" pattern is not observed in these data.** Holding releases,
+cohort and musical genre constant, the main effect of being a woman on network
+position is not distinguishable from zero on any of the three measures:
 
-| misura | coefficiente | IC 95% | p |
+| measure | coefficient | 95% CI | p |
 |---|---|---|---|
 | eigenvector | {n(C.get('b_eigenvector'),3)} | {n(C.get('lo_eigenvector'),3)} – {n(C.get('hi_eigenvector'),3)} | {n(C.get('p_eigenvector'),3)} |
 | coreness | {n(C.get('b_coreness'),3)} | {n(C.get('lo_coreness'),3)} – {n(C.get('hi_coreness'),3)} | {n(C.get('p_coreness'),3)} |
 | betweenness | {n(C.get('b_betweenness'),3)} | {n(C.get('lo_betweenness'),3)} – {n(C.get('hi_betweenness'),3)} | {n(C.get('p_betweenness'),3)} |
 
-Nemmeno le interazioni con il genere musicale aiutano: su
-{n(C.get('n_interazioni'))} termini di interazione stimati,
-{n(C.get('n_interazioni_signif'))} risultano significativi al 5%. Non esiste,
-in questi dati, una scena in cui essere donna sposti sistematicamente verso la
-periferia della rete.
+The interactions with musical genre do not change this either: of
+{n(C.get('n_interazioni'))} interaction terms estimated,
+{n(C.get('n_interazioni_signif'))} are significant at the 5% level. In these
+data there is no scene in which being a woman systematically pushes a person
+toward the periphery of the network.
 
-E' un risultato che va enunciato con precisione, perche' si presta a due letture
-sbagliate di segno opposto.
+This result must be stated precisely, because it lends itself to two mistaken
+readings of opposite sign.
 
-**Non significa che non ci sia disuguaglianza.** Le donne sono il
-{pct(C['share_f'])} della popolazione e pubblicano meno: la mediana delle
-pubblicazioni e' {n(C.get('nrel_med_F'),0)} contro {n(C.get('nrel_med_M'),0)}.
-La disuguaglianza c'e' ed e' grande — ma si manifesta **nell'accesso e nel
-volume di attivita'**, non nella posizione strutturale a parita' di attivita'.
-Chi entra e riesce a lavorare, lavora in posizioni comparabili.
+**It does not mean that there is no inequality.** Women are
+{pct(C['share_f'])} of the population and release less: the median number of
+releases is {n(C.get('nrel_med_F'),0)} versus {n(C.get('nrel_med_M'),0)}. The
+inequality exists and is large, but it shows up **in access and in the volume
+of activity**, not in structural position at equal activity. Those who get in
+and manage to work, work in comparable positions.
 
-**Non significa nemmeno che il controllo per l'attivita' sia neutro.** Il numero
-di pubblicazioni non e' una variabile esogena: e' esso stesso un esito di
-processi di accesso che possono essere segregati. Controllare per l'attivita'
-risponde alla domanda "a parita' di carriera, la posizione differisce?" e non
-alla domanda "le carriere differiscono?". La prima ha risposta negativa, la
-seconda — sezione 4 — ha risposta ampiamente positiva.
+**Nor does it mean that controlling for activity is neutral.** The number of
+releases is not an exogenous variable: it is itself the outcome of access
+processes that may be segregated. Controlling for activity answers the
+question "for the same career, does position differ?" and not the question "do
+careers differ?". The answer to the first is negative; the answer to the
+second (section 4) is clearly positive.
 
-Il dato piu' interessante e' la divergenza fra mediana e media
-dell'eigenvector: la mediana e' piu' alta per le donne
-({sci(C.get('eig_med_F'))} contro {sci(C.get('eig_med_M'))}) mentre la media e'
-piu' bassa. Significa che la donna tipica della rete e' connessa quanto e piu'
-dell'uomo tipico, ma che gli **hub estremi** — i pochissimi nodi con centralita'
-di ordini di grandezza superiore — sono quasi tutti uomini. La disuguaglianza
-di posizione, dove c'e', sta nella coda, non nel corpo della distribuzione.
+The most interesting finding is the divergence between the median and the
+mean of eigenvector centrality: the median is higher for women
+({sci(C.get('eig_med_F'))} versus {sci(C.get('eig_med_M'))}) while the mean is
+lower. This means that the typical woman in the network is at least as
+connected as the typical man, but that the **extreme hubs**, the very few
+nodes whose centrality is orders of magnitude higher, are almost all men.
+Positional inequality, where it exists, lies in the tail, not in the body of
+the distribution.
 """
 
 
@@ -803,284 +935,283 @@ def sezione_ergm(C) -> str:
         return """
 # 7. ERGM (RQ4)
 
-> **Questa fase non ha prodotto stime utilizzabili.** R e statnet sono stati
-> installati in userspace e verificati con un modello di prova, ma nessuna delle
-> sottoreti ha portato a convergenza un modello entro il tempo massimo
-> assegnato. La mancanza e' dichiarata qui e non aggirata: le domande che
-> l'ERGM avrebbe dovuto dirimere — in particolare se l'aumento post-2000
-> dell'omofilia (sez. 5.2) sia propensione o composizione — restano aperte, e
-> su di esse valgono solo le misure descrittive delle sezioni precedenti.
+> **This phase did not produce usable estimates.** R and statnet were
+> installed in user space and tested with a trial model, but for none of the
+> subnetworks did a model converge within the maximum time allotted. The gap
+> is declared here rather than worked around: the questions that the ERGM was
+> meant to settle, in particular whether the post-2000 increase in homophily
+> (sec. 5.2) reflects propensity or composition, remain open, and only the
+> descriptive measures of the previous sections bear on them.
 """
     conv = int(st.convergenza.sum())
     gw = int(st.get("gwesp_converge", pd.Series([False] * len(st))).sum())
     return f"""
-# 7. Probabilita' di collaborare a parita' di tutto: l'ERGM (RQ4)
+# 7. The probability of collaborating, all else being equal: the ERGM (RQ4)
 
 
-## 7.1 Perche' serve e come e' stato impostato
+## 7.1 Why it is needed and how it was set up
 
-Tutte le misure fin qui sono descrittive: dicono *che* i legami sono distribuiti
-in un certo modo, non *perche'*. Un modello esponenziale per grafi casuali
-(ERGM) stima invece la probabilita' che un legame esista, tenendo insieme nello
-stesso modello l'omofilia di genere, quella di genere musicale, il livello di
-attivita', la coorte e la tendenza della rete a chiudere i triangoli.
-Quest'ultimo punto e' decisivo: senza un termine di chiusura triadica
-(`gwesp`), qualunque tendenza a fare gruppo viene erroneamente attribuita
-all'attributo su cui si sta guardando.
+All the measures so far are descriptive: they say *that* ties are distributed
+in a certain way, not *why*. An exponential random graph model (ERGM) instead
+estimates the probability that a tie exists, combining in a single model
+gender homophily, musical-genre homophily, level of activity, cohort and the
+network's tendency to close triangles. This last point is decisive: without a
+triadic closure term (`gwesp`), any tendency to cluster is wrongly attributed
+to whatever attribute is being examined.
 
-**Sulla rete intera l'ERGM non e' stimabile**, e va detto chiaramente invece di
-far finta. Con {n(C['n_nodes'])} nodi lo spazio dei grafi possibili rende il
-campionamento MCMC impraticabile. Si e' quindi proceduto come previsto dal
-disegno, per sottoreti: i cinque generi musicali piu' popolosi, le due epoche, e
-un campione a palla di neve della rete complessiva come riferimento. **Le stime
-valgono per le sottoreti su cui sono calcolate**, non si estendono per
-costruzione all'intera popolazione.
+**The ERGM cannot be estimated on the full network**, and this should be
+stated plainly rather than glossed over. With {n(C['n_nodes'])} nodes the space
+of possible graphs makes MCMC sampling impractical. The analysis therefore
+proceeded, as the design anticipated, by subnetworks: the five most populous
+musical genres, the two periods, and a snowball sample of the overall network
+as a reference. **The estimates apply to the subnetworks on which they are
+computed**, and by construction do not extend to the entire population.
 
-Dall'ERGM sono esclusi i nodi con genere `unknown`. Tenerli come quarta
-categoria avrebbe prodotto un termine di omofilia spurio che misura la struttura
-della copertura dei dati — chi e' poco documentato collabora con chi e' poco
-documentato — invece della struttura delle collaborazioni.
+Nodes with `unknown` gender are excluded from the ERGM. Keeping them as a
+fourth category would have produced a spurious homophily term that measures
+the structure of data coverage (the poorly documented collaborate with the
+poorly documented) rather than the structure of collaborations.
 
-Si stima una **gerarchia di tre modelli**, invece di una specifica unica,
-perche' il termine di chiusura triadica e' esattamente quello che puo' far
-fallire la stima e non si vuole perdere tutto insieme a lui:
+A **hierarchy of three models** is estimated instead of a single
+specification, because the triadic closure term is exactly the one that can
+make estimation fail, and the rest of the analysis should not be lost along
+with it:
 
-* **M0** `edges + nodematch(gender, diff) + controlli` — nessun termine di
-  dipendenza fra archi. E' il modello di riferimento: stimabile sempre.
-* **M1** M0 + `gwesp(0,25; fixed)` — la specifica prevista dal disegno. Il
-  termine di chiusura triadica rende il modello quasi degenere sulle reti molto
-  clusterizzate, e puo' non convergere.
-* **M2** come il migliore fra M1 e M0, con `nodemix(gender)` al posto di
-  `nodematch(gender, diff)`. Le due parametrizzazioni sono ridondanti fra loro
-  e nello stesso modello lo renderebbero non identificato.
+* **M0** `edges + nodematch(gender, diff) + controls`: no edge-dependence
+  term. This is the reference model and can always be estimated.
+* **M1** M0 + `gwesp(0.25; fixed)`: the specification anticipated by the
+  design. The triadic closure term makes the model nearly degenerate on highly
+  clustered networks, and it may fail to converge.
+* **M2** the better of M1 and M0, with `nodemix(gender)` in place of
+  `nodematch(gender, diff)`. The two parameterizations are redundant with each
+  other, and including both in the same model would make it unidentified.
 
-I termini di controllo entrano **solo se l'attributo varia** nella sottorete.
-Dentro una sottorete di un solo genere musicale `nodematch('musical_genre')`
-coincide identicamente con `edges`: includerlo produrrebbe un modello non
-identificato, e nelle prime esecuzioni era proprio questo a impedire la
-convergenza.
+The control terms enter **only if the attribute varies** within the
+subnetwork. Within a subnetwork of a single musical genre,
+`nodematch('musical_genre')` is identical to `edges`: including it would
+produce an unidentified model, and in the first runs this was exactly what
+prevented convergence.
 
-{table('t4_ergm_sintesi', 'Sintesi delle stime ERGM: dimensione, campionamento, convergenza')}
+{table('t4_ergm_sintesi', 'Summary of the ERGM estimates: size, sampling, convergence')}
 
-Sottoreti con almeno un modello convergente: **{conv} su {len(st)}**; sottoreti
-in cui ha retto anche il termine `gwesp`: **{gw}**. Dove `gwesp` non converge,
-i coefficienti riportati vengono da M0 e **non** controllano per la chiusura
-triadica: vanno quindi letti come stime che possono attribuire all'omofilia una
-parte di cio' che e' semplicemente tendenza a formare triangoli. E' una
-limitazione, ed e' dichiarata qui invece di essere nascosta dietro un numero.
+Subnetworks with at least one converged model: **{conv} of {len(st)}**;
+subnetworks in which the `gwesp` term also held: **{gw}**. Where `gwesp` does
+not converge, the reported coefficients come from M0 and do **not** control
+for triadic closure: they should therefore be read as estimates that may
+attribute to homophily part of what is simply a tendency to form triangles.
+This is a limitation, and it is declared here rather than hidden behind a
+number.
 
 {img('f9_ergm_forest_gender',
- "**Coefficienti di omofilia di genere nei cinque generi musicali piu' "
- "popolosi.** Ogni coefficiente e' un log-odds: quanto la probabilita' di un "
- "legame aumenta (o diminuisce) se due artisti condividono il genere sessuale, "
- "*a parita'* di attivita', coorte, genere musicale e chiusura triadica. Questo "
- "e' il confronto che le misure descrittive della sezione 5.4 non potevano "
- "fornire: qui i coefficienti maschile e femminile sono sulla stessa scala e "
- "sono direttamente confrontabili, perche' misurano una propensione e non un "
- "rapporto osservato/atteso schiacciato dalle marginali. Se il coefficiente "
- "maschile supera quello femminile, il pattern italiano e' allineato alla "
- "letteratura (omofilia piu' forte fra gli uomini) e l'inversione osservata "
- "nella sezione 5.4 era un artefatto della rarita' delle donne.")}
+ "**Gender homophily coefficients in the five most populous musical "
+ "genres.** Each coefficient is a log-odds: how much the probability of a tie "
+ "increases (or decreases) if two artists share the same gender, *holding "
+ "constant* activity, cohort, musical genre and triadic closure. This is the "
+ "comparison that the descriptive measures in section 5.4 could not provide: "
+ "here the male and female coefficients are on the same scale and directly "
+ "comparable, because they measure a propensity and not an observed/expected "
+ "ratio squeezed by the marginals. If the male coefficient exceeds the female "
+ "one, the Italian pattern is in line with the literature (stronger homophily "
+ "among men) and the inversion observed in section 5.4 was an artifact of "
+ "women's rarity.")}
 
-{table('t4_ergm_coefficienti', 'Coefficienti ERGM per sottorete', max_rows=40,
+{table('t4_ergm_coefficienti', 'ERGM coefficients by subnetwork', max_rows=40,
  float_dec=4, cols=['rete', 'model', 'term', 'estimate', 'se', 'p', 'ci_lo', 'ci_hi', 'or'])}
 
-### Come si leggono questi coefficienti, e che cosa dicono
+### How to read these coefficients, and what they say
 
-I coefficienti sono in log-odds; la colonna `or` e' il loro esponenziale, cioe'
-di quanto si moltiplica la probabilita' di un legame. `nodematch.gender.F` dice
-quanto una coppia donna-donna e' piu' probabile di una coppia di riferimento **a
-parita' di tutto il resto**: attivita', coorte, genere musicale e — cosa
-decisiva — tendenza della rete a chiudere i triangoli.
+The coefficients are in log-odds; the `or` column is their exponential, that
+is, the factor by which the probability of a tie is multiplied.
+`nodematch.gender.F` says how much more likely a woman–woman pair is than a
+reference pair **holding everything else constant**: activity, cohort, musical
+genre and, decisively, the network's tendency to close triangles.
 
-Il confronto fra `nodematch.gender.F` e `nodematch.gender.M` e' il risultato
-che la sezione 5.4 non poteva dare. Li' i rapporti osservato/atteso non erano
-confrontabili, perche' con una quota femminile del {pct(C['share_f'])} il valore
-atteso per un legame donna-donna e' cosi' basso che qualunque addensamento
-reale produce un rapporto grande. Qui il problema non si pone: i due
-coefficienti misurano la stessa quantita' sulla stessa scala. **E il risultato
-regge: la propensione delle donne a lavorare con donne resta nettamente
-superiore a quella degli uomini a lavorare con uomini.** Non e' un artefatto
-della rarita'; e' una proprieta' della rete.
+The comparison between `nodematch.gender.F` and `nodematch.gender.M` is the
+result that section 5.4 could not provide. There, the observed/expected ratios
+were not comparable, because with a female share of {pct(C['share_f'])} the
+expected value for a woman–woman tie is so low that any real clustering
+produces a large ratio. Here the problem does not arise: the two coefficients
+measure the same quantity on the same scale. **And the result holds: women's
+propensity to work with women remains clearly higher than men's propensity to
+work with men.** It is not an artifact of rarity; it is a property of the
+network.
 
-In alcune sottoreti il coefficiente maschile e' **negativo**: a parita' di
-tutto il resto, due uomini hanno una probabilita' di collaborare leggermente
-*inferiore* al riferimento. Non significa che gli uomini si evitino. Significa
-che, in un ambiente dove sono la stragrande maggioranza, il termine `edges` da
-solo gia' produce quasi tutti i legami maschili che si osservano, e una volta
-tolta quella quota di base non resta nulla da attribuire a una preferenza. E'
-la controprova, dal lato opposto, della stessa asimmetria: dove un gruppo
-domina, l'omofilia non ha modo di manifestarsi come effetto misurabile; dove un
-gruppo e' raro, si manifesta con forza.
+In some subnetworks the male coefficient is **negative**: holding everything
+else constant, two men have a slightly *lower* probability of collaborating
+than the reference. This does not mean that men avoid each other. It means
+that, in an environment where they are the overwhelming majority, the `edges`
+term alone already produces almost all the male ties observed, and once that
+baseline is removed there is nothing left to attribute to a preference. This
+confirms the same asymmetry from the opposite side: where a group dominates,
+homophily has no way to show up as a measurable effect; where a group is rare,
+it shows up strongly.
 
-Merita attenzione anche il confronto fra M0 e M1. Passando dal modello senza
-chiusura triadica a quello con `gwesp`, il coefficiente di omofilia femminile
-**si riduce**: una parte di cio' che sembrava preferenza di genere era in realta'
-la tendenza generale della rete a chiudere i triangoli — se A lavora con B e B
-con C, prima o poi A lavora con C, e in un ambiente dove le donne sono poche i
-triangoli fra donne si formano comunque. Il termine `gwesp` ha un coefficiente
-molto grande, il che dice quanto forte sia quel meccanismo. Cio' che resta dopo
-averlo tolto e' omofilia vera.
+The comparison between M0 and M1 also deserves attention. Moving from the
+model without triadic closure to the one with `gwesp`, the female homophily
+coefficient **decreases**: part of what looked like gender preference was in
+fact the network's general tendency to close triangles (if A works with B and
+B with C, sooner or later A works with C, and in an environment where women
+are few, triangles among women form anyway). The `gwesp` term has a very large
+coefficient, which shows how strong that mechanism is. What remains after it
+is taken into account is genuine homophily.
 
-## 7.2 La diagnostica: il modello descrive davvero questa rete?
+## 7.2 Diagnostics: does the model actually describe this network?
 
 {img('f12_ergm_gof',
- "**Bontà di adattamento.** Per ciascuna sottorete si confrontano tre "
- "statistiche della rete osservata (punti) con quelle delle reti simulate dal "
- "modello stimato (linea e banda): la distribuzione dei gradi, il numero di "
- "partner condivisi da ciascuna coppia collegata (ESP) e le distanze "
- "geodetiche. Un modello che coglie la struttura produce simulazioni la cui "
- "banda contiene l'osservato; dove il punto esce dalla banda, il modello sta "
- "sbagliando proprio quell'aspetto. L'ESP è la statistica da guardare con più "
- "attenzione, perché è quella che il termine gwesp dovrebbe riprodurre: se "
- "l'osservato ne esce, la chiusura triadica non è stata catturata e i "
- "coefficienti di omofilia possono averne assorbito una parte. Nei modelli "
- "stimati qui il centro delle distribuzioni è riprodotto bene, ma **la coda "
- "no**: i nodi con molti collaboratori e le coppie con molti partner in comune "
- "sono sistematicamente più numerosi di quanto il modello preveda (cerchi "
- "rossi). È il limite noto degli ERGM su reti con code pesanti, e va tenuto "
- "presente leggendo i coefficienti: il modello descrive bene il musicista "
- "tipico, meno bene i pochi grandi collaboratori.")}
+ "**Goodness of fit.** For each subnetwork, three statistics of the observed "
+ "network (points) are compared with those of the networks simulated from the "
+ "estimated model (line and band): the degree distribution, the number of "
+ "partners shared by each connected pair (ESP) and the geodesic distances. A "
+ "model that captures the structure produces simulations whose band contains "
+ "the observed values; where a point falls outside the band, the model is "
+ "getting precisely that aspect wrong. ESP is the statistic to watch most "
+ "closely, because it is the one the gwesp term should reproduce: if the "
+ "observed values fall outside the band, triadic closure has not been "
+ "captured and the homophily coefficients may have absorbed part of it. In "
+ "the models estimated here the center of the distributions is reproduced "
+ "well, but **the tail is not**: nodes with many collaborators and pairs with "
+ "many shared partners are systematically more numerous than the model "
+ "predicts (red circles). This is the known limitation of ERGMs on "
+ "heavy-tailed networks, and it should be kept in mind when reading the "
+ "coefficients: the model describes the typical musician well, and the few "
+ "major collaborators less well.")}
 
-{table('t4_ergm_mcmc', 'Diagnostica MCMC: dimensione efficace del campione per '
- 'ciascun termine. Valori bassi indicano una catena che si muove poco e stime '
- 'meno affidabili', max_rows=24, float_dec=1)}
+{table('t4_ergm_mcmc', 'MCMC diagnostics: effective sample size for each '
+ 'term. Low values indicate a chain that moves little and less reliable '
+ 'estimates', max_rows=24, float_dec=1)}
 
-## 7.3 Il test pre/post 2000
+## 7.3 The pre/post-2000 test
 
 {table('t4_ergm_differenza_epoche',
- 'Test della differenza fra i coefficienti ERGM pre-2000 e post-2000', float_dec=4,
+ 'Test of the difference between the pre-2000 and post-2000 ERGM coefficients', float_dec=4,
  cols=['model', 'term', 'estimate_pre', 'estimate_post', 'differenza', 'se_diff', 'z', 'p'])}
 
-Questa tabella e' la verifica formale del risultato controintuitivo della
-sezione 5.2, e il suo esito e' netto.
+This table is the formal test of the counterintuitive result of section 5.2,
+and its outcome is clear-cut.
 
-**L'omofilia di genere non cambia fra le due epoche.** Per le donne il
-coefficiente passa da {n(C.get('epoca_F_pre'),3)} a {n(C.get('epoca_F_post'),3)}
-(differenza {n(C.get('epoca_F_diff'),3)}, p = {n(C.get('epoca_F_p'),2)}); per
-gli uomini da {n(C.get('epoca_M_pre'),3)} a {n(C.get('epoca_M_post'),3)}
-(differenza {n(C.get('epoca_M_diff'),3)}, p = {n(C.get('epoca_M_p'),2)}).
-Nessuna delle due differenze si avvicina alla significativita'.
+**Gender homophily does not change between the two periods.** For women the
+coefficient goes from {n(C.get('epoca_F_pre'),3)} to
+{n(C.get('epoca_F_post'),3)} (difference {n(C.get('epoca_F_diff'),3)}, p =
+{n(C.get('epoca_F_p'),2)}); for men from {n(C.get('epoca_M_pre'),3)} to
+{n(C.get('epoca_M_post'),3)} (difference {n(C.get('epoca_M_diff'),3)}, p =
+{n(C.get('epoca_M_p'),2)}). Neither difference comes close to significance.
 
-**Cambia invece, e moltissimo, la chiusura triadica.** Il coefficiente `gwesp`
-passa da {n(C.get('epoca_gwesp_pre'),3)} a {n(C.get('epoca_gwesp_post'),3)},
-una differenza di {n(C.get('epoca_gwesp_diff'),3)} con p < 0,0001: e' l'unico
-termine del modello la cui variazione fra epoche sia statisticamente solida.
+**Triadic closure, by contrast, changes a great deal.** The `gwesp`
+coefficient goes from {n(C.get('epoca_gwesp_pre'),3)} to
+{n(C.get('epoca_gwesp_post'),3)}, a difference of
+{n(C.get('epoca_gwesp_diff'),3)} with p < 0.0001: it is the only term in the
+model whose change between periods is statistically solid.
 
-La lettura congiunta e' quella data alla sezione 5.2: l'aumento
-dell'assortativita' osservata dopo il 2000 non e' un rafforzamento della
-preferenza di genere, ma la conseguenza di una rete che si chiude in gruppi piu'
-fitti. Vale la pena notare che questo e' esattamente il tipo di confusione che
-un'analisi puramente descrittiva non puo' sciogliere, e per cui l'ERGM era
-previsto nel disegno.
+The joint reading is the one given in section 5.2: the increase in observed
+assortativity after 2000 is not a strengthening of gender preference, but the
+consequence of a network that closes into tighter groups. This is exactly the
+kind of confounding that a purely descriptive analysis cannot untangle, and
+the reason the ERGM was included in the design.
 """
 
 
 # ==========================================================================
 def sezione_robustezza(C) -> str:
     return f"""
-# 8. Quanto reggono questi risultati
+# 8. How well these results hold up
 
-## 8.1 L'incertezza sul genere sessuale
+## 8.1 Uncertainty about gender
 
 {img('f10_montecarlo_genere',
- f"**La distribuzione Monte Carlo dell'assortativita' di genere al variare "
- f"dell'imputazione degli {n(C['n_unknown'])} artisti senza genere determinato.** "
- f"L'istogramma e' la distribuzione su {C['mc_B']} estrazioni dalla marginale "
- f"osservata. Le due linee tratteggiate laterali non sono stime ma **limiti "
- f"costruiti apposta**: assegnando a ogni artista ignoto il genere prevalente "
- f"fra i suoi collaboratori si ottiene la massima omofilia compatibile con i "
- f"dati; assegnando il genere opposto si ottiene la minima. Il fatto rilevante "
- f"e' che **anche il limite inferiore resta positivo**: non esiste "
- f"assegnazione degli ignoti che faccia sparire l'omofilia. La conclusione "
- f"qualitativa e' robusta; la sua grandezza esatta no.")}
+ f"**Monte Carlo distribution of gender assortativity as the imputation of "
+ f"the {n(C['n_unknown'])} artists without determined gender varies.** The "
+ f"histogram is the distribution over {C['mc_B']} draws from the observed "
+ f"marginal. The two dashed lines at the sides are not estimates but "
+ f"**deliberately constructed bounds**: assigning each unknown artist the "
+ f"prevailing gender among their collaborators yields the maximum homophily "
+ f"compatible with the data; assigning the opposite gender yields the "
+ f"minimum. What matters is that **even the lower bound remains positive**: "
+ f"no assignment of the unknowns makes homophily disappear. The qualitative "
+ f"conclusion is robust; its exact magnitude is not.")}
 
 {table('t5_montecarlo_genere',
- "Assortativita' di genere sotto diversi scenari di imputazione", float_dec=4)}
+ "Gender assortativity under different imputation scenarios", float_dec=4)}
 
-I quattro numeri vanno letti insieme. Sui soli artisti con genere determinato
-l'assortativita' vale {n(C['mc_noti'],4)}. Imputando gli ignoti per estrazione
-casuale dalla marginale osservata scende a {n(C['mc_sq'],4)}: l'imputazione
-casuale non puo' che diluire la struttura, ed e' la ragione per cui la misura
-di riferimento di questo studio e' la prima e non la seconda. I due limiti
-costruiti sul vicinato — {n(C['mc_min'],4)} e {n(C['mc_max'],4)} — delimitano
-quanto l'omofilia potrebbe valere se gli artisti ignoti somigliassero
-sistematicamente ai loro collaboratori o sistematicamente no. **Nessuno dei
-quattro scenari porta l'omofilia a zero o sotto zero.**
+The four numbers should be read together. On artists with determined gender
+only, assortativity is {n(C['mc_noti'],4)}. Imputing the unknowns by random
+draws from the observed marginal lowers it to {n(C['mc_sq'],4)}: random
+imputation can only dilute the structure, which is why the reference measure
+of this study is the first and not the second. The two neighborhood-based
+bounds, {n(C['mc_min'],4)} and {n(C['mc_max'],4)}, delimit how large
+homophily could be if the unknown artists systematically resembled their
+collaborators or systematically did not. **None of the four scenarios brings
+homophily to zero or below.**
 
-Va detto con precisione che cosa questi limiti non fanno: riguardano solo gli
-artisti ignoti che hanno almeno un collaboratore di genere noto. Quelli che
-collaborano soltanto con altri ignoti non portano informazione utilizzabile e
-vengono estratti dalla marginale anche negli scenari estremi — assegnarli per
-maggioranza del vicinato li metterebbe tutti nella stessa categoria, creando un
-blocco artificiale che gonfierebbe *entrambi* gli estremi invece di
-delimitarli.
+It should be stated precisely what these bounds do not do: they concern only
+the unknown artists who have at least one collaborator of known gender. Those
+who collaborate only with other unknowns carry no usable information and are
+drawn from the marginal even in the extreme scenarios; assigning them by
+neighborhood majority would put them all in the same category, creating an
+artificial block that would inflate *both* extremes instead of bounding them.
 
-## 8.2 Sensibilita' ai parametri di costruzione
+## 8.2 Sensitivity to construction parameters
 
 {img('f11_sensibilita',
- "**Ogni punto e' l'assortativita' di genere ottenuta cambiando un solo "
- "parametro rispetto alla configurazione di default (linea tratteggiata).** "
- "Gli assi variati sono quelli che potevano ragionevolmente cambiare il "
- "risultato: quanti artisti al massimo puo' avere una pubblicazione perche' "
- "conti come collaborazione, quale peso minimo deve avere un arco, se "
- "escludere le raccolte, quanto strettamente definire l'italianita', come "
- "pesare la specificita' dei crediti, e se usare o no i crediti a livello "
- "traccia. Quest'ultimo e' l'asse piu' informativo: disattivare i crediti di "
- "traccia significa tornare a una rete costruita solo sulle co-presenze di "
- "copertina, ed e' il confronto che dice quanto il livello traccia stia "
- "effettivamente aggiungendo.")}
+ "**Each point is the gender assortativity obtained by changing a single "
+ "parameter relative to the default configuration (dashed line).** The axes "
+ "varied are those that could reasonably change the result: the maximum "
+ "number of artists a release can have for it to count as a collaboration, "
+ "the minimum weight an edge must have, whether to exclude compilations, how "
+ "strictly to define Italian identity, how to weight credit specificity, and "
+ "whether or not to use track-level credits. The last is the most informative "
+ "axis: switching off track credits means going back to a network built only "
+ "on release-level co-presence, and it is the comparison that shows how much "
+ "the track level actually adds.")}
 
 {table('t5_sensibilita',
- "Sensibilita' delle metriche chiave ai parametri di costruzione della rete",
+ "Sensitivity of key metrics to the network construction parameters",
  max_rows=25, float_dec=4,
  cols=['variante', 'nodi', 'archi', 'quota_gigante', 'r_gender_MF',
        'r_gender_pesato', 'r_genere_musicale'],
- rename={'quota_gigante': 'gigante', 'r_gender_MF': 'r genere M/F',
-         'r_gender_pesato': 'r pesata', 'r_genere_musicale': 'r gen. musicale'})}
+ rename={'quota_gigante': 'giant', 'r_gender_MF': 'r gender M/F',
+         'r_gender_pesato': 'r weighted', 'r_genere_musicale': 'r musical genre'})}
 
-Sulle {n(C['sens_n'])} varianti provate, l'assortativita' di genere sui soli
-nodi determinati resta compresa fra **{n(C['sens_mf_min'],4)} e
-{n(C['sens_mf_max'],4)}**, sempre positiva e sempre dello stesso ordine di
-grandezza del valore di riferimento ({n(C['r_mf'],4)}). Nessuna scelta di
-costruzione della rete, fra quelle difendibili, ribalta la conclusione.
+Across the {n(C['sens_n'])} variants tried, gender assortativity on determined
+nodes only stays between **{n(C['sens_mf_min'],4)} and
+{n(C['sens_mf_max'],4)}**, always positive and always of the same order of
+magnitude as the reference value ({n(C['r_mf'],4)}). No defensible choice of
+network construction reverses the conclusion.
 
-### Che cosa aggiungono davvero i crediti a livello traccia
+### What track-level credits actually add
 
-La colonna dell'assortativita' **pesata** e' l'unica su cui la gerarchia di
-specificita' dei crediti puo' manifestarsi, perche' cambiare i pesi non cambia
-quali coppie di artisti siano collegate: cambia quanto contano. Il confronto e'
-istruttivo.
+The **weighted** assortativity column is the only one in which the hierarchy
+of credit specificity can show up, because changing the weights does not
+change which pairs of artists are connected: it changes how much they count.
+The comparison is instructive.
 
-* con i crediti di traccia e la gerarchia di default: **{n(C['rw_default'],4)}**
-* senza crediti di traccia, cioe' tornando alle sole co-presenze di copertina:
-  **{n(C['rw_no_track'],4)}**
-* con tutti i crediti allo stesso peso: {n(C['rw_flat'],4)}
-* con una gerarchia piu' ripida (1 / 0,5 / 0,1): {n(C['rw_steep'],4)}
+* with track credits and the default hierarchy: **{n(C['rw_default'],4)}**
+* without track credits, that is, going back to release-level co-presence
+  only: **{n(C['rw_no_track'],4)}**
+* with all credits at the same weight: {n(C['rw_flat'],4)}
+* with a steeper hierarchy (1 / 0.5 / 0.1): {n(C['rw_steep'],4)}
 
-Disattivare il livello traccia abbassa l'omofilia misurata di circa
-{pct(1 - C['rw_no_track']/max(C['rw_default'],1e-9),0)}, e appiattire i pesi la
-abbassa quasi altrettanto. La lettura e' che **le collaborazioni documentate in
-modo piu' specifico sono anche le piu' omofile**: quando due nomi compaiono
-insieme sulla stessa traccia — non genericamente sullo stesso disco — la
-probabilita' che condividano il genere sessuale e' piu' alta. Una rete costruita
-sulle sole co-presenze di copertina sottostima quindi la segregazione, perche'
-mescola la collaborazione vera con la coabitazione editoriale. E' la
-giustificazione empirica della scelta di disegno descritta alla sezione 3.1.
+Switching off the track level lowers measured homophily by about
+{pct(1 - C['rw_no_track']/max(C['rw_default'],1e-9),0)}, and flattening the
+weights lowers it almost as much. The reading is that **the collaborations
+documented most specifically are also the most homophilous**: when two names
+appear together on the same track, and not just generically on the same
+record, the probability that they share the same gender is higher. A network
+built on release-level co-presence alone therefore underestimates segregation,
+because it mixes genuine collaboration with editorial cohabitation. This is the
+empirical justification for the design choice described in section 3.1.
 
-## 8.3 Artisti con genere musicale debole
+## 8.3 Artists with a weak musical-genre assignment
 
 {table('t5_genere_debole',
- 'Metriche chiave usando il tag principale, il secondo tag, o escludendo '
- 'gli artisti con attribuzione debole', float_dec=4)}
+ 'Key metrics using the main tag, the second tag, or excluding the '
+ 'artists with a weak assignment', float_dec=4)}
 
-Gli artisti il cui tag di genere principale copre meno del
-{pct(C['weak_threshold'],0)} delle loro pubblicazioni sono marcati `genre_weak`:
-sono {n(C['n_weak'])}, cioe' {pct(C['n_weak']/C['n_pop'])} della popolazione. La
-tabella confronta tre trattamenti — tenerli col tag principale, sostituirlo col
-secondo tag, escluderli del tutto — per mostrare quanto le conclusioni su RQ2
-dipendano da un'attribuzione di genere musicale che per costruzione e'
-incerta.
+Artists whose main genre tag covers less than {pct(C['weak_threshold'],0)} of
+their releases are flagged `genre_weak`: there are {n(C['n_weak'])} of them,
+that is, {pct(C['n_weak']/C['n_pop'])} of the population. The table compares
+three treatments (keeping them with the main tag, replacing it with the second
+tag, excluding them altogether) to show how far the conclusions on RQ2 depend
+on a musical-genre assignment that is uncertain by construction.
 """
 
 
@@ -1092,46 +1223,46 @@ def appendice(C) -> str:
         t = pd.read_csv(tm).groupby("step", as_index=False).seconds.sum() \
               .sort_values("seconds", ascending=False).head(20)
         t["seconds"] = t.seconds.map(lambda v: n(v, 1))
-        timing = t.to_markdown(index=False)
+        timing = t.to_markdown(index=False, disable_numparse=True)
     pk = C["packages"]
-    pkt = pd.DataFrame(sorted(pk.items()), columns=["pacchetto", "versione"]).to_markdown(index=False)
+    pkt = pd.DataFrame(sorted(pk.items()), columns=["package", "version"]).to_markdown(index=False)
     return f"""
-# Appendice tecnica
+# Technical appendix
 
-## A.1 Ambiente
+## A.1 Environment
 
-* Sistema: {C['platform']}
+* System: {C['platform']}
 * Python {C['python']}
-* PostgreSQL {C['pg_version']} — database `discogs`, dati su disco rotazionale
-* R per l'ERGM: installato in userspace via micromamba (conda-forge), env
+* PostgreSQL {C['pg_version']} (database `discogs`, data on a spinning disk)
+* R for the ERGM: installed in user space via micromamba (conda-forge), env
   `opt/mamba/envs/ergm`
-* Seme casuale globale: **{C['seed']}**
-* Data di esecuzione: {C['data']}
+* Global random seed: **{C['seed']}**
+* Run date: {C['data']}
 
 {pkt}
 
-## A.2 Una nota sulle prestazioni che ha condizionato il disegno
+## A.2 A note on performance that shaped the design
 
-Il cluster PostgreSQL risiede su un disco **rotazionale** ma era configurato con
-`random_page_cost = 1.1`, un valore tarato per dischi a stato solido. Con quel
-costo il pianificatore preferisce percorsi ad accesso casuale che su disco
-meccanico degradano a pochi megabyte al secondo: la prima versione
-dell'estrazione girava a circa 5 MB/s. Le sessioni di estrazione impostano
-percio' `random_page_cost = 4` e riducono il parallelismo, favorendo scansioni
-sequenziali, e i conteggi di italianita' sono stati riscritti come **una sola
-passata aggregata** su `release_artist` invece di due join ripetuti. Sono GUC di
-sessione: non modificano la configurazione del server ne' i dati.
+The PostgreSQL cluster resides on a **spinning** disk but was configured with
+`random_page_cost = 1.1`, a value tuned for solid-state drives. With that cost
+the planner prefers random-access paths that on a mechanical disk degrade to a
+few megabytes per second: the first version of the extraction ran at about
+5 MB/s. The extraction sessions therefore set `random_page_cost = 4` and
+reduce parallelism, favoring sequential scans, and the Italian-share counts
+were rewritten as **a single aggregated pass** over `release_artist` instead
+of two repeated joins. These are session-level GUCs: they modify neither the
+server configuration nor the data.
 
-Analogamente, il calcolo della matrice di mixing e' stato riscritto da
-`numpy.add.at` a `numpy.bincount` su indici appiattiti — risultato numerico
-identico, verificato, circa **50 volte piu' veloce** — perche' senza quella
-riscrittura le migliaia di repliche bootstrap e di modello nullo previste dal
-disegno non sarebbero state praticabili.
+Similarly, the computation of the mixing matrix was rewritten from
+`numpy.add.at` to `numpy.bincount` on flattened indices (numerically identical
+result, verified, about **50 times faster**), because without that rewrite the
+thousands of bootstrap and null-model replicates required by the design would
+not have been feasible.
 
-## A.3 Query principali
+## A.3 Main queries
 
-Tutte le interrogazioni sono in `src/phase1_extract.py`. La piu' importante e'
-quella che definisce la popolazione, in una passata sola:
+All queries are in `src/phase1_extract.py`. The most important one defines the
+population, in a single pass:
 
 ```sql
 SELECT ra.artist_id,
@@ -1144,44 +1275,45 @@ GROUP BY 1
 HAVING count(*) FILTER (WHERE it.id IS NOT NULL) >= 2;
 ```
 
-La selezione finale (quota, minimo di pubblicazioni, esclusioni anagrafiche)
-avviene poi sui dati gia' a terra, cosi' che la Fase 5 possa variare le soglie
-senza rileggere il database.
+The final selection (share, minimum number of releases, exclusions based on
+the artist records) then takes place on the data already saved locally, so
+that Phase 5 can vary the thresholds without rereading the database.
 
-## A.4 Tempi di esecuzione
+## A.4 Run times
 
 {timing}
 
-## A.5 Riproducibilita'
+## A.5 Reproducibility
 
 ```bash
 cd {ROOT}
-./run_all.sh              # esecuzione completa
-./run_all.sh --from 3     # riparte dalla Fase 3
-./run_all.sh --force      # ignora i checkpoint e ricalcola tutto
+./run_all.sh              # full run
+./run_all.sh --from 3     # restart from Phase 3
+./run_all.sh --force      # ignore checkpoints and recompute everything
 ```
 
-Ogni fase scrive un checkpoint in `data/*.parquet` e viene saltata se il
-checkpoint esiste. I dati grezzi estratti stanno in `data/raw/`, le figure in
-`report/figures/`, le tabelle in `report/tables/` sia in CSV sia in LaTeX.
+Each phase writes a checkpoint in `data/*.parquet` and is skipped if the
+checkpoint exists. The raw extracted data are in `data/raw/`, the figures in
+`report/figures/`, and the tables in `report/tables/`, in both CSV and LaTeX.
 
-## A.6 Limiti, in ordine di gravita'
+## A.6 Limitations, in order of severity
 
-1. **Il genere sessuale e' inferito, e la validazione manuale non e' stata
-   eseguita.** Il campione stratificato e lo script di scoring sono pronti; senza
-   di essa l'errore di misura dell'inferenza resta non quantificato.
-2. **L'italianita' e' approssimata dal paese di pubblicazione**, perche'
-   `release_label` e' vuota. Confonde "artista italiano" con "artista pubblicato
-   in Italia".
-3. **{pct(1-C['share_genre'])} della popolazione non ha genere musicale**, perche'
-   `release_genre` e' vuota e i master coprono solo parte delle pubblicazioni.
-4. **Nessuna verifica incrociata fra fonti**: iTunes e' escluso per scelta.
-5. **Discogs non e' un censimento.** Sovrarappresenta vinile, elettronica e
-   collezionismo.
-6. **L'ERGM vale sulle sottoreti stimate**, non sull'intera rete.
-7. **Wikidata copre {pct(C['n_wikidata']/C['n_pop'])} della popolazione**; il
-   livello di recupero per nome non e' stato completato per indisponibilita'
-   ripetuta del servizio SPARQL, che ha risposto con errori 429, 502 e 504.
+1. **Gender is inferred, and the manual validation has not been carried
+   out.** The stratified sample and the scoring script are ready; without the
+   validation, the measurement error of the inference remains unquantified.
+2. **Italian identity is approximated by the country of release**, because
+   `release_label` is empty. This conflates "Italian artist" with "artist
+   released in Italy".
+3. **{pct(1-C['share_genre'])} of the population has no musical genre**,
+   because `release_genre` is empty and masters cover only part of the
+   releases.
+4. **No cross-check between sources**: iTunes was excluded by choice.
+5. **Discogs is not a census.** It overrepresents vinyl, electronic music and
+   collecting.
+6. **The ERGM applies to the estimated subnetworks**, not to the whole network.
+7. **Wikidata covers {pct(C['n_wikidata']/C['n_pop'])} of the population**;
+   the name-based recovery step was not completed because the SPARQL service
+   was repeatedly unavailable, responding with 429, 502 and 504 errors.
 """
 
 
@@ -1236,9 +1368,9 @@ def collect(cfg, log) -> dict:
     for m in ["pandas", "numpy", "networkx", "scipy", "statsmodels", "matplotlib",
               "seaborn", "pyarrow", "psycopg2", "gender_guesser"]:
         try:
-            pkgs[m] = getattr(importlib.import_module(m), "__version__", "presente")
+            pkgs[m] = getattr(importlib.import_module(m), "__version__", "installed")
         except Exception:
-            pkgs[m] = "assente"
+            pkgs[m] = "not installed"
 
     prior_it = get("onomastic_prior_it.parquet")
     prior_gl = get("onomastic_prior_global.parquet")
@@ -1254,7 +1386,7 @@ def collect(cfg, log) -> dict:
         cts = cts[~cts.artist_id.isin(pg[pg.is_group].artist_id)]
 
     C = {
-        "data": datetime.date.today().strftime("%d/%m/%Y"),
+        "data": _oggi_en(),
         "seed": cfg["project"]["seed"],
         "platform": platform.platform(),
         "python": platform.python_version(),
@@ -1388,7 +1520,6 @@ def build(cfg, log):
                     sezione_rete(C), sezione_risultati(C), sezione_omofilia(C),
                     sezione_posizione(C), sezione_ergm(C), sezione_robustezza(C),
                     appendice(C)])
-    md = common.italiano(md)
     p = REPORT / "report.md"
     p.write_text(md)
     log.info(f"report Markdown: {p} ({len(md):,} caratteri)")
@@ -1440,8 +1571,8 @@ def compile_outputs(md_path: Path, cfg, log):
     if pandoc.exists():
         cmd = [str(pandoc), str(md_path), "-f", "markdown+pipe_tables+raw_html+tex_math_dollars",
                "-t", "html5", "-s", "--toc", "--toc-depth=2", "--mathml",
-               "--metadata", "title=Omofilia di genere nelle collaborazioni musicali italiane",
-               "--metadata", "lang=it", "-c", "report.css", "-o", str(html)]
+               "--metadata", "title=Gender homophily in Italian music collaborations",
+               "--metadata", "lang=en", "-c", "report.css", "-o", str(html)]
         p = subprocess.run(cmd, capture_output=True, text=True)
         if p.returncode == 0:
             log.info(f"HTML: {html}")

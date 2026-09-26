@@ -33,250 +33,273 @@ CSV_GZIP_SOGLIA_MB = 20          # sopra questa dimensione il CSV esce compresso
 # --------------------------------------------------------------------------
 DESCRIZIONI = {
     # --- Fase 1a: estrazione grezza dal database
-    "raw/raw_artist_counts": ("1a", "Per ogni artista con almeno due pubblicazioni "
-        "italiane: quante sono (n_it) e quante in totale (n_all). E' la base da cui "
-        "si ricava la popolazione, ed e' qui che si possono rifare le soglie."),
-    "raw/raw_artistmeta": ("1a", "Anagrafica Discogs dei candidati prima del filtro "
-        "sui nomi: nome, vero nome, profilo testuale, qualita' del dato."),
-    "raw/raw_artists": ("1a", "Popolazione finale: i 100.201 artisti italiani, con i "
-        "conteggi di italianita' e la quota."),
-    "raw/raw_ra": ("1a", "Crediti a livello RELEASE (release_artist) dei soli artisti "
-        "della popolazione. `extra=0` indica l'artista principale; `tracks` e' il "
-        "campo testuale con le posizioni dei brani, quando c'e'."),
-    "raw/raw_rta": ("1a", "Crediti a livello TRACCIA (release_track_artist). "
-        "`track_id` e' l'identificativo globale della traccia in Discogs."),
-    "raw/raw_releases": ("1a", "Anagrafica delle pubblicazioni toccate: anno estratto "
-        "dal campo testuale `released`, paese, identificativo del master."),
-    "raw/raw_relsize": ("1a", "Numero di artisti accreditati su ciascuna pubblicazione "
-        "(tutti, non solo gli italiani). Serve al filtro `max_credits`."),
-    "raw/raw_relsize_track": ("1a", "Stesso conteggio per le pubblicazioni che hanno "
-        "crediti solo a livello traccia e quindi mancano in raw_relsize."),
-    "raw/raw_various": ("1a", "Pubblicazioni attribuite a un artista di nome "
-        "'Various'. Sono tre: in questo dump il segnaposto non viene usato."),
-    "raw/raw_relgenre": ("1a", "Generi musicali delle pubblicazioni, via master_genre. "
-        "E' l'unica fonte disponibile: release_genre e' vuota nel dump."),
-    "raw/raw_relstyle": ("1a", "Stili (sottogeneri) via master_style, usati come "
-        "ripiego quando manca il genere."),
-    "raw/raw_reltracks": ("1a", "Mappa posizione -> traccia per le pubblicazioni che "
-        "hanno crediti posizionali da risolvere (es. 'A1' -> track_id)."),
-    "raw/raw_groups": ("1a", "Composizione dei gruppi (group_member): serve a "
-        "classificare un gruppo come misto od omogeneo."),
-    "raw/raw_namevar": ("1a", "Varianti del nome d'arte registrate in Discogs."),
-    "raw/raw_wd_names": ("1b", "Nome e vero nome, presi da Discogs, dei 199.812 "
-        "artisti che Wikidata etichetta con un genere. E' il corpus da cui nasce "
-        "il dizionario onomastico."),
+    "raw/raw_artist_counts": ("1a", "For each artist with at least two Italian "
+        "releases: how many there are (n_it) and how many releases in total (n_all). "
+        "This is the base from which the population is derived, and the file from "
+        "which the inclusion thresholds can be recomputed."),
+    "raw/raw_artistmeta": ("1a", "Discogs profile data for the candidates before the "
+        "name filter: name, real name, free-text profile, data quality."),
+    "raw/raw_artists": ("1a", "Italian population before the exclusion of groups "
+        "(D16): 100,201 entries, 12,972 of them groups, with the Italian-release "
+        "counts and share."),
+    "raw/raw_ra": ("1a", "Credits at RELEASE level (release_artist), for population "
+        "artists only. `extra=0` marks the main artist; `tracks` is the text field "
+        "with track positions, when present."),
+    "raw/raw_rta": ("1a", "Credits at TRACK level (release_track_artist). "
+        "`track_id` is the global Discogs track identifier."),
+    "raw/raw_releases": ("1a", "Metadata for the releases involved: year extracted "
+        "from the text field `released`, country, master identifier."),
+    "raw/raw_relsize": ("1a", "Number of artists credited on each release (all of "
+        "them, not only Italians). Used by the `max_credits` filter."),
+    "raw/raw_relsize_track": ("1a", "The same count for releases that have credits "
+        "only at track level and are therefore missing from raw_relsize."),
+    "raw/raw_various": ("1a", "Releases attributed to an artist named 'Various'. "
+        "There are three: this dump does not use the placeholder."),
+    "raw/raw_relgenre": ("1a", "Musical genres of the releases, via master_genre. "
+        "This is the only available source: release_genre is empty in the dump."),
+    "raw/raw_relstyle": ("1a", "Styles (musical subgenres) via master_style, used as "
+        "a fallback when the musical genre is missing."),
+    "raw/raw_reltracks": ("1a", "Position-to-track map for releases whose positional "
+        "credits need resolving (e.g. 'A1' -> track_id)."),
+    "raw/raw_groups": ("1a", "Group membership (group_member): used to identify "
+        "groups, which are excluded from the analysis (D16), and, in the version "
+        "with groups, to classify a group as mixed-gender or single-gender."),
+    "raw/raw_namevar": ("1a", "Stage-name variants recorded in Discogs."),
+    "raw/raw_wd_names": ("1b", "Name and real name, taken from Discogs, of the "
+        "199,812 artists to whom Wikidata assigns a gender. This is the corpus "
+        "from which the onomastic dictionary is built."),
 
     # --- Fase 1b: Wikidata
-    "wd_by_discogs": ("1b", "Tutte le entita' Wikidata con proprieta' P1953 "
-        "(identificativo Discogs) e P21 (genere). L'aggancio e' esatto "
-        "sull'identificativo, non per nome. `ambiguous` marca gli identificativi "
-        "legati a piu' entita' con generi discordi."),
-    "onomastic_prior_it": ("1d", "Dizionario nome->genere costruito sui soli artisti "
-        "italiani etichettati con certezza da Wikidata. `purity` e' la quota del "
-        "genere prevalente, `n` il numero di osservazioni."),
-    "onomastic_prior_global": ("1d", "Stesso dizionario costruito sull'intero corpus "
-        "mondiale. Usato SOLO per nomi che il lookup italiano non riconosce."),
-    "onomastic_prior_disaccordo": ("1d", "Nomi su cui i due dizionari sono in "
-        "disaccordo. E' vuoto, ed e' un controllo di coerenza, non un risultato."),
+    "wd_by_discogs": ("1b", "All Wikidata entities with property P1953 (Discogs "
+        "identifier) and P21 (sex or gender). The match is exact on the identifier, "
+        "not by name. `ambiguous` flags identifiers linked to several entities "
+        "with conflicting genders."),
+    "onomastic_prior_it": ("1d", "Name-to-gender dictionary built only from Italian "
+        "artists labeled with certainty by Wikidata. `purity` is the share of the "
+        "prevailing gender, `n` the number of observations."),
+    "onomastic_prior_global": ("1d", "The same dictionary built on the whole "
+        "worldwide corpus. Used ONLY for names that the Italian lookup does not "
+        "recognize."),
+    "onomastic_prior_disaccordo": ("1d", "Names on which the two dictionaries "
+        "disagree. It is empty; it is a consistency check, not a result."),
 
     # --- Fase 1c/1d: popolazione e genere
-    "population": ("1c", "Popolazione con gli attributi calcolati: anno di debutto, "
-        "decennio di coorte, epoca, numero di pubblicazioni, genere musicale "
-        "prevalente e quota del tag principale, se e' un gruppo o un membro."),
-    "population_gender": ("1d", "**Tabella centrale dello studio.** La popolazione "
-        "piu' il genere sessuale inferito, con `label_source` (quale livello della "
-        "cascata ha prodotto l'etichetta) e `confidence`."),
-    "credits": ("1c", "**Tavola unificata dei crediti**, una riga per "
-        "(artista, contesto). `scope` e' la specificita': `track` credito su una "
-        "traccia precisa, `main` artista principale, `umbrella` credito senza "
-        "indicazione di tracce. `source` dice da dove viene il credito. "
-        "`role_class` e' la classificazione del ruolo."),
+    "population": ("1c", "Population with the computed attributes: debut year, "
+        "cohort decade, era, number of releases, prevailing musical genre and "
+        "share of the main tag, whether the artist is a group or a group member."),
+    "population_gender": ("1d", "**Central table of the study.** The population of "
+        "individual artists (87,229; groups excluded under D16) with the inferred "
+        "gender, `label_source` (which level of the cascade produced the label) "
+        "and `confidence`."),
+    "credits": ("1c", "**Unified credit table**, one row per (artist, context). "
+        "`scope` is the specificity: `track` a credit on a specific track, `main` "
+        "main artist, `umbrella` a credit with no track indication. `source` says "
+        "where the credit comes from. `role_class` is the role classification."),
 
     # --- Fase 2: rete
-    "edges_all": ("2", "Proiezione pesata artista-artista, rete completa. `w` e' il "
-        "peso calcolato come descritto nella sezione 3.1 del report."),
-    "edges_creative": ("2", "Stessa proiezione, ristretta ai crediti creativi "
-        "(produzione, scrittura, arrangiamento, composizione)."),
-    "edges_performance": ("2", "Stessa proiezione, ristretta ai crediti di esecuzione "
-        "(voce, strumenti, direzione, featuring)."),
-    "network_stats": ("2", "Descrittive delle tre reti: nodi, archi, densita', "
-        "gradi, componenti, quota della componente gigante."),
+    "edges_all": ("2", "Weighted artist-artist projection, full network. `w` is the "
+        "weight computed as described in Section 3.1 of the Italian report."),
+    "edges_creative": ("2", "The same projection, restricted to creative credits "
+        "(production, writing, arrangement, composition)."),
+    "edges_performance": ("2", "The same projection, restricted to performing "
+        "credits (vocals, instruments, conducting, featuring)."),
+    "network_stats": ("2", "Descriptive statistics for the three networks: nodes, "
+        "edges, density, degrees, components, share of the giant component."),
 
     # --- Fase 3: omofilia e posizione
-    "assortativity_overall": ("3", "Assortativita' complessiva per genere sessuale e "
-        "per genere musicale, con media e deviazione del modello nullo."),
-    "assortativity_strata": ("3", "Assortativita' per sottorete di ruolo ed epoca, "
-        "con intervalli bootstrap. Calcolata su tutte e quattro le categorie."),
-    "assortativity_mf": ("3", "**Misura di riferimento.** La stessa assortativita' "
-        "calcolata sui soli archi fra nodi con genere determinato, affiancata alla "
-        "versione a quattro categorie per rendere visibile l'artefatto."),
-    "homophily_by_genre": ("3", "Omofilia di genere sessuale dentro ciascun genere "
-        "musicale, con i rapporti osservato/atteso separati per uomini e donne."),
-    "women_share": ("3", "Quota di donne per genere musicale e decennio di debutto, "
-        "con intervalli di Wilson."),
-    "position": ("3", "Centralita' di ogni nodo della componente gigante: "
-        "eigenvector, betweenness (esatta, su tutte le sorgenti), coreness, grado, forza, "
-        "clustering; piu' tutti gli attributi dell'artista."),
-    "betweenness_campionata": ("3", "La regressione della posizione con la betweenness "
-        "APPROSSIMATA su 400 sorgenti, sulla stessa rete: il termine di confronto con "
-        "quella esatta (Fase 3d)."),
-    "population_gender_con_gruppi": ("1", "La popolazione con genere inferito PRIMA "
-        "dell'esclusione dei gruppi (D16): 100.201 voci, di cui 12.972 gruppi."),
-    "position_regressions": ("3", "Coefficienti delle regressioni OLS sulla posizione "
-        "nella rete, con errori standard robusti HC3."),
+    "assortativity_overall": ("3", "Overall assortativity by gender and by musical "
+        "genre, with the mean and standard deviation under the null model."),
+    "assortativity_strata": ("3", "Assortativity by role subnetwork and era, with "
+        "bootstrap intervals. Computed on all gender categories (M, F, unknown)."),
+    "assortativity_mf": ("3", "**Reference measure.** The same assortativity "
+        "computed only on edges between nodes with determined gender, shown next "
+        "to the version with all categories (unknown included) to make the "
+        "artifact visible."),
+    "homophily_by_genre": ("3", "Gender homophily within each musical genre, with "
+        "observed/expected ratios reported separately for men and women."),
+    "women_share": ("3", "Share of women by musical genre and debut decade, with "
+        "Wilson intervals."),
+    "position": ("3", "Centrality of each node in the giant component: "
+        "eigenvector, betweenness (exact, from all sources), coreness, degree, "
+        "strength, clustering; plus all the artist attributes."),
+    "betweenness_campionata": ("3", "The position regression with betweenness "
+        "*approximated* from 400 sources, on the same network: the comparison "
+        "term for the exact computation (Phase 3d)."),
+    "population_gender_con_gruppi": ("1", "The population with inferred gender "
+        "BEFORE the exclusion of groups (D16): 100,201 entries, 12,972 of them "
+        "groups."),
+    "position_regressions": ("3", "Coefficients of the OLS regressions on network "
+        "position, with HC3 heteroskedasticity-robust standard errors."),
 
     # --- Fase 4: ERGM
-    "ergm_coef": ("4", "Coefficienti ERGM per ciascuna sottorete e ciascun modello "
-        "della gerarchia (M0 senza gwesp, M1 con gwesp, M2 con nodemix)."),
-    "ergm_summary": ("4", "Per ogni sottorete: dimensione, se e' stata campionata, "
-        "quali modelli sono arrivati a convergenza, se il termine gwesp ha retto."),
+    "ergm_coef": ("4", "ERGM coefficients for each subnetwork and each model in the "
+        "hierarchy (M0 without gwesp, M1 with gwesp, M2 with nodemix)."),
+    "ergm_summary": ("4", "For each subnetwork: size, whether it was sampled, which "
+        "models converged, whether the gwesp term held."),
 
     # --- Fase 5: robustezza
-    "mc_gender": ("5", "Esito di ogni replica Monte Carlo sull'imputazione degli "
-        "artisti di genere ignoto, piu' i due scenari estremi."),
-    "sensitivity": ("5", "Metriche chiave sotto ciascuna variante dei parametri di "
-        "costruzione della rete, una variazione per volta."),
-    "genre_weak_variants": ("5", "Metriche chiave trattando in tre modi diversi gli "
-        "artisti con attribuzione di genere musicale debole."),
+    "mc_gender": ("5", "Outcome of each Monte Carlo replicate of the imputation of "
+        "artists with unknown gender, plus the two extreme scenarios."),
+    "sensitivity": ("5", "Key metrics under each variant of the network "
+        "construction parameters, one change at a time."),
+    "genre_weak_variants": ("5", "Key metrics under three different treatments of "
+        "artists with a weak musical-genre attribution."),
 
     # --- Fase 1e: verifica dell'italianita'
-    "italy_validation": ("1", "Artisti della popolazione con cittadinanza (P27) "
-        "registrata in Wikidata: la verifica dell'euristica di italianita'. "
-        "`italiano` dice se almeno una cittadinanza e' italiana, stati storici compresi."),
-    "wikidata_enriched": ("1", "Entita' Wikidata con identificativo Discogs (P1953): "
-        "genere (P21), cittadinanze (P27), occupazioni, per lotti di QID."),
-    "wd_italian": ("1", "Entita' Wikidata con cittadinanza italiana usate per il "
-        "dizionario onomastico italiano."),
+    "italy_validation": ("1", "Population artists with a citizenship (P27) recorded "
+        "in Wikidata: the check of the Italian-nationality heuristic. `italiano` "
+        "says whether at least one citizenship is Italian, historical states "
+        "included."),
+    "wikidata_enriched": ("1", "Wikidata entities with a Discogs identifier "
+        "(P1953): sex or gender (P21), citizenships (P27), occupations, in "
+        "batches of QIDs."),
+    "wd_italian": ("1", "Wikidata entities with Italian citizenship, used for the "
+        "Italian onomastic dictionary."),
 
     # --- Fase 4c-4j: rete integrale, calcolo esatto, proiezione
-    "dyadic_logit": ("4", "Logit diadico caso-controllo (Fase 4c), SUPERATO dal "
-        "calcolo esatto: resta come termine di confronto. Intercetta gia' corretta "
-        "con il segno giusto (errore E1)."),
-    "qap_gender": ("4", "Test QAP a mille permutazioni (Fase 4c), superato dalla "
-        "forma chiusa di `permutazione_esatta`."),
-    "edges_datati": ("4", "Ogni arco datato con l'anno della prima release condivisa "
-        "dai due artisti, e il decennio corrispondente. Base di tutta la serie "
-        "temporale."),
-    "homophily_temporal": ("4", "Serie temporale campionata (Fase 4d), superata da "
+    "dyadic_logit": ("4", "Case-control dyadic logit (Phase 4c), SUPERSEDED by the "
+        "exact computation: kept as a point of comparison. The intercept is "
+        "already corrected to the right sign (error E1)."),
+    "qap_gender": ("4", "QAP test with a thousand permutations (Phase 4c), "
+        "superseded by the closed form in `permutazione_esatta`."),
+    "edges_datati": ("4", "Each edge dated by the year of the first release shared "
+        "by the two artists, with the corresponding decade. The basis of the "
+        "whole time series."),
+    "homophily_temporal": ("4", "Sampled time series (Phase 4d), superseded by "
         "`temporale_esatto`."),
-    "logit_esatto": ("4", "**Logit diadico esatto** su tutte le 1.619.630.155 diadi "
-        "della rete a genere determinato: coefficienti, errori standard "
-        "dall'informazione osservata (che assumono indipendenza fra diadi), "
-        "log-verosimiglianza."),
-    "logit_esatto_parziale": ("4", "Checkpoint per iterazione del Newton esatto; "
-        "serve solo a riprendere una stima interrotta."),
-    "permutazione_esatta": ("4", "Permutazione UNIFORME delle etichette sulla rete "
-        "intera: media e deviazione in forma chiusa. Cieca all'attivita': vedi "
-        "`nullo_grado`."),
-    "temporale_esatto": ("4", "Serie per decennio di formazione dell'arco: quota di "
-        "donne, rapporti sotto permutazione uniforme in forma chiusa, logit esatto "
-        "per decennio su tutte le diadi del periodo."),
-    "nullo_grado": ("4", "**Nullo di riferimento della serie temporale** (Fase 4j): "
-        "legami entro-genere osservati su attesi permutando le etichette fra artisti "
-        "con lo stesso numero di legami (2.000 permutazioni per decennio), accanto al "
-        "nullo uniforme e al rapporto sul modello di configurazione."),
-    "non_persone": ("4", "Voci della popolazione il cui nome segnala una non-persona "
-        "(band, orchestre, etichette, studi, varianti di Various), con il motivo (Fase 4l)."),
-    "sensibilita_nonpersone": ("4", "Serie per decennio sotto il nullo per strati di grado, "
-        "con e senza le voci che non sono persone (Fase 4l)."),
-    "sensibilita_nonpersone_assortativita": ("4", "Assortativita' di genere e legami, con e "
-        "senza le voci che non sono persone (Fase 4l)."),
-    "densita_genere": ("4", "Per decennio e genere musicale (legami fra artisti dello "
-        "stesso genere): probabilita' che una coppia donna-donna, uomo-uomo o mista "
-        "sia legata, rapporti fra queste probabilita' con intervalli di Poisson "
-        "(ottimistici), e osservato/atteso per tipo di coppia sotto la permutazione "
-        "per strati di grado, con z. `affidabile` = almeno 30 donne e 10 legami FF."),
-    "proiezione_esp": ("4", "Per ogni arco: partner condivisi totali, quelli imposti "
-        "dalla proiezione bipartita, il cast della release condivisa piu' grande e "
-        "se l'arco sta oltre il tetto che una sola release puo' imporre."),
-    "proiezione_distribuzione": ("4", "Quota di partner condivisi imposti dalla "
-        "proiezione, per numero di partner condivisi."),
-    "proiezione_riassunto": ("4", "Riassunto della misura di proiezione su tutti gli "
-        "archi."),
-    "proiezione_tetto": ("4", "Archi entro e oltre il tetto di proiezione, con la "
-        "quota di partner condivisi spiegata in ciascun gruppo (98,8% contro 27,6%)."),
-    "proiezione_nulla": ("4", "Distribuzione dei partner condivisi osservata e da "
-        "proiezione bipartita randomizzata a gradi invariati (Fase 4i), per tre "
-        "insiemi."),
-    "ergm_full_coef": ("4", "Coefficienti delle stime ERGM sulla rete integrale "
-        "(Fase 4b). Nessuna e' valida: vedi `ergm_full_esiti` e docs/05-ergm.md."),
-    "ergm_full_esiti": ("4", "Esito delle stime ERGM sulla rete integrale, con il "
-        "motivo dell'abbandono."),
-    "ergm_decenni_coef": ("4", "Coefficienti ERGM per decennio (Fase 4f); validi solo "
-        "per i decenni convergiti, 1930 e 1940."),
-    "ergm_decenni_esiti": ("4", "Esito delle stime ERGM per decennio."),
-    "ergm_bimodale": ("4", "Controllo della bimodalita' sul decennio 1940 (Fase 4h): "
-        "ampiezza dello scarto a U per il riferimento; le tre varianti non "
-        "convergono, controllo negativo compreso."),
+    "logit_esatto": ("4", "**Exact dyadic logit** on all 1,306,346,055 dyads of the "
+        "network with determined gender: coefficients, standard errors from the "
+        "observed information (which assume independence between dyads), "
+        "log-likelihood."),
+    "logit_esatto_parziale": ("4", "Per-iteration checkpoint of the exact Newton "
+        "estimation; only used to resume an interrupted estimate."),
+    "permutazione_esatta": ("4", "UNIFORM permutation of the labels over the whole "
+        "network: mean and standard deviation in closed form. Blind to activity: "
+        "see `nullo_grado`."),
+    "temporale_esatto": ("4", "Series by decade of edge formation: share of women, "
+        "ratios under uniform permutation in closed form, exact logit per decade "
+        "on all dyads of the period."),
+    "nullo_grado": ("4", "**Reference null for the time series** (Phase 4j): "
+        "observed over expected within-gender ties when labels are permuted among "
+        "artists with the same number of ties (2,000 permutations per decade), "
+        "next to the uniform null and to the ratio under the configuration model."),
+    "non_persone": ("4", "Population entries whose name signals a non-person "
+        "(bands, orchestras, labels, studios, variants of Various), with the "
+        "reason (Phase 4l)."),
+    "sensibilita_nonpersone": ("4", "Series by decade under the degree-stratified "
+        "null, with and without the entries that are not persons (Phase 4l)."),
+    "sensibilita_nonpersone_assortativita": ("4", "Gender assortativity and number "
+        "of ties, with and without the entries that are not persons (Phase 4l)."),
+    "densita_genere": ("4", "By decade and musical genre (ties between artists of "
+        "the same musical genre): probability that a woman-woman, man-man or mixed "
+        "pair is tied, ratios between these probabilities with Poisson intervals "
+        "(optimistic), and observed/expected by pair type under the "
+        "degree-stratified permutation, with z. `affidabile` (reliable) = at least "
+        "30 women and 10 FF ties."),
+    "proiezione_esp": ("4", "For each edge: total shared partners, those imposed by "
+        "the bipartite projection, the cast of the largest shared release, and "
+        "whether the edge lies beyond the ceiling that a single release can "
+        "impose."),
+    "proiezione_distribuzione": ("4", "Share of shared partners imposed by the "
+        "projection, by number of shared partners."),
+    "proiezione_riassunto": ("4", "Summary of the projection measure over all "
+        "edges."),
+    "fattibilita_paesi": ("feasibility study", "Feasibility of the international comparison "
+        "(docs/07-confronto-internazionale.md), one row per candidate country: "
+        "releases, entries, groups and individuals, share with a Wikidata gender "
+        "and share of women among them, share with a real name, and precision of "
+        "the nationality criterion against Wikidata citizenship (P27)."),
+    "fattibilita_paesi_decenni": ("feasibility study", "For the same candidate countries, the "
+        "number of individual artists by decade of debut, 1950s to 2020s."),
+    "proiezione_tetto": ("4","Edges within and beyond the projection ceiling, with "
+        "the share of shared partners explained in each group (98.5% against "
+        "26.5%)."),
+    "proiezione_nulla": ("4", "Distribution of shared partners, observed and from "
+        "a degree-preserving randomized bipartite projection (Phase 4i), for "
+        "three edge sets."),
+    "ergm_full_coef": ("4", "Coefficients of the ERGM estimates on the full network "
+        "(Phase 4b). None is valid: see `ergm_full_esiti` and docs/05-ergm.md."),
+    "ergm_full_esiti": ("4", "Outcome of the ERGM estimates on the full network, "
+        "with the reason each was abandoned."),
+    "ergm_decenni_coef": ("4", "ERGM coefficients by decade (Phase 4f); valid only "
+        "for the decades that converged: 1930, 1940 and 1950."),
+    "ergm_decenni_esiti": ("4", "Outcome of the ERGM estimates by decade."),
+    "ergm_bimodale": ("4", "Check of the bimodality in the 1940s (Phase 4h): size "
+        "of the U-shaped deviation for the reference model; the three variants do "
+        "not converge, the negative control included."),
 }
 
 # --------------------------------------------------------------------------
 # Significato delle colonne che ricorrono.
 # --------------------------------------------------------------------------
 DIZIONARIO = {
-    "decennio": "Decennio di formazione dell'arco: anno della prima release condivisa dai due artisti.",
-    "rapporto_uniforme": "Archi entro-categoria osservati su attesi permutando le etichette su tutti i nodi, "
-                         "senza tener conto del grado. Cieco all'attivita'.",
-    "rapporto_grado": "Archi entro-categoria osservati su attesi permutando le etichette solo fra nodi "
-                      "con lo stesso grado (strati di almeno 30). Riferimento dell'articolo.",
-    "z_grado": "Scarto dell'osservato dalla media della permutazione per strati, in deviazioni standard.",
-    "grado_medio_relativo": "Grado medio dei nodi della categoria diviso per il grado medio di tutti i nodi.",
-    "esp": "Edgewise shared partners: numero di vicini comuni ai due estremi di un arco.",
-    "artist_id": "Identificativo Discogs dell'artista. Chiave di join fra tutte le tavole.",
-    "release_id": "Identificativo Discogs della pubblicazione.",
-    "track_key": "Identificativo della traccia: `track_id` di Discogs quando c'e', "
-                 "altrimenti una chiave sintetica release+sequenza.",
-    "name": "Nome d'arte come compare in Discogs, suffisso di disambiguazione incluso.",
-    "name_clean": "Nome d'arte senza il suffisso di disambiguazione: 'Mina (3)' -> 'Mina'.",
-    "realname": "Nome anagrafico dichiarato in Discogs, quando presente.",
-    "realname_clean": "Come sopra, ripulito.",
-    "profile": "Testo descrittivo libero della scheda Discogs.",
-    "n_it": "Numero di pubblicazioni dell'artista con country = 'Italy'.",
-    "n_all": "Numero totale di pubblicazioni accreditate all'artista.",
-    "italian_share": "n_it / n_all. La soglia di inclusione e' 0,50.",
-    "n_release": "Pubblicazioni distinte su cui l'artista risulta accreditato.",
-    "debut_year": "Anno della prima pubblicazione datata accreditata all'artista.",
-    "cohort_decade": "Decennio di debutto. Il valore piu' basso e' un contenitore "
-                     "'tutto cio' che precede', non un decennio vero.",
-    "era": "pre2000 o post2000, secondo l'anno di debutto.",
-    "musical_genre": "Genere musicale prevalente: il tag piu' frequente sulle "
-                     "pubblicazioni dell'artista. 'Unknown' se nessuna e' taggata.",
-    "musical_genre_2": "Secondo tag per frequenza, usato nelle varianti di robustezza.",
-    "genre_share": "Quota del tag prevalente sul totale dei tag dell'artista.",
-    "genre_weak": "Vero se il tag prevalente copre meno del 40% dei tag.",
-    "gender": "Genere sessuale inferito: M, F, mixed (gruppo con membri di entrambi), "
-              "unknown. **Non e' un dato osservato: e' inferito.**",
-    "label_source": "Quale livello della cascata ha prodotto l'etichetta. "
-                    "`wikidata_p1953` e' il piu' affidabile (aggancio esatto).",
-    "confidence": "Confidenza dichiarata per quell'etichetta, da 0 a 1. E' un "
-                  "parametro di configurazione per livello, non una probabilita' stimata.",
-    "is_group": "Vero se l'artista ha membri registrati in Discogs.",
-    "is_member": "Vero se l'artista risulta membro di almeno un gruppo.",
-    "scope": "Specificita' del credito: track / main / umbrella.",
-    "source": "Provenienza del credito: rta, ra_main, ra_umbrella, ra_tracks, "
+    "decennio": "Decade in which the edge formed: year of the first release shared by the two artists.",
+    "rapporto_uniforme": "Observed within-category edges divided by those expected when labels are permuted "
+                         "across all nodes, ignoring degree. Blind to activity.",
+    "rapporto_grado": "Observed within-category edges divided by those expected when labels are permuted only "
+                      "among nodes with the same degree (strata of at least 30). The reference in the article.",
+    "z_grado": "Deviation of the observed count from the mean of the degree-stratified permutation, in standard deviations.",
+    "grado_medio_relativo": "Mean degree of the nodes in the category divided by the mean degree of all nodes.",
+    "esp": "Edgewise shared partners: number of neighbors common to the two endpoints of an edge.",
+    "artist_id": "Discogs artist identifier. Join key across all tables.",
+    "release_id": "Discogs release identifier.",
+    "track_key": "Track identifier: the Discogs `track_id` when present, "
+                 "otherwise a synthetic release+sequence key.",
+    "name": "Stage name as it appears in Discogs, disambiguation suffix included.",
+    "name_clean": "Stage name without the disambiguation suffix: 'Mina (3)' -> 'Mina'.",
+    "realname": "Legal name declared in Discogs, when present.",
+    "realname_clean": "As above, cleaned.",
+    "profile": "Free descriptive text of the Discogs profile.",
+    "n_it": "Number of the artist's releases with country = 'Italy'.",
+    "n_all": "Total number of releases credited to the artist.",
+    "italian_share": "n_it / n_all. The inclusion threshold is 0.50.",
+    "n_release": "Distinct releases on which the artist is credited.",
+    "debut_year": "Year of the first dated release credited to the artist.",
+    "cohort_decade": "Debut decade. The lowest value is a catch-all bin for "
+                     "'everything earlier', not a real decade.",
+    "era": "pre2000 or post2000, by debut year.",
+    "musical_genre": "Prevailing musical genre: the most frequent tag on the "
+                     "artist's releases. 'Unknown' if none is tagged.",
+    "musical_genre_2": "Second tag by frequency, used in the robustness variants.",
+    "genre_share": "Share of the prevailing tag among all of the artist's musical-genre tags.",
+    "genre_weak": "True if the prevailing tag covers less than 40% of the tags.",
+    "gender": "Inferred gender: M, F, unknown (`mixed`, a group with members of both "
+              "genders, appears only in `population_gender_con_gruppi`, before groups "
+              "were excluded under D16). **It is not an observed datum: it is inferred.**",
+    "label_source": "Which level of the cascade produced the label. "
+                    "`wikidata_p1953` is the most reliable (exact match).",
+    "confidence": "Declared confidence for that label, from 0 to 1. It is a "
+                  "configuration parameter set per level, not an estimated probability.",
+    "is_group": "True if the artist has members registered in Discogs. Groups are "
+                "excluded from the analysis (D16), so it is False in `population_gender` "
+                "and in the network tables.",
+    "is_member": "True if the artist is a member of at least one group.",
+    "scope": "Specificity of the credit: track / main / umbrella.",
+    "source": "Origin of the credit: rta, ra_main, ra_umbrella, ra_tracks, "
               "ra_tracks_unresolved.",
-    "role": "Ruolo come scritto in Discogs, testo libero.",
-    "role_class": "Ruolo normalizzato: creative / performance / technical / other.",
-    "extra": "Campo Discogs: 0 = artista principale, 1 = credito secondario.",
-    "tracks": "Campo Discogs con le posizioni dei brani, in forma testuale.",
-    "u": "Primo estremo dell'arco (artist_id, sempre il minore dei due).",
-    "v": "Secondo estremo dell'arco.",
-    "w": "Peso dell'arco: tracce condivise piu' co-presenza scalata dalla specificita'.",
-    "eigenvector": "Centralita' autovettoriale, pesata.",
-    "betweenness": "Centralita' di intermediazione, approssimata su un campione di sorgenti.",
-    "coreness": "Numero di k-core: a quale strato del nucleo denso appartiene il nodo.",
-    "degree": "Numero di collaboratori distinti.",
-    "strength": "Somma dei pesi degli archi incidenti.",
-    "r": "Coefficiente di assortativita' di Newman per attributi categoriali.",
-    "r_null": "Valore medio dello stesso coefficiente sotto il modello nullo.",
-    "ci_lo / ci_hi": "Estremi dell'intervallo di confidenza bootstrap al 95%.",
-    "z": "Scostamento dell'osservato dal modello nullo, in deviazioni standard.",
-    "estimate": "Coefficiente ERGM, in log-odds.",
-    "or": "exp(estimate): il coefficiente come rapporto di probabilita'.",
-    "gender_wd": "Genere secondo Wikidata, mappato su M / F / other.",
-    "discogs_id": "Valore della proprieta' P1953 di Wikidata, cioe' l'artist_id Discogs.",
-    "ambiguous": "Vero se lo stesso identificativo Discogs risulta legato a piu' "
-                 "entita' Wikidata con generi discordi: quei casi sono scartati.",
+    "role": "Role as written in Discogs, free text.",
+    "role_class": "Normalized role: creative / performance / technical / other.",
+    "extra": "Discogs field: 0 = main artist, 1 = secondary credit.",
+    "tracks": "Discogs field with the track positions, as text.",
+    "u": "First endpoint of the edge (artist_id, always the smaller of the two).",
+    "v": "Second endpoint of the edge.",
+    "w": "Edge weight: shared tracks plus co-presence scaled by specificity.",
+    "eigenvector": "Eigenvector centrality, weighted.",
+    "betweenness": "Betweenness centrality, computed exactly from all sources "
+                   "(`betweenness_approssimata` is True only if the sampled fallback was used).",
+    "coreness": "k-core number: the layer of the dense core to which the node belongs.",
+    "degree": "Number of distinct collaborators.",
+    "strength": "Sum of the weights of the incident edges.",
+    "r": "Newman's assortativity coefficient for categorical attributes.",
+    "r_null": "Mean value of the same coefficient under the null model.",
+    "ci_lo / ci_hi": "Bounds of the 95% bootstrap confidence interval.",
+    "z": "Deviation of the observed value from the null model, in standard deviations.",
+    "estimate": "ERGM coefficient, in log-odds.",
+    "or": "exp(estimate): the coefficient as an odds ratio.",
+    "gender_wd": "Gender according to Wikidata, mapped to M / F / other.",
+    "discogs_id": "Value of Wikidata property P1953, i.e. the Discogs artist_id.",
+    "ambiguous": "True if the same Discogs identifier is linked to several "
+                 "Wikidata entities with conflicting genders: those cases are discarded.",
 }
 
 
@@ -296,7 +319,7 @@ def esporta_dataset(log) -> list[dict]:
                sorted((ROOT / "data" / "raw").glob("*.parquet"))
     for src in sorgenti:
         chiave = ("raw/" if src.parent.name == "raw" else "") + src.stem
-        fase, descr = DESCRIZIONI.get(chiave, ("—", "(nessuna descrizione registrata)"))
+        fase, descr = DESCRIZIONI.get(chiave, ("n/a", "(no description recorded)"))
         dest_dir = dati / ("grezzi" if src.parent.name == "raw" else "elaborati")
         dest_dir.mkdir(parents=True, exist_ok=True)
         pq_dest = dest_dir / src.name
@@ -322,9 +345,9 @@ def esporta_dataset(log) -> list[dict]:
             "byte_parquet": pq_dest.stat().st_size,
             "byte_csv": csv_dest.stat().st_size,
             "sha256_parquet": sha256(pq_dest),
-            "descrizione": common.italiano(descr),
+            "descrizione": descr,
         })
-        log.info(f"  {chiave:<38} {len(df):>10,} righe")
+        log.info(f"  {chiave:<38} {len(df):>10,} rows")
     return righe
 
 
@@ -340,7 +363,7 @@ def copia_contorno(log):
             if f.is_file():
                 shutil.copy2(f, dest / f.name)
                 n += 1
-        log.info(f"  {sorg.name}: {n} file")
+        log.info(f"  {sorg.name}: {n} files")
     # i risultati grezzi dell'ERGM, cartella per cartella
     eg = ROOT / "data" / "ergm"
     if eg.exists():
@@ -348,7 +371,7 @@ def copia_contorno(log):
         if dest.exists():
             shutil.rmtree(dest)
         shutil.copytree(eg, dest)
-        log.info(f"  ergm: {len(list(dest.iterdir()))} sottoreti")
+        log.info(f"  ergm: {len(list(dest.iterdir()))} subnetworks")
     # configurazione, campione di validazione, stato delle fonti esterne
     for f in [ROOT / "config.yaml", ROOT / "README.md",
               ROOT / "data" / "validation_sample.csv",
@@ -392,7 +415,8 @@ def scrivi_manifesto(righe: list[dict], cfg, log):
     def mb(b):
         return f"{b/1048576:.1f} MB" if b >= 1048576 else f"{b/1024:.0f} KB"
 
-    sezioni = {"elaborati": "Dataset elaborati", "grezzi": "Dataset grezzi (estratti dal database)"}
+    sezioni = {"elaborati": "Processed datasets",
+               "grezzi": "Raw datasets (extracted from the database)"}
     corpo = []
     for chiave, titolo in sezioni.items():
         sub = man[man.file_parquet.str.contains(f"/{chiave}/")]
@@ -402,95 +426,108 @@ def scrivi_manifesto(righe: list[dict], cfg, log):
         for _, r in sub.sort_values("fase").iterrows():
             corpo.append(
                 f"### `{Path(r.file_parquet).name}`\n\n"
-                f"*Fase {r.fase} — {r.righe:,} righe × {r.colonne} colonne — "
-                f"{mb(r.byte_parquet)} in Parquet, {mb(r.byte_csv)} in CSV*\n\n"
+                f"*Phase {r.fase}; {r.righe:,} rows × {r.colonne} columns; "
+                f"{mb(r.byte_parquet)} as Parquet, {mb(r.byte_csv)} as CSV*\n\n"
                 f"{r.descrizione}\n\n"
-                f"**Colonne:** `{r.elenco_colonne}`\n\n"
-                f"**Percorsi:** `{r.file_parquet}` · `{r.file_csv}`\n\n"
+                f"**Columns:** `{r.elenco_colonne}`\n\n"
+                f"**Paths:** `{r.file_parquet}` · `{r.file_csv}`\n\n"
                 f"**sha256 (Parquet):** `{r.sha256_parquet}`\n")
-    testo = ("# Manifesto dei dati\n\n"
-             f"Pacchetto generato il {pd.Timestamp.now():%d/%m/%Y %H:%M}. "
-             f"Contiene {len(man)} dataset, "
-             f"{man.righe.sum():,} righe complessive.\n\n"
-             "Ogni dataset e' fornito **due volte**: in Parquet, che conserva i tipi "
-             "ed e' leggibile da pandas, R (arrow), DuckDB e Polars; e in CSV, che si "
-             "apre ovunque. I CSV piu' grandi sono compressi con gzip.\n"
+    # data in inglese, senza dipendere dal locale del sistema
+    ora = pd.Timestamp.now()
+    mesi = ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"]
+    quando = f"{ora.day} {mesi[ora.month - 1]} {ora.year}, {ora:%H:%M}"
+    testo = ("# Data manifest\n\n"
+             f"Package generated on {quando}. "
+             f"It contains {len(man)} datasets, "
+             f"{man.righe.sum():,} rows in total.\n\n"
+             "Each dataset is provided **twice**: as Parquet, which preserves the "
+             "column types and can be read by pandas, R (arrow), DuckDB and Polars; "
+             "and as CSV, which opens anywhere. The largest CSV files are "
+             "compressed with gzip.\n"
              + "".join(corpo))
-    (EXPORT / "MANIFEST.md").write_text(common.italiano(testo))
-    log.info(f"manifesto: {len(man)} dataset, {man.righe.sum():,} righe")
+    (EXPORT / "MANIFEST.md").write_text(testo)
+    log.info(f"manifest: {len(man)} datasets, {man.righe.sum():,} rows")
     return man
 
 
 def scrivi_dizionario(log):
-    voci = "\n".join(f"| `{k}` | {common.italiano(v)} |" for k, v in sorted(DIZIONARIO.items()))
-    testo = f"""# Dizionario delle colonne
+    voci = "\n".join(f"| `{k}` | {v} |" for k, v in sorted(DIZIONARIO.items()))
+    testo = f"""# Column dictionary
 
-Significato delle colonne che ricorrono nei dataset. Le colonne specifiche di
-una singola tabella sono descritte nel manifesto, accanto alla tabella.
+Meaning of the columns that recur across the datasets. Columns specific to a
+single table are described in the manifest, next to that table.
 
-| colonna | significato |
+| column | meaning |
 |---|---|
 {voci}
 
-## Tre avvertenze da leggere prima di usare i dati
+## Three caveats to read before using the data
 
-**Il genere sessuale e' inferito, non osservato.** La colonna `gender` non viene
-da nessuna fonte: e' il risultato della cascata descritta nella sezione 2 del
-report. `label_source` dice da quale livello proviene ciascuna etichetta e
-`confidence` con quanta fiducia. Le etichette `wikidata_p1953` derivano da un
-aggancio esatto sull'identificativo Discogs e sono le piu' solide; quelle
-onomastiche sono inferenze sul nome proprio. La validazione manuale che ne
-misurerebbe l'errore **non e' stata eseguita**: il campione stratificato e'
-in `validation_sample.csv`, con la colonna `human_gender` da compilare.
+**Gender is inferred, not observed.** The `gender` column does not come from
+any source: it is the output of the cascade described in Section 3.2 of the
+article (and in Section 2 of the Italian report). `label_source` says which
+level each label comes from and `confidence` how much trust is placed in it.
+Labels from `wikidata_p1953` come from an exact match on the Discogs
+identifier and are the most solid; onomastic labels are inferences from the
+first name. The manual validation was carried out on 25 September 2026: 200
+artists drawn by stratified sampling were coded blind by the author. The
+cascade's M/F labels agree with the annotator in 94.6% of cases (97.5% of
+the cases the annotator could determine, with 4 M/F reversals). The sample,
+with the `human_gender` column filled in, is in `validation_sample.csv`.
 
-**L'italianita' e' una quota, non una nazionalita'.** Un artista entra nella
-popolazione se almeno meta' delle sue pubblicazioni ha `country = 'Italy'`.
-E' un criterio sul luogo di pubblicazione, non sulla biografia, perche' il dump
-non contiene ne' nazionalita' ne' legame con le etichette discografiche.
+**Italian status is a share, not a nationality.** An artist enters the
+population if at least half of their releases have `country = 'Italy'`. It is
+a criterion based on place of release, not on biography, because the dump
+contains neither nationality nor ties to record labels.
 
-**`unknown` non e' una categoria come le altre.** Gli artisti di genere
-indeterminato collaborano fra loro piu' del caso, ma per ragioni di copertura
-dei dati, non sociali. Le misure di riferimento del report li escludono; i
-dataset li conservano perche' l'esclusione sia una scelta di chi analizza e non
-un dato gia' perso.
+**`unknown` is not a category like the others.** Artists of undetermined
+gender collaborate with each other more than chance would predict, but for
+reasons of data coverage, not social ones. The study's reference measures
+exclude them; the datasets keep them so that excluding them remains the
+analyst's choice rather than information already lost.
 """
-    (EXPORT / "DIZIONARIO.md").write_text(common.italiano(testo))
+    (EXPORT / "DIZIONARIO.md").write_text(testo)
 
 
 def scrivi_readme(man: pd.DataFrame, cfg, log):
-    testo = f"""# Pacchetto dati — omofilia di genere nelle collaborazioni musicali italiane
+    testo = f"""# Data package: gender homophily in Italian music collaborations
 
-Questo pacchetto contiene tutto il materiale intermedio dello studio, in formati
-aperti, perche' chi revisiona possa rifare i conti senza accedere al database
-sorgente e senza rieseguire la pipeline.
+This package contains all the intermediate material of the study, in open
+formats, so that reviewers can redo the computations without access to the
+source database and without rerunning the pipeline.
 
-## Che cosa c'e'
+**Confidentiality.** The package contains the unpublished manuscript
+(`articolo/`). It must not be deposited publicly (for example on Zenodo) until
+the article is published.
+
+## Contents
 
 ```
-MANIFEST.md        che cos'e' ogni file, quante righe, quale fase lo produce
-DIZIONARIO.md      significato di ogni colonna
-manifest.csv       lo stesso manifesto in forma tabellare
-CHECKSUMS.sha256   impronta di ogni file
-config.yaml        tutti i parametri usati in questa esecuzione
-extract.sql        le query di estrazione dal database
-articolo/          l'articolo per Poetics (MD, PDF, DOCX), figure, note per l'autore
-docs/              la documentazione di processo: decisioni, errori, verbale ERGM
-report.pdf/.html/.md   il report italiano, FERMO AL 21 SETTEMBRE: racconta la
-                       tesi ritirata. Fa fede l'articolo
-validation_sample.csv  campione per la validazione manuale del genere (da compilare)
-wikidata_status.json   esito del recupero da Wikidata, degradazioni incluse
-report_numbers.json    ogni cifra citata nel report, in forma leggibile da macchina
+MANIFEST.md        what each file is, how many rows, which phase produces it
+DIZIONARIO.md      meaning of each column (column dictionary)
+manifest.csv       the same manifest in tabular form
+CHECKSUMS.sha256   hash of every file
+config.yaml        all the parameters used in this run
+extract.sql        the database extraction queries
+articolo/          the article for Poetics (MD, PDF, DOCX), figures, notes for the author
+docs/              the process documentation: decisions, errors, ERGM log
+report.pdf/.html/.md   the Italian report, FROZEN AT 21 SEPTEMBER: it presents
+                       the withdrawn thesis. The article is authoritative
+validation_sample.csv  sample for the manual gender validation (human_gender filled in)
+wikidata_status.json   outcome of the Wikidata retrieval, degradations included
+report_numbers.json    every figure cited in the report, in machine-readable form
 
-dati/elaborati/    i dataset prodotti dall'analisi     (Parquet + CSV)
-dati/grezzi/       i dati estratti dal database        (Parquet + CSV)
-tabelle/           le tabelle del report               (CSV + LaTeX)
-figure/            le figure                           (PNG 300 dpi)
-ergm/              input e output grezzi di ogni modello ERGM
-log/               log di esecuzione e tempi di ogni fase
-codice/            il codice sorgente completo, con i test di verifica
+dati/elaborati/    the datasets produced by the analysis   (Parquet + CSV)
+dati/grezzi/       the data extracted from the database    (Parquet + CSV)
+tabelle/           the report tables                       (CSV + LaTeX)
+figure/            the figures                             (PNG 300 dpi)
+ergm/              raw input and output of each ERGM model
+log/               execution logs and timings of each phase
+codice/            the complete source code, with the verification tests
 ```
 
-## Come aprirli
+## How to open the files
 
 ```python
 import pandas as pd
@@ -504,42 +541,42 @@ pop <- read_parquet("dati/elaborati/population_gender.parquet")
 ```
 
 ```sql
--- DuckDB, senza importare nulla
+-- DuckDB, without importing anything
 SELECT gender, count(*) FROM 'dati/elaborati/population_gender.parquet' GROUP BY 1;
 ```
 
-I CSV si aprono con qualunque strumento; quelli sopra i {CSV_GZIP_SOGLIA_MB} MB
-sono compressi con gzip (`pandas.read_csv` li legge direttamente).
+The CSV files open with any tool; those above {CSV_GZIP_SOGLIA_MB} MB are
+compressed with gzip (`pandas.read_csv` reads them directly).
 
-## Da dove ricominciare per verificare un numero
+## Where to start to check a number
 
-| per verificare | partire da |
+| to check | start from |
 |---|---|
-| la definizione della popolazione | `dati/grezzi/raw_artist_counts.parquet` — contiene n_it e n_all per tutti i candidati, quindi le soglie si possono rifare |
-| l'inferenza del genere | `dati/elaborati/population_gender.parquet` piu' `wd_by_discogs.parquet` e i due `onomastic_prior_*` |
-| il peso degli archi | `dati/elaborati/credits.parquet` (colonne `scope` e `source`) e `edges_all.parquet` |
-| l'omofilia | `assortativity_mf.parquet` e' la misura di riferimento; `assortativity_strata.parquet` quella a quattro categorie |
-| la posizione nella rete | `position.parquet` e `position_regressions.parquet` |
-| la serie temporale (risultato centrale) | `edges_datati.parquet`, poi `nullo_grado.parquet` (nullo di riferimento) e `temporale_esatto.parquet` (nullo uniforme e logit per decennio) |
-| il logit sulla rete intera | `logit_esatto.parquet`; il confronto caso-controllo in `dyadic_logit.parquet` |
-| l'artefatto di proiezione | `proiezione_esp.parquet` (arco per arco), `proiezione_tetto.parquet`, `proiezione_nulla.parquet` |
-| gli ERGM | `ergm/<sottorete>/` contiene nodes.csv, edges.csv, control.json e i risultati |
+| the definition of the population | `dati/grezzi/raw_artist_counts.parquet`: it contains n_it and n_all for all candidates, so the thresholds can be recomputed |
+| the gender inference | `dati/elaborati/population_gender.parquet` plus `wd_by_discogs.parquet` and the two `onomastic_prior_*` files |
+| the edge weights | `dati/elaborati/credits.parquet` (columns `scope` and `source`) and `edges_all.parquet` |
+| homophily | `assortativity_mf.parquet` is the reference measure; `assortativity_strata.parquet` the version with all gender categories |
+| network position | `position.parquet` and `position_regressions.parquet` |
+| the time series (main result) | `edges_datati.parquet`, then `nullo_grado.parquet` (reference null) and `temporale_esatto.parquet` (uniform null and logit by decade) |
+| the logit on the full network | `logit_esatto.parquet`; the case-control comparison in `dyadic_logit.parquet` |
+| the projection artifact | `proiezione_esp.parquet` (edge by edge), `proiezione_tetto.parquet`, `proiezione_nulla.parquet` |
+| the ERGMs | `ergm/<subnetwork>/` contains nodes.csv, edges.csv, control.json and the results |
 
-## Riproducibilita'
+## Reproducibility
 
-Seme casuale: **{cfg['project']['seed']}**. Il codice completo e' in `codice/`;
-`codice/run_all.sh` riesegue tutta la pipeline. L'unico passo non riproducibile
-senza il database sorgente e' la Fase 1a, i cui output sono pero' inclusi qui in
-`dati/grezzi/`.
+Random seed: **{cfg['project']['seed']}**. The complete code is in `codice/`;
+`codice/run_all.sh` reruns the whole pipeline. The only step that cannot be
+reproduced without the source database is Phase 1a, whose outputs are,
+however, included here in `dati/grezzi/`.
 
-## Avvertenza
+## Caveat
 
-Il genere sessuale e' **inferito**, non osservato, e la sua validazione manuale
-non e' stata eseguita. L'italianita' e' definita sul paese di pubblicazione, non
-sulla biografia. Entrambi i limiti sono discussi nel report, sezioni 1 e 2, e
-riassunti in `DIZIONARIO.md`.
+Gender is **inferred**, not observed; its manual validation on 200 artists
+found 94.6% agreement on the M/F labels. Italian status is defined by country
+of release, not by biography. Both limits are discussed in the article
+(Sections 3.1 and 3.2) and summarized in `DIZIONARIO.md`.
 """
-    (EXPORT / "README.md").write_text(common.italiano(testo))
+    (EXPORT / "README.md").write_text(testo)
 
 
 def scrivi_checksum(log):
@@ -548,7 +585,7 @@ def scrivi_checksum(log):
         if f.is_file() and f.name != "CHECKSUMS.sha256":
             righe.append(f"{sha256(f)}  {f.relative_to(EXPORT)}")
     (EXPORT / "CHECKSUMS.sha256").write_text("\n".join(righe) + "\n")
-    log.info(f"checksum: {len(righe)} file")
+    log.info(f"checksums: {len(righe)} files")
 
 
 def main(force: bool = False):
@@ -557,9 +594,9 @@ def main(force: bool = False):
     if EXPORT.exists():
         shutil.rmtree(EXPORT)
     EXPORT.mkdir(parents=True)
-    with Timer("esportazione dataset", log):
+    with Timer("dataset export", log):
         righe = esporta_dataset(log)
-    with Timer("copia di tabelle, figure, log e codice", log):
+    with Timer("copying tables, figures, logs and code", log):
         copia_contorno(log)
     man = scrivi_manifesto(righe, cfg, log)
     scrivi_dizionario(log)
@@ -567,17 +604,17 @@ def main(force: bool = False):
     with Timer("checksum", log):
         scrivi_checksum(log)
     tot = sum(f.stat().st_size for f in EXPORT.rglob("*") if f.is_file())
-    log.info(f"pacchetto: {EXPORT} ({tot/1048576:.0f} MB)")
+    log.info(f"package: {EXPORT} ({tot/1048576:.0f} MB)")
     # archivio unico, per chi preferisce scaricare un file solo
-    with Timer("archivio tar.gz", log):
+    with Timer("tar.gz archive", log):
         import tarfile
         arch = ROOT / "gender_collab_export.tar.gz"
         if arch.exists():
             arch.unlink()
         with tarfile.open(arch, "w:gz", compresslevel=6) as tf:
             tf.add(EXPORT, arcname="gender_collab_export")
-        log.info(f"archivio: {arch} ({arch.stat().st_size/1048576:.0f} MB)")
-    log.info("=== esportazione completata ===")
+        log.info(f"archive: {arch} ({arch.stat().st_size/1048576:.0f} MB)")
+    log.info("=== export completed ===")
     arch = ROOT / "gender_collab_export.tar.gz"
     common.write_json({"percorso": str(EXPORT), "byte": tot,
                        "archivio": str(arch) if arch.exists() else None,
