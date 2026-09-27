@@ -11,6 +11,7 @@ reference to be computable.
 | `test_correzione_casocontrollo.py` | the sign of the Prentice-Pyke correction | a simulated population with known ground truth |
 | `test_scambio_bipartito.py` | the double swap of Phase 4i | preserves both degree distributions exactly, creates no duplicates, actually re-pairs the credits |
 | `test_permutazione_per_grado.py` | the permutation within degree strata of Phase 4j | never leaves the strata; on a network with no homophily and a low-degree minority, the uniform null shows a spurious deficit (~0.4) and the stratified null does not (~0.94) |
+| `test_posizione_additiva.py` | the average effect of Phase 3f (D18) | on simulated data with a known effect, the Frisch–Waugh–Lovell coefficient used in the permutation test equals the OLS coefficient of the additive model; the permutation test detects a true effect and does not invent an absent one; the gender coefficient of the model with interactions is the effect in the reference genre, not the average (E20) |
 
 They run without arguments:
 
@@ -20,6 +21,7 @@ python3 tests/test_permutazione_esatta.py
 python3 tests/test_correzione_casocontrollo.py
 python3 tests/test_scambio_bipartito.py
 python3 tests/test_permutazione_per_grado.py
+python3 tests/test_posizione_additiva.py
 ```
 
 The first requires `src/` to be reachable from the project root.

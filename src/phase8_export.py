@@ -120,7 +120,8 @@ DESCRIZIONI = {
     "women_share": ("3", "Share of women by musical genre and debut decade, with "
         "Wilson intervals."),
     "position": ("3", "Centrality of each node in the giant component: "
-        "eigenvector, betweenness (exact, from all sources), coreness, degree, "
+        "eigenvector (localized, not used: E19), betweenness (exact, from all "
+        "sources), coreness, degree, "
         "strength, clustering; plus all the artist attributes."),
     "betweenness_campionata": ("3", "The position regression with betweenness "
         "*approximated* from 400 sources, on the same network: the comparison "
@@ -129,7 +130,25 @@ DESCRIZIONI = {
         "BEFORE the exclusion of groups (D16): 100,201 entries, 12,972 of them "
         "groups."),
     "position_regressions": ("3", "Coefficients of the OLS regressions on network "
-        "position, with HC3 heteroskedasticity-robust standard errors."),
+        "position, with HC3 heteroskedasticity-robust standard errors. The model "
+        "has gender x genre interactions, so the gender coefficient is the effect "
+        "in the reference genre only (E20); the average effect is in "
+        "position_regressions_additiva."),
+    "betweenness_campionata_valori": ("3", "Betweenness of each node approximated "
+        "from 400 sources (Phase 3d), used for the additive model of Phase 3f."),
+    "centralita_alternative": ("3", "Weighted PageRank (damping 0.85) and "
+        "non-backtracking centrality of each node in the giant component, with the "
+        "eigenvector for comparison (Phase 3e, D18)."),
+    "localizzazione": ("3", "Inverse participation ratio and effective number of "
+        "nodes of each centrality measure: documents the localization of the "
+        "eigenvector (E19)."),
+    "position_regressions_alt": ("3", "Position regressions with gender x genre "
+        "interactions for PageRank and non-backtracking centrality (Phase 3e); "
+        "the gender coefficient is the reference-genre effect (E20)."),
+    "position_regressions_additiva": ("3", "Average effect of being a woman on each "
+        "position measure (additive OLS, HC3), its permutation p-value within genre "
+        "x cohort x activity strata, and the joint test of the interactions "
+        "(Phase 3f, D18). The estimates reported in the paper."),
 
     # --- Fase 4: ERGM
     "ergm_coef": ("4", "ERGM coefficients for each subnetwork and each model in the "
