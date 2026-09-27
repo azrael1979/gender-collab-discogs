@@ -15,7 +15,7 @@ once group size and activity are taken into account?
 | H2 | at equal activity, musical genre and cohort, homophily is higher among women than among men (against H2′, majority closure) | confirmed; H2′ rejected |
 | H3 | homophily varies across the decades in which ties were formed (no direction specified) | confirmed: it emerges from the 1970s |
 | H4 | homophily is stronger in creative and technical roles than in performing roles | rejected: the reverse holds, by a factor of 5 |
-| H5 | at equal activity, women occupy more peripheral positions | rejected |
+| H5 | at equal activity, women occupy more peripheral positions | supported for betweenness and PageRank, not for coreness (revised 27 September, D18) |
 | H6 | on a projected network, parameter-free random reprojection reproduces shared partners at least as well as an ERGM | confirmed, 1.4 to 12 times better depending on the decade |
 
 Exploratory: differences between musical genres and sensitivity to a null
@@ -125,6 +125,8 @@ src/
   phase3b_position.py      centrality, coreness, regressions
   phase3c_mf_only.py       assortativity on nodes with determined gender only
   phase3d_betweenness_campionata.py  approximate betweenness, for comparison
+  phase3e_centralita.py    PageRank and non-backtracking centrality (D18)
+  phase3f_posizione_additiva.py  average effect of gender on position (D18)
   phase4_ergm.py           ERGM driver on sampled subnetworks (estimates withdrawn)
   phase4b_ergm_full.py     ERGM on the full network: four failed attempts
   phase4c_dyadic.py        case-control dyadic logit and QAP (superseded by 4e)

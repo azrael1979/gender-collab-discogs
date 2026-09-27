@@ -82,7 +82,9 @@ would have found all of them.
 * "Always in the direction of attenuation": said of two of the four
   approximations, in the paper and in `04-calcolo-esatto.md`. True for the
   case-control logit; false for sampled betweenness, which *exaggerated* a
-  nonexistent marginality effect.
+  nonexistent marginality effect. (This correction was itself wrong: it rested
+  on the reference-genre coefficient. With the average effect, sampled
+  betweenness also attenuates; see E20.)
 * Count of ERGM failures on the full network: "four failures plus a fifth
   with stochastic approximation". There were four in all, and the fourth was
   the stochastic one.
@@ -170,6 +172,60 @@ groups, but the paper described three levels, and the README a limitation that
 no longer exists. The level is kept: it was part of the design, with its
 safeguards against homonyms (the name must be unique in both Wikidata and
 Discogs; names with conflicting genders are discarded).
+
+---
+
+## E19. Eigenvector centrality was localized
+
+*Severity: medium.* A measure reported in the paper did not measure
+centrality.
+
+*What it was.* The weighted eigenvector centrality of the giant component
+concentrates its weight on about 6 of 67,443 nodes (inverse participation
+ratio); it exceeds 10⁻⁴ of its maximum for 5% of nodes and is practically zero
+elsewhere. A localized eigenvector records membership of one dense core
+(Martin, Zhang & Newman, 2014), which on a projected network is a cluster of
+cliques produced by a few releases.
+
+*How it came to light.* In the international comparison (27 September) the
+Nordic field gave an implausible eigenvector effect for women (+1.49, all
+interactions significant). The same check on every field, Italy included,
+showed the localization everywhere.
+
+*Correction.* D18: PageRank replaces the eigenvector. Non-backtracking
+centrality, the remedy proposed by Martin et al., was also computed; it
+localizes less but not enough (it fixes localization on hubs, not on dense
+cores), and it is not used.
+
+---
+
+## E20. The "main effect" of gender was the effect in one small genre
+
+*Severity: high.* A hypothesis (H5) was judged on the wrong coefficient.
+
+*What it was.* The position regressions include gender × musical genre
+interactions. In that model the coefficient `C(gender)[T.F]` is the effect of
+being a woman in the reference category of genre, which is "Altro" (the pooled
+minor genres, 407 artists out of 39,788), not the average effect. It was
+reported in the paper, in `06-risultati.md` and in the comparison of sampled
+and exact betweenness as the effect of gender. The average effect, from the
+model without interactions, is −0.404 for betweenness (not −0.293) and 0.000
+for coreness, and it is significant under permutation. H5, rejected until then,
+is supported for betweenness and PageRank.
+
+*How it came to light.* Rereading Section 4.8 of the paper while replacing the
+eigenvector (E19): the regression formula made the reference category
+explicit.
+
+*Consequences.* The Smurfette section of the paper and Section 5.5 are
+rewritten; the betweenness row of the approximation table changes meaning
+(the sample attenuates the effect by 9%, instead of producing a spurious
+significant effect), which also withdraws the bullet on sampled betweenness in
+E15. Phase 3d now saves the sampled values so that the same average model can
+be fitted to them.
+
+*Lesson.* With interactions in a model, a coefficient reported as a "main
+effect" must be checked against the coding of the other factor.
 
 ---
 

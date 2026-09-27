@@ -1,8 +1,8 @@
 # Project status: Italian study (paper for *Poetics*)
 
-Updated: 26 September 2026. Status of the project, for anyone
+Updated: 27 September 2026. Status of the project, for anyone
 resuming the work. The full history of the work is in `01-percorso.md`,
-decisions in `02-decisioni.md` (D1–D17), errors in `03-errori.md` (E1–E18),
+decisions in `02-decisioni.md` (D1–D18), errors in `03-errori.md` (E1–E20),
 results in `06-risultati.md`.
 
 ---
@@ -18,9 +18,14 @@ results in `06-risultati.md`.
   concerns pop, rock and electronic music, not classical. Hypotheses H1–H6 in
   §2.7; the differences by musical genre and the choice of null are declared
   exploratory (D14).
-- Length: 7,989 words of main text (limit 8,000, set by the author). The count
-  is in `data/paper_status.json` and in the log of `src/paper.py`; every
-  addition must be offset by a cut.
+- Network position (H5) revised on 27 September (D18, E19, E20): at equal
+  activity women have lower betweenness (about a third) and lower PageRank
+  (about 14%), but the same coreness; H5 is now supported for brokerage and
+  centrality. The eigenvector is dropped (localized). Sections 3.x (methods),
+  4.8, 4.9 and 5.5 of the paper were rewritten accordingly.
+- Length: 8,304 words of main text after the revision of 27 September, above
+  the author's limit of 8,000; the author asked not to cut for now. The count
+  is in `data/paper_status.json` and in the log of `src/paper.py`.
 - The manuscript is not in the repository (D15): `paper/`, `src/paper.py`
   (which contains the text) and `src/paper_figures.py` are in `.gitignore` and
   have been removed from the entire git history. They remain local only. The

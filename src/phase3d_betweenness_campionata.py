@@ -45,6 +45,9 @@ def main(force: bool = False):
                                       seed=cfg["project"]["seed"])
     pos = pos.copy()
     pos["betweenness"] = pos.artist_id.map(b)
+    # i valori servono anche al modello additivo della Fase 3f
+    common.save(pos[["artist_id", "betweenness"]].rename(
+        columns={"betweenness": "betweenness_campionata"}), "betweenness_campionata_valori.parquet")
 
     # stessa preparazione e stessa formula della Fase 3b
     d = pos[pos.gender.isin(["M", "F"]) & (pos.musical_genre != "Unknown")

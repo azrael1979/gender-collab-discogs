@@ -85,7 +85,10 @@ performing roles, a factor of five.
 On the Smurfette question there is no positional effect. None of twelve
 interactions is significant, and the main effect for women is not significant
 on any of the three measures (eigenvector +0.223, p=0.19; coreness +0.039,
-p=0.60; betweenness −0.236, p=0.21).
+p=0.60; betweenness −0.236, p=0.21). This reading was later withdrawn: those
+coefficients were effects in the reference genre only, and the eigenvector
+turned out to be localized. The average effects show lower betweenness and
+PageRank for women at equal activity (E19, E20, D18).
 
 ### 5. The ERGM and its four failures
 
@@ -132,7 +135,9 @@ Removing these approximations had three effects, documented in
 
 * two of the four approximations biased the results: the case-control logit
   attenuated the gap between women and men, and sampled betweenness
-  exaggerated a marginality effect that does not exist;
+  attenuated the average effect of being a woman by about a tenth (first
+  described as exaggerating a marginality effect that did not exist, a
+  reading withdrawn with E20);
 * the comparison between exact and approximate results revealed a sign error
   in the case-control correction, which could not have been detected any other
   way;
@@ -166,8 +171,7 @@ The emergence holds; the magnitudes fall (the recent plateau goes from about
 1.7 to about 1.55 times chance). There were two unforeseen effects. The 1950s
 become estimable with an ERGM, which confirms the initial absence of homophily
 while also controlling for closure. The cost of the approximations also becomes
-more serious: sampled betweenness would have produced a significant Smurfette
-effect, and the case-control logit would have almost erased the gap between
+more serious: the case-control logit would have almost erased the gap between
 women and men.
 
 ## Current status

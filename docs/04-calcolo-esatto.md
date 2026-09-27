@@ -190,18 +190,19 @@ could not have been predicted.
 | approximation | did it cost? | magnitude |
 |---|---|---|
 | QAP with 1,000 permutations | no | differences below 0.4%; it was already exact |
-| betweenness on 400 sources | yes, moderately | coefficient 7%, *p* from 0.21 to 0.14 |
+| betweenness on 400 sources | yes, mildly | average effect of F attenuated by 9% (−0.366 against −0.404), same conclusion; earlier figures referred to the reference genre (E20) |
 | case-control logit | yes, substantially | F/M gap compressed by 40% (91% after D16); `same_F` underestimated by up to 0.17 in the 2020s |
 | intercept correction | it was wrong | sign reversed, 12.9 units |
 
-Two of the four distorted the results, and not in the same direction. The
-case-control logit attenuated the F/M gap, which is the effect of interest;
-sampled betweenness pushed toward significance a female marginality effect
-that does not exist (−0.252 with *p* 0.14 instead of −0.236 with *p* 0.21). A
-first draft of this document, and of the article, said "always in the
-direction of attenuation"; that was true only of the former. The third case
-was a genuine error, found only because the exact computation served as a
-check on the approximate one.
+Two of the four distorted the results. The case-control logit attenuated the
+F/M gap, which is the effect of interest, substantially; sampled betweenness
+attenuated the average effect of being a woman by 9%, without changing the
+conclusion. Until 27 September this paragraph said the two went in opposite
+directions, because the betweenness comparison (−0.252 with *p* 0.14 against
+−0.236 with *p* 0.21) used the reference-genre coefficient; that comparison is
+withdrawn (E20), and with the average effect both approximations attenuate.
+The third case was a genuine error, found only because the exact computation
+served as a check on the approximate one.
 
 ---
 

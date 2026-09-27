@@ -322,3 +322,26 @@ nothing. The filter is a declared approximation: it does not catch entries
 without markers (pseudonyms).
 
 *Origin.* The manual coding of the validation sample, 25 September 2026.
+
+## D18. Position measured by PageRank, as an average effect with a permutation test
+
+*Choice.* Network position is measured by coreness, exact betweenness and
+weighted PageRank (damping 0.85), computed on the giant component (Phase 3e).
+The effect of being a woman is estimated by an additive OLS model (log measure
+~ gender + musical genre + log releases + cohort, HC3 errors); its
+significance is also assessed by 2,000 permutations of gender labels within
+strata of genre × cohort × activity quintile, with the network fixed; whether
+it varies by genre is a joint Wald test on the gender × genre interactions
+(Phase 3f).
+
+*Alternative.* Keep the eigenvector and the model with interactions, reading
+the gender coefficient as the main effect; or replace the eigenvector by
+non-backtracking centrality.
+
+*Why rejected.* The eigenvector is localized (E19) and the interaction
+coefficient is the effect in one small genre (E20). Non-backtracking
+centrality still localizes on dense cores. The permutation test is added
+because HC3 errors, like the logit's, treat artists as independent.
+
+*Origin.* The international comparison, 27 September 2026 (DV6 there).
+

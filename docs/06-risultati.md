@@ -135,21 +135,32 @@ nearly absent in creative ones (H4 rejected).
 
 ## Network position by gender
 
-Status: estimated, with exact betweenness computed from all sources.
+Status: estimated. Revised on 27 September (D18, E19, E20); the earlier
+reading ("no positional effect") rested on the coefficient of the reference
+genre, not on an average effect.
 
-| axis | main effect of F | p |
-|---|---|---|
-| eigenvector | +0.180 | 0.31 |
-| coreness | +0.036 | 0.65 |
-| betweenness | −0.293 | **0.083** |
+Average effect of being a woman (additive OLS on the logged measure, controls
+for musical genre, cohort and log releases; HC3 errors; *n* = 39,788), with a
+permutation test of gender labels within strata of genre × cohort × activity
+quintile (2,000 permutations) and a joint Wald test of the gender × genre
+interactions:
 
-No effect is significant at the 5% level, and none of the 36 interactions with
-musical genre is. Betweenness is closest to the threshold. With betweenness
-sampled from 400 sources (Phase 3d), the same effect would be −0.323 with
-*p* 0.040: the usual approximation would have produced a significant
-Smurfette effect that the exact computation does not confirm. The inequality
-lies in the tail: among the 100 artists with the highest eigenvector
-centrality, 2 are women.
+| measure | effect of F | 95% CI | *p* (HC3) | *p* (permutation) | interactions, *p* |
+|---|---|---|---|---|---|
+| coreness | 0.000 | −0.014, 0.014 | 0.99 | 0.48 | 0.076 |
+| betweenness (exact) | −0.404 | −0.441, −0.367 | < 0.001 | < 0.001 | 0.022 |
+| PageRank | −0.146 | −0.164, −0.129 | < 0.001 | < 0.001 | < 0.001 |
+
+At equal activity women are as embedded in the dense core as men, but their
+betweenness is about a third lower and their PageRank about 14% lower. H5 is
+supported for brokerage and centrality, not for core membership. Among the 100
+artists with the highest PageRank, 1 is a woman.
+
+Eigenvector centrality is no longer used: it is localized, concentrating its
+weight on about 6 of 67,443 nodes (E19). The coefficient previously reported
+as the main effect of F (betweenness −0.293, *p* 0.083) is the effect among the
+407 artists of the pooled minor genres, the reference category of the model
+with interactions (E20).
 
 ---
 
@@ -158,7 +169,7 @@ centrality, 2 are women.
 | | sampled | exact |
 |---|---|---|
 | case-control logit, `same_F` / `same_M` | 0.201 / 0.194 | **0.242 / 0.167** |
-| betweenness, effect of F | −0.323 (*p* 0.040) | **−0.293 (*p* 0.083)** |
+| betweenness, average effect of F | −0.366 (*p* < 0.001) | **−0.404 (*p* < 0.001)** |
 | permutation, 1,000 replicates | ratios identical to the fourth digit | closed form |
 
 Case-control sampling compresses the gap between women and men by 91%: with
